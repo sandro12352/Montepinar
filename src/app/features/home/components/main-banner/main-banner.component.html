@@ -1,51 +1,90 @@
 <section
-  class="relative isolate min-h-[100vh] overflow-hidden bg-[#0d5c4b] text-white outline-none focus-visible:shadow-[inset_0_0_0_3px_#f69a2f] max-sm:min-h-[calc(100vh-4.75rem)]"
-  aria-label="Presentación de Montepinar" tabindex="0" (keydown)="handleKeydown($event)">
-  @for (slide of slides; track slide.title; let index = $index) {
-  <article
-    [class]="(activeSlide() === index ? 'opacity-100 pointer-events-auto scale-100' : 'opacity-0 pointer-events-none scale-[1.03]') + ' absolute inset-0 flex items-center bg-cover bg-center bg-no-repeat px-[max(1.5rem,calc((100%-78rem)/2))] py-[clamp(4rem,10vw,8rem)] transition-[opacity,transform] duration-700 ease-out max-sm:items-start max-sm:pt-[5.5rem] ' + slide.theme"
-    [attr.aria-hidden]="activeSlide() !== index">
-    @if (slide.video) {
-    <video class="absolute inset-0 z-0 size-full object-cover" autoplay muted loop playsinline preload="metadata"
-      aria-hidden="true">
-      <source [src]="slide.video" type="video/mp4" />
-    </video>
-    }
-    <div class="absolute inset-0 z-[1] bg-gradient-to-r from-[#073d35]/90 via-[#073d35]/50 to-transparent"></div>
-    <div class="relative z-[2] w-full max-w-[40rem]">
-      <p class="mb-4 text-[0.78rem] font-extrabold uppercase tracking-[0.16em] text-[#ffc176]">{{ slide.eyebrow }}</p>
-      <h1
-        class="m-0 max-w-[11ch] text-[clamp(2.7rem,6vw,5.4rem)] font-extrabold leading-[0.98] tracking-[-0.055em] max-sm:text-[clamp(2.7rem,13vw,4rem)]">
-        {{ slide.title }}</h1>
-      <p class="my-6 max-w-[34rem] text-[clamp(1rem,1.6vw,1.2rem)] leading-[1.65] text-white/85">{{ slide.description }}
-      </p>
-      <a class="inline-flex items-center gap-2 rounded-full bg-[#f39432] px-5 py-3.5 font-extrabold text-[#173e37] no-underline transition-transform hover:-translate-y-0.5 hover:bg-[#ffb052] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffc176]"
-        [href]="slide.href">{{ slide.action }} <span aria-hidden="true">↗</span></a>
-    </div>
-    <div
-      class="pointer-events-none absolute -bottom-[18%] right-[8%] aspect-square w-[min(42vw,34rem)] rounded-full border border-white/20 bg-white/[0.07]"
-      aria-hidden="true"></div>
-    <div
-      class="pointer-events-none absolute right-[22%] top-[8%] aspect-square w-[min(18vw,13rem)] rounded-full border border-white/20 bg-white/[0.05]"
-      aria-hidden="true"></div>
-  </article>
-  }
-
-  <div
-    class="absolute bottom-8 left-[max(1.5rem,calc((100%-78rem)/2))] right-[max(1.5rem,calc((100%-78rem)/2))] flex items-center gap-4 max-sm:bottom-6">
-    <button
-      class="grid size-10 place-items-center rounded-full border border-white/35 bg-white/10 text-xl text-white transition-colors hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffc176]"
-      type="button" aria-label="Diapositiva anterior" (click)="previousSlide()">←</button>
-    <div class="flex gap-2" role="tablist" aria-label="Seleccionar diapositiva">
+  class="relative isolate min-h-screen overflow-hidden bg-[#0d5c4b] text-white outline-none focus-visible:shadow-[inset_0_0_0_3px_#f69a2f] max-sm:min-h-[calc(100vh-4.75rem)]"
+  aria-label="Presentación de Montepinar" tabindex="0">
+  <hlm-carousel class="absolute inset-0 h-full w-full" [options]="{ loop: true }">
+    <hlm-carousel-content class="h-screen">
       @for (slide of slides; track slide.title; let index = $index) {
-      <button
-        [class]="activeSlide() === index ? 'h-1 w-14 rounded-full border-0 bg-[#f5a04a] transition-all duration-200' : 'h-1 w-8 rounded-full border-0 bg-white/40 transition-all duration-200'"
-        type="button" role="tab" [attr.aria-selected]="activeSlide() === index"
-        [attr.aria-label]="'Ir a la diapositiva ' + (index + 1)" (click)="goToSlide(index)"></button>
+
+      <hlm-carousel-item class="h-full basis-full pl-0">
+
+        <article #slideContent
+          class="relative overflow-hidden flex h-full items-center bg-cover bg-center bg-no-repeat px-[max(1.5rem,calc((100%-78rem)/2))] py-[clamp(4rem,10vw,8rem)] transition-[opacity,transform] duration-700 ease-out max-sm:items-start max-sm:pt-[5.5rem]"
+          [class]="slide.theme">
+
+          @if (slide.video) {
+          <video #slideVideo class="absolute inset-0 z-0 size-full object-cover" autoplay muted loop playsinline
+            preload="metadata"  aria-hidden="true">
+            <source [src]="slide.video" type="video/mp4" />
+          </video>
+          } @else if (slide.imagen) {
+          <img data-zoom class="absolute inset-0 z-0 size-full object-cover will-change-transform" [src]="slide.imagen" alt=""
+            [attr.loading]="index === 0 ? 'eager' : 'lazy'" aria-hidden="true" />
+          }
+          <!-- Velo base muy ligero: unifica cualquier imagen o video -->
+          <div class="pointer-events-none absolute inset-0 z-1 bg-black/15"></div>
+
+          <!-- Superior: solo para nav y logo, se funde rápido -->
+          
+
+          <!-- Lateral: apoya el texto sin apagar el lado derecho -->
+          <div
+            class="pointer-events-none absolute inset-0 z-1 bg-linear-to-r from-black/15 via-black/15 to-transparent">
+          </div>
+
+          <div class="relative z-2 w-full max-w-165">
+
+            <p #subtitulo class="mb-4 text-[0.78rem] font-extrabold uppercase tracking-[0.16em] text-[#ffc176]">
+              {{ slide.eyebrow }}
+            </p>
+
+            <h1 #titulo
+              class="m-0 max-w-[11ch] text-[clamp(2.7rem,6vw,5.4rem)] font-extrabold leading-[0.98] tracking-[-0.055em] max-sm:text-[clamp(2.7rem,13vw,4rem)]">
+              {{ slide.title }}
+            </h1>
+
+            <p #descripcion class="my-6 max-w-136 text-[clamp(1rem,1.6vw,1.2rem)] leading-[1.65] text-white/85">
+              {{ slide.description }}
+            </p>
+
+            <a #boton
+              class="group relative inline-flex items-center gap-4 overflow-hidden rounded-lg bg-[#f39432] px-8 py-4 text-sm font-extrabold uppercase tracking-[0.14em] text-[#1f1a14] no-underline shadow-lg shadow-black/30 transition-transform duration-150 hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffc176] focus-visible:ring-offset-2 focus-visible:ring-offset-black/40"
+              [href]="slide.href">
+
+              <!-- Relleno oscuro que entra de izquierda a derecha en hover -->
+              <span
+                class="absolute inset-0 origin-left scale-x-0 bg-[#1f1a14] transition-transform duration-500 ease-out group-hover:scale-x-100"
+                aria-hidden="true"></span>
+
+              <span class="relative z-10">{{ slide.action }}</span>
+
+              <!-- Flecha con línea que se alarga -->
+              <span class="relative z-10 flex items-center" aria-hidden="true">
+                <span class="h-0.5 w-6 bg-current transition-all duration-300 group-hover:w-10"></span>
+                <span class="-ml-1 inline-block h-2.5 w-2.5 rotate-45 border-r-2 border-t-2 border-current"></span>
+              </span>
+            </a>
+
+          </div>
+        </article>
+
+      </hlm-carousel-item>
       }
-    </div>
-    <button
-      class="grid size-10 place-items-center rounded-full border border-white/35 bg-white/10 text-xl text-white transition-colors hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffc176]"
-      type="button" aria-label="Diapositiva siguiente" (click)="nextSlide()">→</button>
+    </hlm-carousel-content>
+
+
+
+    <button hlm-carousel-previous
+      class="left-5 top-1/2 size-11 -translate-y-1/2 border-white/35 bg-black/15 text-white backdrop-blur-sm hover:bg-white/25 max-sm:left-3"
+      type="button"></button>
+    <button hlm-carousel-next
+      class="right-5 top-1/2 size-11 -translate-y-1/2 bg-transparent! text-white   max-sm:right-3"
+      type="button"></button>
+  </hlm-carousel>
+
+  <div class="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 gap-2 max-sm:bottom-6" role="tablist"
+    aria-label="Seleccionar diapositiva">
+    @for (slide of slides; track slide.title; let index = $index) {
+    <button type="button" role="tab" [attr.aria-label]="'Ir a la diapositiva ' + (index + 1)"></button>
+    }
   </div>
 </section>

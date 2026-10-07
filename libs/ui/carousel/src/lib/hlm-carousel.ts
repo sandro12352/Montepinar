@@ -102,4 +102,8 @@ export class HlmCarousel {
   scrollNext() {
     this._emblaCarousel().scrollNext();
   }
+
+  scrollTo(index: number) {
+    this._emblaCarousel().scrollTo(index);
+  }
 }
