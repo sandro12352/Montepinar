@@ -8,7 +8,7 @@ export const routes: Routes = [
         children:[
             {
                 path:'',
-                loadComponent:()=>import('./features/home/components/main-banner/main-banner.component').then(m=>m.MainBannerComponent)
+                loadComponent:()=>import('./features/home/components/home/home.component').then(m=>m.HomeComponent)
             }
         ]
     }

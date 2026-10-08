@@ -1,6 +1,7 @@
-import { afterNextRender, Component, DestroyRef, ElementRef, inject, Injector, signal, viewChild } from '@angular/core';
+import { afterNextRender, afterRenderEffect, Component, DestroyRef, ElementRef, inject, Injector, signal, viewChild } from '@angular/core';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { gsap } from 'gsap';
+import { LoadingService } from '../../../core/services/loading.service';
 
 interface NavigationItem {
   readonly label: string;
@@ -18,35 +19,68 @@ export class HeaderComponent {
   menuOpen = signal(false);
   scrolled = signal(false);
 
-  private readonly destroyRef = inject(DestroyRef);
   private readonly injector = inject(Injector);
+
+  private readonly loadingService = inject(LoadingService);
+  private readonly destroyRef = inject(DestroyRef);
+  private played = false;
 
   private header = viewChild.required<ElementRef<HTMLElement>>('header');
   private bar = viewChild.required<ElementRef<HTMLElement>>('bar');
   private nav = viewChild.required<ElementRef<HTMLElement>>('nav');
 
   protected readonly navigationItems: readonly NavigationItem[] = [
-    { label: 'Inicio', fragment: 'inicio' },
+    { label: 'Ver proyecto', fragment: 'urbanizacion' },
     { label: 'La urbanización', fragment: 'urbanizacion' },
     { label: 'Servicios', fragment: 'servicios' },
     { label: 'Actualidad', fragment: 'actualidad' },
   ];
 
   constructor() {
-    afterNextRender(() => {
+    afterRenderEffect(() => {
+      // Se rastrea: el efecto vuelve a correr cuando loading cambia
+      if (this.loadingService.loading() || this.played) return;
+      this.played = true;
+
       const header = this.header().nativeElement;
       const bar = this.bar().nativeElement;
 
-      // 1) Animación de entrada
       const ctx = gsap.context(() => {
         gsap
-          .timeline({ defaults: { ease: 'power3.out', clearProps: 'transform,opacity' } })
-          .from('[data-anim="bar"]', { opacity: 0, y: -20, duration: 0.6 })
-          .from('[data-anim="logo"]', { opacity: 0, y: -20, duration: 0.7 }, '-=0.3')
-          .from('[data-anim="link"]', { opacity: 0, y: -16, duration: 0.6, stagger: 0.08 }, '-=0.5')
-          .from('[data-anim="cta"]', { opacity: 0, y: -16, scale: 0.95, duration: 0.6 }, '-=0.4');
+          .timeline({ defaults: { ease: 'power3.out' }, delay: 0.2 })
+          .from(bar, {
+            clipPath: 'inset(0 100% 0 0)',
+            duration: 0.9,
+            ease: 'power2.inOut',
+            clearProps: 'clipPath',
+          })
+          .from('[data-anim="bar"]', {
+            opacity: 0,
+            y: 12,
+            duration: 0.6,
+            clearProps: 'transform,opacity',
+          }, '-=0.3')
+          .from('[data-anim="logo"]', {
+            opacity: 0,
+            y: -18,
+            scale: 0.78,
+            rotation: -7,
+            transformOrigin: 'left center',
+            duration: 1,
+            ease: 'back.out(1.7)',
+            clearProps: 'transform,opacity',
+          }, '-=0.3')
+          .from('[data-anim="link"]', {
+            opacity: 0, y: -16, duration: 0.6, stagger: 0.08,
+            clearProps: 'transform,opacity',
+          }, '-=0.5')
+          .from('[data-anim="cta"]', {
+            opacity: 0, y: -16, scale: 0.95, duration: 0.6,
+            clearProps: 'transform,opacity',
+          }, '-=0.4');
       }, header);
 
+      this.destroyRef.onDestroy(() => ctx.revert());
     });
 
   }
