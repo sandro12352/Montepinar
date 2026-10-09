@@ -9,6 +9,13 @@
 :root {
   color-scheme: light;
 
+  /* Colores corporativos */
+  --brand-primary: #fb7a11;
+  --brand-secondary: #13b507;
+  --brand-tertiary: #087940;
+  --brand-complementary-light: #a0cb6a;
+  --brand-complementary-dark: #14a508;
+
   --font-sans:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -93,6 +100,11 @@
   }
 }
 
+html:has(#app-loader),
+body:has(#app-loader) {
+  overflow: hidden;
+}
+
 /* styles.css: solo lo imprescindible para que tape todo */
 /* styles.css */
 #app-loader {
@@ -104,7 +116,7 @@
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  background: #0b5d4b;
+  background: white;
 }
 
 #app-loader .loader-logo {
@@ -141,7 +153,7 @@
 #app-loader .loader-bar span {
   display: block;
   height: 100%;
-  background: #f28c2d;
+  background: var(--brand-primary);
   transform: scaleX(0);
   transform-origin: left;
   animation: loader-bar 1.4s cubic-bezier(.65, 0, .35, 1) .2s forwards;

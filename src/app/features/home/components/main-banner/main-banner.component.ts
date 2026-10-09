@@ -7,10 +7,11 @@ import {
   viewChildren,
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideBedDouble, lucideRuler } from '@ng-icons/lucide';
+import { lucideBedDouble, lucideBuilding2, lucideRuler, lucideMapPinHouse } from '@ng-icons/lucide';
 import { HlmCarousel, HlmCarouselImports } from '@spartan-ng/helm/carousel';
 import { gsap } from 'gsap';
 import { LoaderService } from '../../../../core/services/loader.service';
+import Autoplay from 'embla-carousel-autoplay'
 
 interface BannerSlide {
   readonly eyebrow: string;
@@ -28,8 +29,8 @@ interface BannerSlide {
 }
 
 @Component({
-  imports: [HlmCarouselImports],
-  providers: [provideIcons({ lucideBedDouble, lucideRuler })],
+  imports: [HlmCarouselImports, NgIcon],
+  providers: [provideIcons({ lucideBedDouble, lucideBuilding2, lucideRuler,lucideMapPinHouse })],
   selector: 'app-main-banner',
   styleUrl: './main-banner.component.css',
   templateUrl: './main-banner.component.html',
@@ -53,7 +54,7 @@ export class MainBannerComponent {
       description: 'Descubre un entorno tranquilo, cercano y lleno de vida para disfrutar cada día.',
       action: 'Conoce Montepinar',
       href: '#urbanizacion',
-      theme: 'bg-gradient-to-br from-[#0b5d4b] via-[#118267] to-[#f28c2d]',
+      theme: 'bg-gradient-to-br from-[var(--brand-tertiary)] via-[var(--brand-secondary)] to-[var(--brand-primary)]',
       status: 'En construcción',
       bedrooms: '1, 2 y 3',
       areaFrom: '90 m²',
@@ -66,7 +67,7 @@ export class MainBannerComponent {
       description: 'Espacios abiertos, aire libre y la calma que necesitas sin renunciar a estar conectado.',
       action: 'Explora nuestro entorno',
       href: '#servicios',
-      theme: 'bg-gradient-to-br from-[#064b43] via-[#197b62] to-[#75a45a]',
+      theme: 'bg-gradient-to-br from-[var(--brand-tertiary)] via-[var(--brand-secondary)] to-[var(--brand-complementary-light)]',
       status: 'Próximamente',
       bedrooms: '1, 2 y 3',
       areaFrom: '75 m²',
@@ -79,7 +80,7 @@ export class MainBannerComponent {
       description: 'Información, servicios y actualidad para sentirte parte de Montepinar.',
       action: 'Ver la actualidad',
       href: '#actualidad',
-      theme: 'bg-gradient-to-br from-[#174951] via-[#126d65] to-[#dc8734]',
+      theme: 'bg-gradient-to-br from-[var(--brand-tertiary)] via-[var(--brand-secondary)] to-[var(--brand-primary)]',
       status: 'En construcción',
       bedrooms: '1, 2 y 3',
       areaFrom: '80 m²',
@@ -87,6 +88,11 @@ export class MainBannerComponent {
       imagen: '/images/slide3.webp',
     },
   ];
+
+  readonly carrouselPlugins =[Autoplay({
+    delay:8000,
+    stopOnInteraction: false,
+  })]
 
 
 

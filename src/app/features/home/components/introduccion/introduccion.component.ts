@@ -1,10 +1,13 @@
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideArrowRight } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 @Component({
-  imports: [],
+  imports: [NgIcon],
+  providers: [provideIcons({ lucideArrowRight })],
   selector: 'app-introduccion',
   styleUrl: './introduccion.component.css',
   templateUrl: './introduccion.component.html',
@@ -58,10 +61,9 @@ export class IntroduccionComponent {
         // Imágenes: entrada
         gsap.from('[data-img]', {
           opacity: 0,
-          y: 60,
-          scale: 0.96,
+          x: 60,
           duration: 1,
-          stagger: 0.2,
+          stagger: 0.8,
           ease: 'power3.out',
           scrollTrigger: { trigger: '[data-images]', start: 'top 75%', once: true },
         });

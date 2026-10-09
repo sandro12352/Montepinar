@@ -1,4 +1,6 @@
 import { afterNextRender, afterRenderEffect, Component, DestroyRef, ElementRef, inject, Injector, signal, viewChild } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideCalendarDays, lucideHouse, lucideMapPin, lucideTrees } from '@ng-icons/lucide';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { gsap } from 'gsap';
 import { LoaderService } from '../../../core/services/loader.service';
@@ -6,10 +8,12 @@ import { LoaderService } from '../../../core/services/loader.service';
 interface NavigationItem {
   readonly label: string;
   readonly fragment: string;
+  readonly icon: string;
 }
 
 @Component({
-  imports: [HlmButtonImports],
+  imports: [HlmButtonImports, NgIcon],
+  providers: [provideIcons({ lucideCalendarDays, lucideHouse, lucideMapPin, lucideTrees })],
   selector: 'app-header',
   styleUrl: './header.component.css',
   templateUrl: './header.component.html',
@@ -30,10 +34,8 @@ export class HeaderComponent {
   private nav = viewChild.required<ElementRef<HTMLElement>>('nav');
 
   protected readonly navigationItems: readonly NavigationItem[] = [
-    { label: 'Ver proyecto', fragment: 'urbanizacion' },
-    { label: 'La urbanización', fragment: 'urbanizacion' },
-    { label: 'Servicios', fragment: 'servicios' },
-    { label: 'Actualidad', fragment: 'actualidad' },
+    { label: 'Ver proyectos', fragment: 'urbanizacion', icon: 'lucideHouse' },
+    { label: 'La urbanización', fragment: 'urbanizacion', icon: 'lucideTrees' },
   ];
 
   constructor() {

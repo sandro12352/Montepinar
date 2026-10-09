@@ -1,22 +1,22 @@
 <section #root id="nosotros" class="relative overflow-hidden bg-[#faf6f0] text-[#1f1a14]">
 
   <!-- Contenido principal -->
-  <div class="mx-auto grid max-w-330 items-center gap-14 px-5 py-[clamp(4rem,9vw,8rem)] lg:grid-cols-2 lg:gap-20">
+  <div class="mx-auto grid max-w-[80vw] items-center gap-4 px-5 py-[clamp(4rem,9vw,8rem)] lg:grid-cols-2 ">
 
     <!-- Texto -->
     <div data-text>
 
-      <p data-reveal class="mb-5 flex items-center gap-3 text-[0.75rem] font-extrabold uppercase tracking-[0.2em] text-[#f39432]">
-        <span class="h-px w-10 bg-[#f39432]" aria-hidden="true"></span>
+      <p data-reveal class="mb-5 flex items-center gap-3 text-[0.75rem] font-extrabold uppercase tracking-[0.2em] text-[var(--brand-primary)]">
+        <span class="h-px w-10 bg-[var(--brand-primary)]" aria-hidden="true"></span>
         Conoce Montepinar
       </p>
 
       <h2 data-reveal
         class="m-0 max-w-[14ch] text-balance text-[clamp(2.2rem,4.6vw,4rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
         Un lugar pensado para
-        <span class="relative inline-block text-[#f39432]">
+        <span class="relative inline-block text-[var(--brand-primary)]">
           vivir mejor
-          <span class="absolute -bottom-1 left-0 h-1 w-full rounded-full bg-[#ffc176]/70" aria-hidden="true"></span>
+          <span class="absolute -bottom-1 left-0 h-1 w-full rounded-full bg-[var(--brand-secondary)]/70" aria-hidden="true"></span>
         </span>
       </h2>
 
@@ -32,58 +32,54 @@
       <ul data-reveal class="m-0 mt-7 grid list-none gap-3 p-0 sm:grid-cols-2">
         @for (point of ['Ubicación estratégica', 'Financiamiento flexible', 'Áreas verdes y recreación', 'Acompañamiento personalizado']; track point) {
         <li class="flex items-center gap-3 text-sm font-semibold">
-          <span class="grid size-6 shrink-0 place-items-center rounded-full bg-[#f39432]/15 text-[#f39432]" aria-hidden="true">✓</span>
+          <span class="grid size-6 shrink-0 place-items-center rounded-full bg-[var(--brand-primary)]/15 text-[var(--brand-primary)]" aria-hidden="true">✓</span>
           {{ point }}
         </li>
         }
       </ul>
 
       <a data-reveal href="#proyectos"
-        class="group relative mt-9 inline-flex items-center gap-4 overflow-hidden rounded-lg bg-[#f39432] px-8 py-4 text-sm font-extrabold uppercase tracking-[0.14em] text-[#1f1a14] no-underline shadow-lg shadow-black/15 transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f39432] focus-visible:ring-offset-2">
-        <span class="absolute inset-0 origin-left scale-x-0 bg-[#1f1a14] transition-transform duration-500 ease-out group-hover:scale-x-100" aria-hidden="true"></span>
+        class="group relative mt-9 inline-flex items-center gap-4 overflow-hidden rounded-lg bg-[var(--brand-primary)] px-8 py-4 text-sm font-extrabold uppercase tracking-[0.14em] text-white no-underline shadow-lg shadow-black/15 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
+        <span class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-tertiary)] transition-transform duration-500 ease-out group-hover:scale-x-100" aria-hidden="true"></span>
         <span class="relative z-10">Ver proyectos</span>
-        <span class="relative z-10 flex items-center" aria-hidden="true">
-          <span class="h-0.5 w-6 bg-current transition-all duration-300 group-hover:w-10"></span>
-          <span class="-ml-1 inline-block h-2.5 w-2.5 rotate-45 border-r-2 border-t-2 border-current"></span>
-        </span>
+        <ng-icon class="relative z-10 transition-transform duration-300 group-hover:translate-x-1" name="lucideArrowRight" size="20" aria-hidden="true" />
       </a>
     </div>
 
     <!-- Imágenes superpuestas -->
     <div data-images class="relative mx-auto h-[28rem] w-full max-w-xl sm:h-[34rem] lg:h-[36rem]">
 
-      <!-- Imagen grande -->
-      <div data-img class="absolute left-0 top-0 h-[78%] w-[72%]">
-        <div data-parallax="-6" class="size-full overflow-hidden rounded-2xl shadow-2xl shadow-black/20">
-          <img src="/images/intro-1.jpg" alt="Vista de Montepinar" loading="lazy"
+      <!-- Imagen principal en arco -->
+      <div data-img class="absolute left-10 bottom-20 h-[86%] w-full">
+        <div data-parallax="-6" class="size-full overflow-hidden rounded-3xl shadow-2xl shadow-black/20">
+          <img src="/images/entrada.png" alt="Vista de Montepinar" loading="lazy"
             class="size-full scale-110 object-cover" />
         </div>
       </div>
 
-      <!-- Imagen pequeña -->
-      <div data-img class="absolute bottom-0 right-0 h-[52%] w-[54%]">
-        <div data-parallax="8" class="size-full overflow-hidden rounded-2xl border-4 border-[#faf6f0] shadow-2xl shadow-black/25">
-          <img src="/images/intro-2.jpg" alt="Áreas comunes de Montepinar" loading="lazy"
-            class="size-full scale-110 object-cover" />
+     <!-- Imagen secundaria -->
+      <div data-img class="absolute bottom-0 left-0 h-[40%] w-[62%]">
+        <div data-parallax="8" class="size-full overflow-hidden rounded-3xl  border-[#faf6f0] shadow-2xl shadow-black/25">
+          <img src="/images/presentacion.webp" alt="Áreas comunes de Montepinar" loading="lazy"
+            class="size-full object-cover" />
         </div>
       </div>
 
       <!-- Sello decorativo -->
-      <div class="absolute right-[6%] top-[6%] grid size-28 place-items-center rounded-full bg-[#1f1a14] text-center text-[#ffc176] shadow-xl max-sm:size-24">
-        <p class="m-0 leading-none">
-          <span class="block text-3xl font-extrabold max-sm:text-2xl">+10</span>
-          <span class="mt-1 block text-[0.6rem] font-bold uppercase tracking-widest text-white/80">Años</span>
-        </p>
+       <!-- Dato de confianza (reemplaza el sello circular) -->
+      <div class="absolute bottom-[8%] -right-20 max-w-[11rem] rounded-2xl bg-[var(--brand-tertiary)] px-5 py-4 text-white shadow-xl max-sm:max-w-[9.5rem] max-sm:px-4 max-sm:py-3">
+        <p class="m-0 text-4xl font-extrabold leading-none text-[var(--brand-primary)] max-sm:text-3xl">+10</p>
+        <p class="m-0 mt-2 text-sm leading-snug text-white/80">años construyendo comunidad</p>
       </div>
     </div>
   </div>
 
   <!-- Franja de cifras -->
-  <div data-stats class="bg-[#1f1a14] text-white">
+  <div data-stats class="bg-(--brand-primary) text-white">
     <dl class="mx-auto m-0 grid max-w-330 grid-cols-2 gap-y-10 px-5 py-12 lg:grid-cols-4">
       @for (s of stats; track s.label) {
       <div data-stat class="px-4 text-center lg:border-l lg:border-white/10 lg:first:border-l-0">
-        <dd class="m-0 text-[clamp(2.4rem,5vw,3.8rem)] font-extrabold leading-none tracking-tight text-[#f39432]">
+        <dd class="m-0 text-[clamp(2.4rem,5vw,3.8rem)] font-extrabold leading-none tracking-tight text-white">
           {{ s.prefix }}<span [attr.data-count]="s.value">{{ s.value }}</span>{{ s.suffix }}
         </dd>
         <dt class="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/70">{{ s.label }}</dt>
