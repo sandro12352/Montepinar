@@ -7,7 +7,7 @@ import {
   untracked,
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowLeft } from '@ng-icons/lucide';
+import { lucideChevronLeft } from '@ng-icons/lucide';
 import { HlmButton, provideBrnButtonConfig } from '@spartan-ng/helm/button';
 import { hlm } from '@spartan-ng/helm/utils';
 import { HlmCarousel } from './hlm-carousel';
@@ -16,7 +16,7 @@ import { HlmCarousel } from './hlm-carousel';
   selector: 'button[hlm-carousel-previous], button[hlmCarouselPrevious]',
   imports: [NgIcon],
   providers: [
-    provideIcons({ lucideArrowLeft }),
+    provideIcons({ lucideChevronLeft }),
     provideBrnButtonConfig({ variant: 'outline', size: 'icon-sm' }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,7 +27,7 @@ import { HlmCarousel } from './hlm-carousel';
     '(click)': '_carousel.scrollPrev()',
   },
   template: `
-    <ng-icon name="lucideArrowLeft" class="rtl:rotate-180" />
+    <ng-icon name="lucideChevronLeft" class="size-6 rtl:rotate-180" />
     <span class="sr-only">Previous slide</span>
   `,
 })

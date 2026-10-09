@@ -10,7 +10,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBedDouble, lucideRuler } from '@ng-icons/lucide';
 import { HlmCarousel, HlmCarouselImports } from '@spartan-ng/helm/carousel';
 import { gsap } from 'gsap';
-import { LoadingService } from '../../../../core/services/loading.service';
+import { LoaderService } from '../../../../core/services/loader.service';
 
 interface BannerSlide {
   readonly eyebrow: string;
@@ -28,7 +28,7 @@ interface BannerSlide {
 }
 
 @Component({
-  imports: [HlmCarouselImports, NgIcon],
+  imports: [HlmCarouselImports],
   providers: [provideIcons({ lucideBedDouble, lucideRuler })],
   selector: 'app-main-banner',
   styleUrl: './main-banner.component.css',
@@ -36,10 +36,7 @@ interface BannerSlide {
 })
 export class MainBannerComponent {
   carousel = viewChild.required(HlmCarousel);
-
-  private readonly loadingService = inject(LoadingService);
-
-  private initialLoadingFinished = false;
+  private readonly loaderService = inject(LoaderService);
 
 
 
@@ -96,28 +93,7 @@ export class MainBannerComponent {
   constructor() {
     // Escucha el cambio de slide en Embla
     afterRenderEffect(() => {
-      /**
-      * Mientras el loading inicial esté activo,
-      * no ejecutamos GSAP.
-      */
-      if (!this.initialLoadingFinished) {
-
-        const loading = this.loadingService.loading();
-
-        if (loading) {
-          return;
-        }
-
-        /**
-         * El loading acaba de terminar.
-         * Desde aquí GSAP puede comenzar.
-         */
-        this.initialLoadingFinished = true;
-      }
-
-      /**
-       * Obtenemos el slide actual.
-       */
+      if (!this.loaderService.ready()) return; // 👈 espera al loader
       const index = this.carousel().currentSlide();
 
       this.animateSlide(index);

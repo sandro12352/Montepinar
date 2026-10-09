@@ -87,7 +87,86 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* styles.css: solo lo imprescindible para que tape todo */
+/* styles.css */
+#app-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background: #0b5d4b;
+}
+
+#app-loader .loader-logo {
+  position: relative;
+  width: clamp(140px, 22vw, 240px);
+}
+
+#app-loader .loader-logo img {
+  display: block;
+  width: 100%;
+}
+
+/* silueta tenue de fondo */
+#app-loader .logo-base {
+  opacity: .18;
+}
+
+/* capa que se revela de abajo hacia arriba */
+#app-loader .logo-fill {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(100% 0 0 0);
+  animation: loader-fill 1.4s cubic-bezier(.65, 0, .35, 1) .2s forwards;
+}
+
+#app-loader .loader-bar {
+  width: clamp(140px, 22vw, 240px);
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, .2);
+  overflow: hidden;
+}
+
+#app-loader .loader-bar span {
+  display: block;
+  height: 100%;
+  background: #f28c2d;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: loader-bar 1.4s cubic-bezier(.65, 0, .35, 1) .2s forwards;
+}
+
+@keyframes loader-fill {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes loader-bar {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #app-loader .logo-fill {
+    animation: none;
+    clip-path: none;
+  }
+
+  #app-loader .loader-bar span {
+    animation: none;
+    transform: none;
   }
 }

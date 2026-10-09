@@ -7,7 +7,7 @@ import {
   untracked,
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowRight } from '@ng-icons/lucide';
+import { lucideChevronRight } from '@ng-icons/lucide';
 import { HlmButton, provideBrnButtonConfig } from '@spartan-ng/helm/button';
 import { hlm } from '@spartan-ng/helm/utils';
 import { HlmCarousel } from './hlm-carousel';
@@ -16,8 +16,8 @@ import { HlmCarousel } from './hlm-carousel';
   selector: 'button[hlm-carousel-next], button[hlmCarouselNext]',
   imports: [NgIcon],
   providers: [
-    provideIcons({ lucideArrowRight }),
-    provideBrnButtonConfig({ variant: 'outline', size: 'icon-sm' }),
+    provideIcons({ lucideChevronRight }),
+    provideBrnButtonConfig({ variant: 'outline', size: 'icon-lg' }),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [{ directive: HlmButton, inputs: ['variant', 'size'] }],
@@ -27,7 +27,7 @@ import { HlmCarousel } from './hlm-carousel';
     '(click)': '_carousel.scrollNext()',
   },
   template: `
-    <ng-icon name="lucideArrowRight" class="rtl:rotate-180" />
+    <ng-icon name="lucideChevronRight" class="size-6 rtl:rotate-180" />
     <span class="sr-only">Next slide</span>
   `,
 })

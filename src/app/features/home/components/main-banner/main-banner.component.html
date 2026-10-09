@@ -1,5 +1,5 @@
 <section
-  class="relative isolate min-h-screen overflow-hidden bg-[#0d5c4b] text-white outline-none focus-visible:shadow-[inset_0_0_0_3px_#f69a2f] max-sm:min-h-[calc(100vh-4.75rem)]"
+  class="relative isolate min-h-dvh overflow-hidden bg-[#0d5c4b] text-white outline-none focus-visible:shadow-[inset_0_0_0_3px_#f69a2f] max-sm:min-h-[calc(100vh-4.75rem)]"
   aria-label="Presentación de Montepinar" tabindex="0">
   <hlm-carousel class="absolute inset-0 h-full w-full" [options]="{ loop: true }">
     <hlm-carousel-content class="h-screen">
@@ -33,21 +33,21 @@
 
           <div class="relative z-2 w-full max-w-165">
 
-            <p #subtitulo class="mb-4 text-[0.78rem] font-extrabold uppercase tracking-[0.16em] text-[#ffc176]">
+            <p #subtitulo class="opacity-0 mb-4 text-[0.78rem] font-extrabold uppercase tracking-[0.16em] text-[#ffc176]">
               {{ slide.eyebrow }}
             </p>
 
             <h1 #titulo
-              class="m-0 max-w-[11ch] text-[clamp(2.7rem,6vw,5.4rem)] font-extrabold leading-[0.98] tracking-[-0.055em] max-sm:text-[clamp(2.7rem,13vw,4rem)]">
+              class="opacity-0 m-0 max-w-[11ch] text-[clamp(2.7rem,6vw,5.4rem)] font-extrabold leading-[0.98] tracking-[-0.055em] max-sm:text-[clamp(2.7rem,13vw,4rem)]">
               {{ slide.title }}
             </h1>
 
-            <p #descripcion class="my-6 max-w-136 text-[clamp(1rem,1.6vw,1.2rem)] leading-[1.65] text-white/85">
+            <p #descripcion class="opacity-0 my-6 max-w-136 text-[clamp(1rem,1.6vw,1.2rem)] leading-[1.65] text-white/85">
               {{ slide.description }}
             </p>
 
             <a #boton
-              class="group relative inline-flex items-center gap-4 overflow-hidden rounded-lg bg-[#f39432] px-8 py-4 text-sm font-extrabold uppercase tracking-[0.14em] text-[#1f1a14] no-underline shadow-lg shadow-black/30 transition-transform duration-150 hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffc176] focus-visible:ring-offset-2 focus-visible:ring-offset-black/40"
+              class="opacity-0 group relative inline-flex items-center gap-4 overflow-hidden rounded-lg bg-[#f39432] px-8 py-4 text-sm font-extrabold uppercase tracking-[0.14em] text-[#1f1a14] no-underline shadow-lg shadow-black/30 transition-transform duration-150 hover:-translate-y-0.5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffc176] focus-visible:ring-offset-2 focus-visible:ring-offset-black/40"
               [href]="slide.href">
 
               <!-- Relleno oscuro que entra de izquierda a derecha en hover -->
@@ -74,7 +74,7 @@
 
 
     <button hlm-carousel-previous
-      class="left-5 top-1/2 size-11 -translate-y-1/2 border-white/35 bg-black/15 text-white backdrop-blur-sm hover:bg-white/25 max-sm:left-3"
+      class="left-5 top-1/2 size-11 -translate-y-1/2 border-white/35 bg-black/15 text-white hover:bg-white/25 max-sm:left-3"
       type="button"></button>
     <button hlm-carousel-next
       class="right-5 top-1/2 size-11 -translate-y-1/2 bg-transparent! text-white   max-sm:right-3"

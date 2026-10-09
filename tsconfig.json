@@ -26,7 +26,6 @@
       "@spartan-ng/helm/button-group": ["./libs/ui/button-group/src/index.ts"],
       "@spartan-ng/helm/calendar": ["./libs/ui/calendar/src/index.ts"],
       "@spartan-ng/helm/card": ["./libs/ui/card/src/index.ts"],
-      "@spartan-ng/helm/carousel": ["./libs/ui/carousel/src/index.ts"],
       "@spartan-ng/helm/checkbox": ["./libs/ui/checkbox/src/index.ts"],
       "@spartan-ng/helm/collapsible": ["./libs/ui/collapsible/src/index.ts"],
       "@spartan-ng/helm/combobox": ["./libs/ui/combobox/src/index.ts"],
@@ -56,7 +55,8 @@
       "@spartan-ng/helm/slider": ["./libs/ui/slider/src/index.ts"],
       "@spartan-ng/helm/spinner": ["./libs/ui/spinner/src/index.ts"],
       "@spartan-ng/helm/textarea": ["./libs/ui/textarea/src/index.ts"],
-      "@spartan-ng/helm/utils": ["./libs/ui/utils/src/index.ts"]
+      "@spartan-ng/helm/utils": ["./libs/ui/utils/src/index.ts"],
+      "@spartan-ng/helm/carousel": ["./libs/ui/carousel/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

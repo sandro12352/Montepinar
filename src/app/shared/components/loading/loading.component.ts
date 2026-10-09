@@ -1,5 +1,4 @@
 import { afterNextRender, afterRenderEffect, Component, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
-import { LoadingService } from '../../../core/services/loading.service';
 import { gsap } from 'gsap';
 @Component({
   imports: [],
@@ -9,7 +8,6 @@ import { gsap } from 'gsap';
 })
 export class LoadingComponent {
 
-  private readonly loadingService = inject(LoadingService);
   private readonly destroyRef = inject(DestroyRef);
 
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
@@ -108,7 +106,6 @@ export class LoadingComponent {
     });
 
     afterRenderEffect(() => {
-      if (this.loadingService.loading() || !this.introDone() || this.exiting) return;
       this.exiting = true;
       this.exit();
     });

@@ -1,7 +1,7 @@
 import { afterNextRender, afterRenderEffect, Component, DestroyRef, ElementRef, inject, Injector, signal, viewChild } from '@angular/core';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { gsap } from 'gsap';
-import { LoadingService } from '../../../core/services/loading.service';
+import { LoaderService } from '../../../core/services/loader.service';
 
 interface NavigationItem {
   readonly label: string;
@@ -20,10 +20,10 @@ export class HeaderComponent {
   scrolled = signal(false);
 
   private readonly injector = inject(Injector);
+  private readonly loaderService = inject(LoaderService);
+  
 
-  private readonly loadingService = inject(LoadingService);
   private readonly destroyRef = inject(DestroyRef);
-  private played = false;
 
   private header = viewChild.required<ElementRef<HTMLElement>>('header');
   private bar = viewChild.required<ElementRef<HTMLElement>>('bar');
@@ -38,16 +38,16 @@ export class HeaderComponent {
 
   constructor() {
     afterRenderEffect(() => {
-      // Se rastrea: el efecto vuelve a correr cuando loading cambia
-      if (this.loadingService.loading() || this.played) return;
-      this.played = true;
-
+      if (!this.loaderService.ready()) return; // 👈 espera al loader
       const header = this.header().nativeElement;
       const bar = this.bar().nativeElement;
 
+      // Revela el header justo antes de crear el timeline (ver nota abajo)
+    gsap.set(header, { visibility: 'visible' });
+
       const ctx = gsap.context(() => {
         gsap
-          .timeline({ defaults: { ease: 'power3.out' }, delay: 0.2 })
+          .timeline({ defaults: { ease: 'power3.out' }})
           .from(bar, {
             clipPath: 'inset(0 100% 0 0)',
             duration: 0.9,
