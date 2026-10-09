@@ -42,12 +42,20 @@
           </a>
           }
 
-          <!-- Acción principal para reservar una visita -->
+          <!-- Contacto de ventas -->
           <a data-anim="cta"
              class="group mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--brand-primary)] px-4 py-2.5 text-sm font-bold text-white no-underline transition-colors hover:bg-[var(--brand-tertiary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] md:mt-0 md:ml-2"
-             href="#contacto" (click)="closeMenu()">
-            <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" />
-            <span>Reservar visita</span>
+             href="tel:+51932284185" aria-label="Llamar a ventas al 932 284 185" (click)="closeMenu()">
+            <ng-icon name="lucidePhone" size="18" aria-hidden="true" />
+            <span>Ventas: 932 284 185</span>
+          </a>
+
+          <!-- Contacto de postventa -->
+          <a data-anim="cta"
+             class="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--brand-tertiary)] px-3 py-2.5 text-sm font-bold text-white no-underline transition-colors hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] md:mt-0 md:ml-1"
+             href="tel:+51920018214" aria-label="Llamar a postventa para asociados al 920 018 214" (click)="closeMenu()">
+            <ng-icon name="lucidePhone" size="16" aria-hidden="true" />
+            <span>Postventa: 920 018 214</span>
           </a>
         </nav>
 
