@@ -1,0 +1,33 @@
+.project-track {
+  will-change: transform;
+}
+
+.project-details,
+.project-details :is(h3, p, small, li, strong, span, a) {
+  color: #fff !important;
+  text-shadow: 0 2px 8px rgb(0 0 0 / 85%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-stage {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .project-track {
+    display: flex;
+    width: 100% !important;
+    height: auto;
+    flex-direction: column;
+    gap: 2rem;
+    transform: none !important;
+  }
+
+  .project-slide {
+    width: 100% !important;
+    height: 88svh;
+    min-height: 600px;
+    flex: none !important;
+  }
+}
