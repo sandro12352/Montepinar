@@ -1,91 +1,53 @@
-<section #root id="nosotros" class="relative overflow-hidden bg-[#faf6f0] text-[#1f1a14]">
-
-  <!-- Contenido principal -->
-  <div class="mx-auto grid max-w-[80vw] items-center gap-4 px-5 py-[clamp(4rem,9vw,8rem)] lg:grid-cols-2 ">
-
-    <!-- Texto -->
-    <div data-text>
-
-      <p data-reveal class="mb-5 flex items-center gap-3 text-[0.75rem] font-extrabold uppercase tracking-[0.2em] text-[var(--brand-primary)]">
-        <span class="h-px w-10 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+<section #root id="nosotros" class="intro-section bg-[#faf6f0] px-5 py-[clamp(4.5rem,9vw,6rem)] text-[#1f1a14] sm:px-8">
+  <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-9 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
+    <div data-text class="intro-copy">
+      <p data-reveal class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
         Conoce Montepinar
       </p>
 
-      <h2 data-reveal
-        class="m-0 max-w-[14ch] text-balance text-[clamp(2.2rem,4.6vw,4rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
-        Un lugar pensado para
-        <span class="relative inline-block text-[var(--brand-primary)]">
-          vivir mejor
-          <span class="absolute -bottom-1 left-0 h-1 w-full rounded-full bg-[var(--brand-secondary)]/70" aria-hidden="true"></span>
-        </span>
+      <h2 data-reveal class="m-0 max-w-[15ch] text-balance text-[clamp(2.5rem,4.8vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
+        Un lugar para vivir con más <span class="text-[var(--brand-primary)]">tranquilidad.</span>
       </h2>
 
-      <p data-reveal class="mb-4 mt-7 max-w-xl text-pretty text-[clamp(1rem,1.4vw,1.15rem)] leading-[1.75] text-[#1f1a14]/75">
-        Aquí va una descripción breve de la urbanización: su ubicación, el estilo de vida que ofrece
-        y lo que la diferencia de otras opciones.
+      <p data-reveal class="mb-0 mt-6 max-w-xl text-pretty text-[clamp(1rem,1.4vw,1.15rem)] leading-[1.75] text-[#1f1a14]/75">
+        Montepinar reúne espacios residenciales, áreas verdes y lugares para compartir. Descubre una comunidad pensada para disfrutar cada etapa.
       </p>
 
-      <p data-reveal class="m-0 max-w-xl text-pretty leading-[1.75] text-[#1f1a14]/75">
-        Un segundo párrafo corto sobre los proyectos, el acompañamiento y el financiamiento disponible.
-      </p>
-
-      <ul data-reveal class="m-0 mt-7 grid list-none gap-3 p-0 sm:grid-cols-2">
-        @for (point of ['Ubicación estratégica', 'Financiamiento flexible', 'Áreas verdes y recreación', 'Acompañamiento personalizado']; track point) {
-        <li class="flex items-center gap-3 text-sm font-semibold">
-          <span class="grid size-6 shrink-0 place-items-center rounded-full bg-[var(--brand-primary)]/15 text-[var(--brand-primary)]" aria-hidden="true">✓</span>
-          {{ point }}
-        </li>
+      <ul data-reveal class="intro-benefits mt-8 grid list-none gap-x-8 gap-y-4 p-0 sm:grid-cols-2">
+        @for (point of ['Opciones de financiamiento', 'Áreas verdes y recreación', 'Acompañamiento personalizado', 'Espacios para la comunidad']; track point) {
+          <li class="flex items-start gap-3 text-sm font-semibold leading-snug">
+            <span class="intro-check mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-[var(--brand-primary)]/15 text-[var(--brand-tertiary)]" aria-hidden="true">✓</span>
+            {{ point }}
+          </li>
         }
       </ul>
 
       <a data-reveal href="#proyectos"
-        class="group relative mt-9 inline-flex items-center gap-4 overflow-hidden rounded-lg bg-[var(--brand-primary)] px-8 py-4 text-sm font-extrabold uppercase tracking-[0.14em] text-white no-underline shadow-lg shadow-black/15 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
-        <span class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-tertiary)] transition-transform duration-500 ease-out group-hover:scale-x-100" aria-hidden="true"></span>
-        <span class="relative z-10">Ver proyectos</span>
-        <ng-icon class="relative z-10 transition-transform duration-300 group-hover:translate-x-1" name="lucideArrowRight" size="20" aria-hidden="true" />
+        class="intro-cta group mt-9 inline-flex min-h-12 items-center gap-4 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-6 py-3.5 text-sm font-extrabold text-white no-underline shadow-lg shadow-[#56300f]/15 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
+        <span>Explorar proyectos</span>
+        <ng-icon class="transition-transform duration-200 group-hover:translate-x-1" name="lucideArrowRight" size="20" aria-hidden="true" />
       </a>
     </div>
 
-    <!-- Imágenes superpuestas -->
-    <div data-images class="relative mx-auto h-[28rem] w-full max-w-xl sm:h-[34rem] lg:h-[36rem]">
-
-      <!-- Imagen principal en arco -->
-      <div data-img class="absolute left-10 bottom-20 h-[86%] w-full">
-        <div data-parallax="-6" class="size-full overflow-hidden rounded-3xl shadow-2xl shadow-black/20">
-          <img src="/images/entrada.png" alt="Vista de Montepinar" loading="lazy"
-            class="size-full scale-110 object-cover" />
-        </div>
-      </div>
-
-     <!-- Imagen secundaria -->
-      <div data-img class="absolute bottom-0 left-0 h-[40%] w-[62%]">
-        <div data-parallax="8" class="size-full overflow-hidden rounded-3xl  border-[#faf6f0] shadow-2xl shadow-black/25">
-          <img src="/images/presentacion.webp" alt="Áreas comunes de Montepinar" loading="lazy"
-            class="size-full object-cover" />
-        </div>
-      </div>
-
-      <!-- Sello decorativo -->
-       <!-- Dato de confianza (reemplaza el sello circular) -->
-      <div class="absolute bottom-[8%] -right-20 max-w-[11rem] rounded-2xl bg-[var(--brand-tertiary)] px-5 py-4 text-white shadow-xl max-sm:max-w-[9.5rem] max-sm:px-4 max-sm:py-3">
-        <p class="m-0 text-4xl font-extrabold leading-none text-[var(--brand-primary)] max-sm:text-3xl">+10</p>
-        <p class="m-0 mt-2 text-sm leading-snug text-white/80">años construyendo comunidad</p>
+    <div data-images class="relative min-h-[18rem] lg:min-h-[32rem]">
+      <div class="relative w-full lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:w-[min(58vw,920px)] lg:items-center">
+        <img data-img class="block h-auto w-full" src="/images/introduccion.png" alt="Asesor explica el plano de Montepinar a una familia" loading="lazy" />
       </div>
     </div>
   </div>
 
-  <!-- Franja de cifras -->
-  <div data-stats class="bg-(--brand-primary) text-white">
-    <dl class="mx-auto m-0 grid max-w-330 grid-cols-2 gap-y-10 px-5 py-12 lg:grid-cols-4">
-      @for (s of stats; track s.label) {
-      <div data-stat class="px-4 text-center lg:border-l lg:border-white/10 lg:first:border-l-0">
-        <dd class="m-0 text-[clamp(2.4rem,5vw,3.8rem)] font-extrabold leading-none tracking-tight text-white">
-          {{ s.prefix }}<span [attr.data-count]="s.value">{{ s.value }}</span>{{ s.suffix }}
-        </dd>
-        <dt class="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/70">{{ s.label }}</dt>
+  <div class="mx-auto mt-10 grid max-w-7xl grid-cols-2 gap-x-6 gap-y-7 px-4 pt-7 sm:px-9 lg:mt-6 lg:grid-cols-4 lg:pt-8">
+    @for (metric of [
+      { title: 'Entorno natural', detail: 'Áreas verdes para disfrutar' },
+      { title: 'Vida en comunidad', detail: 'Espacios para compartir' },
+      { title: 'Recorrido virtual', detail: 'Conoce Montepinar en 360°' },
+      { title: 'Atención cercana', detail: 'Acompañamiento personalizado' },
+    ]; track metric.title) {
+      <div data-metric class="border-l-2 border-[var(--brand-primary)] pl-4">
+        <p class="m-0 text-lg font-extrabold leading-tight text-[var(--brand-tertiary)] sm:text-xl">{{ metric.title }}</p>
+        <p class="mb-0 mt-1.5 text-sm leading-relaxed text-[#1f1a14]/70">{{ metric.detail }}</p>
       </div>
-      }
-    </dl>
+    }
   </div>
-
 </section>

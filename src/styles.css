@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap');
 @layer theme, base, components, utilities;
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/preflight.css' layer(base);
@@ -16,9 +17,9 @@
   --brand-complementary-light: #a0cb6a;
   --brand-complementary-dark: #14a508;
 
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-corporate: 'Urbanist', 'Montserrat', sans-serif;
+  --font-secondary: 'Montserrat', sans-serif;
+  --font-sans: var(--font-corporate);
 
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -97,6 +98,8 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-corporate);
+    overflow-x: clip;
   }
 }
 

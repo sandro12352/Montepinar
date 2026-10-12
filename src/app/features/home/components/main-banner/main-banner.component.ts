@@ -3,11 +3,12 @@ import {
   Component,
   ElementRef,
   inject,
+  signal,
   viewChild,
   viewChildren,
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideBedDouble, lucideBuilding2, lucideRuler, lucideMapPinHouse } from '@ng-icons/lucide';
+import { lucideArrowLeft, lucideArrowRight, lucideMapPinHouse } from '@ng-icons/lucide';
 import { HlmCarousel, HlmCarouselImports } from '@spartan-ng/helm/carousel';
 import { gsap } from 'gsap';
 import { LoaderService } from '../../../../core/services/loader.service';
@@ -19,18 +20,13 @@ interface BannerSlide {
   readonly description: string;
   readonly action: string;
   readonly href: string;
-  readonly theme: string;
-  readonly status: string;
-  readonly bedrooms: string;
-  readonly areaFrom: string;
-  readonly priceFrom: string;
   readonly video?: string;
   readonly imagen?: string;
 }
 
 @Component({
   imports: [HlmCarouselImports, NgIcon],
-  providers: [provideIcons({ lucideBedDouble, lucideBuilding2, lucideRuler,lucideMapPinHouse })],
+  providers: [provideIcons({ lucideArrowLeft, lucideArrowRight, lucideMapPinHouse })],
   selector: 'app-main-banner',
   styleUrl: './main-banner.component.css',
   templateUrl: './main-banner.component.html',
@@ -38,6 +34,7 @@ interface BannerSlide {
 export class MainBannerComponent {
   carousel = viewChild.required(HlmCarousel);
   private readonly loaderService = inject(LoaderService);
+  protected readonly activeSlide = signal(0);
 
 
 
@@ -52,39 +49,24 @@ export class MainBannerComponent {
       eyebrow: 'Bienvenido a Montepinar',
       title: 'Un lugar para vivir a tu manera',
       description: 'Descubre un entorno tranquilo, cercano y lleno de vida para disfrutar cada día.',
-      action: 'Conoce Montepinar',
-      href: '#urbanizacion',
-      theme: 'bg-gradient-to-br from-[var(--brand-tertiary)] via-[var(--brand-secondary)] to-[var(--brand-primary)]',
-      status: 'En construcción',
-      bedrooms: '1, 2 y 3',
-      areaFrom: '90 m²',
-      priceFrom: '189.000 €',
+      action: 'Ver proyectos',
+      href: '#proyectos',
       video: '/video/montepinar-banner.mp4',
     },
     {
       eyebrow: 'Naturaleza y bienestar',
       title: 'Tu entorno, tu refugio',
       description: 'Espacios abiertos, aire libre y la calma que necesitas sin renunciar a estar conectado.',
-      action: 'Explora nuestro entorno',
-      href: '#servicios',
-      theme: 'bg-gradient-to-br from-[var(--brand-tertiary)] via-[var(--brand-secondary)] to-[var(--brand-complementary-light)]',
-      status: 'Próximamente',
-      bedrooms: '1, 2 y 3',
-      areaFrom: '75 m²',
-      priceFrom: '169.000 €',
+      action: 'Ver recorrido virtual',
+      href: '#vision-360',
       imagen: '/images/slide2.webp',
     },
     {
       eyebrow: 'Una comunidad activa',
       title: 'Mucho más que una urbanización',
-      description: 'Información, servicios y actualidad para sentirte parte de Montepinar.',
-      action: 'Ver la actualidad',
-      href: '#actualidad',
-      theme: 'bg-gradient-to-br from-[var(--brand-tertiary)] via-[var(--brand-secondary)] to-[var(--brand-primary)]',
-      status: 'En construcción',
-      bedrooms: '1, 2 y 3',
-      areaFrom: '80 m²',
-      priceFrom: '179.000 €',
+      description: 'Descubre las experiencias que forman parte de la comunidad Montepinar.',
+      action: 'Ver testimonios',
+      href: '#testimonios',
       imagen: '/images/slide3.webp',
     },
   ];
@@ -101,6 +83,7 @@ export class MainBannerComponent {
     afterRenderEffect(() => {
       if (!this.loaderService.ready()) return; // 👈 espera al loader
       const index = this.carousel().currentSlide();
+      this.activeSlide.set(index);
 
       this.animateSlide(index);
       this.zoomImages(index);
@@ -127,23 +110,30 @@ export class MainBannerComponent {
     if (!targets.length) return;
 
     gsap.killTweensOf(all);
-    // Oculta el contenido de los slides inactivos
-    gsap.set(all.filter((el) => !targets.includes(el)), { opacity: 0 });
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(all, { clearProps: 'opacity,visibility,transform' });
+      return;
+    }
 
     gsap.fromTo(
       targets,
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.18, ease: 'power1.out' }
+      { autoAlpha: 0, y: 40 },
+      { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.18, ease: 'power1.out' }
     );
   }
 
   private zoomImages(index: number) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     this.slideContents().forEach((slide, i) => {
       const img = slide.nativeElement.querySelector('img[data-zoom]');
       if (!img) return;
 
       gsap.killTweensOf(img);
+      if (reduceMotion) {
+        gsap.set(img, { scale: 1 });
+        return;
+      }
       if (i !== index) return;
       gsap.fromTo(
         img,

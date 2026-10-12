@@ -1,0 +1,90 @@
+<section #root id="vision-360" class="bg-[var(--brand-tertiary)]  px-5 py-[clamp(4.5rem,8vw,7.5rem)] sm:px-8">
+  <div class="mx-auto max-w-7xl rounded-[2rem] px-5 py-10 text-white  sm:px-10 sm:py-14 lg:px-9 lg:py-16">
+    <header data-vision-copy class="mb-9 max-w-3xl sm:mb-12">
+      <p class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-white/80">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        Recorrido virtual
+      </p>
+      <h2 class="m-0 max-w-[14ch] text-balance text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
+        Explora Montepinar en 360°
+      </h2>
+      <p class="mb-0 mt-5 max-w-2xl text-pretty text-base leading-relaxed text-white/80 sm:text-lg">
+        Entra al recorrido, elige las zonas que quieres conocer y desplázate por la vista para observar cada espacio.
+      </p>
+    </header>
+
+    <div data-vision-image class="relative isolate aspect-[4/3] overflow-hidden rounded-2xl bg-[#29251f] shadow-2xl shadow-[#123b2b]/25 sm:aspect-[16/9] sm:rounded-3xl">
+      <img class="absolute inset-0 size-full object-cover" src="/images/presentacion.webp" alt="Familias observan el plano de Montepinar durante una visita" loading="lazy" />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#1f1a14]/65 via-transparent to-[#1f1a14]/10" aria-hidden="true"></div>
+
+      <span class="absolute left-5 top-5 rounded-full border border-white/30 bg-[#1f1a14]/45 px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm sm:left-7 sm:top-7">
+        Recorrido interactivo
+      </span>
+
+      <button
+        data-vision-play
+        type="button"
+        class="absolute inset-0 m-auto flex size-24 flex-col items-center justify-center rounded-full border border-white/80 bg-[var(--brand-primary)] text-white shadow-xl shadow-black/20 transition-colors duration-300 hover:bg-[var(--brand-complementary-dark)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/80 sm:size-28"
+        aria-haspopup="dialog"
+        aria-label="Iniciar recorrido virtual 360 grados"
+        (click)="openViewer()"
+      >
+        <svg class="mb-1 size-7" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="m9 6 9 6-9 6V6Z" fill="currentColor" />
+        </svg>
+        <span class="text-xs font-extrabold sm:text-sm">Iniciar 360°</span>
+      </button>
+
+      <p class="absolute inset-x-5 bottom-5 m-0 text-sm font-semibold text-white sm:inset-x-7 sm:bottom-7 sm:text-base">
+        Explora las zonas del proyecto a tu ritmo.
+      </p>
+    </div>
+
+    <div class="mt-7 grid grid-cols-1 gap-5 border-t border-white/20 pt-6 sm:grid-cols-2 sm:gap-10 sm:pt-7">
+      <div data-vision-step class="flex items-start gap-4">
+        <span class="grid size-10 shrink-0 place-items-center rounded-full bg-[var(--brand-primary)] text-sm font-extrabold text-[#1f1a14]" aria-hidden="true">01</span>
+        <div>
+          <h3 class="m-0 text-base font-extrabold">Elige una zona</h3>
+          <p class="mb-0 mt-1 text-sm leading-relaxed text-white/75 sm:text-base">Haz clic en los espacios señalados para entrar a cada área del proyecto.</p>
+        </div>
+      </div>
+      <div data-vision-step class="flex items-start gap-4">
+        <span class="grid size-10 shrink-0 place-items-center rounded-full bg-[var(--brand-primary)] text-sm font-extrabold text-[#1f1a14]" aria-hidden="true">02</span>
+        <div>
+          <h3 class="m-0 text-base font-extrabold">Mira a tu alrededor</h3>
+          <p class="mb-0 mt-1 text-sm leading-relaxed text-white/75 sm:text-base">Arrastra la vista para desplazarte y observar los detalles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (isOpen()) {
+    <div class="vision-modal-backdrop" (click)="closeViewer()">
+      <section
+        class="vision-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="vision-modal-title"
+        (click)="$event.stopPropagation()"
+      >
+        <header class="vision-modal-header">
+          <div>
+            <h3 id="vision-modal-title">Recorrido virtual 360°</h3>
+            <p>Arrastra la imagen para explorar</p>
+          </div>
+          <button type="button" class="vision-close-button" aria-label="Cerrar visor" (click)="closeViewer()">×</button>
+        </header>
+        <div
+          class="vision-modal-viewer"
+          [style.background-position]="backgroundPosition() + '% center'"
+          role="img"
+          aria-label="Vista interactiva del proyecto Montepinar. Arrastra para explorar."
+          (pointerdown)="startDrag($event)"
+          (pointermove)="moveDrag($event)"
+        >
+          <div class="vision-viewer-hint" aria-hidden="true">Arrastra para explorar ↔</div>
+        </div>
+      </section>
+    </div>
+  }
+</section>

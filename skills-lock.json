@@ -7,6 +7,18 @@
       "skillPath": "angular-developer/SKILL.md",
       "computedHash": "ba25cc7f211528ca1e015c992783f102f078244a106c3ed41f6dfacdb5d46d98"
     },
+    "design-taste-frontend": {
+      "source": "leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/taste-skill/SKILL.md",
+      "computedHash": "52fa30810ae93ef288f8926e27624561ebd2e5b70d35682f4de70cb7131c92d1"
+    },
+    "scroll-world": {
+      "source": "oso95/scroll-world",
+      "sourceType": "github",
+      "skillPath": "skills/scroll-world/SKILL.md",
+      "computedHash": "07ad6d6bad1e154a271e7bf1ef582b4e56c892caba56aff2674e761dc34c6859"
+    },
     "spartan": {
       "source": "spartan-ng/spartan",
       "sourceType": "github",

@@ -1,0 +1,99 @@
+<section #root id="galeria"
+  class="min-h-dvh bg-[#f4f1ea] py-10 pl-5 pr-0 text-[#1f1a14] sm:py-12 sm:pl-8 lg:py-12 lg:pl-[max(2rem,calc((100vw-76rem)/2))]">
+  <div
+    class="grid min-h-[calc(100dvh-5rem)] w-full grid-cols-1 lg:min-h-[calc(100dvh-6rem)] lg:grid-cols-1 lg:items-center lg:gap-10">
+    <header data-gallery-heading class="max-w-[30rem] pr-5 sm:pr-8 lg:pr-0">
+      <p
+        class="mb-4 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        Galería
+      </p>
+      <h2 class="m-0 text-balance text-[clamp(2.25rem,4.5vw,4rem)] font-extrabold leading-[1.02] tracking-[-0.04em]">
+        Montepinar, en imágenes.
+      </h2>
+      <p class="mb-0 mt-5 max-w-sm text-base leading-relaxed text-[#1f1a14]/70">
+        Cada imagen guarda un rincón de Montepinar. Explora el proyecto a tu ritmo.
+      </p>
+    </header>
+
+    <hlm-carousel class="block w-full min-w-0" [options]="{ loop: true, align: 'start' }">
+      <hlm-carousel-content class="-ml-4 py-2">
+        @for (image of images; track image.src; let index = $index) {
+        <hlm-carousel-item #galeryItem class="basis-[82%] pl-4 sm:basis-[58%] lg:basis-[32%] galery-item">
+          <div data-gallery-item
+            class="relative z-0 min-w-0 transition-transform duration-500 ease-out hover:z-20 hover:-translate-y-2 hover:scale-[1.035] focus-within:z-20 focus-within:-translate-y-2 focus-within:scale-[1.035] motion-reduce:transition-none lg:hover:-translate-y-3 lg:focus-within:-translate-y-3">
+            <button type="button" data-gallery-card
+              class="group relative block aspect-square w-full cursor-zoom-in overflow-hidden rounded-xl bg-[#ded8cd] text-left shadow-[0_10px_24px_rgb(73_54_34_/_12%)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-4"
+              [attr.aria-label]="'Ampliar imagen: ' + image.alt" (click)="openImage(index)">
+              <img data-gallery-image
+                class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
+                [src]="image.src" [alt]="image.alt" loading="lazy" />
+              <span
+                class="absolute inset-0 grid place-items-center bg-[#10271c]/0 text-white opacity-100 transition-[background-color,opacity] duration-300 group-hover:bg-[#10271c]/35 group-focus-visible:bg-[#10271c]/35 md:opacity-0 md:group-hover:opacity-100 md:group-focus-visible:opacity-100 motion-reduce:transition-none">
+                <span
+                  class="inline-flex items-center gap-2 rounded-full border border-white/70 bg-[#10271c]/65 px-4 py-2.5 text-sm font-bold text-white backdrop-blur-sm">
+                  <ng-icon name="lucideExpand" size="17" aria-hidden="true" />
+                  Ver imagen
+                </span>
+              </span>
+            </button>
+          </div>
+        </hlm-carousel-item>
+        }
+      </hlm-carousel-content>
+
+      <div class="mt-5 flex items-center justify-between gap-4 pr-5 sm:pr-8 lg:mt-6" role="group"
+        aria-label="Controles de la galería">
+        <a href="#" class="text-sm font-semibold text-[#1f1a14]/65 hover:underline">Ver toda la galería</a>
+        <div class="flex justify-between gap-3">
+          <button hlm-carousel-previous type="button"
+            class="!static !top-auto !right-auto !bottom-auto !left-auto !translate-x-0 !translate-y-0 !rotate-0 grid size-12 place-items-center rounded-full border border-[#1f1a14]/20 bg-white text-[var(--brand-tertiary)] transition-colors hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none"
+            aria-label="Imágenes anteriores">
+            <ng-icon name="lucideChevronLeft" size="21" aria-hidden="true" />
+          </button>
+          <button hlm-carousel-next type="button"
+            class="!static !top-auto !right-auto !bottom-auto !left-auto !translate-x-0 !translate-y-0 !rotate-0 grid size-12 place-items-center rounded-full border border-[#1f1a14]/20 bg-white text-[var(--brand-tertiary)] transition-colors hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none"
+            aria-label="Imágenes siguientes">
+            <ng-icon name="lucideChevronRight" size="21" aria-hidden="true" />
+          </button>
+          
+        </div>
+      </div>
+    </hlm-carousel>
+  </div>
+
+  <dialog #galleryDialog
+    class="m-auto max-h-[94dvh] w-[min(94vw,90rem)] max-w-none border-0 bg-transparent p-0 text-white backdrop:bg-[#10271c]/90"
+    aria-label="Galería de fotos" (click)="closeOnBackdrop($event)" (close)="onDialogClose()">
+    @if (selectedIndex() !== null) {
+    <div class="gallery-modal-content flex min-h-24 flex-col items-center justify-center gap-4">
+      <button type="button"
+        class="absolute right-2 top-2 z-10 grid size-11 place-items-center rounded-full border border-white/35 bg-[#10271c]/70 text-white transition-colors hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white motion-reduce:transition-none sm:right-4 sm:top-4"
+        aria-label="Cerrar galería" (click)="closeGallery()">
+        <ng-icon name="lucideX" size="21" aria-hidden="true" />
+      </button>
+      <hlm-carousel #dialogCarousel class="block w-full min-w-0" [options]="{ loop: true, startIndex: selectedIndex() ?? 0 }">
+        <hlm-carousel-content class="-ml-0">
+          @for (image of images; track $index) {
+          <hlm-carousel-item class="basis-full pl-0">
+            <img data-dialog-image class="mx-auto max-h-[76dvh] max-w-full rounded-xl object-contain" [src]="image.src" [alt]="image.alt" />
+          </hlm-carousel-item>
+          }
+        </hlm-carousel-content>
+        <div class="mt-4 flex items-center justify-center gap-4" role="group" aria-label="Navegación de imágenes">
+          <button hlm-carousel-previous type="button"
+            class="!static !top-auto !right-auto !bottom-auto !left-auto !translate-x-0 !translate-y-0 !rotate-0 grid size-11 place-items-center rounded-full border border-white/35 bg-[#10271c]/70 text-white transition-colors hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white motion-reduce:transition-none"
+            aria-label="Ver imagen anterior">
+          <ng-icon name="lucideChevronLeft" size="22" aria-hidden="true" />
+          </button>
+          <button hlm-carousel-next type="button"
+            class="!static !top-auto !right-auto !bottom-auto !left-auto !translate-x-0 !translate-y-0 !rotate-0 grid size-11 place-items-center rounded-full border border-white/35 bg-[#10271c]/70 text-white transition-colors hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white motion-reduce:transition-none"
+            aria-label="Ver imagen siguiente">
+          <ng-icon name="lucideChevronRight" size="22" aria-hidden="true" />
+          </button>
+        </div>
+      </hlm-carousel>
+    </div>
+    }
+  </dialog>
+</section>

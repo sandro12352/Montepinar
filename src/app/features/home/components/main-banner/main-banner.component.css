@@ -1,0 +1,34 @@
+.carousel-control {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+}
+
+.carousel-progress-segment {
+  display: block;
+  width: 1.75rem;
+  height: 2px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 55%);
+  transition: width 260ms ease, background-color 260ms ease;
+}
+
+.carousel-progress-active {
+  width: 3.5rem;
+  background: var(--brand-primary);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .slide-copy-item {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-control,
+  .carousel-control::before,
+  .carousel-progress-segment {
+    transition: none;
+  }
+}
