@@ -1,0 +1,88 @@
+<hlm-sheet #sheet="hlmSheet" side="right" class="block">
+  <hlm-sheet-content *hlmSheetPortal class="w-full overflow-y-auto border-l border-[#1f1a14]/10 sm:max-w-xl">
+    <hlm-sheet-header class="px-6 pb-2 pt-10 sm:px-8">
+      <p class="mb-2 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">Montepinar</p>
+      <h2 hlmSheetTitle class="text-3xl font-extrabold tracking-tight text-[#1f1a14]">Agenda tu visita</h2>
+      <p hlmSheetDescription class="mt-2 max-w-md text-sm leading-relaxed text-[#1f1a14]/65">
+        Déjanos tus datos y coordinaremos contigo por WhatsApp.
+      </p>
+    </hlm-sheet-header>
+
+    <form [formRoot]="visitForm" (submit)="submitVisit(); $event.preventDefault()" class="flex flex-col gap-5 px-6 pb-8 pt-4 sm:px-8">
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div hlmField class="sm:col-span-2">
+          <label hlmFieldLabel for="visit-name">Nombre completo</label>
+          <input hlmInput id="visit-name" autocomplete="name" placeholder="¿Cómo te llamas?" [formField]="visitForm.name" />
+          @if (visitForm.name().touched() && visitForm.name().invalid()) {
+            <hlm-field-error>{{ visitForm.name().errors()[0]?.message }}</hlm-field-error>
+          }
+        </div>
+
+        <div hlmField>
+          <label hlmFieldLabel for="visit-phone">Teléfono / WhatsApp</label>
+          <input hlmInput id="visit-phone" type="tel" autocomplete="tel" placeholder="Tu número de contacto" [formField]="visitForm.phone" />
+          @if (visitForm.phone().touched() && visitForm.phone().invalid()) {
+            <hlm-field-error>{{ visitForm.phone().errors()[0]?.message }}</hlm-field-error>
+          }
+        </div>
+
+        <div hlmField>
+          <label hlmFieldLabel for="visit-email">Correo electrónico <span class="font-normal text-[#1f1a14]/55">(opcional)</span></label>
+          <input hlmInput id="visit-email" type="email" autocomplete="email" placeholder="nombre@correo.com" [formField]="visitForm.email" />
+          @if (visitForm.email().touched() && visitForm.email().invalid()) {
+            <hlm-field-error>{{ visitForm.email().errors()[0]?.message }}</hlm-field-error>
+          }
+        </div>
+
+        <div hlmField class="sm:col-span-2">
+          <label hlmFieldLabel for="visit-project">Proyecto que deseas conocer</label>
+          <select id="visit-project" class="h-11 w-full rounded-lg border border-input bg-background px-3 text-sm text-foreground outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30" [formField]="visitForm.project">
+            <option value="" disabled>Selecciona un proyecto</option>
+            <option value="Montepinar Iquitos">Montepinar Iquitos</option>
+            <option value="Palmeras de Montepinar">Palmeras de Montepinar</option>
+          </select>
+          @if (visitForm.project().touched() && visitForm.project().invalid()) {
+            <hlm-field-error>{{ visitForm.project().errors()[0]?.message }}</hlm-field-error>
+          }
+        </div>
+
+        <div hlmField>
+          <label hlmFieldLabel for="visit-date">Fecha preferida</label>
+          <input hlmInput id="visit-date" type="date" [formField]="visitForm.date" />
+          @if (visitForm.date().touched() && visitForm.date().invalid()) {
+            <hlm-field-error>{{ visitForm.date().errors()[0]?.message }}</hlm-field-error>
+          }
+        </div>
+
+        <div hlmField>
+          <label hlmFieldLabel for="visit-time">Horario preferido</label>
+          <select id="visit-time" class="h-11 w-full rounded-lg border border-input bg-background px-3 text-sm text-foreground outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30" [formField]="visitForm.time">
+            <option value="" disabled>Selecciona un horario</option>
+            <option value="Mañana">Mañana</option>
+            <option value="Tarde">Tarde</option>
+          </select>
+          @if (visitForm.time().touched() && visitForm.time().invalid()) {
+            <hlm-field-error>{{ visitForm.time().errors()[0]?.message }}</hlm-field-error>
+          }
+        </div>
+
+        <div hlmField class="sm:col-span-2">
+          <label hlmFieldLabel for="visit-notes">¿Algo que debamos saber? <span class="font-normal text-[#1f1a14]/55">(opcional)</span></label>
+          <textarea hlmTextarea id="visit-notes" rows="3" placeholder="Cuéntanos si tienes alguna consulta o preferencia." [formField]="visitForm.notes"></textarea>
+        </div>
+      </div>
+
+      <button hlmBtn type="submit" class="min-h-12 w-full rounded-xl text-base font-bold">
+        {{ submitted() ? 'Enviar de nuevo por WhatsApp' : 'Continuar por WhatsApp' }}
+      </button>
+      @if (submitted()) {
+        <p class="m-0 rounded-xl border border-[var(--brand-primary)]/25 bg-[var(--brand-primary)]/10 px-4 py-3 text-sm leading-relaxed text-[#1f1a14]" role="status">
+          WhatsApp se abrió con los datos de tu visita. Revisa el mensaje y envíalo para completar la solicitud.
+        </p>
+      }
+      <p class="m-0 text-center text-xs leading-relaxed text-[#1f1a14]/55">
+        Revisarás los datos y enviarás la solicitud desde WhatsApp.
+      </p>
+    </form>
+  </hlm-sheet-content>
+</hlm-sheet>

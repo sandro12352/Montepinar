@@ -124,7 +124,7 @@ body:has(#app-loader) {
 
 #app-loader .loader-logo {
   position: relative;
-  width: clamp(140px, 22vw, 240px);
+  width: clamp(240px, 22vw, 240px);
 }
 
 #app-loader .loader-logo img {

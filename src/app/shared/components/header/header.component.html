@@ -7,7 +7,11 @@
       aria-label="Montepinar, volver al inicio"
       (click)="closeMenu()"
     >
-      <img class="block h-auto w-32 sm:w-36" src="/images/logo.webp" alt="Montepinar" />
+      <img
+        class="block h-auto w-32 sm:w-42"
+        [src]="scrolled() ? whiteHeaderLogoSrc : transparentHeaderLogoSrc"
+        alt="Montepinar"
+      />
     </a>
 
     <nav
@@ -22,15 +26,15 @@
           {{ item.label }}
         </a>
       }
-      <a
+      <button
         data-anim="cta"
         class="header-contact"
-        href="tel:+51932284185"
-        aria-label="Contactar con ventas"
-        (click)="closeMenu()"
+        type="button"
+        aria-label="Agendar una visita a Montepinar"
+        (click)="openVisitSheet()"
       >
-        Contactar
-      </a>
+        Agendar visita
+      </button>
     </nav>
 
     <button
@@ -47,3 +51,7 @@
     </button>
   </div>
 </header>
+
+@defer (when visitSheetRequest() > 0) {
+  <app-visit-sheet [openRequest]="visitSheetRequest()" />
+}
