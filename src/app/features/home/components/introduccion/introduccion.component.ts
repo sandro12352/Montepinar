@@ -16,7 +16,12 @@ gsap.registerPlugin(ScrollTrigger);
 export class IntroduccionComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
-
+  protected readonly stats = [
+    { value: 10, prefix: '+', suffix: '', label: 'Años de trayectoria' },
+    { value: 1200, prefix: '+', suffix: '', label: 'Familias felices' },
+    { value: 15, prefix: '', suffix: '', label: 'Proyectos entregados' },
+    { value: 98, prefix: '', suffix: '%', label: 'Clientes satisfechos' },
+  ];
   constructor() {
     afterNextRender(() => {
       const root = this.root().nativeElement;
@@ -48,15 +53,34 @@ export class IntroduccionComponent {
           },
         });
 
-        gsap.from('[data-metric]', {
+        root.querySelectorAll<HTMLElement>('[data-count]').forEach((counter) => {
+          const target = Number(counter.dataset['count']);
+          const value = { current: 0 };
+          gsap.to(value, {
+            current: target,
+            duration: 1.8,
+            ease: 'power2.out',
+            snap: { current: 1 },
+            onUpdate: () => {
+              counter.textContent = Math.round(value.current).toLocaleString('es-PE');
+            },
+            scrollTrigger: {
+              trigger: root.querySelector('[data-stats]'),
+              start: 'top 85%',
+              once: true,
+            },
+          });
+        });
+
+        gsap.from('[data-stat]', {
           autoAlpha: 0,
-          y: 18,
-          duration: 0.55,
+          y: 20,
+          duration: 0.65,
           stagger: 0.1,
           ease: 'power2.out',
           scrollTrigger: {
-            trigger: root.querySelector('[data-metric]'),
-            start: 'top 88%',
+            trigger: root.querySelector('[data-stats]'),
+            start: 'top 85%',
             once: true,
           },
         });

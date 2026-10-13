@@ -4,7 +4,7 @@ import { BrnSheet } from '@spartan-ng/brain/sheet';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
 import { HlmInputImports } from '@spartan-ng/helm/input';
-import { HlmSheet, HlmSheetImports } from '@spartan-ng/helm/sheet';
+import { HlmSheetImports } from '@spartan-ng/helm/sheet';
 import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
 
 @Component({
@@ -14,8 +14,8 @@ import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
   templateUrl: './visit-sheet.component.html',
 })
 export class VisitSheetComponent {
-  readonly openRequest = input(0);
   protected readonly submitted = signal(false);
+  private readonly sheet = viewChild(BrnSheet);
 
   private readonly model = signal({
     name: '',
@@ -49,12 +49,6 @@ export class VisitSheetComponent {
     maxLength(schema.notes, 500, { message: 'El mensaje no puede superar los 500 caracteres.' });
   });
 
-  private readonly sheet = viewChild(BrnSheet);
-
-  constructor() {
-    afterRenderEffect(() => {
-    });
-  }
 
   protected submitVisit(): void {
     submit(this.visitForm, async () => {
@@ -75,12 +69,9 @@ export class VisitSheetComponent {
     });
   }
 
-  closeSheet(){
-    this.sheet()?.close();
-  }
 
-  openSheet(){
-    this.sheet()?.open;
+  openSheet(): void {
+    this.sheet()?.open();
   }
 
 

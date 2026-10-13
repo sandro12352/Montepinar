@@ -1,4 +1,6 @@
 import { afterNextRender, afterRenderEffect, Component, DestroyRef, ElementRef, inject, Injector, signal, viewChild } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideArrowUpRight } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { VisitSheetComponent } from '../visit-sheet/visit-sheet.component';
 import { LoaderService } from '../../../core/services/loader.service';
@@ -9,7 +11,8 @@ interface NavigationItem {
 }
 
 @Component({
-  imports: [VisitSheetComponent],
+  imports: [NgIcon, VisitSheetComponent],
+  providers: [provideIcons({ lucideArrowUpRight })],
   selector: 'app-header',
   styleUrl: './header.component.css',
   templateUrl: './header.component.html',
@@ -17,7 +20,7 @@ interface NavigationItem {
 export class HeaderComponent {
   protected readonly menuOpen = signal(false);
   protected readonly scrolled = signal(false);
-  protected readonly visitSheetRequest = signal(0);
+  private visitSheet = viewChild(VisitSheetComponent);
 
   // Cambia estas rutas para elegir el logo de cada estado del header.
   protected readonly transparentHeaderLogoSrc = '/images/LogotipoBlanco.png';
@@ -110,9 +113,11 @@ export class HeaderComponent {
     });
   }
 
+
   protected openVisitSheet(): void {
     this.closeMenu();
-    this.visitSheetRequest.update((request) => request + 1);
+
+    this.visitSheet()?.openSheet();
   }
 
   private openMenu(): void {

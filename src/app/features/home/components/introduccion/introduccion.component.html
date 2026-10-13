@@ -1,53 +1,65 @@
 <section #root id="nosotros" class="intro-section bg-[#faf6f0] px-5 py-[clamp(4.5rem,9vw,6rem)] text-[#1f1a14] sm:px-8">
   <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-9 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
     <div data-text class="intro-copy">
-      <p data-reveal class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+      <p data-reveal
+        class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
         <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
         Conoce Montepinar
       </p>
 
-      <h2 data-reveal class="m-0 max-w-[15ch] text-balance text-[clamp(2.5rem,4.8vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
+      <h2 data-reveal
+        class="m-0 max-w-[15ch] text-balance text-[clamp(2.5rem,4.8vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
         Un lugar para vivir con más <span class="text-[var(--brand-primary)]">tranquilidad.</span>
       </h2>
 
-      <p data-reveal class="mb-0 mt-6 max-w-xl text-pretty text-[clamp(1rem,1.4vw,1.15rem)] leading-[1.75] text-[#1f1a14]/75">
-        Montepinar reúne espacios residenciales, áreas verdes y lugares para compartir. Descubre una comunidad pensada para disfrutar cada etapa.
+      <p data-reveal
+        class="mb-0 mt-6 max-w-xl text-pretty text-[clamp(1rem,1.4vw,1.15rem)] leading-[1.75] text-[#1f1a14]/75">
+        Montepinar reúne espacios residenciales, áreas verdes y lugares para compartir. Descubre una comunidad pensada
+        para disfrutar cada etapa.
       </p>
 
       <ul data-reveal class="intro-benefits mt-8 grid list-none gap-x-8 gap-y-4 p-0 sm:grid-cols-2">
-        @for (point of ['Opciones de financiamiento', 'Áreas verdes y recreación', 'Acompañamiento personalizado', 'Espacios para la comunidad']; track point) {
-          <li class="flex items-start gap-3 text-sm font-semibold leading-snug">
-            <span class="intro-check mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-[var(--brand-primary)]/15 text-[var(--brand-tertiary)]" aria-hidden="true">✓</span>
-            {{ point }}
-          </li>
+        @for (point of ['Opciones de financiamiento', 'Áreas verdes y recreación', 'Acompañamiento personalizado',
+        'Espacios para la comunidad']; track point) {
+        <li class="flex items-start gap-3 text-sm font-semibold leading-snug">
+          <span
+            class="intro-check mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-[var(--brand-primary)]/15 text-[var(--brand-tertiary)]"
+            aria-hidden="true">✓</span>
+          {{ point }}
+        </li>
         }
       </ul>
 
       <a data-reveal href="#proyectos"
         class="intro-cta group mt-9 inline-flex min-h-12 items-center gap-4 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-6 py-3.5 text-sm font-extrabold text-white no-underline shadow-lg shadow-[#56300f]/15 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
         <span>Explorar proyectos</span>
-        <ng-icon class="transition-transform duration-200 group-hover:translate-x-1" name="lucideArrowRight" size="20" aria-hidden="true" />
+        <ng-icon class="transition-transform duration-200 group-hover:translate-x-1" name="lucideArrowRight" size="20"
+          aria-hidden="true" />
       </a>
     </div>
 
     <div data-images class="relative min-h-[18rem] lg:min-h-[32rem]">
       <div class="relative w-full lg:absolute lg:inset-y-0 lg:left-0 lg:flex lg:w-[min(58vw,920px)] lg:items-center">
-        <img data-img class="block h-auto w-full" src="/images/introduccion.png" alt="Asesor explica el plano de Montepinar a una familia" loading="lazy" />
+        <img data-img class="block h-auto w-full" src="/images/introduccion.png"
+          alt="Asesor explica el plano de Montepinar a una familia" loading="lazy" />
       </div>
     </div>
   </div>
 
-  <div class="mx-auto mt-10 grid max-w-7xl grid-cols-2 gap-x-6 gap-y-7 px-4 pt-7 sm:px-9 lg:mt-6 lg:grid-cols-4 lg:pt-8">
-    @for (metric of [
-      { title: 'Entorno natural', detail: 'Áreas verdes para disfrutar' },
-      { title: 'Vida en comunidad', detail: 'Espacios para compartir' },
-      { title: 'Recorrido virtual', detail: 'Conoce Montepinar en 360°' },
-      { title: 'Atención cercana', detail: 'Acompañamiento personalizado' },
-    ]; track metric.title) {
-      <div data-metric class="border-l-2 border-[var(--brand-primary)] pl-4">
-        <p class="m-0 text-lg font-extrabold leading-tight text-[var(--brand-tertiary)] sm:text-xl">{{ metric.title }}</p>
-        <p class="mb-0 mt-1.5 text-sm leading-relaxed text-[#1f1a14]/70">{{ metric.detail }}</p>
+  <!-- Franja de cifras -->
+  <div data-stats class="mt-14 overflow-hidden rounded-xl bg-[var(--brand-primary)] text-white sm:mt-16 ">
+    <dl class="mx-auto m-0 grid max-w-330 grid-cols-2 px-3 py-4 sm:px-6 sm:py-6 lg:grid-cols-4">
+      @for (s of stats; track s.label) {
+      <div data-stat
+        class="stats-item flex min-h-32 flex-col items-center justify-center px-3 py-5 text-center sm:min-h-36 sm:px-5 lg:min-h-40 lg:px-6 lg:border-l lg:border-white/10 lg:first:border-l-0">
+        <dd class="m-0 text-[clamp(2.25rem,4.2vw,3.5rem)] font-extrabold leading-none tracking-tight">
+          @if (s.value !== null) {
+            {{ s.prefix }}<span [attr.data-count]="s.value">{{ s.value }}</span>{{ s.suffix }}
+          } 
+        </dd>
+        <dt class="mt-3 max-w-40 text-xs font-bold uppercase leading-snug tracking-[0.12em] text-white sm:text-sm">{{ s.label }}</dt>
       </div>
-    }
+      }
+    </dl>
   </div>
 </section>

@@ -28,12 +28,13 @@
       }
       <button
         data-anim="cta"
-        class="header-contact"
+        class="header-contact gap-2 group"
         type="button"
         aria-label="Agendar una visita a Montepinar"
         (click)="openVisitSheet()"
       >
         Agendar visita
+        <ng-icon name="lucideArrowUpRight" size="18" aria-hidden="true" class="group-hover:-translate-y-0.5 transition-transform duration-150" />
       </button>
     </nav>
 
@@ -52,6 +53,4 @@
   </div>
 </header>
 
-@defer (when visitSheetRequest() > 0) {
-  <app-visit-sheet [openRequest]="visitSheetRequest()" />
-}
+<app-visit-sheet></app-visit-sheet>
