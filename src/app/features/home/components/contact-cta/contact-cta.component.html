@@ -1,0 +1,43 @@
+<section aria-labelledby="contact-cta-title" class="bg-[#f4f1ea] px-5 py-8 text-white sm:px-8 sm:py-12">
+  <div class="contact-cta-panel relative mx-auto grid max-w-7xl items-center gap-10 overflow-hidden rounded-2xl bg-[#10271c] px-6 py-10 sm:px-10 sm:py-14 lg:min-h-[430px] lg:grid-cols-[1.25fr_0.75fr] lg:gap-14 lg:px-16">
+    <img
+      class="absolute inset-0 size-full object-cover"
+      src="/images/PalmerasdeMontepinar.png"
+      alt=""
+      loading="lazy"
+      aria-hidden="true" />
+    <div class="absolute inset-0 bg-gradient-to-r from-[#102018]/90 via-[#102018]/75 to-[#102018]/45" aria-hidden="true"></div>
+
+    <div class="relative max-w-2xl">
+      <h2 id="contact-cta-title" class="m-0 max-w-[13ch] text-balance text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
+        Tu próximo hogar empieza aquí.
+      </h2>
+      <p class="mb-0 mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+        Cuéntanos qué proyecto te interesa y te enviaremos la información para dar el siguiente paso.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-x-10 gap-y-5">
+        <p class="m-0"><span class="block text-2xl font-bold">Atención cercana</span><span class="mt-1 block text-sm text-white/75">Resolvemos tus dudas sobre el proyecto</span></p>
+        <p class="m-0"><span class="block text-2xl font-bold">Por WhatsApp</span><span class="mt-1 block text-sm text-white/75">La conversación continúa contigo</span></p>
+      </div>
+    </div>
+
+    <form class="relative flex flex-col gap-3 rounded-xl border border-white/15 bg-[#1d211b]/90 p-5 shadow-[0_20px_60px_rgb(0_0_0_/_22%)] backdrop-blur-md sm:p-6" (submit)="requestInformation($event)">
+      <div class="flex flex-col gap-2">
+        <label for="contact-project" class="text-sm font-semibold text-white">Proyecto de interés</label>
+        <select id="contact-project" name="project" required class="min-h-12 w-full rounded-lg border border-white/20 bg-white/10 px-3 text-sm text-white outline-none transition-colors focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white/40">
+          <option value="" disabled selected class="text-[#1f1a14]">Selecciona un proyecto</option>
+          <option value="Montepinar Iquitos" class="text-[#1f1a14]">Montepinar Iquitos</option>
+          <option value="Palmeras de Montepinar" class="text-[#1f1a14]">Palmeras de Montepinar</option>
+        </select>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="contact-email" class="text-sm font-semibold text-white">Correo electrónico</label>
+        <input id="contact-email" name="email" type="email" autocomplete="email" placeholder="nombre@correo.com" required class="min-h-12 w-full rounded-lg border border-white/20 bg-white/10 px-3 text-sm text-white outline-none placeholder:text-white/65 transition-colors focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white/40" />
+      </div>
+      <button type="submit" class="mt-1 inline-flex min-h-12 w-fit items-center justify-center whitespace-nowrap rounded-lg bg-[var(--brand-primary)] px-5 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d211b] active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none">
+        Solicitar información
+      </button>
+      <p class="m-0 text-xs leading-relaxed text-white/75">Revisarás el mensaje antes de enviarlo por WhatsApp.</p>
+    </form>
+  </div>
+</section>

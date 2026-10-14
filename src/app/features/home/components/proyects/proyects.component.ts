@@ -1,6 +1,4 @@
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowUpRight } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -18,8 +16,6 @@ interface Project {
 }
 
 @Component({
-  imports: [NgIcon],
-  providers: [provideIcons({ lucideArrowUpRight })],
   selector: 'app-proyects',
   templateUrl: './proyects.component.html',
 })
@@ -80,32 +76,6 @@ export class ProyectsComponent {
           });
         });
 
-        root.querySelectorAll<HTMLElement>('[data-project-action]').forEach((button) => {
-          const icon = button.querySelector<HTMLElement>('[data-project-action-icon]');
-          const buttonTween = gsap.to(button, { scale: 1.1, duration: 0.32, ease: 'back.out(2)', paused: true });
-          const iconTween = icon
-            ? gsap.to(icon, { x: 2, y: -2, rotation: 45, duration: 0.32, ease: 'power2.out', paused: true })
-            : null;
-          const activate = () => {
-            buttonTween.play();
-            iconTween?.play();
-          };
-          const deactivate = () => {
-            buttonTween.reverse();
-            iconTween?.reverse();
-          };
-
-          button.addEventListener('pointerenter', activate);
-          button.addEventListener('pointerleave', deactivate);
-          button.addEventListener('focus', activate);
-          button.addEventListener('blur', deactivate);
-          this.destroyRef.onDestroy(() => {
-            button.removeEventListener('pointerenter', activate);
-            button.removeEventListener('pointerleave', deactivate);
-            button.removeEventListener('focus', activate);
-            button.removeEventListener('blur', deactivate);
-          });
-        });
       }, root);
 
       this.destroyRef.onDestroy(() => context.revert());

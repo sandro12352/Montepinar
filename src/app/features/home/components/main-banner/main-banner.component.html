@@ -1,42 +1,49 @@
-<section
-  id="inicio"
-  class="relative isolate min-h-dvh overflow-hidden bg-[var(--brand-tertiary)] text-white"
-  aria-label="Presentación de Montepinar" tabindex="0">
-  <hlm-carousel class="absolute inset-0 h-full w-full" [options]="{ loop: true ,duration:40}" [plugins]="carrouselPlugins">
-    <hlm-carousel-content class="h-[100dvh] min-h-[38rem] max-sm:min-h-[34rem]">
+<section #bannerRoot id="inicio" class="relative isolate min-h-dvh  text-white" aria-label="Presentación de Montepinar"
+  tabindex="0">
+  <hlm-carousel class="absolute inset-0 h-full w-full" [options]="{ loop: true ,duration:40}"
+    [plugins]="carrouselPlugins">
+    <hlm-carousel-content class="h-dvh min-h-152 max-sm:min-h-136">
       @for (slide of slides; track slide.title; let index = $index) {
 
       <hlm-carousel-item class="h-full basis-full pl-0 ">
 
         <article #slideContent
-          class="relative flex h-full items-center overflow-hidden bg-cover bg-center bg-no-repeat px-[max(1.5rem,calc((100%-75rem)/2))] pb-28 pt-28 max-sm:items-center max-sm:px-6 max-sm:pb-32 max-sm:pt-28">
+          class="relative flex h-full items-end overflow-hidden bg-cover bg-center bg-no-repeat pb-28 pt-28 max-sm:px-6 max-sm:pb-32 max-sm:pt-28">
 
-          @if (slide.video) {
-          <video #slideVideo class="absolute inset-0 z-0 size-full object-cover" autoplay muted loop playsinline
-            preload="metadata"  aria-hidden="true">
-            <source [src]="slide.video" type="video/mp4" />
-          </video>
-          } @else if (slide.imagen) {
-          <img data-zoom class="absolute inset-0 z-0 size-full object-cover will-change-transform" [src]="slide.imagen" alt=""
-            [attr.loading]="index === 0 ? 'eager' : 'lazy'" aria-hidden="true" />
-          }
-          <!-- Velo base muy ligero: unifica cualquier imagen o video -->
-          <div class="pointer-events-none absolute inset-0 z-1 bg-linear-to-r from-black/75 via-black/35 to-black/5 max-sm:from-black/65 max-sm:via-black/40 max-sm:to-black/20 " aria-hidden="true"></div>
-          <div class="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-48 bg-linear-to-t from-black/45 to-transparent" aria-hidden="true"></div>
+          <div data-banner-media class="absolute -inset-y-[6%] inset-x-0 overflow-hidden">
+            @if (slide.video) {
+            <video #slideVideo class="absolute inset-0 size-full object-cover" autoplay muted loop playsinline
+              preload="metadata" aria-hidden="true">
+              <source [src]="slide.video" type="video/mp4" />
+            </video>
+            } @else if (slide.imagen) {
+            <img data-zoom class="absolute inset-0 size-full object-cover will-change-transform" [src]="slide.imagen"
+              alt="" [attr.loading]="index === 0 ? 'eager' : 'lazy'" aria-hidden="true" />
+            }
+            <!-- Velo base muy ligero: unifica cualquier imagen o video -->
+            <div
+              class="pointer-events-none absolute inset-0 z-1 bg-linear-to-r from-black/75 via-black/35 to-black/5 max-sm:from-black/65 max-sm:via-black/40 max-sm:to-black/20 "
+              aria-hidden="true"></div>
+            <div
+              class="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-48 bg-linear-to-t from-black/45 to-transparent"
+              aria-hidden="true"></div>
+          </div>
 
-          <div class="relative z-2 w-full max-w-165 ">
+          <div data-banner-copy class="relative z-2 mx-auto w-[85%] pl-4 max-md:w-full max-md:px-5 max-md:pl-5">
 
-            <p #subtitulo class="slide-copy-item mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-white">
+            <p #subtitulo
+              class="slide-copy-item mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-white">
               <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
               {{ slide.eyebrow }}
             </p>
 
             <h1 #titulo
-              class="slide-copy-item m-0 max-w-[15ch] text-balance text-[clamp(2.9rem,5.5vw,5.25rem)] font-extrabold leading-[1.02] tracking-[-0.045em] max-sm:max-w-[11ch] max-sm:text-[clamp(2.75rem,11vw,4rem)]">
+              class="slide-copy-item m-0 max-w-[15ch] text-balance text-[clamp(4.9rem,5.5vw,5.25rem)] font-extrabold leading-[1.02] tracking-[-0.045em] max-sm:max-w-[11ch] max-sm:text-[clamp(2.75rem,11vw,4rem)]">
               {{ slide.title }}
             </h1>
 
-            <p #descripcion class="slide-copy-item my-6 max-w-xl text-pretty text-[clamp(1rem,1.5vw,1.2rem)] leading-[1.65] text-white/90">
+            <p #descripcion
+              class="slide-copy-item my-6 max-w-xl text-pretty text-[clamp(1rem,1.5vw,1.2rem)] leading-[1.65] text-white/90">
               {{ slide.description }}
             </p>
 
@@ -51,7 +58,8 @@
 
               <span class="relative z-10">{{ slide.action }}</span>
 
-              <ng-icon class="relative z-10 transition-transform duration-200 group-hover:translate-x-1" name="lucideMapPinHouse" size="20" aria-hidden="true" />
+              <ng-icon class="relative z-10 transition-transform duration-200 group-hover:translate-x-1"
+                name="lucideMapPinHouse" size="20" aria-hidden="true" />
             </a>
 
           </div>
@@ -63,13 +71,17 @@
 
 
 
-    <div class="carousel-progress pointer-events-none absolute bottom-9 left-[max(1.5rem,calc((100%-75rem)/2))] z-20 flex items-center gap-2 max-sm:bottom-7 max-sm:left-6" aria-hidden="true">
+    <div
+      class="carousel-progress pointer-events-none absolute bottom-9 left-[calc(7.5vw_+_0.1rem)] z-20 flex items-center gap-2 max-sm:bottom-7 max-sm:left-5"
+      aria-hidden="true">
       @for (slide of slides; track slide.title; let index = $index) {
-        <span class="carousel-progress-segment" [class.carousel-progress-active]="activeSlide() === index"></span>
+      <span class="carousel-progress-segment" [class.carousel-progress-active]="activeSlide() === index"></span>
       }
     </div>
 
-    <div class="carousel-controls pointer-events-none absolute bottom-7 right-[max(1.5rem,calc((100%-75rem)/2))] z-20 flex gap-2 max-sm:bottom-5 max-sm:right-5" role="group" aria-label="Controles del carrusel">
+    <div
+      class="carousel-controls pointer-events-none absolute bottom-7 right-[calc(7.5vw_+_2.25rem)] z-20 flex gap-2 max-sm:bottom-5 max-sm:right-5"
+      role="group" aria-label="Controles del carrusel">
       <button hlm-carousel-previous
         class="carousel-control pointer-events-auto grid size-12 place-items-center rounded-xl border border-white/35 bg-black/30 text-white backdrop-blur-sm transition hover:border-[var(--brand-primary)] hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
         type="button" aria-label="Diapositiva anterior">

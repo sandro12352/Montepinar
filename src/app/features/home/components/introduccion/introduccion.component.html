@@ -1,5 +1,5 @@
-<section #root id="nosotros" class="intro-section bg-[#faf6f0] px-5 py-[clamp(4.5rem,9vw,6rem)] text-[#1f1a14] sm:px-8">
-  <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-9 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
+<section #root id="nosotros" class="intro-section bg-[#faf6f0]  py-[clamp(4.5rem,9vw,6rem)] text-[#1f1a14] ">
+  <div class="mx-auto grid w-[85%] items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
     <div data-text class="intro-copy">
       <p data-reveal
         class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
@@ -47,7 +47,7 @@
   </div>
 
   <!-- Franja de cifras -->
-  <div data-stats class="mt-14 overflow-hidden rounded-xl bg-[var(--brand-primary)] text-white sm:mt-16 ">
+  <div data-stats class="mt-14 overflow-hidden  bg-(--brand-primary) text-white sm:mt-16 ">
     <dl class="mx-auto m-0 grid max-w-330 grid-cols-2 px-3 py-4 sm:px-6 sm:py-6 lg:grid-cols-4">
       @for (s of stats; track s.label) {
       <div data-stat

@@ -14,7 +14,6 @@ interface NavigationItem {
   imports: [NgIcon, VisitSheetComponent],
   providers: [provideIcons({ lucideArrowUpRight })],
   selector: 'app-header',
-  styleUrl: './header.component.css',
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {

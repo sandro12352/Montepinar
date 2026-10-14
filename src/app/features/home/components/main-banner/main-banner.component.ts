@@ -1,6 +1,8 @@
 import {
+  afterNextRender,
   afterRenderEffect,
   Component,
+  DestroyRef,
   ElementRef,
   inject,
   signal,
@@ -11,8 +13,11 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowLeft, lucideArrowRight, lucideMapPinHouse } from '@ng-icons/lucide';
 import { HlmCarousel, HlmCarouselImports } from '@spartan-ng/helm/carousel';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { LoaderService } from '../../../../core/services/loader.service';
 import Autoplay from 'embla-carousel-autoplay'
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface BannerSlide {
   readonly eyebrow: string;
@@ -34,6 +39,8 @@ interface BannerSlide {
 export class MainBannerComponent {
   carousel = viewChild.required(HlmCarousel);
   private readonly loaderService = inject(LoaderService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly bannerRoot = viewChild.required<ElementRef<HTMLElement>>('bannerRoot');
   protected readonly activeSlide = signal(0);
 
 
@@ -79,6 +86,40 @@ export class MainBannerComponent {
 
 
   constructor() {
+    afterNextRender(() => {
+      const root = this.bannerRoot().nativeElement;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const context = gsap.context(() => {
+        gsap.to(root.querySelectorAll<HTMLElement>('[data-banner-media]'), {
+          yPercent: -5,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: root,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0.6,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        gsap.to(root.querySelectorAll<HTMLElement>('[data-banner-copy]'), {
+          y: -120,
+          autoAlpha: 0,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: root,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0.6,
+            invalidateOnRefresh: true,
+          },
+        });
+      }, root);
+
+      this.destroyRef.onDestroy(() => context.revert());
+    });
+
     // Escucha el cambio de slide en Embla
     afterRenderEffect(() => {
       if (!this.loaderService.ready()) return; // 👈 espera al loader
@@ -138,7 +179,7 @@ export class MainBannerComponent {
       gsap.fromTo(
         img,
         { scale: 1 },
-        { scale: 1.2, duration: 10, ease: 'none' }
+        { scale: 1.2, duration: 12, ease: 'none' }
       );
     });
   }
