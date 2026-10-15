@@ -1,90 +1,197 @@
-<hlm-sheet #sheet="hlmSheet" side="right" [restoreFocus]="false" class="block">
-  <hlm-sheet-content *hlmSheetPortal data-visit-sheet-content [showCloseButton]="true" class="w-full overflow-y-auto border-l border-[#1f1a14]/10 sm:max-w-xl">
-    <div class="visit-sheet-enter flex min-h-full flex-col gap-4">
-    <hlm-sheet-header class="px-6 pb-2 pt-5 sm:px-8">
-        <p class="m-0 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">Montepinar</p>
-      <h2 hlmSheetTitle class="text-3xl font-extrabold tracking-tight text-[#1f1a14]">Agenda tu visita</h2>
-      <p hlmSheetDescription class="mt-2 max-w-md text-sm leading-relaxed text-[#1f1a14]/65">
-        Déjanos tus datos y coordinaremos contigo por WhatsApp.
-      </p>
-    </hlm-sheet-header>
 
-    <form [formRoot]="visitForm" (submit)="submitVisit(); $event.preventDefault()" class="flex flex-col gap-5 px-6 pb-8 pt-4 sm:px-8">
-      <div class="grid gap-4 sm:grid-cols-2">
-        <div hlmField class="sm:col-span-2">
-          <label hlmFieldLabel for="visit-name">Nombre completo</label>
-          <input hlmInput id="visit-name" autocomplete="name" placeholder="¿Cómo te llamas?" [formField]="visitForm.name" />
-          @if (visitForm.name().touched() && visitForm.name().invalid()) {
-            <hlm-field-error>{{ visitForm.name().errors()[0]?.message }}</hlm-field-error>
-          }
-        </div>
+<hlm-sheet #sheet="hlmSheet" side="right" [restoreFocus]="false" class="block" scrollStrategy="reposition">
+  <hlm-sheet-content
+    *hlmSheetPortal
+    data-visit-sheet-content
+    [showCloseButton]="true"
+    class="no-scrollbar w-140! max-w-140! overflow-y-auto border-l border-[var(--border)] bg-[var(--background)] px-6 pb-8 pt-20 text-[var(--foreground)] sm:px-10 sm:pt-24 [&>button]:absolute [&>button]:right-6 [&>button]:top-6 [&>button]:h-10 [&>button]:w-auto [&>button]:gap-2 [&>button]:rounded-full [&>button]:border [&>button]:border-[var(--border)] [&>button]:bg-[var(--card)] [&>button]:px-4 [&>button]:text-sm [&>button]:font-medium [&>button]:text-[var(--foreground)] [&>button]:shadow-none [&>button]:hover:bg-[var(--brand-sage-100)]">
 
-        <div hlmField>
-          <label hlmFieldLabel for="visit-phone">Teléfono / WhatsApp</label>
-          <input hlmInput id="visit-phone" type="tel" autocomplete="tel" placeholder="Tu número de contacto" [formField]="visitForm.phone" />
-          @if (visitForm.phone().touched() && visitForm.phone().invalid()) {
-            <hlm-field-error>{{ visitForm.phone().errors()[0]?.message }}</hlm-field-error>
-          }
-        </div>
+    <div class="visit-sheet-enter mx-auto flex min-h-full w-full max-w-lg flex-col">
 
-        <div hlmField>
-          <label hlmFieldLabel for="visit-email">Correo electrónico <span class="font-normal text-[#1f1a14]/55">(opcional)</span></label>
-          <input hlmInput id="visit-email" type="email" autocomplete="email" placeholder="nombre@correo.com" [formField]="visitForm.email" />
-          @if (visitForm.email().touched() && visitForm.email().invalid()) {
-            <hlm-field-error>{{ visitForm.email().errors()[0]?.message }}</hlm-field-error>
-          }
-        </div>
+      <hlm-sheet-header class="mb-6 p-0 text-left">
+        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--brand-orange-700)]">
+          Agenda una visita
+        </p>
 
-        <div hlmField class="sm:col-span-2">
-          <label hlmFieldLabel for="visit-project">Proyecto que deseas conocer</label>
-          <select id="visit-project" class="h-11 w-full rounded-lg border border-input bg-background px-3 text-sm text-foreground outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30" [formField]="visitForm.project">
-            <option value="" disabled>Selecciona un proyecto</option>
-            <option value="Montepinar Iquitos">Montepinar Iquitos</option>
-            <option value="Palmeras de Montepinar">Palmeras de Montepinar</option>
-          </select>
-          @if (visitForm.project().touched() && visitForm.project().invalid()) {
-            <hlm-field-error>{{ visitForm.project().errors()[0]?.message }}</hlm-field-error>
-          }
-        </div>
+        <h2
+          hlmSheetTitle
+          class="m-0 text-[2.35rem] font-semibold leading-[1.08] tracking-[-0.045em] text-[var(--foreground)] sm:text-3xl">
+          Encuentra tu lugar en Montepinar.
+        </h2>
 
-        <div hlmField>
-          <label hlmFieldLabel for="visit-date">Fecha preferida</label>
-          <input hlmInput id="visit-date" type="date" [formField]="visitForm.date" />
-          @if (visitForm.date().touched() && visitForm.date().invalid()) {
-            <hlm-field-error>{{ visitForm.date().errors()[0]?.message }}</hlm-field-error>
-          }
-        </div>
+        <p
+          hlmSheetDescription
+          class="mt-4 max-w-lg text-sm leading-relaxed text-[var(--muted-foreground)] sm:text-base">
+          Déjanos tus datos y nos pondremos en contacto contigo para coordinar una visita.
+        </p>
+      </hlm-sheet-header>
 
-        <div hlmField>
-          <label hlmFieldLabel for="visit-time">Horario preferido</label>
-          <select id="visit-time" class="h-11 w-full rounded-lg border border-input bg-background px-3 text-sm text-foreground outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30" [formField]="visitForm.time">
-            <option value="" disabled>Selecciona un horario</option>
-            <option value="Mañana">Mañana</option>
-            <option value="Tarde">Tarde</option>
-          </select>
-          @if (visitForm.time().touched() && visitForm.time().invalid()) {
-            <hlm-field-error>{{ visitForm.time().errors()[0]?.message }}</hlm-field-error>
-          }
-        </div>
+      <div class="mb-7 flex items-center gap-3">
+        <img
+          class="size-11 shrink-0 rounded-full object-cover ring-2 ring-[var(--brand-sage-200)]"
+          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=96&h=96&q=80"
+          alt="Asesora del equipo Montepinar"
+          width="44"
+          height="44"
+          loading="lazy" />
 
-        <div hlmField class="sm:col-span-2">
-          <label hlmFieldLabel for="visit-notes">¿Algo que debamos saber? <span class="font-normal text-[#1f1a14]/55">(opcional)</span></label>
-          <textarea hlmTextarea id="visit-notes" rows="3" placeholder="Cuéntanos si tienes alguna consulta o preferencia." [formField]="visitForm.notes"></textarea>
+        <div class="min-w-0">
+          <p class="m-0 text-base font-semibold text-[var(--foreground)]">
+            Equipo Montepinar
+          </p>
+          <a
+            class="text-sm text-[var(--muted-foreground)] underline-offset-2 transition-colors hover:text-[var(--brand-forest-600)] hover:underline"
+            href="tel:+51932284185">
+            Ventas · +51 932 284 185
+          </a>
         </div>
       </div>
 
-      <button hlmBtn type="submit" class="min-h-12 w-full rounded-xl text-base font-bold">
-        {{ submitted() ? 'Enviar de nuevo por WhatsApp' : 'Continuar por WhatsApp' }}
-      </button>
       @if (submitted()) {
-        <p class="m-0 rounded-xl border border-[var(--brand-primary)]/25 bg-[var(--brand-primary)]/10 px-4 py-3 text-sm leading-relaxed text-[#1f1a14]" role="status">
-          WhatsApp se abrió con los datos de tu visita. Revisa el mensaje y envíalo para completar la solicitud.
-        </p>
+        <section
+          class="flex flex-1 flex-col items-start justify-center py-10"
+          role="status"
+          aria-live="polite">
+
+          <span
+            class="mb-5 grid size-12 place-items-center rounded-full bg-[var(--brand-forest-100)] text-xl text-[var(--brand-forest-700)]"
+            aria-hidden="true">
+            ✓
+          </span>
+
+          <h3 class="mb-3 text-3xl font-semibold leading-tight tracking-[-0.04em] text-[var(--foreground)]">
+            ¡Gracias por tu interés!
+          </h3>
+
+          <p class="max-w-md text-sm leading-relaxed text-[var(--muted-foreground)] sm:text-base">
+            Tu solicitud de visita quedó lista. El equipo Montepinar se pondrá en contacto contigo para coordinar los detalles.
+          </p>
+        </section>
+      } @else {
+
+        <form
+          [formRoot]="visitForm"
+          (submit)="submitVisit(); $event.preventDefault()"
+          class="flex flex-1 flex-col gap-2.5">
+
+          <div hlmField class="gap-0">
+            <label hlmFieldLabel class="sr-only" for="visit-name">Tu nombre</label>
+            <input
+              hlmInput
+              id="visit-name"
+              autocomplete="name"
+              placeholder="Tu nombre"
+              class="h-[3.15rem] rounded-xl border-[var(--border)] bg-[var(--card)] px-3 text-sm text-[var(--foreground)] shadow-none placeholder:text-[var(--muted-foreground)] focus-visible:border-[var(--brand-forest-500)] focus-visible:ring-[var(--brand-forest-500)]/20"
+              [formField]="visitForm.name" />
+
+            @if (visitForm.name().touched() && visitForm.name().invalid()) {
+              <hlm-field-error>{{ visitForm.name().errors()[0]?.message }}</hlm-field-error>
+            }
+          </div>
+
+          <div hlmField class="gap-0">
+            <label hlmFieldLabel class="sr-only" for="visit-email">Correo electrónico</label>
+            <input
+              hlmInput
+              id="visit-email"
+              type="email"
+              autocomplete="email"
+              placeholder="Correo electrónico"
+              class="h-[3.15rem] rounded-xl border-[var(--border)] bg-[var(--card)] px-3 text-sm text-[var(--foreground)] shadow-none placeholder:text-[var(--muted-foreground)] focus-visible:border-[var(--brand-forest-500)] focus-visible:ring-[var(--brand-forest-500)]/20"
+              [formField]="visitForm.email" />
+
+            @if (visitForm.email().touched() && visitForm.email().invalid()) {
+              <hlm-field-error>{{ visitForm.email().errors()[0]?.message }}</hlm-field-error>
+            }
+          </div>
+
+          <div hlmField class="gap-0">
+            <label hlmFieldLabel class="sr-only" for="visit-phone">Teléfono</label>
+            <input
+              hlmInput
+              id="visit-phone"
+              type="tel"
+              autocomplete="tel"
+              placeholder="Teléfono / WhatsApp"
+              class="h-[3.15rem] rounded-xl border-[var(--border)] bg-[var(--card)] px-3 text-sm text-[var(--foreground)] shadow-none placeholder:text-[var(--muted-foreground)] focus-visible:border-[var(--brand-forest-500)] focus-visible:ring-[var(--brand-forest-500)]/20"
+              [formField]="visitForm.phone" />
+
+            @if (visitForm.phone().touched() && visitForm.phone().invalid()) {
+              <hlm-field-error>{{ visitForm.phone().errors()[0]?.message }}</hlm-field-error>
+            }
+          </div>
+
+          <div hlmField class="gap-0">
+            <label hlmFieldLabel class="sr-only" for="visit-project">
+              ¿Qué proyecto o zona te interesa?
+            </label>
+
+            <select
+              id="visit-project"
+              class="h-[3.15rem] w-full rounded-xl border border-[var(--border)] bg-[var(--card)] px-3 text-sm text-[var(--foreground)] outline-none transition-colors focus-visible:border-[var(--brand-forest-500)] focus-visible:ring-3 focus-visible:ring-[var(--brand-forest-500)]/20"
+              [formField]="visitForm.project">
+
+              <option value="" disabled>¿Qué proyecto o zona te interesa?</option>
+              <option value="Montepinar Iquitos">Montepinar Iquitos</option>
+              <option value="Palmeras de Montepinar">Palmeras de Montepinar</option>
+            </select>
+
+            @if (visitForm.project().touched() && visitForm.project().invalid()) {
+              <hlm-field-error>{{ visitForm.project().errors()[0]?.message }}</hlm-field-error>
+            }
+          </div>
+
+          <div hlmField class="gap-0">
+            <label hlmFieldLabel class="sr-only" for="visit-date">Fecha preferida</label>
+            <input
+              hlmInput
+              id="visit-date"
+              type="date"
+              class="h-[3.15rem] rounded-xl border-[var(--border)] bg-[var(--card)] px-3 text-sm text-[var(--foreground)] shadow-none focus-visible:border-[var(--brand-forest-500)] focus-visible:ring-[var(--brand-forest-500)]/20"
+              [formField]="visitForm.date" />
+
+            @if (visitForm.date().touched() && visitForm.date().invalid()) {
+              <hlm-field-error>{{ visitForm.date().errors()[0]?.message }}</hlm-field-error>
+            }
+          </div>
+
+          <div hlmField class="gap-0">
+            <label hlmFieldLabel class="sr-only" for="visit-notes">
+              ¿Algo más que debamos saber?
+            </label>
+
+            <textarea
+              hlmTextarea
+              id="visit-notes"
+              rows="3"
+              placeholder="¿Algo más que debamos saber?"
+              class="min-h-28 resize-y rounded-xl border-[var(--border)] bg-[var(--card)] px-3 py-3 text-sm text-[var(--foreground)] shadow-none placeholder:text-[var(--muted-foreground)] focus-visible:border-[var(--brand-forest-500)] focus-visible:ring-[var(--brand-forest-500)]/20"
+              [formField]="visitForm.notes"></textarea>
+          </div>
+
+          <button
+            hlmBtn
+            type="submit"
+            [disabled]="submitting()"
+            class="mt-0 min-h-[3.15rem] w-full rounded-xl bg-[var(--brand-forest-500)] text-sm font-semibold text-white shadow-none transition-colors hover:bg-[var(--brand-forest-700)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-forest-500)] focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-75">
+
+            @if (submitting()) {
+              <span
+                class="mr-2 inline-block size-4 animate-spin rounded-full border-2 border-white/35 border-t-white"
+                aria-hidden="true"></span>
+              Enviando solicitud…
+            } @else {
+              Solicitar una visita
+            }
+          </button>
+
+          <p class="mb-0 mt-5 text-sm leading-relaxed text-[var(--muted-foreground)]">
+            Al enviar este formulario aceptas nuestra política de privacidad. No recibirás spam.
+          </p>
+        </form>
       }
-      <p class="m-0 text-center text-xs leading-relaxed text-[#1f1a14]/55">
-        Revisarás los datos y enviarás la solicitud desde WhatsApp.
-      </p>
-    </form>
     </div>
   </hlm-sheet-content>
 </hlm-sheet>
+
+<app-visit-sheet></app-visit-sheet>

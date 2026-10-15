@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 @layer theme, base, components, utilities;
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/preflight.css' layer(base);
@@ -10,49 +10,138 @@
 :root {
   color-scheme: light;
 
-  /* Colores corporativos */
-  --brand-primary: #fb7a11;
-  --brand-secondary: #13b507;
-  --brand-tertiary: #087940;
-  --brand-complementary-light: #a0cb6a;
-  --brand-complementary-dark: #14a508;
+  /* ========================================
+     1. PALETA CORPORATIVA MONTEPINAR
+     ======================================== */
+
+  /* Naranja corporativo */
+  --brand-orange-50: #FFFAF5;
+  --brand-orange-100: #FFF2E7;
+  --brand-orange-200: #FEE2CB;
+  --brand-orange-300: #FDC79B;
+  --brand-orange-400: #FCA258;
+  --brand-orange-500: #FB7A11;
+  --brand-orange-600: #D5680E;
+  --brand-orange-700: #B0550C;
+  --brand-orange-800: #8A4309;
+  --brand-orange-900: #643107;
+
+  /* Verde bosque */
+  --brand-forest-50: #F5FAF7;
+  --brand-forest-100: #E6F2EC;
+  --brand-forest-200: #C9E2D5;
+  --brand-forest-300: #97C7AF;
+  --brand-forest-400: #52A179;
+  --brand-forest-500: #087940;
+  --brand-forest-600: #076736;
+  --brand-forest-700: #06552D;
+  --brand-forest-800: #044323;
+  --brand-forest-900: #03301A;
+
+  /* Verde vivo */
+  --brand-green-50: #F6FCF5;
+  --brand-green-100: #E7F8E6;
+  --brand-green-200: #CBEFC8;
+  --brand-green-300: #9CE097;
+  --brand-green-400: #5ACB51;
+  --brand-green-500: #13B507;
+  --brand-green-600: #109A06;
+  --brand-green-700: #0D7F05;
+  --brand-green-800: #0A6404;
+  --brand-green-900: #084803;
+
+  /* Verde suave */
+  --brand-sage-50: #FCFDF9;
+  --brand-sage-100: #F7FAF0;
+  --brand-sage-200: #EDF3DE;
+  --brand-sage-300: #DCE8C0;
+  --brand-sage-400: #C4D897;
+  --brand-sage-500: #ABC86A;
+  --brand-sage-600: #91AA5A;
+  --brand-sage-700: #788C4A;
+  --brand-sage-800: #5E6E3A;
+  --brand-sage-900: #44502A;
+
+  /* Verde complementario */
+  --brand-green-alt-50: #F6FBF5;
+  --brand-green-alt-100: #E8F6E6;
+  --brand-green-alt-200: #CBEBC9;
+  --brand-green-alt-300: #9CD997;
+  --brand-green-alt-400: #5AC052;
+  --brand-green-alt-500: #14A508;
+  --brand-green-alt-600: #118C07;
+  --brand-green-alt-700: #0E7306;
+  --brand-green-alt-800: #0B5B04;
+  --brand-green-alt-900: #084203;
+
+  /* Alias corporativos */
+  --brand-primary: var(--brand-orange-500);
+  --brand-secondary: var(--brand-green-500);
+  --brand-tertiary: var(--brand-forest-500);
+  --brand-complementary-light: var(--brand-sage-500);
+  --brand-complementary-dark: var(--brand-green-alt-500);
+
+  /* ========================================
+     2. TIPOGRAFÍA
+     ======================================== */
 
   --font-corporate: 'Urbanist', 'Montserrat', sans-serif;
   --font-secondary: 'Montserrat', sans-serif;
   --font-sans: var(--font-corporate);
 
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  /* ========================================
+     3. TEMA CLARO: TAILWIND / SPARTAN
+     ======================================== */
+
+  --background: #F7F8F3;
+  --foreground: #1F2A23;
+
+  --card: #FFFFFF;
+  --card-foreground: #1F2A23;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #1F2A23;
+
+  /* Acciones principales en verde bosque */
+  --primary: var(--brand-forest-500);
+  --primary-foreground: #FFFFFF;
+
+  /* Fondos secundarios */
+  --secondary: var(--brand-forest-100);
+  --secondary-foreground: var(--brand-forest-800);
+
+  --muted: #EEF4EA;
+  --muted-foreground: #68756B;
+
+  /* Naranja para acentos */
+  --accent: var(--brand-orange-100);
+  --accent-foreground: var(--brand-orange-800);
+
+  --destructive: #B91C1C;
+
+  --border: #DDE6D8;
+  --input: #DDE6D8;
+  --ring: var(--brand-forest-500);
+
+  /* Gráficos */
+  --chart-1: var(--brand-orange-500);
+  --chart-2: var(--brand-forest-500);
+  --chart-3: var(--brand-green-500);
+  --chart-4: var(--brand-sage-500);
+  --chart-5: var(--brand-green-alt-500);
+
+  /* Componentes generales */
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Barra lateral */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #1F2A23;
+  --sidebar-primary: var(--brand-forest-500);
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: var(--brand-forest-100);
+  --sidebar-accent-foreground: var(--brand-forest-800);
+  --sidebar-border: #DDE6D8;
+  --sidebar-ring: var(--brand-forest-500);
 }
 
 :root.dark {
@@ -119,7 +208,7 @@ body:has(#app-loader) {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  background: white;
+  background: var(--background);
 }
 
 #app-loader .loader-logo {
@@ -149,7 +238,7 @@ body:has(#app-loader) {
   width: clamp(140px, 22vw, 240px);
   height: 2px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, .2);
+  background: rgb(8 121 64 / 16%);
   overflow: hidden;
 }
 

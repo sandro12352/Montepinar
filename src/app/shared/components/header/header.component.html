@@ -1,4 +1,5 @@
-<header #header class="invisible absolute inset-x-0 top-2 z-50 text-white transition-[background-color,box-shadow] duration-200 motion-reduce:transition-none" [class.bg-white]="scrolled()" [class.text-stone-900]="scrolled()" [class.shadow-lg]="scrolled()">
+<header #header class="invisible absolute inset-x-0 top-2 z-50 text-white transition-[background-color,box-shadow] duration-200 motion-reduce:transition-none" [class.bg-white]="scrolled()" [style.background-color]="scrolled() ? 'var(--card)' : 'transparent'"
+[style.color]="scrolled() ? 'var(--foreground)' : '#FFFFFF'" [class.shadow-lg]="scrolled()">
   <div class="mx-auto flex w-[85%] items-center justify-between gap-5 py-2 max-md:w-full max-m:px-5">
     <a
       data-anim="logo"
@@ -22,18 +23,18 @@
         <a
           data-anim="link"
           class="relative px-1 py-[0.65rem] text-[0.92rem] font-semibold no-underline transition-colors duration-200 after:absolute after:bottom-[0.35rem] after:left-1 after:right-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-(--brand-primary) after:transition-transform after:duration-200 after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100"
-          [style.color]="scrolled() || menuOpen() ? '#1f1a14' : '#fff'"
+          [style.color]="scrolled() || menuOpen()? 'var(--foreground)': '#FFFFFF'"
           [href]="'#' + item.fragment"
           (click)="closeMenu()"
         >{{ item.label }}</a>
       }
-      <button data-anim="cta" class="group inline-flex min-h-[2.9rem] items-center justify-center gap-2 rounded-xl border-0 bg-[var(--brand-primary)] px-[1.4rem] text-[0.9rem] font-extrabold text-white transition-[background-color,transform] duration-200 hover:-translate-y-px hover:bg-[var(--brand-tertiary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-tertiary)] focus-visible:ring-offset-2 md:hidden max-md:mt-1 motion-reduce:transition-none" type="button" (click)="openVisitSheet()">
+      <button data-anim="cta" class="group inline-flex min-h-[2.9rem] items-center justify-center gap-2 rounded-xl border-0 bg-primary text-primary-foreground px-[1.4rem] text-[0.9rem] font-extrabold  transition-[background-color,transform] duration-200 hover:-translate-y-px hover:bg-[var(--brand-tertiary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-tertiary)] focus-visible:ring-offset-2 md:hidden max-md:mt-1 motion-reduce:transition-none" type="button" (click)="openVisitSheet()">
         Agendar visita
         <ng-icon name="lucideArrowUpRight" size="18" aria-hidden="true" class="transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
       </button>
     </nav>
 
-    <button data-anim="cta" class="group col-start-3 row-start-1 inline-flex min-h-[2.9rem] items-center justify-center justify-self-end gap-2 rounded-xl border-0 bg-[var(--brand-primary)] px-[1.4rem] text-[0.9rem] font-extrabold text-white transition-[background-color,transform] duration-200 hover:-translate-y-px hover:bg-[var(--brand-tertiary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-tertiary)] focus-visible:ring-offset-2 max-md:hidden motion-reduce:transition-none" type="button" aria-label="Agendar una visita a Montepinar" (click)="openVisitSheet()">
+    <button data-anim="cta" class="group col-start-3 row-start-1 inline-flex min-h-[2.9rem] items-center justify-center justify-self-end gap-2 rounded-xl border-0 bg-primary px-[1.4rem] text-[0.9rem] font-extrabold text-primary-foreground transition-[background-color,transform] duration-200 hover:-translate-y-px hover:bg-[var(--brand-forest-700)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-forest-500)] focus-visible:ring-offset-2 max-md:hidden motion-reduce:transition-none" type="button" aria-label="Agendar una visita a Montepinar" (click)="openVisitSheet()">
       Agendar visita
       <ng-icon name="lucideArrowUpRight" size="18" aria-hidden="true" class="transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
     </button>

@@ -1,4 +1,4 @@
-import { afterRenderEffect, Component, input, signal, viewChild } from '@angular/core';
+import { Component, signal, viewChild } from '@angular/core';
 import { email, form, FormField, FormRoot, maxLength, minLength, pattern, required, submit, validate } from '@angular/forms/signals';
 import { BrnSheet } from '@spartan-ng/brain/sheet';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -15,6 +15,7 @@ import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
 })
 export class VisitSheetComponent {
   protected readonly submitted = signal(false);
+  protected readonly submitting = signal(false);
   private readonly sheet = viewChild(BrnSheet);
 
   private readonly model = signal({
@@ -23,7 +24,6 @@ export class VisitSheetComponent {
     email: '',
     project: '',
     date: '',
-    time: '',
     notes: '',
   });
   protected readonly visitForm = form(this.model, (schema) => {
@@ -45,26 +45,17 @@ export class VisitSheetComponent {
         ? { kind: 'pastDate', message: 'Selecciona hoy o una fecha futura.' }
         : undefined;
     });
-    required(schema.time, { message: 'Selecciona un horario de preferencia.' });
     maxLength(schema.notes, 500, { message: 'El mensaje no puede superar los 500 caracteres.' });
   });
 
 
   protected submitVisit(): void {
-    submit(this.visitForm, async () => {
-      const { name, phone, email: emailAddress, project, date, time, notes } = this.model();
-      const message = [
-        'Hola, quisiera agendar una visita a Montepinar.',
-        `Nombre: ${name}`,
-        `Teléfono: ${phone}`,
-        emailAddress ? `Correo: ${emailAddress}` : '',
-        `Proyecto: ${project}`,
-        `Fecha preferida: ${date}`,
-        `Horario preferido: ${time}`,
-        notes ? `Comentarios: ${notes}` : '',
-      ].filter(Boolean).join('\n');
+    if (this.submitting() || this.submitted()) return;
 
-      window.open(`https://wa.me/51932284185?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    submit(this.visitForm, async () => {
+      this.submitting.set(true);
+      await new Promise((resolve) => setTimeout(resolve, 900));
+      this.submitting.set(false);
       this.submitted.set(true);
     });
   }
