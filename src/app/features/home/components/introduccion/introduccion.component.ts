@@ -10,7 +10,6 @@ gsap.registerPlugin(ScrollTrigger);
   imports: [NgIcon],
   providers: [provideIcons({ lucideArrowRight })],
   selector: 'app-introduccion',
-  styleUrl: './introduccion.component.css',
   templateUrl: './introduccion.component.html',
 })
 export class IntroduccionComponent {

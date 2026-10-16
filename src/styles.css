@@ -7,6 +7,7 @@
 @import '@spartan-ng/brain/hlm-tailwind-preset.css';
 /* You can add global styles to this file, and also import other style files */
 
+
 :root {
   color-scheme: light;
 
@@ -93,56 +94,79 @@
      3. TEMA CLARO: TAILWIND / SPARTAN
      ======================================== */
 
+  /* Fondo general */
   --background: #F7F8F3;
   --foreground: #1F2A23;
 
+  /* Tarjetas */
   --card: #FFFFFF;
   --card-foreground: #1F2A23;
 
+  /* Ventanas emergentes */
   --popover: #FFFFFF;
   --popover-foreground: #1F2A23;
 
-  /* Acciones principales en verde bosque */
-  --primary: var(--brand-forest-500);
+  /* Color primario: NARANJA */
+  --primary: var(--brand-orange-500);
   --primary-foreground: #FFFFFF;
 
-  /* Fondos secundarios */
+  /* Color secundario: VERDE BOSQUE CLARO */
   --secondary: var(--brand-forest-100);
   --secondary-foreground: var(--brand-forest-800);
 
+  /* Elementos discretos */
   --muted: #EEF4EA;
   --muted-foreground: #68756B;
 
-  /* Naranja para acentos */
+  /* Acentos */
   --accent: var(--brand-orange-100);
   --accent-foreground: var(--brand-orange-800);
 
+  /* Estados */
   --destructive: #B91C1C;
 
+  /* Bordes y campos */
   --border: #DDE6D8;
   --input: #DDE6D8;
-  --ring: var(--brand-forest-500);
 
-  /* Gráficos */
+  /* Foco accesible */
+  --ring: var(--brand-orange-600);
+
+  /* ========================================
+     4. GRÁFICOS
+     ======================================== */
+
   --chart-1: var(--brand-orange-500);
   --chart-2: var(--brand-forest-500);
   --chart-3: var(--brand-green-500);
   --chart-4: var(--brand-sage-500);
   --chart-5: var(--brand-green-alt-500);
 
-  /* Componentes generales */
+  /* ========================================
+     5. COMPONENTES GENERALES
+     ======================================== */
+
   --radius: 0.625rem;
 
-  /* Barra lateral */
+  /* ========================================
+     6. BARRA LATERAL
+     ======================================== */
+
   --sidebar: #FFFFFF;
   --sidebar-foreground: #1F2A23;
-  --sidebar-primary: var(--brand-forest-500);
-  --sidebar-primary-foreground: #FFFFFF;
+
+  /* Acciones principales en naranja */
+  --sidebar-primary: var(--brand-orange-700);
+  --sidebar-primary-foreground: #1F2A23;
+
+  /* Acentos secundarios en verde */
   --sidebar-accent: var(--brand-forest-100);
   --sidebar-accent-foreground: var(--brand-forest-800);
+
   --sidebar-border: #DDE6D8;
-  --sidebar-ring: var(--brand-forest-500);
+  --sidebar-ring: var(--brand-orange-600);
 }
+
 
 :root.dark {
   color-scheme: dark;

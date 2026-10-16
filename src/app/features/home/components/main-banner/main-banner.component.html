@@ -33,7 +33,7 @@
 
             <p #subtitulo
               class="slide-copy-item mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-white">
-              <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+              <span class="h-0.5 w-9 bg-primary" aria-hidden="true"></span>
               {{ slide.eyebrow }}
             </p>
 
@@ -48,13 +48,8 @@
             </p>
 
             <a #boton
-              class="slide-copy-item group relative inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-6 py-3.5 text-sm font-extrabold text-white no-underline shadow-lg shadow-black/25 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
+              class="slide-copy-item group relative inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl bg-(--brand-primary) px-6 py-3.5 text-sm font-extrabold text-white no-underline shadow-lg shadow-black/25 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 hover:bg-(--brand-orange-600) focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
               [href]="slide.href">
-
-              <!-- Relleno oscuro que entra de izquierda a derecha en hover -->
-              <span
-                class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-tertiary)] transition-transform duration-300 ease-out group-hover:scale-x-100"
-                aria-hidden="true"></span>
 
               <span class="relative z-10">{{ slide.action }}</span>
 
