@@ -10,7 +10,7 @@ import {
   viewChildren,
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowLeft, lucideArrowRight, lucideMapPinHouse } from '@ng-icons/lucide';
+import { lucideMapPinHouse, lucideArrowRight } from '@ng-icons/lucide';
 import { HlmCarousel, HlmCarouselImports } from '@spartan-ng/helm/carousel';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -31,7 +31,7 @@ interface BannerSlide {
 
 @Component({
   imports: [HlmCarouselImports, NgIcon],
-  providers: [provideIcons({ lucideArrowLeft, lucideArrowRight, lucideMapPinHouse })],
+  providers: [provideIcons({ lucideMapPinHouse,lucideArrowRight })],
   selector: 'app-main-banner',
   styleUrl: './main-banner.component.css',
   templateUrl: './main-banner.component.html',
@@ -45,11 +45,19 @@ export class MainBannerComponent {
 
 
 
+  protected goToSlide(index: number): void {
+    this.carousel().scrollTo(index);
+  }
+
+
+
   slideContents = viewChildren<ElementRef>('slideContent');
   titulos = viewChildren<ElementRef>('titulo');
   subtitulos = viewChildren<ElementRef>('subtitulo');
   descripciones = viewChildren<ElementRef>('descripcion');
   botones = viewChildren<ElementRef>('boton');
+  card = viewChildren<ElementRef>('cardFloat');
+  
 
   protected readonly slides: readonly BannerSlide[] = [
     {
@@ -78,8 +86,8 @@ export class MainBannerComponent {
     },
   ];
 
-  readonly carrouselPlugins =[Autoplay({
-    delay:8000,
+  readonly carrouselPlugins = [Autoplay({
+    delay: 8000,
     stopOnInteraction: false,
   })]
 
@@ -103,8 +111,11 @@ export class MainBannerComponent {
           },
         });
 
-        gsap.to(root.querySelectorAll<HTMLElement>('[data-banner-copy]'), {
-          y: -120,
+        gsap.to([
+          ...root.querySelectorAll<HTMLElement>('[data-banner-copy]'),
+          ...root.querySelectorAll<HTMLElement>('[data-card-float]'),
+        ], {
+          x: -120,
           autoAlpha: 0,
           ease: 'none',
           scrollTrigger: {
@@ -137,6 +148,7 @@ export class MainBannerComponent {
       ...this.titulos(),
       ...this.descripciones(),
       ...this.botones(),
+      ...this.card(),
     ].map((r) => r.nativeElement);
 
     const targets = [
@@ -144,6 +156,7 @@ export class MainBannerComponent {
       this.titulos()[index],
       this.descripciones()[index],
       this.botones()[index],
+      this.card()[0],
     ]
       .filter(Boolean)
       .map((r) => r.nativeElement);
@@ -158,8 +171,8 @@ export class MainBannerComponent {
 
     gsap.fromTo(
       targets,
-      { autoAlpha: 0, y: 40 },
-      { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.18, ease: 'power1.out' }
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.8, stagger: 0.18, ease: 'power1.inOut' }
     );
   }
 

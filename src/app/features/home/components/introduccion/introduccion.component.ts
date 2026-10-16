@@ -44,7 +44,7 @@ export class IntroduccionComponent {
           autoAlpha: 0,
           x: 88,
           duration: 0.95,
-          ease: 'power3.out',
+          ease: 'power1.inOut',
           scrollTrigger: {
             trigger: root.querySelector('[data-images]'),
             start: 'top 78%',

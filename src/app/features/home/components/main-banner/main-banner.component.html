@@ -8,7 +8,7 @@
       <hlm-carousel-item class="h-full basis-full pl-0 ">
 
         <article #slideContent
-          class="relative flex h-full items-end overflow-hidden bg-cover bg-center bg-no-repeat pb-28 pt-28 max-sm:px-6 max-sm:pb-32 max-sm:pt-28">
+          class="relative flex h-full items-end overflow-hidden bg-cover pb-14 pt-28 max-sm:px-6 max-sm:pb-32 max-sm:pt-28">
 
           <div data-banner-media class="absolute -inset-y-[6%] inset-x-0 overflow-hidden">
             @if (slide.video) {
@@ -65,28 +65,35 @@
     </hlm-carousel-content>
 
 
-
     <div
-      class="carousel-progress pointer-events-none absolute bottom-9 left-[calc(7.5vw_+_0.1rem)] z-20 flex items-center gap-2 max-sm:bottom-7 max-sm:left-5"
-      aria-hidden="true">
+      class="banner-controls absolute right-[7.5vw] top-1/2 z-20 flex -translate-y-1/2 flex-col gap-3 max-sm:right-4 motion-reduce:animate-none"
+      role="group" aria-label="Seleccionar diapositiva">
       @for (slide of slides; track slide.title; let index = $index) {
-      <span class="carousel-progress-segment" [class.carousel-progress-active]="activeSlide() === index"></span>
+      <button
+        class="grid size-4 cursor-pointer place-items-center rounded-full border border-white/85 bg-black/30 transition-[background-color,transform] duration-200 hover:scale-110 hover:border-primary hover:bg-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
+        [class.!border-primary]="activeSlide() === index" [class.!bg-primary]="activeSlide() === index"
+        (click)="goToSlide(index)" type="button" [attr.aria-label]="'Ver diapositiva ' + (index + 1)"
+        [attr.aria-current]="activeSlide() === index ? 'true' : null"></button>
       }
     </div>
 
-    <div
-      class="carousel-controls pointer-events-none absolute bottom-7 right-[calc(7.5vw_+_2.25rem)] z-20 flex gap-2 max-sm:bottom-5 max-sm:right-5"
-      role="group" aria-label="Controles del carrusel">
-      <button hlm-carousel-previous
-        class="carousel-control pointer-events-auto grid size-12 place-items-center rounded-xl border border-white/35 bg-black/30 text-white backdrop-blur-sm transition hover:border-[var(--brand-primary)] hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-        type="button" aria-label="Diapositiva anterior">
-        <ng-icon name="lucideArrowLeft" size="20" aria-hidden="true" />
-      </button>
-      <button hlm-carousel-next
-        class="carousel-control pointer-events-auto grid size-12 place-items-center rounded-xl border border-white/35 bg-black/30 text-white backdrop-blur-sm transition hover:border-[var(--brand-primary)] hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-        type="button" aria-label="Siguiente diapositiva">
-        <ng-icon name="lucideArrowRight" size="20" aria-hidden="true" />
-      </button>
+    <div #cardFloat data-card-float
+      class="slide-copy-item group absolute bottom-12 right-[7.5vw] z-20 flex w-[min(29rem,calc(100vw-8rem))] items-center justify-between gap-5 rounded-2xl border border-white/25 bg-[#191613]/75 p-5 text-white shadow-xl shadow-black/25 backdrop-blur-md transition-[background-color,border-color] duration-300 hover:border-white/40 hover:bg-[#191613]/90 max-sm:bottom-5 max-sm:right-16 motion-reduce:animate-none motion-reduce:transition-none"
+      aria-label="Información sobre lotes">
+      <div>
+        <p class="mb-2 text-[0.68rem] font-extrabold uppercase tracking-[0.12em] text-(--brand-orange-300)">Tu próximo
+          hogar empieza aquí</p>
+        <h2 class="m-0 text-xl font-extrabold">Consigue tu lote</h2>
+        <p class="mb-4 mt-2 text-[0.82rem] leading-relaxed text-white/85">Encuentra el espacio ideal para construir tu
+          futuro.</p>
+
+      </div>
+
+      <a href="#proyectos" aria-label="Conoce nuestros proyectos"
+        class="grid size-10 shrink-0 place-items-center overflow-hidden rounded-lg border border-white/35 bg-white/10 text-white no-underline transition-[background-color,border-color,color] duration-200  group-hover:bg-white group-hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none">
+        <ng-icon name="lucideArrowRight" size="15" aria-hidden="true" >↗</ng-icon>
+      </a>
+
     </div>
   </hlm-carousel>
 </section>

@@ -1,9 +1,10 @@
 import { afterNextRender, Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LoaderService } from './core/services/loader.service';
+import { AnniversaryConfettiComponent } from './shared/components/anniversary-confetti/anniversary-confetti.component';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, AnniversaryConfettiComponent],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

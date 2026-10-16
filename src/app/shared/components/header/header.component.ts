@@ -1,6 +1,6 @@
 import { afterNextRender, afterRenderEffect, Component, DestroyRef, ElementRef, inject, Injector, signal, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowUpRight } from '@ng-icons/lucide';
+import { lucideArrowRight } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { VisitSheetComponent } from '../visit-sheet/visit-sheet.component';
 import { LoaderService } from '../../../core/services/loader.service';
@@ -12,7 +12,7 @@ interface NavigationItem {
 
 @Component({
   imports: [NgIcon, VisitSheetComponent],
-  providers: [provideIcons({ lucideArrowUpRight })],
+  providers: [provideIcons({ lucideArrowRight })],
   selector: 'app-header',
   templateUrl: './header.component.html',
 })

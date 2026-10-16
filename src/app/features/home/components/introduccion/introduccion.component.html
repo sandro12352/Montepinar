@@ -1,5 +1,15 @@
-<section #root id="nosotros" class="bg-[var(--brand-orange-50)] pt-[clamp(4.5rem,10vw,9rem)] text-[var(--brand-forest-900)]">
-  <div class="mx-auto grid w-[min(88%,1400px)] items-center gap-12 pb-[clamp(4.5rem,9vw,8rem)] lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+<section #root id="nosotros"
+  class="bg-primary-foreground pt-[clamp(4.5rem,10vw,9rem)] text-[var(--brand-forest-900)]">
+  <div
+    class="mx-auto grid w-[min(88%,1400px)] items-center gap-12 pb-[clamp(4.5rem,9vw,8rem)] lg:grid-cols-[1.05fr_1fr] lg:gap-24">
+    <div data-images class="intro-visual relative min-h-[25rem] lg:min-h-[42rem]">
+      <div
+        class="relative flex min-h-[25rem] w-full items-center justify-center overflow-hidden lg:absolute lg:inset-0 lg:min-h-0">
+        <img data-img class="relative z-[1] block h-auto w-full object-cover scale-115" src="/images/mujeres.png"
+          alt="Asesor explica el plano de Montepinar a una familia" loading="lazy" />
+      </div>
+    </div>
+
     <div data-text class="intro-copy">
       <p data-reveal
         class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
@@ -38,12 +48,7 @@
       </a>
     </div>
 
-    <div data-images class="intro-visual relative min-h-[25rem] lg:min-h-[42rem]">
-      <div class="relative flex min-h-[25rem] w-full items-center justify-center overflow-hidden  bg-secondary lg:absolute lg:inset-0 lg:min-h-0">
-        <img data-img class="relative z-[1] block h-auto w-full" src="/images/introduccion.png"
-          alt="Asesor explica el plano de Montepinar a una familia" loading="lazy" />
-      </div>
-    </div>
+
   </div>
 
   <!-- Franja de cifras -->
@@ -54,10 +59,11 @@
         class="stats-item flex min-h-32 flex-col items-center justify-center px-3 py-5 text-center sm:min-h-36 sm:px-5 lg:min-h-40 lg:px-6 lg:border-l lg:border-white/10 lg:first:border-l-0">
         <dd class="m-0 text-[clamp(2.25rem,4.2vw,3.5rem)] font-extrabold leading-none tracking-tight">
           @if (s.value !== null) {
-            {{ s.prefix }}<span [attr.data-count]="s.value">{{ s.value }}</span>{{ s.suffix }}
-          } 
+          {{ s.prefix }}<span [attr.data-count]="s.value">{{ s.value }}</span>{{ s.suffix }}
+          }
         </dd>
-        <dt class="mt-3 max-w-40 text-xs font-bold uppercase leading-snug tracking-[0.12em] text-white sm:text-sm">{{ s.label }}</dt>
+        <dt class="mt-3 max-w-40 text-xs font-bold uppercase leading-snug tracking-[0.12em] text-white sm:text-sm">{{
+          s.label }}</dt>
       </div>
       }
     </dl>
