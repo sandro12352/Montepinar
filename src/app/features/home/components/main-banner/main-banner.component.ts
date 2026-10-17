@@ -66,7 +66,7 @@ export class MainBannerComponent {
       description: 'Descubre un entorno tranquilo, cercano y lleno de vida para disfrutar cada día.',
       action: 'Ver proyectos',
       href: '#proyectos',
-      video: '/video/montepinar-banner.mp4',
+      imagen:'/images/prueba1.png'
     },
     {
       eyebrow: 'Naturaleza y bienestar',

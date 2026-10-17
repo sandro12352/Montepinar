@@ -232,7 +232,7 @@ body:has(#app-loader) {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  background: var(--background);
+  background: #faf6f0;
 }
 
 #app-loader .loader-logo {

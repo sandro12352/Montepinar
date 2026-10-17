@@ -34,7 +34,7 @@ const COLORS = ['#f43f5e', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899'
         @for (piece of pieces; track piece.id) {
           <span
             #particle
-            class="absolute block h-6 w-2 rounded-sm opacity-0 will-change-transform"
+            class="absolute block h-6 w-1 rounded-lg opacity-0 will-change-transform"
             [class.h-10]="piece.long"
             [class.w-2.5]="piece.long"
             [class.rounded-full]="piece.round"
@@ -54,17 +54,18 @@ export class AnniversaryConfettiComponent {
   private readonly particles = viewChildren<ElementRef<HTMLSpanElement>>('particle');
 
   readonly finished = signal(false);
-  readonly pieces: ConfettiPiece[] = this.createPieces(160);
+  readonly pieces: ConfettiPiece[] = this.createPieces(250);
 
   private timeline?: gsap.core.Timeline;
   private started = false;
 
   constructor() {
     afterRenderEffect(() => {
-      const loading = this.loader.ready(); // ajusta al API real de tu LoaderService
+      const ready = this.loader.ready(); // ajusta al API real de tu LoaderService
       const elements = this.particles();
 
-      if (loading || this.started || elements.length === 0) return;
+       // Espera a que el loader termine y a que existan las partículas
+    if (!ready || this.started || elements.length === 0) return;
 
       this.started = true;
       untracked(() => this.launch(elements.map((el) => el.nativeElement)));
@@ -77,9 +78,9 @@ export class AnniversaryConfettiComponent {
     return Array.from({ length: count }, (_, id) => ({
       id,
       side: id % 2 === 0 ? 'left' : 'right',
-      offset: gsap.utils.random(-2, 4), // pegadas a los bordes laterales
-      top: gsap.utils.random(55, 90),   // salen desde la mitad inferior de la pantalla
-      long: Math.random() > 0.7,
+      offset: gsap.utils.random(-15, 10), // pegadas a los bordes laterales
+      top: gsap.utils.random(20, 90),   // salen desde la mitad inferior de la pantalla
+      long: Math.random() > 1,
       round: Math.random() > 0.8,
       color: COLORS[id % COLORS.length],
     }));
