@@ -1,16 +1,16 @@
-<section #root id="nosotros"
-  class="bg-primary-foreground pt-[clamp(4.5rem,10vw,9rem)] text-[var(--brand-forest-900)]">
+<section #root id="nosotro  s"
+  class="bg-primary-foreground pt-[clamp(4.5rem,10vw,9rem)] text-[var(--brand-forest-900)] ">
   <div
-    class="mx-auto grid w-[min(88%,1400px)] items-center gap-12 pb-[clamp(4.5rem,9vw,8rem)] lg:grid-cols-[1.05fr_1fr] lg:gap-24">
-    <div data-images class="intro-visual relative min-h-[25rem] lg:min-h-[42rem]">
+    class="mx-auto grid w-[min(88%,1600px)] items-center gap-12 pb-[clamp(4.5rem,9vw,8rem)] lg:grid-cols-[1.05fr_1fr] lg:gap-24 ">
+    <div data-images class="relative min-h-[25rem] lg:min-h-[42rem]">
       <div
-        class="relative flex min-h-[25rem] w-full items-center justify-center overflow-hidden lg:absolute lg:inset-0 lg:min-h-0">
-        <img data-img class="relative z-[1] block h-auto w-full object-cover scale-115" src="/images/mujeres.png"
+        class="relative flex h-full w-full  overflow-hidden lg:absolute lg:inset-0 lg:min-h-0">
+        <img data-img class="relative z-[1] block h-auto w-full  object-cover" src="/images/mujeres.png"
           alt="Asesor explica el plano de Montepinar a una familia" loading="lazy" />
       </div>
     </div>
 
-    <div data-text class="">
+    <div data-text>
       <p data-reveal
         class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
         <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
@@ -52,8 +52,8 @@
   </div>
 
   <!-- Franja de cifras -->
-  <div data-stats class="overflow-hidden bg-primary text-white ">
-    <dl class="mx-auto m-0 grid max-w-330 grid-cols-2 px-3 py-4 sm:px-6 sm:py-6 lg:grid-cols-4">
+  <div data-stats class="relative isolate overflow-hidden bg-primary text-white">
+    <dl class="relative z-10 mx-auto m-0 grid max-w-330 grid-cols-2 px-3 py-4 sm:px-6 sm:py-6 lg:grid-cols-4">
       @for (s of stats; track s.label) {
       <div data-stat
         class="stats-item flex min-h-32 flex-col items-center justify-center px-3 py-5 text-center sm:min-h-36 sm:px-5 lg:min-h-40 lg:px-6 lg:border-l lg:border-white/10 lg:first:border-l-0">

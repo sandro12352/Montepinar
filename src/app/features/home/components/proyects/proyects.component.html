@@ -1,6 +1,7 @@
 <section #root id="proyectos" class="bg-[#f4f1ea]  py-[clamp(4.5rem,8vw,7.5rem)] text-[#1f1a14] ">
-  <div class="mx-auto grid w-[80%] grid-cols-1 gap-12 lg:grid-cols-[0.78fr_1.22fr] ">
-    <header class="h-fit lg:sticky lg:top-28 lg:self-start">
+  
+  <div class="mx-auto grid w-[min(88%,1400px)] grid-cols-1 gap-12 lg:grid-cols-[0.60fr_1.40fr] lg:gap-12 ">
+    <div class="h-fit lg:sticky lg:top-28 lg:self-start">
       <p class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">
         <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
         Proyectos Montepinar
@@ -15,7 +16,7 @@
         class="mt-8 inline-flex min-h-12 items-center justify-center rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-sm font-bold text-white no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
         Recibir asesoría
       </a>
-    </header>
+    </div>
 
     <div class="grid min-w-0 grid-cols-1 gap-10 sm:gap-14">
       @for (project of projects; track project.name) {
@@ -47,3 +48,6 @@
     </div>
   </div>
 </section>
+
+
+
