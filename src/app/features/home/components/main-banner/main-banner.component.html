@@ -29,6 +29,11 @@
               aria-hidden="true"></div>
           </div>
 
+          @if (index === 0) {
+            <img #ownerImage src="/images/dueño.png" alt="" aria-hidden="true" loading="eager"
+              class="opacity-0 pointer-events-none absolute bottom-0 right-[8%] z-[2] h-[78%] w-auto max-w-[42vw] object-contain object-bottom max-md:right-0 max-md:h-[52%] max-md:max-w-[58vw]" />
+          }
+
           <div data-banner-copy class="relative z-2 mx-auto w-[85%] pl-4 max-md:w-full max-md:px-5 max-md:pl-5">
 
             <p #subtitulo

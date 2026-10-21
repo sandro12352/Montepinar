@@ -1,12 +1,14 @@
 <section #root id="proyectos" class="bg-[#f4f1ea]  py-[clamp(4.5rem,8vw,7.5rem)] text-[#1f1a14] ">
-  
+
   <div class="mx-auto grid w-[min(88%,1400px)] grid-cols-1 gap-12 lg:grid-cols-[0.60fr_1.40fr] lg:gap-12 ">
     <div class="h-fit lg:sticky lg:top-28 lg:self-start">
-      <p class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">
+      <p
+        class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">
         <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
         Proyectos Montepinar
       </p>
-      <h2 class="m-0 max-w-[12ch] text-balance text-[clamp(2.5rem,4.5vw,4.25rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
+      <h2
+        class="m-0 max-w-[12ch] text-balance text-[clamp(2.5rem,4.5vw,4.25rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
         Encuentra tu lugar en Montepinar
       </h2>
       <p class="mb-0 mt-6 max-w-md text-pretty text-base leading-relaxed text-[#1f1a14]/70 sm:text-lg">
@@ -18,36 +20,80 @@
       </a>
     </div>
 
-    <div class="grid min-w-0 grid-cols-1 gap-10 sm:gap-14">
+    <div class="grid min-w-0 grid-cols-1 gap-8 sm:gap-10">
       @for (project of projects; track project.name) {
-        <article data-project-card [attr.id]="'proyecto-' + $index" class="group min-w-0 overflow-hidden rounded-2xl bg-white shadow-sm shadow-[#56300f]/10 focus-within:outline-none focus-within:ring-2 focus-within:ring-[var(--brand-primary)] focus-within:ring-offset-4">
-          <div class="relative aspect-[16/10] overflow-hidden bg-[#e5e0d5]">
-            <img
-              class="project-photo absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] group-focus-within:scale-[1.04]"
-              [src]="project.image"
-              [alt]="project.imageAlt"
-              loading="lazy" />
-            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#17130f]/90 via-[#17130f]/25 to-transparent opacity-100 transition-opacity duration-300 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100" aria-hidden="true"></div>
-            <div class="absolute inset-x-0 bottom-0 flex translate-y-0 flex-col gap-3 p-5 text-white opacity-100 transition-[opacity,transform] duration-300 sm:translate-y-3 sm:p-7 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100">
-              <span class="w-fit rounded-full bg-white/15 px-3 py-1.5 text-xs font-bold backdrop-blur-sm">{{ project.status }}</span>
+      <article data-project-card [attr.id]="'proyecto-' + $index"
+        class="group/card min-w-0 overflow-hidden rounded-[1.5rem] bg-[#fbfaf7] shadow-[0_10px_30px_rgba(30,45,34,0.12)] transition-shadow duration-300 hover:shadow-[0_14px_36px_rgba(30,45,34,0.16)] focus-within:outline-none focus-within:ring-2 focus-within:ring-[var(--brand-primary)] focus-within:ring-offset-4">
+
+        <!-- Imagen + precio -->
+        <div class="relative aspect-[21/9] overflow-hidden rounded-t-[1.5rem] bg-[#e5e0d5] sm:aspect-[2/1]">
+          <img
+            class="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-[1.04] group-focus-within/card:scale-[1.04]"
+            [src]="project.image" [alt]="project.imageAlt" loading="lazy" />
+
+          @if ($index === 0) {
+          <span
+            class="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-[var(--brand-primary)] px-3.5 py-2 text-xs font-extrabold uppercase tracking-wide text-white shadow-lg sm:left-6 sm:top-6">
+            <ng-icon name="lucideStar" class="text-sm" />
+            Proyecto destacado
+          </span>
+          }
+
+          <!-- Precio: esquina redondeada -->
+          <div
+            class="absolute right-0 top-0 rounded-bl-[3.5rem] rounded-tr-[1.5rem] bg-[var(--brand-forest-900)] pb-5 pl-10 pr-6 pt-4 text-white shadow-lg sm:pb-6 sm:pl-14 sm:pr-8 sm:pt-5">
+            <span class="block text-xs font-medium text-white/85">Lotes desde</span>
+            <span class="block text-xl font-extrabold tracking-tight sm:text-3xl">{{ project.priceFrom }}</span>
+          </div>
+        </div>
+
+        <!-- Contenido -->
+        <div class="px-6 pb-6 pt-5 sm:px-8 sm:pb-7 sm:pt-6">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3
+              class="m-0 font-serif text-3xl font-bold leading-tight tracking-tight text-[var(--brand-forest-900)] sm:text-4xl">
+              {{ project.name }}</h3>
+            <span
+              class="rounded-full border border-[var(--brand-forest-900)]/20 px-3 py-1 text-xs font-bold text-[var(--brand-forest-900)]">{{
+              project.status }}</span>
+          </div>
+
+          <p class="mb-0 mt-2 text-sm leading-relaxed text-[#202820]/70 sm:text-base">{{ project.description }}</p>
+
+          <!-- Metadatos -->
+          <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[var(--brand-forest-900)]">
+            <div class="flex items-center gap-3 border-r border-[#202820]/15 pr-5">
+              <ng-icon name="lucideMapPin" class="text-2xl shrink-0" />
               <div>
-                <p class="mb-1 text-xs font-semibold text-white/80">{{ project.category }} · {{ project.location }}</p>
-                <h3 class="m-0 text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">{{ project.name }}</h3>
-                <p class="mb-0 mt-2 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">{{ project.description }}</p>
-              </div>
-              <div class="flex flex-wrap items-center justify-between gap-4 border-t border-white/25 pt-3">
-                <p class="m-0"><span class="block text-xs text-white/75">Desde</span><span class="block text-lg font-extrabold">{{ project.priceFrom }}</span></p>
-                <a href="tel:+51932284185" class="pointer-events-auto inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-xl bg-[var(--brand-primary)] px-4 py-2.5 text-sm font-bold text-white no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-primary)] active:scale-[0.98]">
-                  Registrar visita
-                </a>
+                <span class="block text-xs text-[#202820]/65">{{ project.category }}</span>
+                <span class="block text-base font-extrabold">{{ project.location }}</span>
               </div>
             </div>
+            <span class="text-base font-bold">Visitas guiadas</span>
           </div>
-        </article>
+
+          <!-- Botones -->
+          <div class="mt-5 grid gap-3 sm:grid-cols-[1.14fr_1fr]">
+            <a href="tel:+51932284185"
+              class="group/btn relative inline-flex min-h-12 items-center justify-center gap-3 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-5 py-3 text-base font-extrabold text-white no-underline transition-transform active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
+              <span aria-hidden="true"
+                class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-forest-900)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100"></span>
+              <ng-icon name="lucideCalendarDays" class="relative z-10 text-lg" />
+              <span class="relative z-10">Agendar visita</span>
+              <ng-icon name="lucideArrowRight" class="relative z-10 text-lg" />
+            </a>
+
+            <a href="#contacto"
+              class="group/btn relative inline-flex min-h-12 items-center justify-center gap-3 overflow-hidden rounded-xl border border-[var(--brand-forest-900)]/60 px-5 py-3 text-base font-extrabold text-[var(--brand-forest-900)] no-underline transition-colors duration-500 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-forest-900)] focus-visible:ring-offset-2">
+              <span aria-hidden="true"
+                class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-forest-900)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100"></span>
+              <ng-icon name="lucideFileText" class="relative z-10 text-lg" />
+              <span class="relative z-10">Ver proyecto</span>
+            </a>
+          </div>
+        </div>
+      </article>
       }
     </div>
   </div>
 </section>
-
-
-

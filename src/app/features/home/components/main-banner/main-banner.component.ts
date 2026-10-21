@@ -57,6 +57,7 @@ export class MainBannerComponent {
   descripciones = viewChildren<ElementRef>('descripcion');
   botones = viewChildren<ElementRef>('boton');
   card = viewChildren<ElementRef>('cardFloat');
+  ownerImages = viewChildren<ElementRef<HTMLImageElement>>('ownerImage');
   
 
   protected readonly slides: readonly BannerSlide[] = [
@@ -143,6 +144,7 @@ export class MainBannerComponent {
   }
 
   private animateSlide(index: number) {
+    const owner = this.ownerImages()[0]?.nativeElement;
     const all = [
       ...this.subtitulos(),
       ...this.titulos(),
@@ -166,7 +168,25 @@ export class MainBannerComponent {
     gsap.killTweensOf(all);
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       gsap.set(all, { clearProps: 'opacity,visibility,transform' });
+      if (owner) gsap.set(owner, { clearProps: 'opacity,visibility,transform' });
       return;
+    }
+
+    if (owner) {
+      gsap.killTweensOf(owner);
+      if (index === 0) {
+        gsap.fromTo(owner, { autoAlpha: 0, x: 0, y: 24, scale: 1.5 }, {
+          autoAlpha: 1,
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 1.15,
+          delay: 0.2,
+          ease: 'power3.out',
+        });
+      } else {
+        gsap.set(owner, { autoAlpha: 0 });
+      }
     }
 
     gsap.fromTo(

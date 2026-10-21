@@ -1,18 +1,18 @@
-<section aria-labelledby="resident-help-title" class="min-h-[34rem] overflow-hidden  bg-foreground text-white sm:min-h-[40rem] lg:min-h-[42rem]">
+<section #residentHelp aria-labelledby="resident-help-title" class="min-h-[34rem] overflow-hidden  bg-foreground text-white sm:min-h-[40rem] lg:min-h-[42rem]">
   <div class="relative mx-auto flex min-h-[34rem]  items-center py-16 sm:min-h-[40rem] sm:py-20 lg:min-h-[56rem]">
     <div class="pointer-events-none absolute inset-y-0 right-0 hidden w-[62%] md:block">
-      <img class="size-full object-cover object-right" src="/images/prueba2.png" alt="" aria-hidden="true" loading="lazy">
+      <img #residentImage class="size-full object-cover object-right" src="/images/prueba2.png" alt="" aria-hidden="true" loading="lazy">
     </div>
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#10271c] via-[#10271c]/25 to-[#10271c]/10" aria-hidden="true"></div>
     <div class="relative z-10 mx-auto w-[min(88%,1400px)]">
-      <div class="max-w-[48rem] md:w-[48%]">
-      <h2 id="resident-help-title" class="m-0 max-w-[13ch] font-serif text-[clamp(2.75rem,6vw,6rem)] font-normal leading-[0.98] tracking-[-0.045em]">
+      <div #residentCopy class="max-w-[48rem] md:w-[48%]">
+      <h2 data-resident-text id="resident-help-title" class="m-0 max-w-[13ch] font-serif text-[clamp(2.75rem,6vw,6rem)] font-normal leading-[0.98] tracking-[-0.045em]">
         ¿No sabes por dónde empezar? Hablemos de tu próximo hogar.
       </h2>
-      <p class="mb-0 mt-8 max-w-xl text-base leading-relaxed text-white/85 sm:mt-10 sm:text-lg">
+      <p data-resident-text class="mb-0 mt-8 max-w-xl text-base leading-relaxed text-white/85 sm:mt-10 sm:text-lg">
         Cuéntanos qué estás buscando y te ayudaremos a conocer nuestros proyectos y opciones de financiamiento.
       </p>
-      <a href="#contacto" class="mt-7 inline-flex min-h-12 items-center gap-4 rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-sm font-extrabold text-white no-underline shadow-lg shadow-black/20 transition-transform hover:-translate-y-0.5 hover:bg-[var(--brand-orange-600)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1b211b] active:scale-[.98] motion-reduce:transition-none sm:mt-8 ">
+      <a data-resident-text href="#contacto" class="mt-7 inline-flex min-h-12 items-center gap-4 rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-sm font-extrabold text-white no-underline shadow-lg shadow-black/20 transition-transform hover:-translate-y-0.5 hover:bg-[var(--brand-orange-600)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1b211b] active:scale-[.98] motion-reduce:transition-none sm:mt-8 ">
         Solicitar asesoría
         <span aria-hidden="true">→</span>
       </a>

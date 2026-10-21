@@ -1,4 +1,6 @@
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideCalendarDays, lucideArrowRight, lucideFileText, lucideMapPin, lucideStar } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -18,6 +20,14 @@ interface Project {
 @Component({
   selector: 'app-proyects',
   templateUrl: './proyects.component.html',
+  imports:[NgIcon],
+  providers:[provideIcons({
+      lucideCalendarDays,
+      lucideArrowRight,
+      lucideFileText,
+      lucideMapPin,
+      lucideStar,
+    }),]
 })
 export class ProyectsComponent {
   private readonly destroyRef = inject(DestroyRef);
