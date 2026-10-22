@@ -42,22 +42,15 @@
         }
       </hlm-carousel-content>
 
-      <div class="mt-5 flex items-center justify-between gap-4 pr-5 sm:pr-8 lg:mt-6" role="group"
-        aria-label="Controles de la galería">
-        <a href="#" class="text-sm font-semibold text-[#1f1a14]/65 hover:underline">Ver toda la galería</a>
-        <div class="flex justify-between gap-3">
-          <button hlm-carousel-previous type="button"
-            class="!static !top-auto !right-auto !bottom-auto !left-auto !translate-x-0 !translate-y-0 !rotate-0 grid size-12 place-items-center rounded-full border border-[#1f1a14]/20 bg-white text-[var(--brand-tertiary)] transition-colors hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none"
-            aria-label="Imágenes anteriores">
-            <ng-icon name="lucideChevronLeft" size="21" aria-hidden="true" />
-          </button>
-          <button hlm-carousel-next type="button"
-            class="!static !top-auto !right-auto !bottom-auto !left-auto !translate-x-0 !translate-y-0 !rotate-0 grid size-12 place-items-center rounded-full border border-[#1f1a14]/20 bg-white text-[var(--brand-tertiary)] transition-colors hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none"
-            aria-label="Imágenes siguientes">
-            <ng-icon name="lucideChevronRight" size="21" aria-hidden="true" />
-          </button>
-          
-        </div>
+      <div class="relative z-10 mt-5 flex w-full items-center justify-center gap-4 pr-5 sm:pr-8 lg:mt-6" role="group"
+        aria-label="Controles de testimonios">
+        <button hlm-carousel-previous type="button"
+          class="!static !top-auto !start-auto !end-auto !translate-y-0 !transform-none !h-12 !w-12 shrink-0 rounded-xl border-0 bg-white text-[#60666b] shadow-sm transition-colors hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 hover:cursor-pointer"
+          aria-label="Testimonio anterior"></button>
+
+        <button hlm-carousel-next type="button"
+          class="!static !top-auto !start-auto !end-auto !translate-y-0 !transform-none !h-12 !w-12 shrink-0 rounded-xl border-0 bg-white text-[#60666b] shadow-sm transition-colors hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 hover:cursor-pointer"
+          aria-label="Siguiente testimonio"></button>
       </div>
     </hlm-carousel>
   </div>
@@ -72,11 +65,13 @@
         aria-label="Cerrar galería" (click)="closeGallery()">
         <ng-icon name="lucideX" size="21" aria-hidden="true" />
       </button>
-      <hlm-carousel #dialogCarousel class="block w-full min-w-0" [options]="{ loop: true, startIndex: selectedIndex() ?? 0 }">
+      <hlm-carousel #dialogCarousel class="block w-full min-w-0"
+        [options]="{ loop: true, startIndex: selectedIndex() ?? 0 }">
         <hlm-carousel-content class="-ml-0">
           @for (image of images; track $index) {
           <hlm-carousel-item class="basis-full pl-0">
-            <img data-dialog-image class="mx-auto max-h-[76dvh] max-w-full rounded-xl object-contain" [src]="image.src" [alt]="image.alt" />
+            <img data-dialog-image class="mx-auto max-h-[76dvh] max-w-full rounded-xl object-contain" [src]="image.src"
+              [alt]="image.alt" />
           </hlm-carousel-item>
           }
         </hlm-carousel-content>
@@ -84,12 +79,12 @@
           <button hlm-carousel-previous type="button"
             class="!static !top-auto !right-auto !bottom-auto !left-auto !translate-x-0 !translate-y-0 !rotate-0 grid size-11 place-items-center rounded-full border border-white/35 bg-[#10271c]/70 text-white transition-colors hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white motion-reduce:transition-none"
             aria-label="Ver imagen anterior">
-          <ng-icon name="lucideChevronLeft" size="22" aria-hidden="true" />
+            <ng-icon name="lucideChevronLeft" size="22" aria-hidden="true" />
           </button>
           <button hlm-carousel-next type="button"
             class="!static !top-auto !right-auto !bottom-auto !left-auto !translate-x-0 !translate-y-0 !rotate-0 grid size-11 place-items-center rounded-full border border-white/35 bg-[#10271c]/70 text-white transition-colors hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white motion-reduce:transition-none"
             aria-label="Ver imagen siguiente">
-          <ng-icon name="lucideChevronRight" size="22" aria-hidden="true" />
+            <ng-icon name="lucideChevronRight" size="22" aria-hidden="true" />
           </button>
         </div>
       </hlm-carousel>

@@ -1,91 +1,192 @@
-<section id="preguntas-frecuentes" aria-labelledby="faq-title" class="relative isolate overflow-hidden bg-[#f4f1ea] px-5 py-16 text-[#1f1a14] sm:px-8 sm:py-20 lg:py-24">
+<section id="preguntas-frecuentes" aria-labelledby="faq-title"
+  class="relative isolate overflow-hidden bg-[#f4f1ea] px-5 py-16 text-[#1f1a14] sm:px-8 sm:py-20 lg:py-24">
+  <div class="mx-auto max-w-[1400px]">
 
-  <div class="relative mx-auto max-w-[1400px]">
-    <header class="mb-9 sm:mb-12">
-      <p class="mb-3 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
-        <span class="h-1 w-12 bg-[var(--brand-primary)]" aria-hidden="true"></span>
-        Estamos para ayudarte
-      </p>
-      <h2 id="faq-title" class="m-0 text-balance font-serif text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-[#0b442d]">
-        Conoce Montepinar y resuelve tus dudas
-      </h2>
-      <p class="mb-0 mt-4 max-w-4xl text-base leading-relaxed text-[#34433d]/80 sm:text-lg">
-        Te compartimos información clave en este video y resolvemos las preguntas más frecuentes para que avances con confianza en tu próximo terreno.
-      </p>
-    </header>
 
-    <div class="grid items-center gap-5 lg:grid-cols-[1.2fr_1fr] lg:gap-5">
-      <div class="relative aspect-[1.55] min-h-[18rem] overflow-hidden rounded-2xl bg-[#10271c] sm:aspect-[1.75] lg:min-h-[28rem]">
-        <video
-          #faqVideo
-          class="absolute inset-0 size-full object-cover"
-          poster="/images/entrada.png"
-          preload="none"
-          [controls]="videoPlaying()"
-          playsinline
-          aria-label="Video de presentación de los proyectos Montepinar"
-          (pause)="onVideoPause()"
-          (ended)="onVideoPause()"
-        >
+    <!-- ENCABEZADO + VIDEO -->
+    <div class="mb-10 ">
+
+      <header>
+        <p
+          class="mb-3 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+          <span class="h-1 w-12 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          Estamos para ayudarte
+        </p>
+
+        <h2 id="faq-title"
+          class="m-0 max-w-[15ch] text-balance text-[clamp(2.5rem,4.8vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
+          Conoce Montepinar y resuelve tus dudas
+        </h2>
+
+        <p class="mb-0 mt-4 max-w-3xl text-base leading-relaxed text-[#34433d]/80 sm:text-lg">
+          Te compartimos información clave en este video y resolvemos las preguntas más frecuentes para que avances con
+          confianza en tu próximo terreno.
+        </p>
+      </header>
+
+
+    </div>
+
+    <div class="grid items-center gap-8 lg:mb-12 lg:grid-cols-1">
+      <!-- VIDEO MÁS ANCHO -->
+      <div class="relative h-[220px] w-full overflow-hidden rounded-2xl bg-[#10271c] sm:h-[260px] lg:h-[580px]">
+        <video #faqVideo class="absolute inset-0 size-full object-cover" poster="/images/entrada.png" preload="none"
+          [controls]="videoPlaying()" playsinline aria-label="Video de presentación de los proyectos Montepinar"
+          (pause)="onVideoPause()" (ended)="onVideoPause()">
           <source src="/video/MONTEPINAR.mp4" type="video/mp4" />
           Tu navegador no puede reproducir este video.
         </video>
-        <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#10271c]/85 via-transparent to-transparent" aria-hidden="true"></div>
+
+        <div
+          class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#10271c]/85 via-transparent to-transparent"
+          aria-hidden="true"></div>
+
         @if (!videoPlaying()) {
-          <button
-            type="button"
-            class="absolute left-1/2 top-1/2 grid size-[4.5rem] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-[var(--brand-primary)] shadow-xl transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70 active:scale-95"
-            aria-label="Reproducir video de Montepinar"
-            (click)="playVideo(faqVideo)"
-          >
-            <span class="ml-1 text-3xl" aria-hidden="true">▶</span>
-          </button>
+        <button type="button"
+          class="absolute left-1/2 top-1/2 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-[var(--brand-primary)] shadow-xl transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70 active:scale-95"
+          aria-label="Reproducir video de Montepinar" (click)="playVideo(faqVideo)">
+          <span class="ml-1 text-2xl" aria-hidden="true">▶</span>
+        </button>
         }
-        <p class="pointer-events-none absolute inset-x-6 bottom-5 m-0 font-serif text-xl font-bold leading-tight text-white sm:inset-x-8 sm:bottom-7 sm:text-2xl">
+
+        <p class="pointer-events-none absolute inset-x-4 bottom-4 m-0 font-serif text-lg font-bold text-white">
           Conoce nuestros proyectos
         </p>
       </div>
 
-      <div class="rounded-2xl border border-[#10271c]/10 bg-white/35 px-5 sm:px-8">
-        <div class="divide-y divide-[#10271c]/15">
-          <details class="group py-5 sm:py-6">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 text-left text-base font-bold text-[#0b442d] marker:content-none sm:text-lg">
-              ¿Qué tipos de lotes ofrece Montepinar?
-              <span class="grid size-10 shrink-0 place-items-center rounded-full border border-[#10271c]/20 text-2xl font-normal leading-none text-[var(--brand-primary)] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
-            </summary>
-            <p class="mb-0 max-w-2xl pr-10 pt-3 text-sm leading-relaxed text-[#1f1a14]/70 sm:text-base">
-              Contamos con distintas opciones según el proyecto y la etapa. Nuestro equipo puede ayudarte a conocer las áreas disponibles y encontrar la que mejor se ajuste a tus planes.
-            </p>
-          </details>
-          <details class="group py-5 sm:py-6">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 text-left text-base font-bold text-[#0b442d] marker:content-none sm:text-lg">
-              ¿Cómo puedo conocer las opciones de financiamiento?
-              <span class="grid size-10 shrink-0 place-items-center rounded-full border border-[#10271c]/20 text-2xl font-normal leading-none text-[var(--brand-primary)] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
-            </summary>
-            <p class="mb-0 max-w-2xl pr-10 pt-3 text-sm leading-relaxed text-[#1f1a14]/70 sm:text-base">
-              Podemos orientarte sobre las alternativas disponibles para cada proyecto y explicarte los pasos para iniciar una compra.
-            </p>
-          </details>
-          <details class="group py-5 sm:py-6">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 text-left text-base font-bold text-[#0b442d] marker:content-none sm:text-lg">
-              ¿Puedo visitar el proyecto antes de decidir?
-              <span class="grid size-10 shrink-0 place-items-center rounded-full border border-[#10271c]/20 text-2xl font-normal leading-none text-[var(--brand-primary)] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
-            </summary>
-            <p class="mb-0 max-w-2xl pr-10 pt-3 text-sm leading-relaxed text-[#1f1a14]/70 sm:text-base">
-              Sí. Escríbenos o solicita una asesoría para coordinar una visita y conocer el proyecto en persona.
-            </p>
-          </details>
-          <details class="group py-5 sm:py-6">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 text-left text-base font-bold text-[#0b442d] marker:content-none sm:text-lg">
-              ¿Cómo solicito más información?
-              <span class="grid size-10 shrink-0 place-items-center rounded-full border border-[#10271c]/20 text-2xl font-normal leading-none text-[var(--brand-primary)] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
-            </summary>
-            <p class="mb-0 max-w-2xl pr-10 pt-3 text-sm leading-relaxed text-[#1f1a14]/70 sm:text-base">
-              Déjanos tus datos en el formulario de contacto y nuestro equipo se comunicará contigo para atender tus consultas.
-            </p>
-          </details>
-        </div>
+      <!-- FAQ: CARDS ESTÁTICAS, SIN ACORDEÓN -->
+      <div class="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-4">
+
+        <!-- FAQ 1 -->
+        <article
+          class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
+          <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
+            ¿Qué tipos de lotes ofrece Montepinar?
+          </h3>
+          <p class="m-0 text-sm leading-relaxed text-[#1f1a14]/75">
+            Contamos con distintas opciones según el proyecto y la etapa. Nuestro equipo puede ayudarte a conocer las
+            áreas disponibles y encontrar la que mejor se ajuste a tus planes.
+          </p>
+        </article>
+
+        <!-- FAQ 2 -->
+        <article
+          class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
+          <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
+            ¿Cómo puedo conocer las opciones de financiamiento?
+          </h3>
+          <p class="m-0 text-sm leading-relaxed text-[#1f1a14]/75">
+            Podemos orientarte sobre las alternativas disponibles para cada proyecto y explicarte los pasos para iniciar
+            una compra.
+          </p>
+        </article>
+
+        <!-- FAQ 3 -->
+        <article
+          class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
+          <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
+            ¿Puedo visitar el proyecto antes de decidir?
+          </h3>
+          <p class="m-0 text-sm leading-relaxed text-[#1f1a14]/75">
+            Sí. Puedes comunicarte con nuestro equipo para coordinar una visita y conocer el proyecto personalmente.
+          </p>
+        </article>
+
+        <!-- FAQ 4 -->
+        <article
+          class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
+          <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
+            ¿Cómo solicito más información?
+          </h3>
+          <p class="m-0 text-sm leading-relaxed text-[#1f1a14]/75">
+            Déjanos tus datos en el formulario de contacto y nuestro equipo se comunicará contigo para atender tus
+            consultas.
+          </p>
+        </article>
+
+        <!-- FAQ 5 -->
+        <article
+          class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
+          <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
+            ¿Cómo puedo separar un lote?
+          </h3>
+          <p class="m-0 text-sm leading-relaxed text-[#1f1a14]/75">
+            Nuestro equipo comercial puede explicarte el procedimiento de separación, las condiciones aplicables y los
+            pasos para continuar con la compra.
+          </p>
+        </article>
+
+        <!-- FAQ 6 -->
+        <article
+          class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
+          <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
+            ¿Qué documentos necesito para comprar un terreno?
+          </h3>
+          <p class="m-0 text-sm leading-relaxed text-[#1f1a14]/75">
+            Los requisitos pueden variar según el proyecto y la modalidad de compra. Un asesor te indicará qué
+            documentos
+            necesitas.
+          </p>
+        </article>
+
+        <!-- FAQ 7 -->
+        <article
+          class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
+          <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
+            ¿Dónde están ubicados los proyectos?
+          </h3>
+          <p class="m-0 text-sm leading-relaxed text-[#1f1a14]/75">
+            Puedes consultar la ubicación exacta, las rutas de acceso y las indicaciones para llegar a cada proyecto con
+            nuestro equipo comercial.
+          </p>
+        </article>
+
+        <!-- FAQ 8 -->
+        <article
+          class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
+          <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
+            ¿Cómo puedo recibir asesoría personalizada?
+          </h3>
+          <p class="m-0 text-sm leading-relaxed text-[#1f1a14]/75">
+            Contáctanos para resolver tus dudas, conocer las opciones disponibles y recibir orientación durante el
+            proceso
+            de compra.
+          </p>
+        </article>
+
       </div>
     </div>
+
+
+
+
+
+
+
+
+    <!-- CTA DEBAJO DE LAS FAQ -->
+    <div class="mt-10 flex flex-col items-center text-center sm:mt-12">
+      <p class="mb-5 max-w-xl text-base leading-relaxed text-[#34433d]/80 sm:text-lg">
+        ¿Tienes más preguntas? Descubre nuestros proyectos y encuentra el terreno ideal para ti.
+      </p>
+
+      <a href="#contacto"
+        class="group inline-flex items-center justify-center gap-3 rounded-xl bg-[var(--brand-primary)] px-8 py-4 text-sm font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--brand-primary)]/30">
+        Conoce más sobre Montepinar
+        <span class="text-lg transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+          →
+        </span>
+      </a>
+    </div>
+
+
   </div>
 </section>

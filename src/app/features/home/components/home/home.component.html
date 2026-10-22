@@ -1,22 +1,32 @@
 <app-main-banner></app-main-banner>
 <app-introduccion></app-introduccion>
 <app-proyects></app-proyects>
-<section aria-labelledby="financing-title" class="bg-[#f4f1ea] py-8 sm:py-10">
-  <div #financingPanel class="mx-auto grid min-h-60 w-[min(88%,1400px)] items-center gap-6 rounded-lg border border-[var(--brand-forest-100)] border-b-2 border-b-primary bg-[var(--brand-forest-50)] px-7 py-8 sm:px-10 md:grid-cols-[minmax(0,1fr)_auto] md:gap-12 md:px-14 md:py-10 lg:px-16">
-    <div class="w-140">
-      <p class="mb-2 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">Asesoría personalizada</p>
-      <h2 id="financing-title" class="m-0 text-balance text-2xl font-extrabold tracking-tight text-[var(--brand-forest-900)] sm:text-5xl">
+
+<section aria-labelledby="financing-title" class="bg-[#f4f1ea] py-8 sm:py-12 lg:py-16">
+  <div #financingPanel
+    class="mx-auto grid w-[92%] max-w-[1400px] grid-cols-1 items-center gap-6 rounded-lg border border-[var(--brand-forest-100)] border-b-2 border-b-primary bg-[var(--brand-forest-50)] px-5 py-7 sm:w-[90%] sm:px-8 sm:py-9 md:grid-cols-[minmax(0,1fr)_auto] md:gap-8 md:px-10 lg:gap-12 lg:px-14 lg:py-12 xl:px-16">
+    <div class="min-w-0">
+      <p class="mb-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)] sm:text-xs">
+        Asesoría personalizada
+      </p>
+
+      <h2 id="financing-title"
+        class="m-0 text-balance text-2xl font-extrabold tracking-tight text-[var(--brand-forest-900)] sm:text-3xl md:text-4xl lg:text-5xl">
         ¿Tienes dudas sobre cómo financiar tu hogar?
       </h2>
-      <p class="mb-0 mt-2 text-base leading-relaxed text-[var(--brand-forest-900)]/75">
+
+      <p class="mb-0 mt-3 text-sm leading-relaxed text-[var(--brand-forest-900)]/75 sm:text-base">
         Te orientamos para que conozcas las opciones disponibles.
       </p>
     </div>
-    <a href="#contacto" class="inline-flex min-h-12 w-fit items-center justify-center rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-sm font-extrabold text-white no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
+
+    <a href="#contacto"
+      class="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-center text-sm font-extrabold text-white no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 sm:w-fit md:shrink-0">
       Consultar opciones
     </a>
   </div>
 </section>
+
 <app-vision360></app-vision360>
 <app-resident-help></app-resident-help>
 <app-gallery></app-gallery>

@@ -25,7 +25,6 @@ export class GalleryComponent {
   private readonly galleryDialog = viewChild.required<ElementRef<HTMLDialogElement>>('galleryDialog');
   private readonly galleryItems = viewChildren<ElementRef<HTMLElement>>('galeryItem');
   private readonly dialogCarousel = viewChild<HlmCarousel>('dialogCarousel');
-  private animationContext?: gsap.Context;
   private modalAnimation?: gsap.core.Timeline;
   private previousDialogSlide: number | null = null;
 
@@ -126,7 +125,6 @@ export class GalleryComponent {
         }
 
       }, root);
-      this.animationContext = context;
 
       this.destroyRef.onDestroy(() => context.revert());
       this.destroyRef.onDestroy(() => this.modalAnimation?.kill());

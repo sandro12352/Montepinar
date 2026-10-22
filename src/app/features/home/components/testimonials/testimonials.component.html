@@ -1,7 +1,10 @@
-<section #root id="testimonios" class="relative overflow-hidden bg-[#faf6f0] px-5 py-16 text-[#1f1a14] sm:px-8 sm:py-24">
-  <div class="mx-auto w-[min(88%,1400px)]">
-    <header data-testimonials-content class="mb-10 max-w-3xl md:mb-14">
-      <p class="mb-4 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+<section #root id="testimonios"
+  class="min-h-dvh bg-[#f4f1ea] py-10 pl-5 pr-0 text-[#1f1a14] sm:py-12 sm:pl-8 lg:py-12 lg:pl-[max(2rem,calc((100vw-88.5rem)/2))]">
+  <div
+    class="mx-auto grid min-h-[calc(100dvh-14rem)] w-full grid-cols-1 lg:min-h-[calc(100dvh-6rem)] lg:grid-cols-1 lg:items-center lg:gap-10 ">
+    <header data-testimonials-content class="mb-3 max-w-[30rem] pr-5 sm:pr-8 lg:pr-0">
+      <p
+        class="mb-4 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
         <span class="h-px w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
         Voces de Montepinar
       </p>
@@ -13,63 +16,70 @@
       </p>
     </header>
 
-    <div data-testimonial-item class="min-w-0">
-      <hlm-carousel class="block min-w-0" [options]="{ loop: true, align: 'center' }">
-        <hlm-carousel-content>
-          @for (video of videos; track video.title) {
-            <hlm-carousel-item class="basis-full">
-              <article class="grid min-w-0 grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(10rem,0.8fr)_minmax(0,1.8fr)] lg:gap-0">
-                <div class="w-full max-w-80">
-                  <div class="relative aspect-9/16 overflow-hidden rounded-2xl bg-[#e4dfd6] shadow-[0_14px_36px_rgb(73_54_34_/_12%)]">
-                    @if (video.videoSrc) {
-                      <video class="size-full object-contain" [src]="video.videoSrc" [poster]="video.poster" controls playsinline preload="metadata" [attr.aria-label]="video.title">
-                        Tu navegador no admite la reproducción de video.
-                      </video>
-                    } @else {
-                      <img class="size-full object-cover" [src]="video.poster" [alt]="video.title" loading="lazy" />
-                      <span class="absolute inset-x-3 bottom-3 rounded-xl border border-white/60 bg-[#1f1a14]/80 px-4 py-3 text-center text-sm font-bold text-white backdrop-blur-sm">Video pendiente</span>
-                    }
-                  </div>
-                  <h3 class="mb-0 mt-4 text-center text-xl font-bold leading-tight">{{ video.title }}</h3>
-                </div>
+    <hlm-carousel class="block min-w-0 " [options]="{ loop: true, align: 'start' }">
+      <hlm-carousel-content>
+        @for (video of videos; track video.title) {
+        <hlm-carousel-item class="basis-[82%] pl-4 sm:basis-[58%] lg:basis-[60%] ">
+          <article
+            class="grid h-100 min-w-0 grid-cols-1 overflow-hidden rounded-3xl bg-white shadow-[0_14px_36px_rgb(73_54_34_/_10%)] md:grid-cols-[minmax(15rem,0.85fr)_minmax(0,1.5fr)] p-5">
+            <div class="relative  overflow-hidden bg-[#e4dfd6]  rounded-2xl h-auto">
+              @if (video.videoSrc) {
+              <video class="absolute inset-0 size-full object-cover" [src]="video.videoSrc" [poster]="video.poster"
+                controls playsinline preload="metadata" [attr.aria-label]="video.title">
+                Tu navegador no admite la reproducción de video.
+              </video>
+              } @else {
+              <img class="absolute inset-0 size-full object-cover" [src]="video.poster" [alt]="video.title"
+                loading="lazy" />
+              <span
+                class="absolute inset-x-3 bottom-3 rounded-xl border border-white/60 bg-[#1f1a14]/80 px-4 py-3 text-center text-sm font-bold text-white backdrop-blur-sm">Video
+                pendiente</span>
+              }
+            </div>
 
-                <div class="min-w-0 self-start border-t border-[#1f1a14]/15 pt-7 lg:border-t-0 lg:pt-0">
-                  <div class="mb-7 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <h3 class="m-0 text-2xl font-extrabold tracking-tight">Lo que cuentan</h3>
-                    <span class="text-xs font-medium text-[#1f1a14]/55">Ejemplos ficticios</span>
-                  </div>
-                  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    @for (comment of video.comments; track comment.initials) {
-                      <blockquote class="m-0 flex min-w-0 flex-col rounded-xl border border-[#1f1a14]/10 bg-white/75 p-4 sm:p-5">
-                        <div class="mb-3 flex gap-1 text-sm leading-none text-[var(--brand-primary)]" role="img" aria-label="5 de 5 estrellas">
-                          @for (star of [1, 2, 3, 4, 5]; track star) { <span aria-hidden="true">★</span> }
-                        </div>
-                        <p class="m-0 flex-1 text-sm font-medium leading-relaxed text-[#1f1a14]/80">“{{ comment.text }}”</p>
-                        <footer class="mt-4 flex items-center gap-3 border-t border-[#1f1a14]/10 pt-3">
-                          <span class="grid size-9 shrink-0 place-items-center rounded-full bg-[var(--brand-tertiary)] text-[11px] font-extrabold text-white" aria-hidden="true">{{ comment.initials }}</span>
-                          <span>
-                            <strong class="block text-sm font-bold leading-tight text-[#1f1a14]">{{ comment.author }}</strong>
-                            <small class="mt-1 block text-xs leading-tight text-[#1f1a14]/60">{{ comment.role }}</small>
-                          </span>
-                        </footer>
-                      </blockquote>
-                    }
-                  </div>
+            <div class="flex min-w-0 flex-col justify-between p-6 sm:p-9 lg:p-12">
+              <div>
+                <p class="mb-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">
+                  Experiencia Montepinar</p>
+                <h3 class="m-0 text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">{{ video.title }}</h3>
+              </div>
+              @if (video.comments[0]; as comment) {
+              <blockquote class="my-7 flex-1">
+                <div class="mb-4 flex gap-1 text-sm leading-none text-[var(--brand-primary)]" role="img"
+                  aria-label="5 de 5 estrellas">
+                  @for (star of [1, 2, 3, 4, 5]; track star) { <span aria-hidden="true">★</span> }
                 </div>
-              </article>
-            </hlm-carousel-item>
-          }
-        </hlm-carousel-content>
-        <div class="mt-8 flex items-center justify-center gap-3" role="group" aria-label="Controles de testimonios">
-          <button hlm-carousel-previous class="grid size-11 place-items-center rounded-full border border-[#1f1a14]/15 bg-white text-[var(--brand-tertiary)] transition-colors hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none" type="button" aria-label="Testimonio anterior">
-            <ng-icon name="lucideArrowLeft" size="18" aria-hidden="true" />
-          </button>
-          <span class="px-2 text-sm font-semibold text-[#1f1a14]/60">Desliza para ver más</span>
-          <button hlm-carousel-next class="grid size-11 place-items-center rounded-full border border-[#1f1a14]/15 bg-white text-[var(--brand-tertiary)] transition-colors hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none" type="button" aria-label="Siguiente testimonio">
-            <ng-icon name="lucideArrowRight" size="18" aria-hidden="true" />
-          </button>
-        </div>
-      </hlm-carousel>
-    </div>
+                <p class="m-0 text-base leading-relaxed text-[#1f1a14]/75 sm:text-lg">“{{ comment.text }}”</p>
+              </blockquote>
+              <footer class="flex items-center gap-3 border-t border-[#1f1a14]/10 pt-5">
+                <span
+                  class="grid size-11 shrink-0 place-items-center rounded-full bg-[var(--brand-tertiary)] text-xs font-extrabold text-white"
+                  aria-hidden="true">{{ comment.initials }}</span>
+                <span>
+                  <strong class="block text-sm font-bold leading-tight text-[#1f1a14]">{{ comment.author }}</strong>
+                  <small class="mt-1 block text-xs leading-tight text-[#1f1a14]/60">{{ comment.role }}</small>
+                </span>
+              </footer>
+              }
+            </div>
+          </article>
+        </hlm-carousel-item>
+        }
+      </hlm-carousel-content>
+
+
+      <!-- FLECHAS DEBAJO DEL CARRUSEL -->
+      <div class="relative z-10 mt-5 flex w-full items-center justify-center gap-4 pr-5 sm:pr-8 lg:mt-6" role="group"
+        aria-label="Controles de testimonios">
+        <button hlm-carousel-previous type="button"
+          class="!static !top-auto !start-auto !end-auto !translate-y-0 !transform-none !h-12 !w-12 shrink-0 rounded-xl border-0 bg-white text-[#60666b] shadow-sm transition-colors hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 hover:cursor-pointer"
+          aria-label="Testimonio anterior"></button>
+
+        <button hlm-carousel-next type="button"
+          class="!static !top-auto !start-auto !end-auto !translate-y-0 !transform-none !h-12 !w-12 shrink-0 rounded-xl border-0 bg-white text-[#60666b] shadow-sm transition-colors hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 hover:cursor-pointer"
+          aria-label="Siguiente testimonio"></button>
+      </div>
+
+    </hlm-carousel>
   </div>
 </section>

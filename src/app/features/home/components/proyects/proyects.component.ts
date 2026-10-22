@@ -75,9 +75,10 @@ export class ProyectsComponent {
         root.querySelectorAll<HTMLElement>('[data-project-card]').forEach((card) => {
           gsap.from(card, {
             autoAlpha: 0,
-            x: 36,
-            duration: 0.7,
-            ease: 'power2.out',
+            x: 100,
+            scale:1,
+            duration: 0.9,
+            ease: 'power3.out',
             scrollTrigger: {
               trigger: card,
               start: 'top 82%',

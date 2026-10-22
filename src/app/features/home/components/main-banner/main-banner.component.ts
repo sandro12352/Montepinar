@@ -157,7 +157,8 @@ export class MainBannerComponent {
       this.subtitulos()[index],
       this.titulos()[index],
       this.descripciones()[index],
-      this.botones()[index],
+      this.botones()[index * 2],
+      this.botones()[index * 2 + 1],
       this.card()[0],
     ]
       .filter(Boolean)

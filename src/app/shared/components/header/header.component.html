@@ -20,26 +20,27 @@
         (click)="closeMenu()">{{ item.label }}</a>
       }
       <button data-anim="cta"
-        class="group inline-flex min-h-[2.9rem] items-center justify-center gap-2 rounded-xl border-0 bg-primary text-primary-foreground px-[1.4rem] text-[0.9rem] font-extrabold  transition-[background-color,transform] duration-200 hover:-translate-y-px hover:bg-[var(--brand-tertiary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-tertiary)] focus-visible:ring-offset-2 md:hidden max-md:mt-1 motion-reduce:transition-none"
+        class="group relative isolate inline-flex min-h-[2.9rem] items-center justify-center gap-2 overflow-hidden rounded-xl border-0 bg-primary text-primary-foreground px-[1.4rem] text-[0.9rem] font-extrabold transition-transform duration-200 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-tertiary)] focus-visible:ring-offset-2 md:hidden max-md:mt-1 motion-reduce:transition-none"
         type="button" (click)="openVisitSheet()">
-        Agendar visita
+        <span aria-hidden="true" class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-tertiary)] transition-transform duration-500 ease-out group-hover:scale-x-100 motion-reduce:transition-none"></span>
+        <span class="relative z-10">Agendar visita</span>
         <ng-icon name="lucideArrowRight" size="18" aria-hidden="true"
           class="transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
       </button>
     </nav>
 
     <button data-anim="cta"
-      class="group relative isolate col-start-3 row-start-1 inline-flex min-h-[2.9rem] items-center justify-center justify-self-end gap-2 overflow-hidden rounded-xl border-0 bg-primary px-[1.4rem] text-[0.9rem] font-extrabold text-primary-foreground transition-transform duration-200 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-forest-500)] focus-visible:ring-offset-2 max-md:hidden motion-reduce:transition-none hover:cursor-pointer hover:bg-(--brand-orange-600)"
+      class="group relative isolate col-start-3 row-start-1 inline-flex min-h-[2.9rem] items-center justify-center justify-self-end gap-2 overflow-hidden rounded-xl border-0 bg-primary px-[1.4rem] text-[0.9rem] font-extrabold text-primary-foreground transition-transform duration-200 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-forest-500)] focus-visible:ring-offset-2 max-md:hidden motion-reduce:transition-none hover:cursor-pointer"
       type="button" aria-label="Agendar una visita a Montepinar" (click)="openVisitSheet()">
-      <!-- Fondo animado de izquierda a derecha -->
-    
+      <span aria-hidden="true"
+        class="absolute inset-0 origin-left scale-x-0 bg-(--brand-orange-600) transition-transform duration-500 ease-out group-hover:scale-x-100 motion-reduce:transition-none"></span>
 
-      <span class="relative">
+      <span class="relative z-10">
         Agendar visita
       </span>
 
       <ng-icon name="lucideArrowRight" size="18" aria-hidden="true"
-        class="relative transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
+        class="relative z-10 transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
     </button>
 
     <button
