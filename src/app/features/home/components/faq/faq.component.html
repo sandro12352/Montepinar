@@ -1,4 +1,4 @@
-<section id="preguntas-frecuentes" aria-labelledby="faq-title"
+<section #root id="preguntas-frecuentes" aria-labelledby="faq-title"
   class="relative isolate overflow-hidden bg-[#f4f1ea] px-5 py-16 text-[#1f1a14] sm:px-8 sm:py-20 lg:py-24">
   <div class="mx-auto max-w-[1400px]">
 
@@ -6,7 +6,7 @@
     <!-- ENCABEZADO + VIDEO -->
     <div class="mb-10 ">
 
-      <header>
+      <header data-faq-header>
         <p
           class="mb-3 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
           <span class="h-1 w-12 bg-[var(--brand-primary)]" aria-hidden="true"></span>
@@ -29,7 +29,7 @@
 
     <div class="grid items-center gap-8 lg:mb-12 lg:grid-cols-1">
       <!-- VIDEO MÁS ANCHO -->
-      <div class="relative h-[220px] w-full overflow-hidden rounded-2xl bg-[#10271c] sm:h-[260px] lg:h-[580px]">
+      <div data-faq-video class="relative h-[220px] w-full overflow-hidden rounded-2xl bg-[#10271c] sm:h-[260px] lg:h-[580px]">
         <video #faqVideo class="absolute inset-0 size-full object-cover" poster="/images/entrada.png" preload="none"
           [controls]="videoPlaying()" playsinline aria-label="Video de presentación de los proyectos Montepinar"
           (pause)="onVideoPause()" (ended)="onVideoPause()">
@@ -58,7 +58,7 @@
       <div class="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-4">
 
         <!-- FAQ 1 -->
-        <article
+        <article data-faq-card
           class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
           <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
           <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
@@ -71,7 +71,7 @@
         </article>
 
         <!-- FAQ 2 -->
-        <article
+        <article data-faq-card
           class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
           <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
           <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
@@ -84,7 +84,7 @@
         </article>
 
         <!-- FAQ 3 -->
-        <article
+        <article data-faq-card
           class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
           <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
           <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
@@ -96,7 +96,7 @@
         </article>
 
         <!-- FAQ 4 -->
-        <article
+        <article data-faq-card
           class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
           <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
           <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
@@ -109,7 +109,7 @@
         </article>
 
         <!-- FAQ 5 -->
-        <article
+        <article data-faq-card
           class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
           <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
           <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
@@ -122,7 +122,7 @@
         </article>
 
         <!-- FAQ 6 -->
-        <article
+        <article data-faq-card
           class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
           <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
           <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
@@ -136,7 +136,7 @@
         </article>
 
         <!-- FAQ 7 -->
-        <article
+        <article data-faq-card
           class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
           <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
           <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
@@ -149,7 +149,7 @@
         </article>
 
         <!-- FAQ 8 -->
-        <article
+        <article data-faq-card
           class="h-full rounded-2xl border border-[#10271c]/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg">
           <span class="mb-4 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
           <h3 class="mb-3 text-lg font-bold leading-snug text-[#0b442d]">
@@ -173,7 +173,7 @@
 
 
     <!-- CTA DEBAJO DE LAS FAQ -->
-    <div class="mt-10 flex flex-col items-center text-center sm:mt-12">
+    <div data-faq-cta class="mt-10 flex flex-col items-center text-center sm:mt-12">
       <p class="mb-5 max-w-xl text-base leading-relaxed text-[#34433d]/80 sm:text-lg">
         ¿Tienes más preguntas? Descubre nuestros proyectos y encuentra el terreno ideal para ti.
       </p>

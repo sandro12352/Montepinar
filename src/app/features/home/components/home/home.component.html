@@ -4,33 +4,89 @@
 
 <section aria-labelledby="financing-title" class="bg-[#f4f1ea] py-8 sm:py-12 lg:py-16">
   <div #financingPanel
-    class="mx-auto grid w-[92%] max-w-[1400px] grid-cols-1 items-center gap-6 rounded-lg border border-[var(--brand-forest-100)] border-b-2 border-b-primary bg-[var(--brand-forest-50)] px-5 py-7 sm:w-[90%] sm:px-8 sm:py-9 md:grid-cols-[minmax(0,1fr)_auto] md:gap-8 md:px-10 lg:gap-12 lg:px-14 lg:py-12 xl:px-16">
+    class="relative isolate mx-auto grid w-[92%] max-w-[1400px] grid-cols-1 items-center gap-8 overflow-hidden rounded-3xl bg-[var(--brand-forest-900)] px-5 py-8 text-white sm:w-[90%] sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-12 lg:px-14 lg:py-14">
+    <span aria-hidden="true"
+      class="pointer-events-none absolute -bottom-32 -left-24 -z-10 size-96 rounded-full bg-[var(--brand-primary)]/20 blur-3xl"></span>
+
+    <!-- Texto -->
     <div class="min-w-0">
-      <p class="mb-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)] sm:text-xs">
-        Asesoría personalizada
+      <p data-reveal
+        class="m-0 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.16em] text-white/90 sm:text-xs">
+        <span class="size-1.5 rounded-full bg-[var(--brand-forest-400)]" aria-hidden="true"></span>
+        Plan flexible &amp; directo
       </p>
 
-      <h2 id="financing-title"
-        class="m-0 text-balance text-2xl font-extrabold tracking-tight text-[var(--brand-forest-900)] sm:text-3xl md:text-4xl lg:text-5xl">
-        ¿Tienes dudas sobre cómo financiar tu hogar?
+      <h2 id="financing-title" data-reveal
+        class="m-0 mt-5 max-w-[20ch] text-balance text-[clamp(2rem,4vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.04em]">
+        ¿Cómo financiar tu próximo <span class="text-[var(--brand-primary)]">lote o casa</span>?
       </h2>
 
-      <p class="mb-0 mt-3 text-sm leading-relaxed text-[var(--brand-forest-900)]/75 sm:text-base">
-        Te orientamos para que conozcas las opciones disponibles.
+      <p data-reveal class="mb-0 mt-5 max-w-xl text-pretty text-sm leading-relaxed text-white/75 sm:text-base">
+        Simula tus cuotas mensuales sin bancos ni intermediarios. Te guiamos con planes personalizados y facilidades
+        directas a tu medida.
       </p>
+
+      <ul data-reveal class="m-0 mt-7 grid list-none gap-3 p-0 sm:grid-cols-3">
+        @for (benefit of financingBenefits; track benefit.label) {
+        <li
+          class="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold leading-snug sm:text-sm">
+          <ng-icon [name]="benefit.icon" size="20" class="shrink-0 text-[var(--brand-primary)]" aria-hidden="true" />
+          {{ benefit.label }}
+        </li>
+        }
+      </ul>
     </div>
 
-    <a href="#contacto"
-      class="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-center text-sm font-extrabold text-white no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 sm:w-fit md:shrink-0">
-      Consultar opciones
-    </a>
+    <!-- Calculadora -->
+    <div data-reveal class="min-w-0 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm sm:p-6">
+      <div class="flex items-center justify-between gap-3 border-b border-white/10 pb-4">
+        <div class="flex items-center gap-3">
+          <span class="grid size-10 shrink-0 place-items-center rounded-xl bg-[var(--brand-primary)]">
+            <ng-icon name="lucideCalculator" size="20" aria-hidden="true" />
+          </span>
+          <span class="text-xs font-extrabold uppercase tracking-wider sm:text-sm">Calculadora de cuotas</span>
+        </div>
+        <span
+          class="rounded-full bg-[var(--brand-forest-500)] px-2.5 py-1 text-[0.65rem] font-extrabold">Estimación</span>
+      </div>
+
+      <div class="mt-4 flex items-end justify-between gap-3 rounded-xl bg-black/20 px-4 py-4">
+        <div>
+          <span class="block text-[0.65rem] font-semibold uppercase tracking-wider text-white/60">Cuota mensual
+            estimada</span>
+          <span class="mt-1 block text-3xl font-extrabold tracking-tight">$199 <span
+              class="text-sm font-medium text-white/60">/ mes</span></span>
+        </div>
+        <div class="text-right text-[0.7rem] leading-relaxed">
+          <span class="block font-bold text-[var(--brand-forest-400)]">Hasta 60 meses</span>
+          <span class="block text-white/60">Inicial flexible</span>
+        </div>
+      </div>
+
+      <a href="#contacto"
+        class="group/btn relative isolate mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-5 py-3 text-sm font-extrabold text-white no-underline transition-transform duration-200 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] motion-reduce:transition-none">
+        <span aria-hidden="true"
+          class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-orange-600)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+        <span class="relative z-10">Calcular mis cuotas</span>
+        <ng-icon name="lucideArrowRight" size="18" aria-hidden="true"
+          class="relative z-10 transition-transform duration-200 group-hover/btn:translate-x-1 motion-reduce:transition-none" />
+      </a>
+
+      <a href="https://wa.me/51932284185" target="_blank" rel="noopener noreferrer"
+        class="group/btn relative isolate mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 overflow-hidden rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-xs font-bold text-white no-underline transition-transform duration-200 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] sm:text-sm motion-reduce:transition-none">
+        <span aria-hidden="true"
+          class="absolute inset-0 origin-left scale-x-0 bg-white/15 transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+        <ng-icon name="lucideMessageCircle" size="18" aria-hidden="true"
+          class="relative z-10 text-[var(--brand-forest-400)]" />
+        <span class="relative z-10">Hablar por WhatsApp con un asesor</span>
+      </a>
+    </div>
   </div>
 </section>
+<app-gallery></app-gallery>
 
 <app-vision360></app-vision360>
-<app-resident-help></app-resident-help>
-<app-gallery></app-gallery>
 <app-faq></app-faq>
-<app-contact-cta></app-contact-cta>
-
+<app-resident-help></app-resident-help>
 <app-testimonials></app-testimonials>
+<app-contact-cta></app-contact-cta>

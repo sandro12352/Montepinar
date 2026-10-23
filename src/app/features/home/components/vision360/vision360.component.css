@@ -15,7 +15,7 @@
   overflow: hidden;
   border: 1px solid rgb(255 255 255 / 15%);
   border-radius: 1.25rem;
-  background: #1f1a14;
+  background: var(--brand-forest-900);
   box-shadow: 0 25px 80px rgb(0 0 0 / 40%);
   animation: vision-modal-in 220ms ease-out both;
 }
@@ -55,8 +55,11 @@
   background: var(--brand-primary);
   color: white;
   cursor: pointer;
-  font-size: 1.75rem;
-  line-height: 1;
+  transition: background-color 200ms ease;
+}
+
+.vision-close-button:hover {
+  background: var(--brand-orange-600);
 }
 
 .vision-modal-viewer {
@@ -64,7 +67,6 @@
   min-height: min(68vh, 42rem);
   overflow: hidden;
   background-color: #29251f;
-  background-image: url('/images/presentacion.webp');
   background-repeat: repeat-x;
   background-size: auto 135%;
   background-position-y: center;
@@ -78,19 +80,57 @@
   cursor: grabbing;
 }
 
-.vision-viewer-hint {
+.vision-scene {
+  animation: vision-scene-in 450ms ease-out both;
+}
+
+.vision-modal-scenes {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding: 0.9rem 1.25rem 1.1rem;
+}
+
+.vision-scene-thumb {
+  position: relative;
+  flex: 0 0 auto;
+  width: 8rem;
+  height: 4.75rem;
+  overflow: hidden;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 0.75rem;
+  background: none;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 200ms ease, border-color 200ms ease;
+}
+
+.vision-scene-thumb:hover,
+.vision-scene-thumb:focus-visible,
+.vision-scene-thumb.is-active {
+  opacity: 1;
+}
+
+.vision-scene-thumb.is-active {
+  border-color: var(--brand-primary);
+}
+
+.vision-scene-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vision-scene-thumb span {
   position: absolute;
-  right: 1rem;
-  bottom: 1rem;
-  padding: 0.65rem 1rem;
-  border: 1px solid rgb(255 255 255 / 30%);
-  border-radius: 999px;
-  background: var(--brand-tertiary);
+  inset: auto 0 0;
+  padding: 0.35rem 0.4rem;
+  background: linear-gradient(to top, rgb(3 48 26 / 90%), transparent);
   color: white;
-  font-size: 0.875rem;
-  pointer-events: none;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-align: left;
 }
 
 @keyframes vision-modal-in {
@@ -98,6 +138,12 @@
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+@keyframes vision-scene-in {
+  from { opacity: 0; transform: scale(1.02); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .vision-modal { animation: none; }
+  .vision-modal,
+  .vision-scene { animation: none; }
 }

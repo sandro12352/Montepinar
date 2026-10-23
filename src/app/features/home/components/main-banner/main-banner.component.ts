@@ -10,7 +10,7 @@ import {
   viewChildren,
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideMapPinHouse, lucideArrowRight } from '@ng-icons/lucide';
+import { lucideMapPinHouse, lucideArrowRight, lucidePhone } from '@ng-icons/lucide';
 import { HlmCarousel, HlmCarouselImports } from '@spartan-ng/helm/carousel';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -31,7 +31,7 @@ interface BannerSlide {
 
 @Component({
   imports: [HlmCarouselImports, NgIcon],
-  providers: [provideIcons({ lucideMapPinHouse,lucideArrowRight })],
+  providers: [provideIcons({ lucideMapPinHouse,lucideArrowRight,lucidePhone })],
   selector: 'app-main-banner',
   styleUrl: './main-banner.component.css',
   templateUrl: './main-banner.component.html',
@@ -57,8 +57,8 @@ export class MainBannerComponent {
   descripciones = viewChildren<ElementRef>('descripcion');
   botones = viewChildren<ElementRef>('boton');
   card = viewChildren<ElementRef>('cardFloat');
-  ownerImages = viewChildren<ElementRef<HTMLImageElement>>('ownerImage');
-  
+  // La barra de preventa es fija: solo hace su entrada la primera vez.
+  private cardIntroDone = false;
 
   protected readonly slides: readonly BannerSlide[] = [
     {
@@ -112,10 +112,7 @@ export class MainBannerComponent {
           },
         });
 
-        gsap.to([
-          ...root.querySelectorAll<HTMLElement>('[data-banner-copy]'),
-          ...root.querySelectorAll<HTMLElement>('[data-card-float]'),
-        ], {
+        gsap.to(root.querySelectorAll<HTMLElement>('[data-banner-copy]'), {
           x: -120,
           autoAlpha: 0,
           ease: 'none',
@@ -127,6 +124,23 @@ export class MainBannerComponent {
             invalidateOnRefresh: true,
           },
         });
+
+        // La barra de preventa ocupa todo el ancho: solo se desvanece (sin desplazarla en x).
+        // Se define el valor inicial para no capturar el opacity 0 de la clase slide-copy-item.
+        gsap.fromTo(root.querySelectorAll<HTMLElement>('[data-card-float]'),
+          { autoAlpha: 1 },
+          {
+            autoAlpha: 0,
+            ease: 'none',
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: root,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 0.6,
+            },
+          },
+        );
       }, root);
 
       this.destroyRef.onDestroy(() => context.revert());
@@ -144,13 +158,11 @@ export class MainBannerComponent {
   }
 
   private animateSlide(index: number) {
-    const owner = this.ownerImages()[0]?.nativeElement;
     const all = [
       ...this.subtitulos(),
       ...this.titulos(),
       ...this.descripciones(),
       ...this.botones(),
-      ...this.card(),
     ].map((r) => r.nativeElement);
 
     const targets = [
@@ -159,35 +171,18 @@ export class MainBannerComponent {
       this.descripciones()[index],
       this.botones()[index * 2],
       this.botones()[index * 2 + 1],
-      this.card()[0],
+      ...(this.cardIntroDone ? [] : this.card().slice(0, 1)),
     ]
       .filter(Boolean)
       .map((r) => r.nativeElement);
 
     if (!targets.length) return;
 
+    this.cardIntroDone = this.cardIntroDone || this.card().length > 0;
     gsap.killTweensOf(all);
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       gsap.set(all, { clearProps: 'opacity,visibility,transform' });
-      if (owner) gsap.set(owner, { clearProps: 'opacity,visibility,transform' });
       return;
-    }
-
-    if (owner) {
-      gsap.killTweensOf(owner);
-      if (index === 0) {
-        gsap.fromTo(owner, { autoAlpha: 0, x: 0, y: 24, scale: 1.5 }, {
-          autoAlpha: 1,
-          x: 0,
-          y: 0,
-          scale: 1,
-          duration: 1.15,
-          delay: 0.2,
-          ease: 'power3.out',
-        });
-      } else {
-        gsap.set(owner, { autoAlpha: 0 });
-      }
     }
 
     gsap.fromTo(

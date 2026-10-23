@@ -1,94 +1,92 @@
 <section #root id="proyectos" class="bg-[#f4f1ea]  py-[clamp(4.5rem,8vw,7.5rem)] text-[#1f1a14] ">
 
-  <div class="mx-auto grid w-[min(88%,1400px)] grid-cols-1 gap-12 lg:grid-cols-[0.60fr_1.40fr] lg:gap-12 ">
-    <div class="h-fit lg:sticky lg:top-28 lg:self-start">
-      <p
+  <div class="mx-auto grid w-[min(88%,1400px)] grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-12 ">
+    <div data-text class="h-fit lg:sticky lg:top-28 lg:self-start">
+      <p data-reveal
         class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">
         <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
         Proyectos Montepinar
       </p>
-      <h2
+      <h2 data-reveal
         class="m-0 max-w-[15ch] text-balance text-[clamp(2.5rem,4.8vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
         Encuentra tu lugar en <span class="text-[var(--brand-primary)]">Montepinar</span>
       </h2>
-      <p class="mb-0 mt-6 max-w-md text-pretty text-base leading-relaxed text-[#1f1a14]/70 sm:text-lg">
+      <p data-reveal class="mb-0 mt-6 max-w-md text-pretty text-base leading-relaxed text-[#1f1a14]/70 sm:text-lg">
         Explora nuestros proyectos y descubre los espacios que pueden convertirse en tu próximo hogar.
       </p>
-      <a href="#contacto"
-        class="mt-8 inline-flex min-h-12 items-center justify-center rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-sm font-bold text-white no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
-        Recibir asesoría
+      <a data-reveal href="#contacto"
+        class="group/btn relative isolate mt-8 inline-flex min-h-12 items-center justify-center overflow-hidden rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-sm font-bold text-white no-underline transition-transform duration-200 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
+        <span aria-hidden="true"
+          class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-forest-900)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+        <ng-icon name="lucideHeadset" size="18" aria-hidden="true"
+          class="relative z-10 mr-2 transition-transform duration-200 group-hover/btn:-translate-y-0.5 motion-reduce:transition-none" />
+        <span class="relative z-10">Recibir asesoría</span>
       </a>
     </div>
 
     <div class="grid min-w-0 grid-cols-1 gap-8 sm:gap-10">
       @for (project of projects; track project.name) {
       <article data-project-card [attr.id]="'proyecto-' + $index"
-        class="group/card min-w-0 overflow-hidden rounded-[1.5rem] bg-[#fbfaf7] shadow-[0_10px_30px_rgba(30,45,34,0.12)] transition-shadow duration-300 hover:shadow-[0_14px_36px_rgba(30,45,34,0.16)] focus-within:outline-none focus-within:ring-2 focus-within:ring-[var(--brand-primary)] focus-within:ring-offset-4">
+        class="group/card flex min-w-0 flex-col overflow-hidden rounded-2xl bg-white shadow-[0_8px_24px_rgba(30,45,34,0.08)] transition-shadow duration-300 hover:shadow-[0_14px_36px_rgba(30,45,34,0.14)]">
 
-        <!-- Imagen + precio -->
-        <div class="relative aspect-[21/9] overflow-hidden rounded-t-[1.5rem] bg-[#e5e0d5] sm:aspect-[2/1]">
+        <!-- Imagen -->
+        <div class="relative aspect-[3/2] overflow-hidden bg-[#e5e0d5]">
           <img
-            class="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-[1.04] group-focus-within/card:scale-[1.04]"
+            class="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-[1.04]"
             [src]="project.image" [alt]="project.imageAlt" loading="lazy" />
 
-          @if ($index === 0) {
           <span
-            class="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-[var(--brand-primary)] px-3.5 py-2 text-xs font-extrabold uppercase tracking-wide text-white shadow-lg sm:left-6 sm:top-6">
-            <ng-icon name="lucideStar" class="text-sm" />
-            Proyecto destacado
+            class="absolute left-3 top-3 rounded-full px-3 py-1 text-[0.65rem] font-extrabold uppercase tracking-wider text-white shadow-sm"
+            [class]="project.badgeTone === 'tertiary' ? 'bg-[var(--brand-tertiary)]' : 'bg-[var(--brand-primary)]'">
+            {{ project.badge }}
           </span>
-          }
+          <span
+            class="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-[0.65rem] font-extrabold uppercase tracking-wider text-[var(--brand-forest-900)] shadow-sm">
+            {{ project.status }}
+          </span>
 
-          <!-- Precio: esquina redondeada -->
           <div
-            class="absolute right-0 top-0 rounded-bl-[3.5rem] rounded-tr-[1.5rem] bg-[var(--brand-forest-900)] pb-5 pl-10 pr-6 pt-4 text-white shadow-lg sm:pb-6 sm:pl-14 sm:pr-8 sm:pt-5">
-            <span class="block text-xs font-medium text-white/85">Lotes desde</span>
-            <span class="block text-xl font-extrabold tracking-tight sm:text-3xl">{{ project.priceFrom }}</span>
+            class="absolute bottom-3 left-3 rounded-lg bg-[var(--brand-forest-900)]/75 px-3 py-2 text-white backdrop-blur-sm">
+            <span class="block text-[0.65rem] font-semibold uppercase tracking-wider text-white/75">Lotes desde</span>
+            <span class="block text-xl font-extrabold tracking-tight">{{ project.priceFrom }}</span>
           </div>
         </div>
 
         <!-- Contenido -->
-        <div class="px-6 pb-6 pt-5 sm:px-8 sm:pb-7 sm:pt-6">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <h3
-              class="m-0 font-serif text-3xl font-bold leading-tight tracking-tight text-[var(--brand-forest-900)] sm:text-4xl">
-              {{ project.name }}</h3>
-            <span
-              class="rounded-full border border-[var(--brand-forest-900)]/20 px-3 py-1 text-xs font-bold text-[var(--brand-forest-900)]">{{
-              project.status }}</span>
+        <div class="flex flex-1 flex-col px-5 pb-6 pt-5 sm:px-6 sm:pb-7">
+          <div class="flex items-center justify-between gap-3 text-[0.7rem] font-bold uppercase tracking-wider">
+            <span class="text-[#1f1a14]/70">{{ project.category }}</span>
+            <span class="inline-flex items-center gap-1 text-[var(--brand-forest-900)]">
+              <ng-icon name="lucideMapPin" class="text-sm text-[var(--brand-tertiary)]" aria-hidden="true" />
+              {{ project.location }}
+            </span>
           </div>
 
-          <p class="mb-0 mt-2 text-sm leading-relaxed text-[#202820]/70 sm:text-base">{{ project.description }}</p>
+          <h3 class="m-0 mt-2 text-xl font-extrabold leading-tight tracking-tight text-[var(--brand-forest-900)]">
+            {{ project.name }}
+          </h3>
+          <p class="mb-0 mt-2 line-clamp-2 text-sm leading-relaxed text-[#1f1a14]/70">{{ project.description }}</p>
 
-          <!-- Metadatos -->
-          <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[var(--brand-forest-900)]">
-            <div class="flex items-center gap-3 border-r border-[#202820]/15 pr-5">
-              <ng-icon name="lucideMapPin" class="text-2xl shrink-0" />
-              <div>
-                <span class="block text-xs text-[#202820]/65">{{ project.category }}</span>
-                <span class="block text-base font-extrabold">{{ project.location }}</span>
-              </div>
-            </div>
-            <span class="text-base font-bold">Visitas guiadas</span>
-          </div>
+          <!-- Características -->
+          <ul class="m-0 mt-4 grid list-none grid-cols-2 gap-x-3 gap-y-3 rounded-xl bg-[#f4f1ea] p-4">
+            @for (feature of project.features; track feature.label) {
+            <li class="flex items-center gap-2 text-xs text-[#1f1a14]/80">
+              <ng-icon [name]="feature.icon" class="shrink-0 text-base text-[var(--brand-primary)]"
+                aria-hidden="true" />
+              {{ feature.label }}
+            </li>
+            }
+          </ul>
 
-          <!-- Botones -->
-          <div class="mt-5 grid gap-3 sm:grid-cols-[1.14fr_1fr]">
+          <!-- Acciones -->
+          <div class="mt-auto flex gap-2 pt-4">
             <a href="tel:+51932284185"
-              class="group/btn relative inline-flex min-h-12 items-center justify-center gap-3 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-5 py-3 text-base font-extrabold text-white no-underline transition-transform active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
+              class="group/btn relative isolate inline-flex min-h-11 flex-1 items-center justify-center overflow-hidden rounded-xl bg-[var(--brand-forest-900)] px-4 py-2.5 text-sm font-bold text-white no-underline transition-transform duration-200 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-forest-900)] focus-visible:ring-offset-2 motion-reduce:transition-none">
               <span aria-hidden="true"
-                class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-forest-900)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100"></span>
-              <ng-icon name="lucideCalendarDays" class="relative z-10 text-lg" />
+                class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-primary)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+              <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true"
+                class="relative z-10 mr-2 transition-transform duration-200 group-hover/btn:-translate-y-0.5 motion-reduce:transition-none" />
               <span class="relative z-10">Agendar visita</span>
-              <ng-icon name="lucideArrowRight" class="relative z-10 text-lg" />
-            </a>
-
-            <a href="#contacto"
-              class="group/btn relative inline-flex min-h-12 items-center justify-center gap-3 overflow-hidden rounded-xl border border-[var(--brand-forest-900)]/60 px-5 py-3 text-base font-extrabold text-[var(--brand-forest-900)] no-underline transition-colors duration-500 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-forest-900)] focus-visible:ring-offset-2">
-              <span aria-hidden="true"
-                class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-forest-900)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100"></span>
-              <ng-icon name="lucideFileText" class="relative z-10 text-lg" />
-              <span class="relative z-10">Ver proyecto</span>
             </a>
           </div>
         </div>

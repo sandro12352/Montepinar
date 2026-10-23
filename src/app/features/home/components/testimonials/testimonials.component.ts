@@ -2,6 +2,7 @@ import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild }
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowLeft, lucideArrowRight } from '@ng-icons/lucide';
 import { HlmCarouselImports } from '@spartan-ng/helm/carousel';
+import AutoScroll from 'embla-carousel-auto-scroll';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -61,32 +62,70 @@ export class TestimonialsComponent {
     },
   ];
 
+  // Se duplica la lista para que el carrusel a todo el ancho tenga slides suficientes para el loop.
+  protected readonly loopVideos: readonly TestimonialVideo[] = [...this.videos, ...this.videos];
+
+  protected readonly carouselPlugins = [
+    AutoScroll({
+      speed: 2,
+      startDelay: 0,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    }),
+  ];
+
   constructor() {
     afterNextRender(() => {
       const root = this.root().nativeElement;
       const context = gsap.context(() => {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-        const content = root.querySelector<HTMLElement>('[data-testimonials-content]');
-        const cards = root.querySelectorAll<HTMLElement>('[data-testimonial-item]');
-        if (!content || cards.length === 0) return;
+        const heading = root.querySelector<HTMLElement>('[data-testimonials-content]');
+        const items = Array.from(root.querySelectorAll<HTMLElement>('[data-testimonial-item]'));
+        const controls = root.querySelector<HTMLElement>('[data-testimonials-controls]');
 
-        gsap.fromTo(
-          [content, ...Array.from(cards)],
-          { autoAlpha: 0, y: 32 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.75,
-            stagger: 0.12,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: root,
-              start: 'top 75%',
-              once: true,
+        if (heading) {
+          gsap.fromTo(heading.children,
+            { autoAlpha: 0, y: 24 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: heading, start: 'top 82%', once: true },
             },
-          },
-        );
+          );
+        }
+
+        // Los testimonios aparecen uno por uno, igual que la galería.
+        if (items.length) {
+          gsap.fromTo(items,
+            { autoAlpha: 0, y: 24, scale: 0.975 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.8,
+              stagger: 0.2,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: items[0], start: 'top 84%', once: true },
+            },
+          );
+        }
+
+        if (controls) {
+          gsap.fromTo(controls,
+            { autoAlpha: 0, y: 24 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.8,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: controls, start: 'top 95%', once: true },
+            },
+          );
+        }
       }, root);
 
       this.destroyRef.onDestroy(() => context.revert());

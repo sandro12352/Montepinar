@@ -1,1 +1,73 @@
-<p>footer works!</p>
+<footer #root aria-label="Pie de página"
+  class="relative isolate overflow-hidden bg-[#f4f1ea] pt-[clamp(3.5rem,6vw,5.5rem)] text-[#1f1a14]">
+  <div class="mx-auto w-[min(92%,1400px)] sm:w-[90%]">
+
+    <!-- Marca + columnas -->
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1.7fr)] lg:gap-16">
+      <div data-footer-reveal>
+        <a href="#inicio" class="inline-block" aria-label="Montepinar, ir al inicio">
+          <img class="block h-auto w-44 sm:w-52" src="/images/logo.webp" alt="Montepinar Inmobiliaria & Constructora"
+            loading="lazy" />
+        </a>
+        <p class="mb-0 mt-5 max-w-sm text-pretty text-sm leading-relaxed text-[#1f1a14]/70 sm:text-base">
+          Desarrollamos espacios residenciales campestres, con extensas áreas verdes y lugares pensados para compartir
+          en comunidad.
+        </p>
+
+        <ul class="m-0 mt-6 flex list-none gap-3 p-0">
+          <li>
+            <a href="https://wa.me/51932284185" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+              class="group/btn relative isolate grid size-10 place-items-center overflow-hidden rounded-full border border-[var(--brand-forest-900)]/20 text-[var(--brand-forest-900)] no-underline transition-colors duration-500 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
+              <span aria-hidden="true"
+                class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-primary)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+              <ng-icon name="lucideMessageCircle" size="18" class="relative z-10" aria-hidden="true" />
+            </a>
+          </li>
+          <li>
+            <a href="tel:+51932284185" aria-label="Llamar por teléfono"
+              class="group/btn relative isolate grid size-10 place-items-center overflow-hidden rounded-full border border-[var(--brand-forest-900)]/20 text-[var(--brand-forest-900)] no-underline transition-colors duration-500 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
+              <span aria-hidden="true"
+                class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-primary)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+              <ng-icon name="lucidePhone" size="18" class="relative z-10" aria-hidden="true" />
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-2 gap-8 sm:grid-cols-3">
+        @for (column of columns; track column.title) {
+        <nav data-footer-reveal [attr.aria-label]="column.title">
+          <h2 class="m-0 text-base font-extrabold text-[var(--brand-forest-900)]">{{ column.title }}</h2>
+          <ul class="m-0 mt-4 grid list-none gap-3 p-0">
+            @for (link of column.links; track link.label) {
+            <li>
+              <a [href]="link.href"
+                class="text-sm text-[#1f1a14]/70 no-underline transition-colors duration-200 hover:text-[var(--brand-primary)] focus-visible:text-[var(--brand-primary)] focus-visible:outline-none">{{
+                link.label }}</a>
+            </li>
+            }
+          </ul>
+        </nav>
+        }
+      </div>
+    </div>
+
+    <!-- Línea + copyright -->
+    <div data-footer-reveal
+      class="mt-10 flex flex-col items-start justify-between gap-2 border-t border-[var(--brand-forest-900)]/25 pt-6 text-sm text-[#1f1a14]/70 sm:flex-row sm:items-center">
+      <p class="m-0">Copyright © <strong class="font-bold text-[var(--brand-forest-900)]">Montepinar</strong> {{ year }}
+      </p>
+      <p class="m-0">Inmobiliaria &amp; Constructora</p>
+    </div>
+  </div>
+
+  <!-- Marca de agua + imagen -->
+  <div data-footer-image class="relative mt-4 h-[clamp(14rem,30vw,28rem)] overflow-hidden" aria-hidden="true">
+    <span
+      class="pointer-events-none absolute inset-x-0 top-0 select-none text-center text-[clamp(5rem,19vw,17rem)] font-black leading-none tracking-[-0.04em] text-[var(--brand-forest-900)]/[0.06]">
+      Montepinar
+    </span>
+    <img class="absolute inset-x-0 bottom-0 z-10 size-full object-cover object-bottom"
+      src="/images/Entrada%20Montepinar%20entre%20jardines%20y%20banderas.png" alt="" loading="lazy" />
+  </div>
+</footer>

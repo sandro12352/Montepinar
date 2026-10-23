@@ -1,6 +1,6 @@
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowRight } from '@ng-icons/lucide';
+import { lucideArrowRight, lucideMountain } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   imports: [NgIcon],
-  providers: [provideIcons({ lucideArrowRight })],
+  providers: [provideIcons({ lucideArrowRight, lucideMountain })],
   selector: 'app-introduccion',
   templateUrl: './introduccion.component.html',
 })
