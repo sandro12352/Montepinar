@@ -1,0 +1,33 @@
+<section #root aria-labelledby="about-values-title"
+  class="bg-white py-[clamp(4.5rem,8vw,7.5rem)] text-[#1f1a14]">
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <header data-heading class="max-w-2xl">
+      <p
+        class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        Nuestros valores
+      </p>
+      <h2 id="about-values-title"
+        class="m-0 text-balance text-[clamp(2.25rem,4.4vw,4rem)] font-extrabold leading-[1.04] tracking-[-0.04em] text-[var(--brand-forest-900)]">
+        Lo que sostiene cada proyecto.
+      </h2>
+      <p class="mb-0 mt-5 max-w-lg text-pretty text-base leading-[1.8] text-[#1f1a14]/70 sm:text-lg">
+        Cuatro principios guían cómo trabajamos con cada familia y cada comunidad.
+      </p>
+    </header>
+
+    <ul class="m-0 mt-10 grid list-none grid-cols-1 gap-5 p-0 sm:grid-cols-2 xl:grid-cols-4">
+      @for (value of values; track value.title) {
+      <li data-card
+        class="h-full rounded-2xl border border-[#10271c]/10 bg-[#f4f1ea] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none">
+        <span class="mb-5 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        <span class="grid size-12 place-items-center rounded-xl bg-[var(--brand-forest-900)] text-[var(--brand-primary)]">
+          <ng-icon [name]="value.icon" size="24" aria-hidden="true" />
+        </span>
+        <h3 class="m-0 mt-5 text-xl font-extrabold leading-snug text-[var(--brand-forest-900)]">{{ value.title }}</h3>
+        <p class="mb-0 mt-2 text-sm leading-relaxed text-[#1f1a14]/75">{{ value.text }}</p>
+      </li>
+      }
+    </ul>
+  </div>
+</section>

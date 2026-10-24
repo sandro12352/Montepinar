@@ -1,0 +1,47 @@
+<section #root aria-labelledby="about-stats-title"
+  class="bg-[#f4f1ea] py-[clamp(4.5rem,8vw,7.5rem)] text-[#1f1a14]">
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <header data-heading class="mx-auto flex max-w-3xl flex-col items-center text-center">
+      <p
+        class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        Nuestro impacto
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+      </p>
+      <h2 id="about-stats-title"
+        class="m-0 text-balance text-[clamp(2.25rem,4.4vw,4rem)] font-extrabold leading-[1.04] tracking-[-0.04em] text-[var(--brand-forest-900)]">
+        Miles de familias confían en Montepinar.
+      </h2>
+      <p class="mb-0 mt-5 max-w-xl text-pretty text-base leading-[1.8] text-[#1f1a14]/70 sm:text-lg">
+        Cada cifra representa una historia que empezó con una visita y hoy es un hogar.
+      </p>
+    </header>
+
+    <dl class="m-0 mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      @for (stat of stats; track stat.label) {
+      <div data-stat
+        class="relative isolate flex min-h-64 flex-col justify-end overflow-hidden rounded-3xl bg-[var(--brand-forest-900)] p-7 text-white sm:min-h-72">
+        <span aria-hidden="true"
+          class="pointer-events-none absolute -right-10 -top-10 -z-10 size-40 rounded-full bg-[var(--brand-primary)]/20 blur-2xl"></span>
+        <dd class="m-0 text-[clamp(2.75rem,4.6vw,4rem)] font-extrabold leading-none tracking-tight">
+          {{ stat.prefix }}<span [attr.data-count]="stat.value">{{ stat.value }}</span>{{ stat.suffix }}
+        </dd>
+        <dt class="mt-3 text-sm font-extrabold uppercase tracking-[0.12em] text-[var(--brand-primary)]">{{ stat.label }}
+        </dt>
+        <p class="mb-0 mt-2 text-sm leading-relaxed text-white/70">{{ stat.text }}</p>
+      </div>
+      }
+    </dl>
+
+    <div class="mt-10 flex justify-center">
+      <a href="/#proyectos"
+        class="group/btn relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-7 py-3.5 text-sm font-extrabold text-white no-underline transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
+        <span aria-hidden="true"
+          class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-forest-900)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+        <span class="relative z-10">Ver proyectos</span>
+        <ng-icon name="lucideArrowRight" size="18" aria-hidden="true"
+          class="relative z-10 transition-transform duration-200 group-hover/btn:translate-x-1 motion-reduce:transition-none" />
+      </a>
+    </div>
+  </div>
+</section>

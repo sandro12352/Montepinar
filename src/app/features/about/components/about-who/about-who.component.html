@@ -1,0 +1,52 @@
+<section #root aria-labelledby="about-who-title"
+  class="bg-white py-[clamp(4.5rem,8vw,7.5rem)] text-[#1f1a14]">
+  <div class="mx-auto grid w-[min(88%,1400px)] items-center gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+    <div data-image class="relative isolate mx-auto w-full max-w-md">
+      <div
+        class="absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-b from-[var(--brand-forest-100)] to-[var(--brand-forest-200)]"
+        aria-hidden="true"></div>
+      <img class="relative z-10 block h-auto w-full px-6 pt-8" src="/images/dueño.png"
+        alt="Fundador de Montepinar" loading="lazy" />
+      <span
+        class="absolute bottom-5 left-5 z-20 rounded-xl bg-[var(--brand-forest-900)]/85 px-4 py-2.5 text-xs font-extrabold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
+        Equipo fundador
+      </span>
+    </div>
+
+    <div data-text>
+      <p data-reveal
+        class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        Quiénes somos
+      </p>
+
+      <h2 id="about-who-title" data-reveal
+        class="m-0 max-w-[18ch] text-balance text-[clamp(2.25rem,4.4vw,4rem)] font-extrabold leading-[1.04] tracking-[-0.04em] text-[var(--brand-forest-900)]">
+        Historias reales, hogares que nacen en comunidad.
+      </h2>
+
+      <p data-reveal class="mb-0 mt-6 max-w-2xl text-pretty text-base leading-[1.8] text-[#1f1a14]/75 sm:text-lg">
+        Montepinar reúne espacios residenciales campestres, extensas áreas verdes y lugares diseñados para compartir en
+        comunidad. Trabajamos de la mano con cada familia para que comprar un lote sea un proceso claro, cercano y sin
+        sorpresas.
+      </p>
+      <p data-reveal class="mb-0 mt-4 max-w-2xl text-pretty text-base leading-[1.8] text-[#1f1a14]/75 sm:text-lg">
+        Desde el valle fértil de Huaral hasta la costa emergente de Chancay y el pulmón verde de Iquitos,
+        desarrollamos entornos donde cada generación puede florecer en equilibrio con la naturaleza.
+      </p>
+
+      <ul data-reveal class="m-0 mt-7 grid list-none gap-3 p-0 sm:grid-cols-1">
+        @for (point of points; track point) {
+        <li class="flex items-center gap-3 text-sm font-semibold sm:text-base">
+          <span
+            class="grid size-6 shrink-0 place-items-center rounded-full border border-[var(--brand-tertiary)] text-[var(--brand-tertiary)]"
+            aria-hidden="true">
+            <ng-icon name="lucideCheck" size="14" />
+          </span>
+          {{ point }}
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>
