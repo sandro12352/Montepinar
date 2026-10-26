@@ -1,28 +1,44 @@
 import { afterNextRender, afterRenderEffect, Component, DestroyRef, ElementRef, inject, Injector, signal, viewChild } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowRight } from '@ng-icons/lucide';
+import { lucideArrowRight, lucideChevronDown } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { VisitSheetService } from '../../../core/services/visit-sheet.service';
 import { VisitSheetComponent } from '../visit-sheet/visit-sheet.component';
 import { LoaderService } from '../../../core/services/loader.service';
+import { PROJECTS } from '../../../features/projects/data/projects.data';
+
+interface NavigationChild {
+  readonly label: string;
+  readonly description: string;
+  // Imagen de referencia que acompaña a la opción.
+  readonly image: string;
+  readonly path?: string;
+  readonly anchor?: string;
+  // Acción en lugar de navegación (abre el sheet de visita).
+  readonly action?: 'visit';
+}
 
 interface NavigationItem {
   readonly label: string;
   // Ruta de página (se marca como activa) o ancla de la home.
   readonly path?: string;
   readonly anchor?: string;
+  // Subopciones: se muestran en un menú desplegable.
+  readonly children?: readonly NavigationChild[];
 }
 
 @Component({
-  imports: [NgIcon, RouterLink, RouterLinkActive, VisitSheetComponent],
-  providers: [provideIcons({ lucideArrowRight })],
+  imports: [NgIcon, NgTemplateOutlet, RouterLink, RouterLinkActive, VisitSheetComponent],
+  providers: [provideIcons({ lucideArrowRight, lucideChevronDown })],
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
   protected readonly menuOpen = signal(false);
   protected readonly scrolled = signal(false);
+  protected readonly openDropdownLabel = signal<string | null>(null);
   private visitSheet = inject(VisitSheetService);
 
   // Cambia estas rutas para elegir el logo de cada estado del header.
@@ -38,10 +54,27 @@ export class HeaderComponent {
   protected readonly navigationItems: readonly NavigationItem[] = [
     { label: 'Inicio', path: '/' },
     { label: 'Nosotros', path: '/about' },
-    { label: 'Proyectos', path: '/projects' },
-    { label: 'Visita guiada', path: '/visita-guiada' },
-    { label: 'Visión 360°', anchor: '/#vision-360' },
-    { label: 'Testimonios', anchor: '/#testimonios' },
+    {
+      label: 'Proyectos',
+      path: '/projects',
+      children: [
+        ...PROJECTS.map((project) => ({
+          label: project.location,
+          description: project.name,
+          image: project.image,
+          path: `/projects/${project.slug}`,
+        })),
+        { label: 'Ver todos', description: 'Compara los tres proyectos', image: '/images/mapa.png', path: '/projects' },
+      ],
+    },
+    {
+      label: 'Recorridos',
+      children: [
+        { label: 'Visita guiada', description: 'Conoce el proyecto en persona', image: '/images/entrada.png', action: 'visit' },
+        { label: 'Visión 360°', description: 'Recórrelo desde donde estés', image: '/images/slide2.webp', anchor: '/#vision-360' },
+      ],
+    },
+    { label: 'Contacto', anchor: '/#contacto' },
   ];
 
   constructor() {
@@ -118,6 +151,55 @@ export class HeaderComponent {
     });
   }
 
+
+  protected openDropdown(event: Event, label: string): void {
+    const panel = this.dropdownPanel(event);
+    if (!panel || this.isMobile()) return;
+
+    this.openDropdownLabel.set(label);
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = panel.querySelectorAll('[data-dropdown-item]');
+
+    gsap.killTweensOf([panel, items]);
+    gsap.fromTo(
+      panel,
+      { autoAlpha: 0, y: 14, scale: 0.97 },
+      { autoAlpha: 1, y: 0, scale: 1, duration: reduced ? 0 : 0.32, ease: 'power3.out', transformOrigin: 'top center' },
+    );
+    if (!reduced) {
+      gsap.fromTo(items, { autoAlpha: 0, x: -12 }, { autoAlpha: 1, x: 0, duration: 0.35, stagger: 0.06, delay: 0.08, ease: 'power2.out' });
+    }
+  }
+
+  protected closeDropdown(event: Event, label: string): void {
+    const panel = this.dropdownPanel(event);
+    if (!panel || this.isMobile()) return;
+
+    if (this.openDropdownLabel() === label) this.openDropdownLabel.set(null);
+    gsap.killTweensOf(panel);
+    gsap.to(panel, { autoAlpha: 0, y: 10, scale: 0.97, duration: 0.2, ease: 'power2.in' });
+  }
+
+  /** Cierra el desplegable solo cuando el foco sale por completo del grupo. */
+  protected onDropdownFocusOut(event: FocusEvent, label: string): void {
+    const host = event.currentTarget as HTMLElement;
+    if (event.relatedTarget instanceof Node && host.contains(event.relatedTarget)) return;
+    this.closeDropdown(event, label);
+  }
+
+  private dropdownPanel(event: Event): HTMLElement | null {
+    return (event.currentTarget as HTMLElement).querySelector<HTMLElement>('[data-dropdown-panel]');
+  }
+
+  private isMobile(): boolean {
+    return window.matchMedia('(max-width: 767px)').matches;
+  }
+
+  protected onChildClick(event: Event, child: NavigationChild, label: string): void {
+    this.closeDropdown(event, label);
+    if (child.action === 'visit') this.openVisitSheet();
+    else this.closeMenu();
+  }
 
   protected openVisitSheet(): void {
     this.closeMenu();

@@ -1,0 +1,192 @@
+<section #root id="proyectos" aria-labelledby="home-projects-title"
+  class="bg-[#f4f1ea] py-[clamp(4.5rem,8vw,7.5rem)] text-[#1f1a14]">
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <!-- Encabezado -->
+    <div data-heading class="mb-[clamp(2rem,4vw,3.5rem)] grid items-end gap-6 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+      <div>
+        <p data-head
+          class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">
+          <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          Proyectos Montepinar
+        </p>
+        <h2 id="home-projects-title" data-head
+          class="m-0 max-w-[16ch] text-balance text-[clamp(2.5rem,4.8vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.045em] text-[var(--brand-forest-900)]">
+          Encuentra tu lugar en <span class="text-[var(--brand-primary)]">Montepinar</span>
+        </h2>
+      </div>
+      <div>
+        <p data-head class="m-0 max-w-md text-pretty text-base leading-relaxed text-[#1f1a14]/70 sm:text-lg">
+          Tres paisajes, un mismo estilo de vida. Recorre cada proyecto y descubre el espacio que puede convertirse en tu
+          próximo hogar.
+        </p>
+        <a data-head routerLink="/projects"
+          class="group/link mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[var(--brand-forest-900)] no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
+          <span class="border-b-2 border-[var(--brand-primary)] pb-0.5">Ver todos los proyectos</span>
+          <ng-icon name="lucideArrowUpRight" size="18" aria-hidden="true"
+            class="text-[var(--brand-primary)] transition-transform duration-200 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 motion-reduce:transition-none" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Escritorio: escenario fijo, el scroll cambia de proyecto -->
+    <div data-stage
+      class="hidden h-[min(42rem,calc(100svh-7rem))] grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-14 lg:grid [@media(prefers-reduced-motion:reduce)]:!hidden">
+      <div class="relative min-w-0">
+        @for (project of projects; track project.slug; let i = $index) {
+        <article data-panel class="absolute inset-0 flex flex-col justify-center" [attr.aria-hidden]="active() !== i">
+          <span aria-hidden="true"
+            class="pointer-events-none absolute -top-2 right-0 select-none text-[clamp(8rem,13vw,12rem)] font-black leading-none tracking-[-0.06em] text-transparent [-webkit-text-stroke:1.5px_rgb(3_48_26/0.13)]">
+            {{ indexLabel(i) }}
+          </span>
+
+          <p class="relative m-0 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.7rem] font-extrabold uppercase tracking-[0.16em]">
+            <span class="inline-flex items-center gap-1.5 text-[var(--brand-tertiary)]">
+              <ng-icon name="lucideMapPin" size="14" aria-hidden="true" />
+              {{ project.location }}
+            </span>
+            <span class="h-3 w-px bg-[var(--brand-forest-900)]/25" aria-hidden="true"></span>
+            <span class="text-[#1f1a14]/60">{{ project.category }}</span>
+          </p>
+
+          <h3 class="relative m-0 mt-4 max-w-[14ch] text-balance text-[clamp(2.1rem,3.4vw,3.2rem)] font-extrabold leading-[1.05] tracking-[-0.035em] text-[var(--brand-forest-900)]">
+            {{ project.name }}
+          </h3>
+          <p class="relative mb-0 mt-4 max-w-md text-pretty text-base leading-[1.75] text-[#1f1a14]/70">
+            {{ project.description }}
+          </p>
+
+          <ul class="relative m-0 mt-6 grid max-w-md list-none grid-cols-2 p-0">
+            @for (feature of project.features; track feature.label) {
+            <li class="flex items-center gap-3 border-t border-[var(--brand-forest-900)]/12 py-3 text-sm font-semibold text-[#1f1a14]/85">
+              <span class="grid size-8 shrink-0 place-items-center rounded-full bg-[var(--brand-primary)]/12 text-[var(--brand-primary)]">
+                <ng-icon [name]="feature.icon" size="16" aria-hidden="true" />
+              </span>
+              {{ feature.label }}
+            </li>
+            }
+          </ul>
+
+          <div class="relative mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <div class="leading-tight">
+              <span class="block text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#1f1a14]/55">Lotes desde</span>
+              <span class="block text-3xl font-extrabold tracking-tight text-[var(--brand-forest-900)]">{{ project.priceFrom }}</span>
+            </div>
+            <a [routerLink]="['/projects', project.slug]" [tabIndex]="active() === i ? 0 : -1"
+              class="group/btn relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-sm font-extrabold text-white no-underline transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
+              <span aria-hidden="true"
+                class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-forest-900)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+              <span class="relative z-10">Ver detalle</span>
+              <ng-icon name="lucideArrowRight" size="18" aria-hidden="true"
+                class="relative z-10 transition-transform duration-200 group-hover/btn:translate-x-1 motion-reduce:transition-none" />
+            </a>
+            <button type="button" (click)="openVisit()" [tabIndex]="active() === i ? 0 : -1"
+              class="group/link inline-flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-sm font-extrabold text-[var(--brand-forest-900)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
+              <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" class="text-[var(--brand-primary)]" />
+              <span class="border-b-2 border-[var(--brand-primary)] pb-0.5">Agendar visita</span>
+            </button>
+          </div>
+        </article>
+        }
+
+        <!-- Progreso -->
+        <div class="absolute inset-x-0 bottom-0 flex items-center gap-4">
+          <ol class="m-0 flex list-none items-center gap-2 p-0">
+            @for (project of projects; track project.slug; let i = $index) {
+            <li>
+              <button type="button" (click)="goTo(i)" [attr.aria-label]="'Ir al proyecto ' + project.location"
+                [attr.aria-current]="active() === i ? 'true' : null"
+                class="cursor-pointer rounded-full border px-3.5 py-1.5 text-[0.7rem] font-extrabold uppercase tracking-[0.12em] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+                [class]="active() === i
+                  ? 'border-[var(--brand-forest-900)] bg-[var(--brand-forest-900)] text-white'
+                  : 'border-[var(--brand-forest-900)]/20 bg-transparent text-[var(--brand-forest-900)]/65 hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]'">
+                {{ indexLabel(i) }} · {{ project.location }}
+              </button>
+            </li>
+            }
+          </ol>
+          <span class="h-0.5 flex-1 overflow-hidden rounded-full bg-[var(--brand-forest-900)]/12" aria-hidden="true">
+            <span data-progress class="block h-full origin-left rounded-full bg-[var(--brand-primary)]"></span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Imágenes apiladas -->
+      <div class="relative min-w-0">
+        @for (project of projects; track project.slug; let i = $index) {
+        <figure data-slide class="absolute inset-0 m-0 overflow-hidden rounded-[2rem] bg-[var(--brand-forest-800)] shadow-2xl shadow-[var(--brand-forest-900)]/20">
+          <img data-slide-img class="absolute inset-0 size-full object-cover" [src]="project.image" [alt]="project.imageAlt"
+            [loading]="i === 0 ? 'eager' : 'lazy'" />
+          <span aria-hidden="true" class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/30 to-transparent"></span>
+          <span
+            class="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-1.5 text-[0.65rem] font-extrabold uppercase tracking-[0.14em] text-[var(--brand-forest-900)] backdrop-blur-sm">
+            <span class="size-1.5 rounded-full"
+              [class]="project.status === 'En construcción' ? 'bg-[var(--brand-primary)]' : 'bg-[var(--brand-forest-400)]'"
+              aria-hidden="true"></span>
+            {{ project.status }}
+          </span>
+        </figure>
+        }
+      </div>
+    </div>
+
+    <!-- Móvil / tablet / movimiento reducido: lista editorial -->
+    <div class="grid gap-14 lg:hidden [@media(prefers-reduced-motion:reduce)]:!grid">
+      @for (project of projects; track project.slug; let i = $index) {
+      <article data-item class="grid gap-6 lg:grid-cols-2">
+        <figure data-item-media class="relative m-0 aspect-[4/3] overflow-hidden rounded-3xl bg-[var(--brand-forest-800)]">
+          <img data-item-img class="absolute inset-0 -top-[6%] h-[112%] w-full object-cover" [src]="project.image" [alt]="project.imageAlt"
+            loading="lazy" />
+          <span
+            class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-[0.65rem] font-extrabold uppercase tracking-[0.14em] text-[var(--brand-forest-900)]">
+            <span class="size-1.5 rounded-full"
+              [class]="project.status === 'En construcción' ? 'bg-[var(--brand-primary)]' : 'bg-[var(--brand-forest-400)]'"
+              aria-hidden="true"></span>
+            {{ project.status }}
+          </span>
+        </figure>
+
+        <div class="flex flex-col justify-center">
+          <p data-item-line class="m-0 flex flex-wrap items-center gap-x-3 text-[0.7rem] font-extrabold uppercase tracking-[0.16em]">
+            <span class="text-[var(--brand-tertiary)]">{{ indexLabel(i) }}</span>
+            <span class="inline-flex items-center gap-1.5 text-[var(--brand-tertiary)]">
+              <ng-icon name="lucideMapPin" size="14" aria-hidden="true" />
+              {{ project.location }}
+            </span>
+            <span class="text-[#1f1a14]/60">{{ project.category }}</span>
+          </p>
+          <h3 data-item-line class="m-0 mt-3 text-balance text-[clamp(1.9rem,6vw,2.5rem)] font-extrabold leading-[1.06] tracking-[-0.035em] text-[var(--brand-forest-900)]">
+            {{ project.name }}
+          </h3>
+          <p data-item-line class="mb-0 mt-3 text-pretty text-base leading-[1.75] text-[#1f1a14]/70">{{ project.description }}</p>
+
+          <ul data-item-line class="m-0 mt-5 flex list-none flex-wrap gap-2 p-0">
+            @for (feature of project.features; track feature.label) {
+            <li class="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-2 text-xs font-bold text-[var(--brand-forest-900)]">
+              <ng-icon [name]="feature.icon" size="15" aria-hidden="true" class="text-[var(--brand-primary)]" />
+              {{ feature.label }}
+            </li>
+            }
+          </ul>
+
+          <div data-item-line class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <div class="leading-tight">
+              <span class="block text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#1f1a14]/55">Lotes desde</span>
+              <span class="block text-2xl font-extrabold tracking-tight text-[var(--brand-forest-900)]">{{ project.priceFrom }}</span>
+            </div>
+            <a [routerLink]="['/projects', project.slug]"
+              class="inline-flex min-h-12 items-center gap-3 rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-sm font-extrabold text-white no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
+              Ver detalle
+              <ng-icon name="lucideArrowRight" size="18" aria-hidden="true" />
+            </a>
+            <button type="button" (click)="openVisit()"
+              class="inline-flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-sm font-extrabold text-[var(--brand-forest-900)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]">
+              <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" class="text-[var(--brand-primary)]" />
+              <span class="border-b-2 border-[var(--brand-primary)] pb-0.5">Agendar visita</span>
+            </button>
+          </div>
+        </div>
+      </article>
+      }
+    </div>
+  </div>
+</section>

@@ -120,21 +120,14 @@
             </ul>
 
             <div data-row-item class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <a href="tel:+51932284185"
-                class="group/btn relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-sm font-extrabold text-white no-underline transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
+              <button type="button" (click)="openVisit()"
+                class="group/btn relative isolate inline-flex min-h-12 cursor-pointer items-center gap-3 overflow-hidden rounded-xl border-0 bg-[var(--brand-primary)] px-6 py-3 text-sm font-extrabold text-white no-underline transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
                 <span aria-hidden="true"
                   class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-forest-900)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
                 <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" class="relative z-10" />
                 <span class="relative z-10">Agendar visita</span>
-              </a>
+              </button>
               <a [routerLink]="['/projects', project.slug]" class="group/link inline-flex items-center gap-2 text-sm font-extrabold text-[var(--brand-forest-900)] no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2"><span class="border-b-2 border-[var(--brand-primary)] pb-0.5">Ver detalle</span><ng-icon name="lucideArrowUpRight" size="18" aria-hidden="true" class="text-[var(--brand-primary)] transition-transform duration-200 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" /></a>
-              <a [href]="whatsappLink(project)"
-                target="_blank" rel="noopener noreferrer"
-                class="group/link inline-flex items-center gap-2 text-sm font-extrabold text-[var(--brand-forest-900)] no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
-                <span class="border-b-2 border-[var(--brand-primary)] pb-0.5">Pedir información</span>
-                <ng-icon name="lucideArrowUpRight" size="18" aria-hidden="true"
-                  class="text-[var(--brand-primary)] transition-transform duration-200 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 motion-reduce:transition-none" />
-              </a>
             </div>
           </div>
         </div>

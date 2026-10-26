@@ -1,4 +1,4 @@
-import { afterRenderEffect, Component, computed, ElementRef, signal, viewChild } from '@angular/core';
+import { afterRenderEffect, Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -16,6 +16,7 @@ import {
   lucideWaves,
   lucideZap,
 } from '@ng-icons/lucide';
+import { VisitSheetService } from '../../../../core/services/visit-sheet.service';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PROJECTS, ProjectItem } from '../../data/projects.data';
@@ -47,6 +48,7 @@ type StatusFilter = 'Todos' | ProjectItem['status'];
   templateUrl: './projects-showcase.component.html',
 })
 export class ProjectsShowcaseComponent {
+  private readonly visitSheet = inject(VisitSheetService);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 
   protected readonly filters: readonly StatusFilter[] = ['Todos', 'En construcción', 'Próximamente'];
@@ -65,9 +67,8 @@ export class ProjectsShowcaseComponent {
     this.activeFilter.set(filter);
   }
 
-  protected whatsappLink(project: ProjectItem): string {
-    const message = `Hola, quisiera información del proyecto de ${project.location}.`;
-    return `https://wa.me/51932284185?text=${encodeURIComponent(message)}`;
+  protected openVisit(): void {
+    this.visitSheet.open();
   }
 
   protected indexLabel(index: number): string {

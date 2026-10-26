@@ -14,7 +14,62 @@
       class="hidden w-full items-center gap-[clamp(0.5rem,1.5vw,1.5rem)] text-inherit md:col-start-2 md:row-start-1 md:flex md:w-max md:justify-self-center max-md:col-span-2 max-md:col-start-1 max-md:row-start-2 max-md:flex-col max-md:items-stretch max-md:gap-1 max-md:rounded-2xl max-md:border max-md:border-stone-900/10 max-md:bg-white max-md:p-3 max-md:text-stone-900 max-md:shadow-[0_16px_36px_rgb(31_26_20_/_16%)]"
       [class.flex]="menuOpen()" [class.hidden]="!menuOpen()" aria-label="Navegación principal">
       @for (item of navigationItems; track item.label) {
-      @if (item.path) {
+      @if (item.children) {
+      <div data-anim="link" class="relative max-md:flex max-md:flex-col" (mouseenter)="openDropdown($event, item.label)"
+        (mouseleave)="closeDropdown($event, item.label)" (focusin)="openDropdown($event, item.label)"
+        (focusout)="onDropdownFocusOut($event, item.label)" (keydown.escape)="closeDropdown($event, item.label)">
+        @if (item.path) {
+        <a class="inline-flex items-center gap-1 relative px-1 py-[0.65rem] text-[0.92rem] font-semibold no-underline transition-colors duration-200 after:absolute after:bottom-[0.35rem] after:left-1 after:right-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-(--brand-primary) after:transition-transform after:duration-200 after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100"
+          [style.color]="scrolled() || menuOpen()? 'var(--foreground)': '#FFFFFF'" [routerLink]="item.path"
+          routerLinkActive="after:scale-x-100" [routerLinkActiveOptions]="{ exact: false }" ariaCurrentWhenActive="page"
+          aria-haspopup="true" [attr.aria-expanded]="openDropdownLabel() === item.label" (click)="closeMenu()">
+          {{ item.label }}
+          <ng-icon name="lucideChevronDown" size="15" aria-hidden="true" class="transition-transform duration-300 max-md:hidden" [class.rotate-180]="openDropdownLabel() === item.label" />
+        </a>
+        } @else {
+        <button type="button" class="inline-flex cursor-pointer items-center gap-1 border-0 bg-transparent relative px-1 py-[0.65rem] text-[0.92rem] font-semibold no-underline transition-colors duration-200 after:absolute after:bottom-[0.35rem] after:left-1 after:right-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-(--brand-primary) after:transition-transform after:duration-200 after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100"
+          [style.color]="scrolled() || menuOpen()? 'var(--foreground)': '#FFFFFF'" aria-haspopup="true"
+          [attr.aria-expanded]="openDropdownLabel() === item.label">
+          {{ item.label }}
+          <ng-icon name="lucideChevronDown" size="15" aria-hidden="true" class="transition-transform duration-300 max-md:hidden" [class.rotate-180]="openDropdownLabel() === item.label" />
+        </button>
+        }
+
+        <div data-dropdown-panel
+          class="invisible absolute left-1/2 top-full z-50 w-[25rem] -translate-x-1/2 pt-3 opacity-0 max-md:visible max-md:static max-md:w-full max-md:translate-x-0 max-md:pt-0 max-md:opacity-100">
+          <ul class="m-0 list-none rounded-2xl border border-[var(--brand-forest-900)]/10 bg-white p-2 text-[var(--brand-forest-900)] shadow-[0_18px_44px_rgb(3_48_26_/_18%)] max-md:border-0 max-md:p-0 max-md:shadow-none">
+            @for (child of item.children; track child.label) {
+            <li data-dropdown-item>
+              <ng-template #childBody>
+                <img class="h-[3.75rem] w-[5.5rem] shrink-0 rounded-lg bg-[var(--brand-forest-100)] object-cover transition-transform duration-300 group-hover/child:scale-[1.04] max-md:h-12 max-md:w-16"
+                  [src]="child.image" alt="" width="88" height="60" loading="lazy" />
+                <span class="min-w-0 flex-1 leading-tight">
+                  <span class="block text-sm font-extrabold">{{ child.label }}</span>
+                  <span class="mt-0.5 block text-xs text-[#1f1a14]/55">{{ child.description }}</span>
+                </span>
+                <ng-icon name="lucideArrowRight" size="16" aria-hidden="true"
+                  class="shrink-0 -translate-x-1 text-[var(--brand-primary)] opacity-0 transition-all duration-200 group-hover/child:translate-x-0 group-hover/child:opacity-100 group-focus-visible/child:translate-x-0 group-focus-visible/child:opacity-100 max-md:hidden" />
+              </ng-template>
+
+              @if (child.path) {
+              <a [routerLink]="child.path" class="group/child flex w-full cursor-pointer items-center gap-3.5 rounded-xl border-0 bg-transparent p-2.5 text-left text-[var(--brand-forest-900)] no-underline transition-colors duration-200 hover:bg-[var(--brand-forest-50)] focus-visible:bg-[var(--brand-forest-50)] focus-visible:outline-none max-md:p-1.5" (click)="onChildClick($event, child, item.label)">
+                <ng-container [ngTemplateOutlet]="childBody" />
+              </a>
+              } @else if (child.anchor) {
+              <a [href]="child.anchor" class="group/child flex w-full cursor-pointer items-center gap-3.5 rounded-xl border-0 bg-transparent p-2.5 text-left text-[var(--brand-forest-900)] no-underline transition-colors duration-200 hover:bg-[var(--brand-forest-50)] focus-visible:bg-[var(--brand-forest-50)] focus-visible:outline-none max-md:p-1.5" (click)="onChildClick($event, child, item.label)">
+                <ng-container [ngTemplateOutlet]="childBody" />
+              </a>
+              } @else {
+              <button type="button" class="group/child flex w-full cursor-pointer items-center gap-3.5 rounded-xl border-0 bg-transparent p-2.5 text-left text-[var(--brand-forest-900)] no-underline transition-colors duration-200 hover:bg-[var(--brand-forest-50)] focus-visible:bg-[var(--brand-forest-50)] focus-visible:outline-none max-md:p-1.5" (click)="onChildClick($event, child, item.label)">
+                <ng-container [ngTemplateOutlet]="childBody" />
+              </button>
+              }
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
+      } @else if (item.path) {
       <a data-anim="link"
         class="relative px-1 py-[0.65rem] text-[0.92rem] font-semibold no-underline transition-colors duration-200 after:absolute after:bottom-[0.35rem] after:left-1 after:right-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-(--brand-primary) after:transition-transform after:duration-200 after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100"
         [style.color]="scrolled() || menuOpen()? 'var(--foreground)': '#FFFFFF'" [routerLink]="item.path"
