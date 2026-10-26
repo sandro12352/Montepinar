@@ -61,6 +61,7 @@ export const HLM_DATE_PICKER_VALUE_ACCESSOR = {
           [defaultFocusedDate]="_mutableDate() ?? defaultFocusedDate()"
           [min]="minDate()"
           [max]="maxDate()"
+          [dateDisabled]="dateDisabled()"
           [disabled]="_disabled()"
           (dateChange)="_handleChange($event)"
         />
@@ -88,6 +89,9 @@ export class HlmDatePicker<T> implements BrnDatePickerBase<T>, ControlValueAcces
 
   /** The maximum date that can be selected. */
   public readonly maxDate = input<T>();
+
+  /** Predicate that marks individual dates as not selectable. */
+  public readonly dateDisabled = input<(date: T) => boolean>(() => false);
 
   /** Determine if the date picker is disabled. */
   public readonly disabled = input<boolean, BooleanInput>(false, {

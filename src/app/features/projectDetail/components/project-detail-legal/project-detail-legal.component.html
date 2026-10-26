@@ -1,0 +1,74 @@
+<section #root id="detalle-legal" aria-labelledby="detail-legal-title"
+  class="bg-[#f4f1ea] py-[clamp(4rem,7vw,6.5rem)]">
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <div class="mb-9 max-w-2xl">
+      <p data-reveal class="m-0 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">Información legal</p>
+      <h2 id="detail-legal-title" data-reveal
+        class="m-0 mt-3 text-balance text-[clamp(2.25rem,4.6vw,3.75rem)] font-extrabold leading-[1.04] tracking-[-0.04em] text-[var(--brand-forest-900)]">
+        Revisa los documentos del proyecto.
+      </h2>
+      <p data-reveal class="mb-0 mt-3 text-base leading-relaxed text-[#1f1a14]/65">
+        Todo a la vista, sin pedir citas: elige un documento y léelo aquí mismo, o descárgalo.
+      </p>
+    </div>
+
+    <div class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.8fr)]">
+      <!-- Lista de documentos -->
+      <ul data-reveal class="m-0 flex list-none flex-col gap-2 p-0" role="tablist" aria-label="Documentos del proyecto" aria-orientation="vertical">
+        @for (doc of project().legal; track doc.file; let i = $index) {
+        <li>
+          <button type="button" role="tab" (click)="select(i)" [attr.aria-selected]="selectedIndex() === i"
+            class="group/doc flex w-full cursor-pointer items-start gap-4 rounded-2xl border p-4 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] sm:p-5"
+            [class]="selectedIndex() === i
+              ? 'border-[var(--brand-forest-900)] bg-[var(--brand-forest-900)] text-white shadow-lg'
+              : 'border-[var(--brand-forest-900)]/10 bg-white text-[var(--brand-forest-900)] hover:-translate-y-0.5 hover:border-[var(--brand-primary)]'">
+            <span class="grid size-11 shrink-0 place-items-center rounded-xl transition-colors duration-300"
+              [class]="selectedIndex() === i ? 'bg-[var(--brand-primary)] text-white' : 'bg-[var(--brand-primary)]/12 text-[var(--brand-primary)]'">
+              <ng-icon [name]="doc.icon" size="22" aria-hidden="true" />
+            </span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-base font-extrabold tracking-tight">{{ doc.title }}</span>
+              <span class="mt-1 block text-sm leading-relaxed"
+                [class]="selectedIndex() === i ? 'text-white/75' : 'text-[#1f1a14]/60'">{{ doc.description }}</span>
+            </span>
+          </button>
+        </li>
+        }
+      </ul>
+
+      <!-- Visor -->
+      <div data-reveal class="overflow-hidden rounded-3xl bg-white shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--brand-forest-900)]/10 px-5 py-4 sm:px-6">
+          <div class="flex min-w-0 items-center gap-3">
+            <ng-icon name="lucideFileText" size="20" aria-hidden="true" class="shrink-0 text-[var(--brand-primary)]" />
+            <div class="min-w-0">
+              <p class="m-0 truncate text-sm font-extrabold text-[var(--brand-forest-900)]">{{ selected().title }}</p>
+              <p class="m-0 text-xs text-[#1f1a14]/55">{{ project().name }} · {{ project().location }} · PDF</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <a [href]="selected().file" target="_blank" rel="noopener noreferrer"
+              class="inline-flex min-h-10 items-center gap-2 rounded-lg border border-[var(--brand-forest-900)]/15 bg-white px-3.5 py-2 text-xs font-extrabold text-[var(--brand-forest-900)] no-underline transition-colors duration-300 hover:border-[var(--brand-forest-900)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]">
+              <ng-icon name="lucideExternalLink" size="15" aria-hidden="true" />
+              Pantalla completa
+            </a>
+            <a [href]="selected().file" [attr.download]="selected().title + '.pdf'"
+              class="inline-flex min-h-10 items-center gap-2 rounded-lg bg-[var(--brand-primary)] px-3.5 py-2 text-xs font-extrabold text-white no-underline transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
+              <ng-icon name="lucideDownload" size="15" aria-hidden="true" />
+              Descargar
+            </a>
+          </div>
+        </div>
+
+        <div #viewer class="relative h-[clamp(26rem,70vh,44rem)] bg-[var(--brand-forest-50)]">
+          <iframe class="absolute inset-0 size-full border-0" [src]="viewerUrl()" [title]="selected().title" loading="lazy"></iframe>
+        </div>
+
+        <p class="m-0 flex items-start gap-2 border-t border-[var(--brand-forest-900)]/10 px-5 py-3 text-xs text-[#1f1a14]/55 sm:px-6">
+          <ng-icon name="lucideShieldCheck" size="15" aria-hidden="true" class="mt-px shrink-0 text-[var(--brand-tertiary)]" />
+          Copia informativa de los documentos del proyecto. El original puede revisarse durante tu visita.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

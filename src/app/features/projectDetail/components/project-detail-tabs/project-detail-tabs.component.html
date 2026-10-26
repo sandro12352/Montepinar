@@ -1,0 +1,17 @@
+<nav aria-label="Secciones del proyecto"
+  class="sticky top-0 z-30 border-b border-[var(--brand-forest-900)]/10 bg-white/95 backdrop-blur">
+  <ul class="m-0 mx-auto flex w-[min(88%,1400px)] list-none items-center gap-1 overflow-x-auto p-0 [scrollbar-width:none] sm:gap-4 [&::-webkit-scrollbar]:hidden">
+    @for (tab of tabs; track tab.id) {
+    <li class="shrink-0">
+      <button type="button" (click)="goTo(tab.id)" [attr.aria-current]="active() === tab.id ? 'true' : null"
+        class="relative cursor-pointer border-0 bg-transparent px-3 py-4 text-sm font-semibold transition-colors duration-300 hover:text-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+        [class]="active() === tab.id ? 'text-[var(--brand-forest-900)]' : 'text-[#1f1a14]/60'">
+        {{ tab.label }}
+        <span aria-hidden="true"
+          class="absolute inset-x-3 bottom-0 h-0.5 origin-left bg-[var(--brand-primary)] transition-transform duration-300"
+          [class]="active() === tab.id ? 'scale-x-100' : 'scale-x-0'"></span>
+      </button>
+    </li>
+    }
+  </ul>
+</nav>

@@ -1,0 +1,58 @@
+<section #root aria-labelledby="projects-benefits-title"
+  class="relative isolate overflow-hidden bg-[var(--brand-forest-900)] py-[clamp(4.5rem,8vw,7.5rem)] text-white">
+  <span aria-hidden="true"
+    class="pointer-events-none absolute -left-32 top-0 -z-10 size-[26rem] rounded-full bg-[var(--brand-primary)]/15 blur-3xl"></span>
+  <span aria-hidden="true"
+    class="pointer-events-none absolute -bottom-32 -right-24 -z-10 size-[26rem] rounded-full bg-[var(--brand-forest-400)]/20 blur-3xl"></span>
+
+  <div class="mx-auto grid w-[min(88%,1400px)] gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+    <div data-text class="h-fit lg:sticky lg:top-28 lg:self-start">
+      <p data-reveal
+        class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-primary)]">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        En todos los proyectos
+      </p>
+      <h2 id="projects-benefits-title" data-reveal
+        class="m-0 max-w-[14ch] text-balance text-[clamp(2.25rem,4.4vw,4rem)] font-extrabold leading-[1.04] tracking-[-0.04em]">
+        Lo que no cambia, vivas donde vivas.
+      </h2>
+      <p data-reveal class="mb-0 mt-6 max-w-md text-pretty text-base leading-[1.75] text-white/75 sm:text-lg">
+        Cada ubicación tiene su propio paisaje, pero todas comparten la misma promesa de calidad y tranquilidad.
+      </p>
+    </div>
+
+    <ol class="m-0 list-none p-0">
+      @for (benefit of benefits; track benefit.title; let i = $index) {
+      <li data-benefit class="group/row relative py-7 sm:py-8">
+        <span data-line aria-hidden="true"
+          class="absolute inset-x-0 top-0 h-px origin-left bg-white/20 transition-colors duration-500 group-hover/row:bg-[var(--brand-primary)]"></span>
+
+        <div class="flex items-start gap-5 sm:gap-8">
+          <span data-benefit-item
+            class="w-9 shrink-0 pt-1 text-sm font-extrabold tracking-[0.1em] text-white/45 transition-colors duration-300 group-hover/row:text-[var(--brand-primary)]">
+            {{ '0' + (i + 1) }}
+          </span>
+
+          <div class="min-w-0 flex-1 transition-transform duration-500 ease-out group-hover/row:translate-x-2 motion-reduce:transition-none">
+            <h3 data-benefit-item
+              class="m-0 text-balance text-[clamp(1.35rem,2.4vw,2rem)] font-extrabold leading-tight tracking-[-0.025em]">
+              {{ benefit.title }}
+            </h3>
+            <p data-benefit-item class="mb-0 mt-2 max-w-lg text-pretty text-sm leading-[1.7] text-white/70 sm:text-base">
+              {{ benefit.text }}
+            </p>
+          </div>
+
+          <span data-benefit-item aria-hidden="true"
+            class="grid size-12 shrink-0 place-items-center rounded-full border border-white/20 text-white transition-all duration-500 group-hover/row:rotate-[-8deg] group-hover/row:scale-110 group-hover/row:border-[var(--brand-primary)] group-hover/row:bg-[var(--brand-primary)] motion-reduce:transition-none">
+            <ng-icon [name]="benefit.icon" size="22" />
+          </span>
+        </div>
+      </li>
+      }
+      <li aria-hidden="true" class="relative h-px">
+        <span class="absolute inset-x-0 top-0 h-px bg-white/20"></span>
+      </li>
+    </ol>
+  </div>
+</section>

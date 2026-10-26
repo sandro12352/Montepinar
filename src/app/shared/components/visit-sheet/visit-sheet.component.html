@@ -1,195 +1,182 @@
-
 <hlm-sheet #sheet="hlmSheet" side="right" [restoreFocus]="false" class="block" scrollStrategy="reposition">
-  <hlm-sheet-content
-    *hlmSheetPortal
-    data-visit-sheet-content
-    [showCloseButton]="true"
-    class="no-scrollbar w-! max-w-130! overflow-y-auto border-l bg-sidebar px-6 pb-8 pt-20 text-[var(--foreground)] sm:px-10 sm:pt-24 [&>button]:absolute [&>button]:right-6 [&>button]:top-6 [&>button]:h-10 [&>button]:w-auto [&>button]:gap-2 [&>button]:rounded-full [&>button]:border [&>button]:border-[var(--border)] [&>button]:bg-[var(--card)] [&>button]:px-4 [&>button]:text-sm [&>button]:font-medium [&>button]:text-[var(--foreground)] [&>button]:shadow-none [&>button]:hover:bg-[var(--brand-sage-100)]">
+  <hlm-sheet-content *hlmSheetPortal data-visit-sheet-content [showCloseButton]="true"
+    class="no-scrollbar w-full! max-w-150! gap-0 overflow-y-auto border-l-0 bg-[#f4f1ea]  text-[#1f1a14] [&>button]:absolute [&>button]:right-5 [&>button]:top-5 [&>button]:z-20 [&>button]:size-10 [&>button]:rounded-full [&>button]:border [&>button]:border-white/25 [&>button]:bg-white/10 [&>button]:text-white [&>button]:backdrop-blur-sm [&>button]:transition-colors [&>button]:hover:bg-white/25 [&>button]:hover:text-white">
 
-    <div class="visit-sheet-enter mx-auto flex min-h-full w-full max-w-lg flex-col">
+    <div #panel class="flex min-h-full w-full shrink-0 flex-col">
 
-      <hlm-sheet-header class="mb-6 p-0 text-left">
-        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--brand-orange-700)]">
+      <!-- Cabecera -->
+      <hlm-sheet-header
+        class="relative isolate shrink-0 gap-0 overflow-hidden bg-[var(--brand-forest-900)] px-6 pb-9 pt-6 text-left text-white sm:px-10 sm:pt-8">
+        <span data-sheet-glow aria-hidden="true"
+          class="pointer-events-none absolute -bottom-24 -left-20 -z-10 size-72 rounded-full bg-[var(--brand-primary)]/25 blur-3xl"></span>
+        <span data-sheet-glow aria-hidden="true"
+          class="pointer-events-none absolute -right-20 -top-20 -z-10 size-72 rounded-full bg-[var(--brand-forest-400)]/25 blur-3xl"></span>
+
+        <p data-sheet-head
+          class="m-0 mb-4 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-orange-300)]">
+          <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
           Agenda una visita
         </p>
 
-        <h2
-          hlmSheetTitle
-          class="m-0 text-[2.35rem] font-semibold leading-[1.08] tracking-[-0.045em] text-[var(--foreground)] sm:text-3xl">
-          Encuentra tu lugar en Montepinar.
+        <h2 hlmSheetTitle data-sheet-head
+          class="m-0 text-balance text-[clamp(2rem,6vw,2.75rem)] font-extrabold leading-[1.04] tracking-[-0.04em] text-white">
+          Encuentra tu lugar en <span class="text-[var(--brand-primary)]">Montepinar</span>.
         </h2>
 
-        <p
-          hlmSheetDescription
-          class="mt-4 max-w-lg text-sm leading-relaxed text-[var(--muted-foreground)] sm:text-base">
+        <p hlmSheetDescription data-sheet-head class="mb-0 mt-4 max-w-md text-sm leading-[1.7] text-white/75 sm:text-base">
           Déjanos tus datos y nos pondremos en contacto contigo para coordinar una visita.
         </p>
+
+        <div data-sheet-head
+          class="mt-6 flex items-center gap-3 self-start rounded-2xl border border-white/15 bg-white/10 py-2.5 pl-2.5 pr-5 backdrop-blur-sm">
+          <img class="size-11 shrink-0 rounded-full object-cover ring-2 ring-white/30"
+            src="/images/avatars/women-44.jpg" alt="Asesora del equipo Montepinar" width="44" height="44"
+            loading="lazy" />
+          <div class="min-w-0 leading-tight">
+            <p class="m-0 text-sm font-extrabold text-white">Equipo Montepinar</p>
+            <a class="text-sm text-white/70 no-underline transition-colors hover:text-[var(--brand-orange-300)]"
+              href="tel:+51932284185">
+              Ventas · +51 932 284 185
+            </a>
+          </div>
+        </div>
       </hlm-sheet-header>
 
-      <div class="mb-7 flex items-center gap-3">
-        <img
-          class="size-11 shrink-0 rounded-full object-cover ring-2 ring-[var(--brand-sage-200)]"
-          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=96&h=96&q=80"
-          alt="Asesora del equipo Montepinar"
-          width="44"
-          height="44"
-          loading="lazy" />
-
-        <div class="min-w-0">
-          <p class="m-0 text-base font-semibold text-[var(--foreground)]">
-            Equipo Montepinar
-          </p>
-          <a
-            class="text-sm text-[var(--muted-foreground)] underline-offset-2 transition-colors hover:text-[var(--brand-forest-600)] hover:underline"
-            href="tel:+51932284185">
-            Ventas · +51 932 284 185
-          </a>
-        </div>
-      </div>
-
-      @if (submitted()) {
-        <section
-          class="flex flex-1 flex-col items-start justify-center py-10"
-          role="status"
-          aria-live="polite">
-
-          <span
-            class="mb-5 grid size-12 place-items-center rounded-full bg-[var(--brand-forest-100)] text-xl text-[var(--brand-forest-700)]"
+      <div class="flex flex-1 flex-col px-6 pb-10 pt-8 sm:px-10">
+        @if (submitted()) {
+        <section #success class="flex flex-1 flex-col items-start justify-center py-8" role="status" aria-live="polite">
+          <span data-success-badge
+            class="mb-6 grid size-16 place-items-center rounded-full bg-[var(--brand-primary)] text-white shadow-lg shadow-[var(--brand-primary)]/30"
             aria-hidden="true">
-            ✓
+            <ng-icon name="lucideCheck" size="30" />
           </span>
 
-          <h3 class="mb-3 text-3xl font-semibold leading-tight tracking-[-0.04em] text-[var(--foreground)]">
+          <h3 data-success-item
+            class="m-0 text-balance text-[clamp(1.75rem,5vw,2.25rem)] font-extrabold leading-[1.08] tracking-[-0.035em] text-[var(--brand-forest-900)]">
             ¡Gracias por tu interés!
           </h3>
 
-          <p class="max-w-md text-sm leading-relaxed text-[var(--muted-foreground)] sm:text-base">
-            Tu solicitud de visita quedó lista. El equipo Montepinar se pondrá en contacto contigo para coordinar los detalles.
+          <p data-success-item class="mb-0 mt-4 max-w-md text-pretty text-base leading-[1.7] text-[#1f1a14]/70">
+            Tu solicitud de visita quedó lista. El equipo Montepinar se pondrá en contacto contigo para coordinar los
+            detalles.
           </p>
+
+          <dl data-success-item class="m-0 mt-7 grid w-full gap-3 border-t border-[var(--brand-forest-900)]/12 pt-5 text-sm">
+            <div class="flex items-baseline justify-between gap-4">
+              <dt class="font-bold uppercase tracking-[0.12em] text-[#1f1a14]/55">Punto de recojo</dt>
+              <dd class="m-0 text-right font-extrabold text-[var(--brand-forest-900)]">{{ selectedPickup() }}</dd>
+            </div>
+            <div class="flex items-baseline justify-between gap-4">
+              <dt class="font-bold uppercase tracking-[0.12em] text-[#1f1a14]/55">Fecha</dt>
+              <dd class="m-0 text-right font-extrabold capitalize text-[var(--brand-forest-900)]">{{ selectedDateLabel() }}</dd>
+            </div>
+          </dl>
+
+          <button data-success-item hlmSheetClose type="button"
+            class="group/btn relative isolate mt-8 inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-xl border-0 bg-[var(--brand-forest-900)] px-7 py-3 text-sm font-extrabold text-white transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
+            <span aria-hidden="true"
+              class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-primary)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+            <span class="relative z-10">Volver al sitio</span>
+          </button>
         </section>
-      } @else {
+        } @else {
+        <form [formRoot]="visitForm" (submit)="submitVisit(); $event.preventDefault()" class="flex flex-1 flex-col gap-5">
 
-        <form
-          [formRoot]="visitForm"
-          (submit)="submitVisit(); $event.preventDefault()"
-          class="flex flex-1 flex-col gap-2.5">
-
-          <div hlmField class="gap-0">
-            <label hlmFieldLabel class="sr-only" for="visit-name">Tu nombre</label>
-            <input
-              hlmInput
-              id="visit-name"
-              autocomplete="name"
-              placeholder="Tu nombre"
-              class="h-[3.15rem] rounded-xl border-[var(--border)] bg-[var(--card)] px-3 text-sm text-[var(--foreground)] shadow-none placeholder:text-[var(--muted-foreground)] focus-visible:border-[var(--brand-forest-500)] focus-visible:ring-[var(--brand-forest-500)]/20"
+          <div data-sheet-field hlmField class="gap-2">
+            <label hlmFieldLabel for="visit-name"
+              class="text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--brand-forest-900)]">Tu nombre</label>
+            <input hlmInput id="visit-name" autocomplete="name" placeholder="Nombre y apellido"
+              class="h-12 rounded-xl border-[var(--brand-forest-900)]/12 bg-white px-4 text-sm text-[#1f1a14] shadow-[0_4px_14px_rgba(30,45,34,0.05)] placeholder:text-[#1f1a14]/45 focus-visible:border-[var(--brand-primary)] focus-visible:ring-[var(--brand-primary)]/25"
               [formField]="visitForm.name" />
-
             @if (visitForm.name().touched() && visitForm.name().invalid()) {
-              <hlm-field-error>{{ visitForm.name().errors()[0]?.message }}</hlm-field-error>
+            <hlm-field-error>{{ visitForm.name().errors()[0]?.message }}</hlm-field-error>
             }
           </div>
 
-          <div hlmField class="gap-0">
-            <label hlmFieldLabel class="sr-only" for="visit-email">Correo electrónico</label>
-            <input
-              hlmInput
-              id="visit-email"
-              type="email"
-              autocomplete="email"
-              placeholder="Correo electrónico"
-              class="h-[3.15rem] rounded-xl border-[var(--border)] bg-[var(--card)] px-3 text-sm text-[var(--foreground)] shadow-none placeholder:text-[var(--muted-foreground)] focus-visible:border-[var(--brand-forest-500)] focus-visible:ring-[var(--brand-forest-500)]/20"
-              [formField]="visitForm.email" />
-
-            @if (visitForm.email().touched() && visitForm.email().invalid()) {
-              <hlm-field-error>{{ visitForm.email().errors()[0]?.message }}</hlm-field-error>
-            }
-          </div>
-
-          <div hlmField class="gap-0">
-            <label hlmFieldLabel class="sr-only" for="visit-phone">Teléfono</label>
-            <input
-              hlmInput
-              id="visit-phone"
-              type="tel"
-              autocomplete="tel"
-              placeholder="Teléfono / WhatsApp"
-              class="h-[3.15rem] rounded-xl border-[var(--border)] bg-[var(--card)] px-3 text-sm text-[var(--foreground)] shadow-none placeholder:text-[var(--muted-foreground)] focus-visible:border-[var(--brand-forest-500)] focus-visible:ring-[var(--brand-forest-500)]/20"
-              [formField]="visitForm.phone" />
-
-            @if (visitForm.phone().touched() && visitForm.phone().invalid()) {
+            <div data-sheet-field hlmField class="gap-2">
+              <label hlmFieldLabel for="visit-phone"
+                class="text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--brand-forest-900)]">Teléfono / WhatsApp</label>
+              <input hlmInput id="visit-phone" type="tel" autocomplete="tel" placeholder="+51 999 999 999"
+                class="h-12 rounded-xl border-[var(--brand-forest-900)]/12 bg-white px-4 text-sm text-[#1f1a14] shadow-[0_4px_14px_rgba(30,45,34,0.05)] placeholder:text-[#1f1a14]/45 focus-visible:border-[var(--brand-primary)] focus-visible:ring-[var(--brand-primary)]/25"
+                [formField]="visitForm.phone" />
+              @if (visitForm.phone().touched() && visitForm.phone().invalid()) {
               <hlm-field-error>{{ visitForm.phone().errors()[0]?.message }}</hlm-field-error>
+              }
+            </div>
+
+          <div data-sheet-field hlmField class="gap-2">
+            <label hlmFieldLabel for="visit-pickup"
+              class="text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--brand-forest-900)]">Punto de recojo</label>
+            <hlm-select [formField]="visitForm.pickup">
+              <hlm-select-trigger buttonId="visit-pickup"
+                [class]="'w-full rounded-xl border-[var(--brand-forest-900)]/12 bg-white px-4 text-sm text-[#1f1a14] shadow-[0_4px_14px_rgba(30,45,34,0.05)] data-[size=default]:h-12 focus-visible:border-[var(--brand-primary)] focus-visible:ring-[var(--brand-primary)]/25'">
+                <hlm-select-value placeholder="¿Dónde te recogemos?" />
+              </hlm-select-trigger>
+              <hlm-select-content *hlmSelectPortal class="rounded-xl bg-white">
+                <hlm-select-group>
+                  @for (point of pickupPoints; track point.place) {
+                  <hlm-select-item [value]="point.place + ' · ' + point.time" class="py-2.5 text-sm">
+                    <span class="flex flex-col">
+                      <span class="font-bold">{{ point.place }} · {{ point.time }}</span>
+                      @if (point.reference) {
+                      <span class="text-xs font-normal text-[#1f1a14]/60">{{ point.reference }}</span>
+                      }
+                    </span>
+                  </hlm-select-item>
+                  }
+                </hlm-select-group>
+              </hlm-select-content>
+            </hlm-select>
+            @if (visitForm.pickup().touched() && visitForm.pickup().invalid()) {
+            <hlm-field-error>{{ visitForm.pickup().errors()[0]?.message }}</hlm-field-error>
             }
           </div>
 
-          <div hlmField class="gap-0">
-            <label hlmFieldLabel class="sr-only" for="visit-project">
-              ¿Qué proyecto o zona te interesa?
-            </label>
-
-            <select
-              id="visit-project"
-              class="h-[3.15rem] w-full rounded-xl border border-[var(--border)] bg-[var(--card)] px-3 text-sm text-[var(--foreground)] outline-none transition-colors focus-visible:border-[var(--brand-forest-500)] focus-visible:ring-3 focus-visible:ring-[var(--brand-forest-500)]/20"
-              [formField]="visitForm.project">
-
-              <option value="" disabled>¿Qué proyecto o zona te interesa?</option>
-              <option value="Montepinar Iquitos">Montepinar Iquitos</option>
-              <option value="Palmeras de Montepinar">Palmeras de Montepinar</option>
-            </select>
-
-            @if (visitForm.project().touched() && visitForm.project().invalid()) {
-              <hlm-field-error>{{ visitForm.project().errors()[0]?.message }}</hlm-field-error>
-            }
-          </div>
-
-          <div hlmField class="gap-0">
-            <label hlmFieldLabel class="sr-only" for="visit-date">Fecha preferida</label>
-            <input
-              hlmInput
-              id="visit-date"
-              type="date"
-              class="h-[3.15rem] rounded-xl border-[var(--border)] bg-[var(--card)] px-3 text-sm text-[var(--foreground)] shadow-none focus-visible:border-[var(--brand-forest-500)] focus-visible:ring-[var(--brand-forest-500)]/20"
-              [formField]="visitForm.date" />
-
+          <div data-sheet-field hlmField class="gap-2">
+            <label hlmFieldLabel for="visit-date"
+              class="text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--brand-forest-900)]">Fecha de la visita (domingos)</label>
+            <hlm-date-picker [formField]="visitForm.date" [minDate]="firstVisitDay" [maxDate]="lastVisitDay" [defaultFocusedDate]="firstVisitDay"  class="block">
+              <hlm-date-picker-trigger buttonId="visit-date"
+                [class]="'flex w-full h-12 justify-between rounded-xl border-[var(--brand-forest-900)]/12 bg-white px-4 text-sm font-normal text-[#1f1a14] shadow-[0_4px_14px_rgba(30,45,34,0.05)] hover:bg-white focus-visible:border-[var(--brand-primary)] focus-visible:ring-[var(--brand-primary)]/25'">
+                Selecciona una fecha
+              </hlm-date-picker-trigger>
+            </hlm-date-picker>
             @if (visitForm.date().touched() && visitForm.date().invalid()) {
-              <hlm-field-error>{{ visitForm.date().errors()[0]?.message }}</hlm-field-error>
+            <hlm-field-error>{{ visitForm.date().errors()[0]?.message }}</hlm-field-error>
             }
           </div>
 
-          <div hlmField class="gap-0">
-            <label hlmFieldLabel class="sr-only" for="visit-notes">
-              ¿Algo más que debamos saber?
-            </label>
-
-            <textarea
-              hlmTextarea
-              id="visit-notes"
-              rows="3"
-              placeholder="¿Algo más que debamos saber?"
-              class="min-h-28 resize-y rounded-xl border-[var(--border)] bg-[var(--card)] px-3 py-3 text-sm text-[var(--foreground)] shadow-none placeholder:text-[var(--muted-foreground)] focus-visible:border-[var(--brand-forest-500)] focus-visible:ring-[var(--brand-forest-500)]/20"
+          <div data-sheet-field hlmField class="gap-2">
+            <label hlmFieldLabel for="visit-notes"
+              class="text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--brand-forest-900)]">¿Algo más que debamos saber?</label>
+            <textarea hlmTextarea id="visit-notes" rows="3" placeholder="Cuéntanos qué buscas (opcional)"
+              class="min-h-28 resize-y rounded-xl border-[var(--brand-forest-900)]/12 bg-white px-4 py-3 text-sm text-[#1f1a14] shadow-[0_4px_14px_rgba(30,45,34,0.05)] placeholder:text-[#1f1a14]/45 focus-visible:border-[var(--brand-primary)] focus-visible:ring-[var(--brand-primary)]/25"
               [formField]="visitForm.notes"></textarea>
           </div>
 
-          <button
-            hlmBtn
-            type="submit"
-            [disabled]="submitting()"
-            class="mt-0 min-h-[3.15rem] w-full rounded-xl bg-[var(--brand-forest-500)] text-sm font-semibold text-white shadow-none transition-colors hover:bg-[var(--brand-forest-700)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-forest-500)] focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-75">
-
+          <button data-sheet-field type="submit" [disabled]="submitting()"
+            class="group/btn relative isolate mt-1 inline-flex min-h-13 w-full cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-xl border-0 bg-[var(--brand-primary)] px-7 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-[var(--brand-primary)]/25 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-75 motion-reduce:transition-none">
+            <span aria-hidden="true"
+              class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-forest-900)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
             @if (submitting()) {
-              <span
-                class="mr-2 inline-block size-4 animate-spin rounded-full border-2 border-white/35 border-t-white"
-                aria-hidden="true"></span>
-              Enviando solicitud…
+            <span class="relative z-10 inline-block size-4 animate-spin rounded-full border-2 border-white/35 border-t-white"
+              aria-hidden="true"></span>
+            <span class="relative z-10">Enviando solicitud…</span>
             } @else {
-              Solicitar una visita
+            <span class="relative z-10">Solicitar una visita</span>
+            <ng-icon name="lucideArrowRight" size="18" aria-hidden="true"
+              class="relative z-10 transition-transform duration-200 group-hover/btn:translate-x-1 motion-reduce:transition-none" />
             }
           </button>
 
-          <p class="mb-0 mt-5 text-sm leading-relaxed text-[var(--muted-foreground)]">
+          <p data-sheet-field class="m-0 flex items-start gap-2 text-xs leading-relaxed text-[#1f1a14]/60">
+            <ng-icon name="lucideShieldCheck" size="16" aria-hidden="true"
+              class="mt-px shrink-0 text-[var(--brand-tertiary)]" />
             Al enviar este formulario aceptas nuestra política de privacidad. No recibirás spam.
           </p>
         </form>
-      }
+        }
+      </div>
     </div>
   </hlm-sheet-content>
 </hlm-sheet>

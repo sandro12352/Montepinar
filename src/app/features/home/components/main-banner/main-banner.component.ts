@@ -15,6 +15,7 @@ import { HlmCarousel, HlmCarouselImports } from '@spartan-ng/helm/carousel';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { LoaderService } from '../../../../core/services/loader.service';
+import { VisitSheetService } from '../../../../core/services/visit-sheet.service';
 import Autoplay from 'embla-carousel-autoplay'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -39,11 +40,22 @@ interface BannerSlide {
 export class MainBannerComponent {
   carousel = viewChild.required(HlmCarousel);
   private readonly loaderService = inject(LoaderService);
+  private readonly visitSheetService = inject(VisitSheetService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly bannerRoot = viewChild.required<ElementRef<HTMLElement>>('bannerRoot');
   protected readonly activeSlide = signal(0);
+  protected readonly avatars = [
+    '/images/avatars/women-44.jpg',
+    '/images/avatars/men-32.jpg',
+    '/images/avatars/women-68.jpg',
+    '/images/avatars/men-75.jpg',
+  ];
 
 
+
+  protected openVisitSheet(): void {
+    this.visitSheetService.open();
+  }
 
   protected goToSlide(index: number): void {
     this.carousel().scrollTo(index);
@@ -57,7 +69,7 @@ export class MainBannerComponent {
   descripciones = viewChildren<ElementRef>('descripcion');
   botones = viewChildren<ElementRef>('boton');
   card = viewChildren<ElementRef>('cardFloat');
-  // La barra de preventa es fija: solo hace su entrada la primera vez.
+  // La barra inferior es fija: solo hace su entrada la primera vez.
   private cardIntroDone = false;
 
   protected readonly slides: readonly BannerSlide[] = [
@@ -125,7 +137,7 @@ export class MainBannerComponent {
           },
         });
 
-        // La barra de preventa ocupa todo el ancho: solo se desvanece (sin desplazarla en x).
+        // La barra inferior ocupa todo el ancho: solo se desvanece (sin desplazarla en x).
         // Se define el valor inicial para no capturar el opacity 0 de la clase slide-copy-item.
         gsap.fromTo(root.querySelectorAll<HTMLElement>('[data-card-float]'),
           { autoAlpha: 1 },
@@ -208,7 +220,7 @@ export class MainBannerComponent {
       gsap.fromTo(
         img,
         { scale: 1 },
-        { scale: 1.2, duration: 12, ease: 'none' }
+        { scale: 1.2, duration: 12, ease: 'none', repeat: -1, yoyo: true }
       );
     });
   }

@@ -1,0 +1,14 @@
+@for (item of [project()]; track item?.slug) {
+@if (item) {
+<app-project-detail-hero [project]="item" />
+<app-project-detail-tabs />
+<app-project-detail-main [project]="item" />
+<app-project-detail-plans [project]="item" (planSelected)="selectedPlan.set($event)" />
+<app-project-detail-lots [project]="item" (planSelected)="selectedPlan.set($event)" />
+<app-project-detail-location [project]="item" />
+<app-project-detail-simulator [project]="item" [selectedPlan]="selectedPlan()" />
+<app-project-detail-legal [project]="item" />
+<app-contact-cta></app-contact-cta>
+<app-faq></app-faq>
+}
+}

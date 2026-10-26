@@ -1,4 +1,5 @@
 import { afterNextRender, afterRenderEffect, Component, DestroyRef, ElementRef, inject, Injector, signal, viewChild } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowRight } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
@@ -7,11 +8,13 @@ import { LoaderService } from '../../../core/services/loader.service';
 
 interface NavigationItem {
   readonly label: string;
-  readonly fragment: string;
+  // Ruta de página (se marca como activa) o ancla de la home.
+  readonly path?: string;
+  readonly anchor?: string;
 }
 
 @Component({
-  imports: [NgIcon, VisitSheetComponent],
+  imports: [NgIcon, RouterLink, RouterLinkActive, VisitSheetComponent],
   providers: [provideIcons({ lucideArrowRight })],
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -32,10 +35,12 @@ export class HeaderComponent {
   private readonly nav = viewChild.required<ElementRef<HTMLElement>>('nav');
 
   protected readonly navigationItems: readonly NavigationItem[] = [
-    { label: 'Nosotros', fragment: 'nosotros' },
-    { label: 'Proyectos', fragment: 'proyectos' },
-    { label: 'Visión 360°', fragment: 'vision-360' },
-    { label: 'Testimonios', fragment: 'testimonios' },
+    { label: 'Inicio', path: '/' },
+    { label: 'Nosotros', path: '/about' },
+    { label: 'Proyectos', path: '/projects' },
+    { label: 'Visita guiada', path: '/visita-guiada' },
+    { label: 'Visión 360°', anchor: '/#vision-360' },
+    { label: 'Testimonios', anchor: '/#testimonios' },
   ];
 
   constructor() {

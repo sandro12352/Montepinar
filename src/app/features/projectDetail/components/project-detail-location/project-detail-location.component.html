@@ -1,0 +1,46 @@
+<section #root id="detalle-ubicacion" aria-labelledby="detail-location-title"
+  class="relative isolate overflow-hidden bg-[#f4f1ea] py-[clamp(4.5rem,8vw,7.5rem)]">
+  <div class="mx-auto grid w-[min(88%,1400px)] items-center gap-12 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
+    <div>
+      <p data-reveal
+        class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-primary)]">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        Ubicación
+      </p>
+      <h2 id="detail-location-title" data-reveal
+        class="m-0 max-w-[14ch] text-balance text-[clamp(2.25rem,4.4vw,3.75rem)] font-extrabold leading-[1.04] tracking-[-0.04em] text-[var(--brand-forest-900)]">
+        Bien conectado, lejos del ruido.
+      </h2>
+      <p data-reveal class="mb-0 mt-5 flex items-start gap-3 text-base leading-[1.7] text-[#1f1a14]/70">
+        <ng-icon name="lucideMapPin" size="20" aria-hidden="true" class="mt-0.5 shrink-0 text-[var(--brand-primary)]" />
+        {{ project().address }}
+      </p>
+
+      <ul class="m-0 mt-8 list-none p-0">
+        @for (place of project().nearby; track place.label) {
+        <li data-reveal class="flex items-center justify-between gap-4 border-t border-[var(--brand-forest-900)]/12 py-4">
+          <span class="flex items-center gap-3 text-base font-bold text-[var(--brand-forest-900)]">
+            <ng-icon name="lucideRoute" size="18" aria-hidden="true" class="text-[var(--brand-primary)]" />
+            {{ place.label }}
+          </span>
+          <span class="inline-flex items-center gap-1.5 text-sm font-extrabold text-[#1f1a14]/65">
+            <ng-icon name="lucideClock" size="15" aria-hidden="true" />
+            {{ place.distance }}
+          </span>
+        </li>
+        }
+      </ul>
+
+      <a data-reveal [href]="directionsUrl()" target="_blank" rel="noopener noreferrer"
+        class="group/link mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-[var(--brand-forest-900)] no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
+        <ng-icon name="lucideNavigation" size="18" aria-hidden="true" class="text-[var(--brand-primary)]" />
+        <span class="border-b-2 border-[var(--brand-primary)] pb-0.5">Abrir en Google Maps</span>
+      </a>
+    </div>
+
+    <div data-map class="relative aspect-[4/3] w-full overflow-hidden rounded-3xl bg-[var(--brand-forest-100)] shadow-xl shadow-[var(--brand-forest-900)]/15 lg:aspect-[5/4]">
+      <iframe class="absolute inset-0 size-full border-0" [src]="mapUrl()" [title]="'Mapa de ' + project().location"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>

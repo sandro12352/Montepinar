@@ -13,6 +13,14 @@ export const routes: Routes = [
             {
                 path:'about',
                 loadComponent:()=>import('./features/about/components/about/about.component').then(m=>m.AboutComponent)
+            },
+            {
+                path:'projects',
+                loadComponent:()=>import('./features/projects/components/projects/projects.component').then(m=>m.ProjectsComponent)
+            },
+            {
+                path:'projects/:slug',
+                loadComponent:()=>import('./features/projectDetail/components/project-detail/project-detail.component').then(m=>m.ProjectDetailComponent)
             }
         ]
     }

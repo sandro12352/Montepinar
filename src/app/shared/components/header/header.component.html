@@ -13,11 +13,19 @@
     <nav #nav id="main-navigation"
       class="hidden w-full items-center gap-[clamp(0.5rem,1.5vw,1.5rem)] text-inherit md:col-start-2 md:row-start-1 md:flex md:w-max md:justify-self-center max-md:col-span-2 max-md:col-start-1 max-md:row-start-2 max-md:flex-col max-md:items-stretch max-md:gap-1 max-md:rounded-2xl max-md:border max-md:border-stone-900/10 max-md:bg-white max-md:p-3 max-md:text-stone-900 max-md:shadow-[0_16px_36px_rgb(31_26_20_/_16%)]"
       [class.flex]="menuOpen()" [class.hidden]="!menuOpen()" aria-label="Navegación principal">
-      @for (item of navigationItems; track item.fragment) {
+      @for (item of navigationItems; track item.label) {
+      @if (item.path) {
       <a data-anim="link"
         class="relative px-1 py-[0.65rem] text-[0.92rem] font-semibold no-underline transition-colors duration-200 after:absolute after:bottom-[0.35rem] after:left-1 after:right-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-(--brand-primary) after:transition-transform after:duration-200 after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100"
-        [style.color]="scrolled() || menuOpen()? 'var(--foreground)': '#FFFFFF'" [href]="'#' + item.fragment"
+        [style.color]="scrolled() || menuOpen()? 'var(--foreground)': '#FFFFFF'" [routerLink]="item.path"
+        routerLinkActive="after:scale-x-100" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page"
         (click)="closeMenu()">{{ item.label }}</a>
+      } @else {
+      <a data-anim="link"
+        class="relative px-1 py-[0.65rem] text-[0.92rem] font-semibold no-underline transition-colors duration-200 after:absolute after:bottom-[0.35rem] after:left-1 after:right-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-(--brand-primary) after:transition-transform after:duration-200 after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100"
+        [style.color]="scrolled() || menuOpen()? 'var(--foreground)': '#FFFFFF'" [href]="item.anchor"
+        (click)="closeMenu()">{{ item.label }}</a>
+      }
       }
       <button data-anim="cta"
         class="group relative isolate inline-flex min-h-[2.9rem] items-center justify-center gap-2 overflow-hidden rounded-xl border-0 bg-primary text-primary-foreground px-[1.4rem] text-[0.9rem] font-extrabold transition-transform duration-200 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-tertiary)] focus-visible:ring-offset-2 md:hidden max-md:mt-1 motion-reduce:transition-none"

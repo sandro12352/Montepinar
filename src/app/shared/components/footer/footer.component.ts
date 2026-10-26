@@ -31,21 +31,17 @@ export class FooterComponent {
 
   protected readonly columns: readonly FooterColumn[] = [
     {
-      title: 'Navegación',
-      links: [
-        { label: 'Inicio', href: '#inicio' },
-        { label: 'Nosotros', href: '#nosotros' },
-        { label: 'Proyectos', href: '#proyectos' },
-        { label: 'Visión 360°', href: '#vision-360' },
-        { label: 'Testimonios', href: '#testimonios' },
-      ],
-    },
-    {
       title: 'Proyectos',
       links: [
         { label: 'Chancay', href: '#proyectos' },
         { label: 'Huaral', href: '#proyectos' },
         { label: 'Iquitos', href: '#proyectos' },
+      ],
+    },
+    {
+      title: 'Enlaces',
+      links: [
+        { label: 'Nosotros', href: '/about' },
         { label: 'Galería', href: '#galeria' },
         { label: 'Preguntas frecuentes', href: '#preguntas-frecuentes' },
       ],
@@ -53,7 +49,6 @@ export class FooterComponent {
     {
       title: 'Contacto',
       links: [
-        { label: '+51 932 284 185', href: 'tel:+51932284185' },
         { label: 'WhatsApp', href: 'https://wa.me/51932284185' },
         { label: 'Agendar visita', href: '#contacto' },
       ],
@@ -80,6 +75,22 @@ export class FooterComponent {
             scrollTrigger: { trigger: root, start: 'top 85%', once: true },
           },
         );
+
+        // Mismo acercamiento lento del banner principal, solo sobre la imagen.
+        const zoom = root.querySelector<HTMLElement>('[data-footer-zoom]');
+        if (image && zoom) {
+          gsap.fromTo(zoom,
+            { scale: 1 },
+            {
+              scale: 1.2,
+              duration: 20,
+              ease: 'none',
+              repeat: -1,
+              yoyo: true,
+              scrollTrigger: { trigger: image, start: 'top 95%', once: true },
+            },
+          );
+        }
 
         if (image) {
           gsap.fromTo(image,
