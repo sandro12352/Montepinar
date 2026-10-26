@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowRight } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
+import { VisitSheetService } from '../../../core/services/visit-sheet.service';
 import { VisitSheetComponent } from '../visit-sheet/visit-sheet.component';
 import { LoaderService } from '../../../core/services/loader.service';
 
@@ -22,7 +23,7 @@ interface NavigationItem {
 export class HeaderComponent {
   protected readonly menuOpen = signal(false);
   protected readonly scrolled = signal(false);
-  private visitSheet = viewChild(VisitSheetComponent);
+  private visitSheet = inject(VisitSheetService);
 
   // Cambia estas rutas para elegir el logo de cada estado del header.
   protected readonly transparentHeaderLogoSrc = '/images/LogotipoBlanco.png';
@@ -121,7 +122,7 @@ export class HeaderComponent {
   protected openVisitSheet(): void {
     this.closeMenu();
 
-    this.visitSheet()?.openSheet();
+    this.visitSheet.open();
   }
 
   private openMenu(): void {
