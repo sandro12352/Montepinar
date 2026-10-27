@@ -1,0 +1,43 @@
+<section #root aria-labelledby="tour-cta-title" class="bg-[#f4f1ea] pb-[clamp(4rem,7vw,6rem)] pt-[clamp(6rem,10vw,9rem)]">
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <div data-panel
+      class="relative isolate grid items-center gap-8 rounded-[2.5rem] bg-[var(--brand-forest-900)] px-[clamp(1.75rem,5vw,4.5rem)] pt-[clamp(2.5rem,5vw,4rem)] text-white lg:grid-cols-[1.1fr_0.9fr] lg:pb-[clamp(2.5rem,5vw,4rem)]">
+      <span data-orb aria-hidden="true"
+        class="pointer-events-none absolute -right-10 bottom-0 -z-10 size-[28rem] rounded-full bg-[var(--brand-primary)]/20 blur-2xl"></span>
+
+      <div class="pb-8 lg:pb-0">
+        <p data-copy class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-orange-300)]">
+          <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          Reserva tu cupo
+        </p>
+        <h2 id="tour-cta-title" data-copy
+          class="m-0 max-w-[14ch] text-balance text-[clamp(2.2rem,4.6vw,4rem)] font-extrabold leading-[1.04] tracking-[-0.04em]">
+          Tu lote empieza con una visita.
+        </h2>
+        <p data-copy class="mb-0 mt-5 max-w-md text-pretty text-base leading-relaxed text-white/75">
+          Elige tu punto de recojo y el domingo que prefieras. No pagas nada: el bus y las comidas son por nuestra cuenta.
+        </p>
+        <div data-copy class="mt-8 flex flex-wrap items-center gap-4">
+          <button type="button" (click)="openVisit()"
+            class="group/btn relative isolate inline-flex min-h-12 cursor-pointer items-center gap-3 overflow-hidden rounded-xl border-0 bg-[var(--brand-primary)] px-6 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-black/25 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] motion-reduce:transition-none">
+            <span aria-hidden="true"
+              class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-orange-600)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+            <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" class="relative z-10" />
+            <span class="relative z-10">Agendar mi visita gratis</span>
+          </button>
+          <a routerLink="/projects"
+            class="group/link inline-flex items-center gap-2 text-sm font-extrabold text-white/85 no-underline hover:text-white">
+            Ver los proyectos
+            <ng-icon name="lucideArrowRight" size="16" aria-hidden="true" class="transition-transform duration-300 group-hover/link:translate-x-1" />
+          </a>
+        </div>
+      </div>
+
+      <!-- PNG sin fondo del bus, que sobresale por arriba del panel -->
+      <div class="relative flex items-end justify-center lg:-mt-[clamp(5rem,9vw,8rem)]">
+        <img data-people class="relative z-10 block h-auto w-full max-w-[30rem] lg:max-w-none" src="/images/visita/transporte.png"
+          alt="Bus de la visita guiada de Montepinar, con el asesor esperando en la puerta" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>

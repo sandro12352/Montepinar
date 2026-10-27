@@ -1,0 +1,44 @@
+<section #root aria-labelledby="tour-included-title"
+  class="bg-[#f4f1ea] py-[clamp(4.5rem,8vw,7.5rem)] text-[var(--brand-forest-900)]">
+  <div class="mx-auto grid w-[min(88%,1400px)] items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+    <div data-heading>
+      <p data-head class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        Qué incluye
+      </p>
+      <h2 id="tour-included-title" data-head
+        class="m-0 max-w-[14ch] text-balance text-[clamp(2.2rem,4.4vw,3.75rem)] font-extrabold leading-[1.04] tracking-[-0.04em]">
+        Todo el día, a cuenta nuestra.
+      </h2>
+      <p data-head class="mb-0 mt-5 max-w-sm text-pretty text-base leading-relaxed text-[#1f1a14]/65">
+        Para venir solo necesitas ganas de conocer. El traslado y las comidas corren por Montepinar.
+      </p>
+
+      <p data-head class="m-0 mt-8 flex items-baseline gap-2 font-extrabold leading-none tracking-[-0.06em] text-[var(--brand-primary)]"
+        aria-label="Costo de la visita: cero soles">
+        <span class="text-[clamp(2rem,4vw,3rem)]" aria-hidden="true">S/</span>
+        <span data-price class="text-[clamp(6rem,15vw,11rem)]" aria-hidden="true">0</span>
+      </p>
+    </div>
+
+    <ul data-list class="m-0 list-none p-0">
+      @for (item of inclusions; track item.title) {
+      <li class="relative">
+        <span data-line aria-hidden="true" class="absolute inset-x-0 top-0 h-px origin-left bg-[var(--brand-forest-900)]/20"></span>
+        <div data-row class="flex items-start gap-5 py-6 sm:gap-6 sm:py-7">
+          <span class="grid size-14 shrink-0 place-items-center rounded-full bg-[var(--brand-forest-900)] text-[var(--brand-orange-300)]">
+            <ng-icon [name]="item.icon" size="24" aria-hidden="true" />
+          </span>
+          <div>
+            <h3 class="m-0 text-xl font-extrabold tracking-tight sm:text-2xl">{{ item.title }}</h3>
+            <p class="mb-0 mt-1.5 max-w-md text-pretty text-sm leading-relaxed text-[#1f1a14]/65 sm:text-base">{{ item.text }}</p>
+          </div>
+        </div>
+      </li>
+      }
+      <li class="relative h-px">
+        <span data-line aria-hidden="true" class="absolute inset-x-0 top-0 h-px origin-left bg-[var(--brand-forest-900)]/20"></span>
+      </li>
+    </ul>
+  </div>
+</section>

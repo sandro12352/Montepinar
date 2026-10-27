@@ -1,43 +1,64 @@
-<section #root aria-labelledby="about-process-title"
-  class="bg-[#f4f1ea] py-[clamp(4.5rem,8vw,7.5rem)] text-[#1f1a14]">
+<section #root aria-labelledby="about-process-title" class="bg-[#f4f1ea] py-[clamp(4.5rem,8vw,7.5rem)] text-[var(--brand-forest-900)]">
   <div class="mx-auto w-[min(88%,1400px)]">
-    <header data-text class="mx-auto flex max-w-3xl flex-col items-center text-center">
-      <p data-reveal
-        class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+    <header data-heading class="mb-[clamp(2.5rem,5vw,4.5rem)] max-w-2xl">
+      <p data-head class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
         <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
         Nuestro proceso
-        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
       </p>
-      <h2 id="about-process-title" data-reveal
-        class="m-0 text-balance text-[clamp(2.25rem,4.4vw,4rem)] font-extrabold leading-[1.04] tracking-[-0.04em] text-[var(--brand-forest-900)]">
+      <h2 id="about-process-title" data-head
+        class="m-0 text-balance text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.03] tracking-[-0.045em]">
         Del primer contacto a tu hogar, paso a paso.
       </h2>
-      <p data-reveal class="mb-0 mt-5 max-w-xl text-pretty text-base leading-[1.8] text-[#1f1a14]/70 sm:text-lg">
+      <p data-head class="mb-0 mt-5 max-w-lg text-pretty text-base leading-relaxed text-[#1f1a14]/70 sm:text-lg">
         Un camino claro y sin sorpresas, con un asesor a tu lado en cada etapa.
       </p>
     </header>
 
-    <ol class="m-0 mt-[clamp(3rem,6vw,5rem)] grid list-none gap-[clamp(3rem,6vw,5rem)] p-0">
-      @for (step of steps; track step.number; let i = $index) {
-      <li data-step class="grid items-center gap-8 md:grid-cols-2 md:gap-14 lg:gap-24">
-        <div data-step-text [class.md:order-2]="i % 2 === 1">
-          <span
-            class="block text-[clamp(3rem,6vw,5rem)] font-extrabold leading-none tracking-[-0.05em] text-[var(--brand-tertiary)]">{{
-            step.number }}</span>
-          <p class="m-0 mt-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-primary)]">Paso {{
-            step.number }}</p>
-          <h3
-            class="m-0 mt-2 max-w-[16ch] text-balance text-[clamp(1.75rem,3vw,2.6rem)] font-extrabold leading-[1.08] tracking-[-0.035em] text-[var(--brand-forest-900)]">
-            {{ step.title }}</h3>
-          <p class="mb-0 mt-4 max-w-md text-pretty text-base leading-[1.8] text-[#1f1a14]/70">{{ step.text }}</p>
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-20">
+      <!-- Imagen fija (escritorio) -->
+      <div class="relative hidden lg:block">
+        <div class="sticky top-28">
+          <div class="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-[var(--brand-forest-800)] shadow-2xl shadow-[var(--brand-forest-900)]/20">
+            @for (step of steps; track step.number; let i = $index) {
+            <img data-frame class="absolute inset-0 size-full object-cover" [src]="step.image" [alt]="step.imageAlt"
+              [loading]="i === 0 ? 'eager' : 'lazy'" />
+            }
+            <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/35 to-transparent"></span>
+            <span class="absolute bottom-5 left-6 text-[5rem] font-black leading-none tracking-[-0.06em] text-white/90">
+              {{ steps[active()].number }}
+            </span>
+          </div>
         </div>
-        <div data-step-image class="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[#e4dfd6]"
-          [class.md:order-1]="i % 2 === 1">
-          <img class="absolute inset-0 size-full object-cover" [src]="step.image" [alt]="step.imageAlt"
-            loading="lazy" />
-        </div>
-      </li>
-      }
-    </ol>
+      </div>
+
+      <!-- Pasos -->
+      <div class="relative">
+        <span aria-hidden="true" class="absolute bottom-0 left-[1.1rem] top-0 hidden w-0.5 rounded-full bg-[var(--brand-forest-900)]/12 lg:block">
+          <span data-fill class="block size-full origin-top rounded-full bg-[var(--brand-primary)]"></span>
+        </span>
+
+        <ol data-steps class="m-0 list-none p-0">
+          @for (step of steps; track step.number; let i = $index) {
+          <li data-step class="relative pb-14 last:pb-0 lg:min-h-[26rem] lg:pb-0 lg:pl-16 lg:pt-6">
+            <span data-step-item
+              class="mb-4 grid size-11 place-items-center rounded-full border-2 text-sm font-extrabold transition-colors duration-500 lg:absolute lg:left-0 lg:top-6 lg:mb-0 lg:size-9"
+              [class]="active() >= i ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white' : 'border-[var(--brand-forest-900)]/20 bg-[#f4f1ea] text-[var(--brand-forest-900)]/60'">
+              {{ step.number }}
+            </span>
+
+            <figure data-step-item class="m-0 mb-5 aspect-[16/10] overflow-hidden rounded-3xl bg-[var(--brand-forest-800)] lg:hidden">
+              <img class="size-full object-cover" [src]="step.image" [alt]="step.imageAlt" loading="lazy" />
+            </figure>
+
+            <p data-step-item class="m-0 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">Paso {{ step.number }}</p>
+            <h3 data-step-item class="m-0 mt-3 text-balance text-[clamp(1.8rem,3vw,2.6rem)] font-extrabold leading-[1.08] tracking-[-0.035em]">
+              {{ step.title }}
+            </h3>
+            <p data-step-item class="mb-0 mt-4 max-w-md text-pretty text-base leading-[1.8] text-[#1f1a14]/70">{{ step.text }}</p>
+          </li>
+          }
+        </ol>
+      </div>
+    </div>
   </div>
 </section>

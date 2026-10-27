@@ -1,0 +1,75 @@
+<section #root aria-labelledby="tour-hero-title"
+  class="relative isolate flex min-h-[max(40rem,100svh)] flex-col justify-end overflow-hidden bg-[var(--brand-forest-900)] pt-[clamp(8rem,14vw,10rem)] text-white">
+  <!-- Foto de fondo con zoom lento y paralaje -->
+  <div data-bg class="absolute inset-x-0 -top-[8%] -z-20 h-[116%] overflow-hidden">
+    <!-- Se refleja y se amplía para que las personas queden a la derecha y el texto tenga cielo despejado -->
+    <div class="absolute inset-y-0 left-0 w-full -scale-x-100">
+      <img data-img class="size-full object-cover" src="/images/visita/visita-mar.png"
+        alt="Asesora muestra el plano del proyecto a un grupo de visitantes frente a la entrada de Montepinar" fetchpriority="high"
+        style="object-position: 50% 55%" />
+    </div>
+  </div>
+  <span aria-hidden="true"
+    class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(0,0,0,0.25)_0%,rgba(0,0,0,0)_30%,rgba(0,0,0,0)_55%,rgba(0,0,0,0.55)_100%)]"></span>
+  <span aria-hidden="true"
+    class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.3)_40%,transparent_70%)]"></span>
+
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <nav data-reveal hlmBreadcrumb aria-label="Migas de pan" class="mb-8">
+      <ol hlmBreadcrumbList class="gap-1.5 text-xs font-extrabold uppercase tracking-[0.14em] text-white/75 sm:gap-2">
+        <li hlmBreadcrumbItem>
+          <a hlmBreadcrumbLink link="/" class="text-white/75 no-underline hover:text-white">Inicio</a>
+        </li>
+        <li hlmBreadcrumbSeparator class="text-white/50"></li>
+        <li hlmBreadcrumbItem>
+          <span hlmBreadcrumbPage class="text-white">Visita guiada</span>
+        </li>
+      </ol>
+    </nav>
+
+    <p data-reveal
+      class="m-0 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.16em] text-white backdrop-blur-sm">
+      <span class="size-1.5 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+      100% gratis · ida y vuelta
+    </p>
+
+    <h1 id="tour-hero-title" data-reveal
+      class="m-0 mt-6 max-w-[15ch] text-balance text-[clamp(3rem,7.5vw,6.5rem)] font-extrabold leading-[0.98] tracking-[-0.05em]">
+      Ven a conocer tu futuro lote, <span class="text-[var(--brand-primary)]">sin pagar un sol</span>.
+    </h1>
+
+    <p data-reveal class="mb-0 mt-6 max-w-xl text-pretty text-base leading-[1.75] text-white/85 sm:text-lg">
+      Te recogemos en tu punto, te invitamos desayuno y almuerzo, y recorremos juntos los lotes. Si decides separar el tuyo, te ayudamos con el trámite.
+    </p>
+
+    <div data-reveal class="mt-9 flex flex-wrap items-center gap-4">
+      <button type="button" (click)="openVisit()"
+        class="group/btn relative isolate inline-flex min-h-12 cursor-pointer items-center gap-3 overflow-hidden rounded-xl border-0 bg-[var(--brand-primary)] px-6 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-black/25 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] motion-reduce:transition-none">
+        <span aria-hidden="true"
+          class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-orange-600)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+        <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" class="relative z-10" />
+        <span class="relative z-10">Reservar mi visita</span>
+      </button>
+      <a href="#recorrido"
+        class="text-sm font-extrabold text-white underline decoration-[var(--brand-primary)] decoration-2 underline-offset-8 hover:text-white">
+        Ver cómo es el día
+      </a>
+    </div>
+
+    <!-- Franja de vidrio con lo que incluye -->
+    <ul data-strip
+      class="m-0 mb-[clamp(1.5rem,3vw,2.5rem)] mt-[clamp(2.5rem,5vw,4rem)] grid list-none grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/15 bg-white/20 p-0 backdrop-blur-md lg:grid-cols-4">
+      @for (perk of perks; track perk.label) {
+      <li class="flex items-center gap-3 bg-black/30 px-5 py-4">
+        <span class="grid size-10 shrink-0 place-items-center rounded-full bg-[var(--brand-primary)]">
+          <ng-icon [name]="perk.icon" size="20" aria-hidden="true" />
+        </span>
+        <span>
+          <strong class="block text-sm font-extrabold leading-tight">{{ perk.label }}</strong>
+          <span class="block text-xs text-[var(--brand-orange-300)]">{{ perk.note }}</span>
+        </span>
+      </li>
+      }
+    </ul>
+  </div>
+</section>

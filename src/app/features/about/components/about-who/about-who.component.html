@@ -1,52 +1,54 @@
 <section #root id="equipo" aria-labelledby="about-who-title"
-  class="scroll-mt-20 bg-white py-[clamp(4.5rem,8vw,7.5rem)] text-[#1f1a14]">
-  <div class="mx-auto grid w-[min(88%,1400px)] items-center gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-    <div data-image class="relative isolate mx-auto w-full max-w-md">
-      <div
-        class="absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-b from-[var(--brand-forest-100)] to-[var(--brand-forest-200)]"
-        aria-hidden="true"></div>
-      <img class="relative z-10 block h-auto w-full px-6 pt-8" src="/images/dueño.png"
-        alt="Fundador de Montepinar" loading="lazy" />
-      <span
-        class="absolute bottom-5 left-5 z-20 rounded-xl bg-[var(--brand-forest-900)]/85 px-4 py-2.5 text-xs font-extrabold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
+  class="relative isolate overflow-x-clip bg-[#f4f1ea] py-[clamp(5.5rem,9vw,8.5rem)] text-[var(--brand-forest-900)]">
+  <div class="mx-auto grid w-[min(88%,1400px)] items-center gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
+    <!-- Imagen en arco con bloque decorativo -->
+    <div class="relative mx-auto w-full max-w-[28rem] lg:max-w-none">
+      <span data-block aria-hidden="true"
+        class="absolute -bottom-5 -left-5 -z-10 size-3/4 rounded-[2rem] bg-[var(--brand-primary)]/20"></span>
+      <figure data-frame class="relative m-0 aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2rem] bg-[var(--brand-forest-800)] shadow-2xl shadow-[var(--brand-forest-900)]/20 ">
+        <img data-photo class="absolute inset-0 h-[114%] w-full object-cover " src="/images/dueño.png"
+          alt="Fundador de Montepinar" loading="lazy" />
+      </figure>
+      <span data-chip
+        class="absolute -right-3 bottom-10 inline-flex items-center gap-2 rounded-full bg-[var(--brand-forest-900)] px-5 py-3 text-xs font-extrabold uppercase tracking-[0.14em] text-white shadow-xl shadow-black/25 sm:-right-8">
+        <span class="size-2 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
         Equipo fundador
       </span>
     </div>
 
+    <!-- Texto -->
     <div data-text>
-      <p data-reveal
-        class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+      <p data-reveal class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
         <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
         Quiénes somos
       </p>
-
       <h2 id="about-who-title" data-reveal
-        class="m-0 max-w-[18ch] text-balance text-[clamp(2.25rem,4.4vw,4rem)] font-extrabold leading-[1.04] tracking-[-0.04em] text-[var(--brand-forest-900)]">
-        Historias reales, hogares que nacen en comunidad.
+        class="m-0 max-w-[16ch] text-balance text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.03] tracking-[-0.045em]">
+        Historias reales, hogares que nacen en <span class="text-[var(--brand-primary)]">comunidad</span>.
       </h2>
-
-      <p data-reveal class="mb-0 mt-6 max-w-2xl text-pretty text-base leading-[1.8] text-[#1f1a14]/75 sm:text-lg">
+      <p data-reveal class="mb-0 mt-6 max-w-xl text-pretty text-base leading-[1.85] text-[#1f1a14]/75 sm:text-lg">
         Montepinar reúne espacios residenciales campestres, extensas áreas verdes y lugares diseñados para compartir en
         comunidad. Trabajamos de la mano con cada familia para que comprar un lote sea un proceso claro, cercano y sin
         sorpresas.
       </p>
-      <p data-reveal class="mb-0 mt-4 max-w-2xl text-pretty text-base leading-[1.8] text-[#1f1a14]/75 sm:text-lg">
-        Desde el valle fértil de Huaral hasta la costa emergente de Chancay y el pulmón verde de Iquitos,
-        desarrollamos entornos donde cada generación puede florecer en equilibrio con la naturaleza.
+      <p data-reveal class="mb-0 mt-4 max-w-xl text-pretty text-base leading-[1.85] text-[#1f1a14]/65">
+        Desde el valle fértil de Huaral hasta la costa emergente de Chancay y el pulmón verde de Iquitos, desarrollamos
+        entornos donde cada generación puede florecer en equilibrio con la naturaleza.
       </p>
 
-      <ul data-reveal class="m-0 mt-7 grid list-none gap-3 p-0 sm:grid-cols-1">
-        @for (point of points; track point) {
-        <li class="flex items-center gap-3 text-sm font-semibold sm:text-base">
-          <span
-            class="grid size-6 shrink-0 place-items-center rounded-full border border-[var(--brand-tertiary)] text-[var(--brand-tertiary)]"
-            aria-hidden="true">
-            <ng-icon name="lucideCheck" size="14" />
-          </span>
-          {{ point }}
+      <ol data-points class="m-0 mt-9 list-none p-0">
+        @for (point of points; track point.title; let i = $index) {
+        <li data-reveal class="group/row relative flex items-start gap-5 py-5">
+          <span data-line aria-hidden="true"
+            class="absolute inset-x-0 top-0 h-px origin-left bg-[var(--brand-forest-900)]/20 transition-colors duration-500 group-hover/row:bg-[var(--brand-primary)]"></span>
+          <span class="w-8 shrink-0 pt-0.5 text-sm font-extrabold tracking-[0.1em] text-[var(--brand-primary)]">0{{ i + 1 }}</span>
+          <div class="transition-transform duration-300 group-hover/row:translate-x-2">
+            <h3 class="m-0 text-lg font-extrabold tracking-tight">{{ point.title }}</h3>
+            <p class="mb-0 mt-1 text-sm leading-relaxed text-[#1f1a14]/65">{{ point.text }}</p>
+          </div>
         </li>
         }
-      </ul>
+      </ol>
     </div>
   </div>
 </section>

@@ -1,75 +1,57 @@
-<section #root aria-labelledby="about-purpose-title"
-  class="overflow-x-clip bg-[#f4f1ea] py-[clamp(4rem,7vw,6rem)] text-[#1f1a14] [--gutter:max(1.25rem,calc((100vw-80.5rem)/2))] lg:flex lg:h-dvh lg:items-center lg:py-0">
-
-  <div data-stage class="w-full">
-    <!-- Frase en móvil: encima del carrusel -->
-    <div class="mb-8 px-5 lg:hidden">
-      <p data-reveal
-        class="m-0 inline-flex rounded-md bg-[var(--brand-forest-100)] px-3.5 py-1.5 text-sm font-semibold text-[var(--brand-tertiary)]">
-        Misión y visión
-      </p>
-      <h2 data-reveal
-        class="m-0 mt-5 text-balance text-4xl font-extrabold leading-[1.06] tracking-[-0.04em] text-[var(--brand-forest-900)]">
-        Lo que nos mueve cada día.
-      </h2>
-      <p data-reveal class="mb-0 mt-4 max-w-sm text-pretty text-base leading-[1.7] text-[#1f1a14]/70">
-        Conoce el propósito que guía cada proyecto y la forma en que acompañamos a las familias de Montepinar.
+<section #root aria-labelledby="about-purpose-title" class="bg-white py-[clamp(4.5rem,8vw,7.5rem)] text-[var(--brand-forest-900)]">
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <div data-heading class="mb-[clamp(2rem,4vw,3.5rem)] grid items-end gap-6 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+      <div>
+        <p data-head class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+          <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          Misión y visión
+        </p>
+        <h2 id="about-purpose-title" data-head
+          class="m-0 max-w-[14ch] text-balance text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.03] tracking-[-0.045em]">
+          Lo que nos mueve cada día.
+        </h2>
+      </div>
+      <p data-head class="m-0 max-w-md text-pretty text-base leading-relaxed text-[#1f1a14]/70 sm:text-lg">
+        El propósito que guía cada proyecto y la forma en que acompañamos a las familias de Montepinar.
       </p>
     </div>
 
-    <!-- En escritorio el arrastre se desactiva: el scroll vertical es quien mueve el carril -->
-    <hlm-carousel class="block w-full"
-      [options]="{ align: 'start', containScroll: false, loop: false, breakpoints: { '(min-width: 1024px)': { watchDrag: false } } }">
-      <hlm-carousel-content class="-ml-0">
-        <!-- Slide 0: la frase (solo escritorio) -->
-        <hlm-carousel-item class="hidden basis-auto pl-(--gutter) lg:block lg:w-[calc(24rem+var(--gutter))] lg:flex-none">
-          <p data-reveal
-            class="m-0 inline-flex rounded-md bg-[var(--brand-forest-100)] px-3.5 py-1.5 text-sm font-semibold text-[var(--brand-tertiary)]">
-            Misión y visión
+    <div data-panels class="flex flex-col gap-4 lg:h-[36rem] lg:flex-row">
+      @for (slide of slides; track slide.eyebrow; let i = $index) {
+      <article data-panel tabindex="0" (mouseenter)="activate(i)" (focus)="activate(i)" [attr.data-active]="active() === i"
+        class="group/panel relative isolate flex min-h-[32rem] flex-col justify-end overflow-hidden rounded-[2rem] bg-[var(--brand-forest-800)] text-white outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 lg:min-h-0 lg:min-w-0 lg:flex-1">
+        <img class="absolute inset-0 -z-20 size-full object-cover transition-transform duration-[1200ms] ease-out group-hover/panel:scale-105 motion-reduce:transition-none"
+          [src]="slide.image" [alt]="slide.imageAlt" loading="lazy" />
+        <span aria-hidden="true"
+          class="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgb(3_48_26/0.92)_0%,rgb(3_48_26/0.55)_45%,transparent_80%)]"></span>
+
+        <div class="p-6 sm:p-8 lg:p-10">
+          <p data-detail class="m-0 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-orange-300)]">
+            <span class="grid size-8 place-items-center rounded-full bg-[var(--brand-primary)] text-[0.7rem] text-white">0{{ i + 1 }}</span>
+            {{ slide.eyebrow }}
           </p>
-          <h2 id="about-purpose-title" data-reveal
-            class="m-0 mt-6 text-balance text-[clamp(2.25rem,4vw,3.5rem)] font-extrabold leading-[1.06] tracking-[-0.04em] text-[var(--brand-forest-900)]">
-            Lo que nos mueve cada día.
-          </h2>
-          <p data-reveal class="mb-0 mt-5 max-w-sm text-pretty text-base leading-[1.7] text-[#1f1a14]/70">
-            Conoce el propósito que guía cada proyecto y la forma en que acompañamos a las familias de Montepinar.
-          </p>
-        </hlm-carousel-item>
+          <h3 data-detail class="m-0 mt-4 max-w-[22ch] text-balance text-[clamp(1.6rem,2.6vw,2.4rem)] font-extrabold leading-[1.1] tracking-[-0.03em]">
+            {{ slide.title }}
+          </h3>
 
-        <!-- Slides 1..n: las cards -->
-        @for (slide of slides; track slide.eyebrow; let last = $last) {
-        <hlm-carousel-item class="basis-[92%] pl-5 sm:basis-[80%] lg:basis-[calc(min(76rem,84vw)+3.5rem)] lg:pl-14"
-          [class]="last ? 'lg:pr-(--gutter) lg:basis-[calc(min(76rem,84vw)+3.5rem+var(--gutter))]' : ''">
-          <article data-card
-            class="grid h-full gap-6 rounded-2xl bg-white p-5 shadow-[0_14px_36px_rgba(30,45,34,0.08)] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-10 md:p-7">
-            <div class="relative min-h-64 overflow-hidden rounded-xl md:min-h-[26rem] lg:min-h-[min(36rem,68dvh)]">
-              <img class="absolute inset-0 size-full object-cover" [src]="slide.image" [alt]="slide.imageAlt"
-                loading="lazy" />
-            </div>
-
-            <div class="flex min-w-0 flex-col justify-center py-1">
-              <h3 class="m-0 text-3xl font-extrabold leading-tight tracking-tight text-[var(--brand-tertiary)] lg:text-4xl">
-                {{ slide.eyebrow }}</h3>
-              <p class="m-0 mt-3 text-lg font-extrabold leading-snug text-[var(--brand-forest-900)] lg:text-xl">{{
-                slide.title }}
-              </p>
-              <p class="mb-0 mt-4 text-pretty text-sm leading-[1.75] text-[#1f1a14]/70 lg:text-base">{{ slide.text }}</p>
-
-              <ul class="m-0 mt-7 grid list-none grid-cols-2 gap-x-5 gap-y-6 p-0">
-                @for (feature of slide.features; track feature.title) {
-                <li>
-                  <ng-icon [name]="feature.icon" size="28" class="text-[var(--brand-tertiary)]" aria-hidden="true" />
-                  <strong class="mt-3 block text-sm font-extrabold leading-tight text-[var(--brand-forest-900)]">{{
-                    feature.title }}</strong>
-                  <span class="mt-1 block text-xs leading-relaxed text-[#1f1a14]/55">{{ feature.text }}</span>
-                </li>
-                }
-              </ul>
-            </div>
-          </article>
-        </hlm-carousel-item>
-        }
-      </hlm-carousel-content>
-    </hlm-carousel>
+          <div class="lg:overflow-hidden lg:transition-[max-height,opacity] lg:duration-700"
+            [class]="active() === i ? 'lg:max-h-[22rem] lg:opacity-100' : 'lg:max-h-0 lg:opacity-0'">
+            <p data-detail class="mb-0 mt-4 max-w-xl text-pretty text-base leading-[1.75] text-white/80">{{ slide.text }}</p>
+            <ul class="m-0 mt-6 grid list-none gap-x-6 gap-y-4 p-0 sm:grid-cols-2">
+              @for (feature of slide.features; track feature.title) {
+              <li data-detail class="flex items-start gap-3">
+                <ng-icon [name]="feature.icon" size="22" aria-hidden="true" class="mt-0.5 shrink-0 text-[var(--brand-primary)]" />
+                <span class="leading-tight">
+                  <strong class="block text-sm font-extrabold">{{ feature.title }}</strong>
+                  <span class="block text-xs text-white/65">{{ feature.text }}</span>
+                </span>
+              </li>
+              }
+            </ul>
+          </div>
+        </div>
+      </article>
+      }
+    </div>
   </div>
 </section>

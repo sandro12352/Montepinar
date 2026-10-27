@@ -1,4 +1,4 @@
-import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
+import { afterNextRender, afterRenderEffect, Component, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideCompass,
@@ -10,9 +10,6 @@ import {
   lucideTrees,
   lucideUsers,
 } from '@ng-icons/lucide';
-import { HlmCarousel, HlmCarouselImports } from '@spartan-ng/helm/carousel';
-import type { EmblaCarouselType } from 'embla-carousel';
-import type { EmblaCarouselDirective } from 'embla-carousel-angular';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -34,18 +31,9 @@ interface PurposeSlide {
 }
 
 @Component({
-  imports: [HlmCarouselImports, NgIcon],
+  imports: [NgIcon],
   providers: [
-    provideIcons({
-      lucideCompass,
-      lucideEye,
-      lucideFileCheck,
-      lucideHandshake,
-      lucideHouse,
-      lucideSprout,
-      lucideTrees,
-      lucideUsers,
-    }),
+    provideIcons({ lucideCompass, lucideEye, lucideFileCheck, lucideHandshake, lucideHouse, lucideSprout, lucideTrees, lucideUsers }),
   ],
   selector: 'app-about-purpose',
   templateUrl: './about-purpose.component.html',
@@ -53,7 +41,9 @@ interface PurposeSlide {
 export class AboutPurposeComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
-  private readonly carousel = viewChild(HlmCarousel);
+
+  /** Panel abierto en escritorio. En pantallas pequeñas ambos se muestran completos. */
+  protected readonly active = signal(0);
 
   protected readonly slides: readonly PurposeSlide[] = [
     {
@@ -84,111 +74,54 @@ export class AboutPurposeComponent {
     },
   ];
 
-  /** Embla vive dentro de hlm-carousel (miembro protegido), así que se obtiene de su directiva. */
-  private emblaApi(): EmblaCarouselType | null {
-    const carousel = this.carousel() as unknown as { _emblaCarousel(): EmblaCarouselDirective } | undefined;
-    return carousel?._emblaCarousel().emblaApi ?? null;
+  protected activate(index: number): void {
+    this.active.set(index);
   }
 
   constructor() {
+    // Escritorio: el panel elegido se abre y su contenido entra escalonado.
+    afterRenderEffect(() => {
+      const index = this.active();
+      const root = this.root().nativeElement;
+      const desktop = window.matchMedia('(min-width: 1024px)').matches;
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!desktop) return;
+
+      const panels = root.querySelectorAll<HTMLElement>('[data-panel]');
+      gsap.to(panels, { flexGrow: (i: number) => (i === index ? 1.9 : 1), duration: reduced ? 0 : 0.9, ease: 'power3.inOut', overwrite: 'auto' });
+
+      const details = panels[index]?.querySelectorAll('[data-detail]');
+      if (details && !reduced) {
+        gsap.fromTo(details, { autoAlpha: 0, y: 22 }, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.07, delay: 0.25, ease: 'power3.out', overwrite: 'auto' });
+      }
+    });
+
     afterNextRender(() => {
       const root = this.root().nativeElement;
-      const mm = gsap.matchMedia();
-
-      // Entrada: el texto y las cards aparecen escalonados al llegar a la sección.
       const context = gsap.context(() => {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-        gsap.fromTo('[data-reveal]',
-          { autoAlpha: 0, y: 24 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.65,
-            stagger: 0.1,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: root, start: 'top 75%', once: true },
-          },
+        gsap.fromTo(
+          '[data-head]',
+          { autoAlpha: 0, y: 26 },
+          { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: '[data-heading]', start: 'top 82%', once: true } },
         );
-
-        gsap.fromTo('[data-card]',
-          { autoAlpha: 0, y: 32 },
+        gsap.fromTo(
+          '[data-panel]',
+          { autoAlpha: 0, y: 60, clipPath: 'inset(8% 6% 8% 6% round 2.5rem)' },
           {
             autoAlpha: 1,
             y: 0,
-            duration: 0.9,
-            stagger: 0.15,
-            delay: 0.2,
-            ease: 'power2.out',
-            clearProps: 'transform',
-            scrollTrigger: { trigger: root, start: 'top 75%', once: true },
+            clipPath: 'inset(0% 0% 0% 0% round 2rem)',
+            duration: 1.1,
+            stagger: 0.18,
+            ease: 'power4.out',
+            scrollTrigger: { trigger: '[data-panels]', start: 'top 82%', once: true },
           },
         );
       }, root);
 
-      // Escritorio (como la referencia): la sección se fija y el scroll vertical desplaza todo el carril del
-      // carrusel (frase + cards) hacia la izquierda de forma continua. El movimiento se aplica sobre el motor
-      // de Embla del carrusel de Spartan, así que su estado interno queda siempre sincronizado.
-      mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
-        let frame = 0;
-        let timeline: gsap.core.Timeline | undefined;
-
-        // Embla se inicializa dentro de hlm-carousel un instante después del primer render: se espera a que exista.
-        const setup = (attempt: number) => {
-          const api = this.emblaApi();
-          if (!api) {
-            if (attempt < 120) frame = requestAnimationFrame(() => setup(attempt + 1));
-            return;
-          }
-
-          const engine = api.internalEngine();
-          const distance = () => Math.max(0, api.containerNode().scrollWidth - api.rootNode().clientWidth);
-          const state = { x: 0 };
-          const apply = (x: number) => {
-            engine.location.set(x);
-            engine.target.set(x);
-            engine.translate.to(x);
-          };
-
-          const stage = root.querySelector<HTMLElement>('[data-stage]');
-          // Al inicio las cards quedan cerca del borde superior; al avanzar bajan hasta el centro.
-          const startY = () => {
-            if (!stage) return 0;
-            const free = root.clientHeight - stage.offsetHeight;
-            return Math.min(0, 96 - free / 2);
-          };
-
-          timeline = gsap.timeline({
-            defaults: { ease: 'none' },
-            scrollTrigger: {
-              trigger: root,
-              start: 'top top',
-              end: () => `+=${distance() + window.innerHeight * 0.35}`,
-              pin: true,
-              scrub: 0.6,
-              invalidateOnRefresh: true,
-              onRefresh: () => apply(state.x),
-            },
-          });
-
-          if (stage) {
-            timeline.fromTo(stage, { y: startY }, { y: 0, duration: 0.3, ease: 'power2.out' }, 0);
-          }
-          timeline.to(state, { x: () => -distance(), duration: 1, onUpdate: () => apply(state.x) }, 0);
-        };
-        setup(0);
-
-        return () => {
-          cancelAnimationFrame(frame);
-          timeline?.scrollTrigger?.kill();
-          timeline?.kill();
-        };
-      });
-
-      this.destroyRef.onDestroy(() => {
-        mm.revert();
-        context.revert();
-      });
+      this.destroyRef.onDestroy(() => context.revert());
     });
   }
 }

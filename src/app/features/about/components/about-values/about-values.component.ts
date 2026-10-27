@@ -23,45 +23,35 @@ export class AboutValuesComponent {
     { icon: 'lucideHandshake', title: 'Compromiso', text: 'Cumplimos lo que prometemos, desde la visita hasta la entrega.' },
   ];
 
+  /** Palabras que recorren la cinta; se repiten para que el movimiento no deje huecos. */
+  protected readonly ribbon = Array.from({ length: 3 }, () => this.values.map((value) => value.title)).flat();
+
   constructor() {
     afterNextRender(() => {
       const root = this.root().nativeElement;
       const context = gsap.context(() => {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-        const heading = root.querySelector<HTMLElement>('[data-heading]');
-        const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-card]'));
+        gsap.fromTo(
+          '[data-head]',
+          { autoAlpha: 0, y: 26 },
+          { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: '[data-heading]', start: 'top 82%', once: true } },
+        );
 
-        if (heading) {
-          gsap.fromTo(heading.children,
-            { autoAlpha: 0, y: 24 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.8,
-              stagger: 0.1,
-              ease: 'power2.out',
-              scrollTrigger: { trigger: heading, start: 'top 82%', once: true },
-            },
-          );
-        }
+        // Las dos cintas viajan en sentidos opuestos al hacer scroll.
+        gsap.fromTo('[data-ribbon="a"]', { xPercent: 0 }, { xPercent: -28, ease: 'none', scrollTrigger: { trigger: root, start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+        gsap.fromTo('[data-ribbon="b"]', { xPercent: -28 }, { xPercent: 0, ease: 'none', scrollTrigger: { trigger: root, start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
 
-        // Las tarjetas aparecen una por una, igual que la galería.
-        if (cards.length) {
-          gsap.fromTo(cards,
-            { autoAlpha: 0, y: 24, scale: 0.975 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              scale: 1,
-              duration: 1,
-              stagger: 0.1,
-              ease: 'power2.out',
-              clearProps: 'transform',
-              scrollTrigger: { trigger: cards[0], start: 'top 84%', once: true },
-            },
-          );
-        }
+        gsap.fromTo(
+          '[data-value]',
+          { autoAlpha: 0, y: 32 },
+          { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: '[data-values]', start: 'top 82%', once: true } },
+        );
+        gsap.fromTo(
+          '[data-line]',
+          { scaleX: 0 },
+          { scaleX: 1, duration: 1, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: '[data-values]', start: 'top 82%', once: true } },
+        );
       }, root);
 
       this.destroyRef.onDestroy(() => context.revert());

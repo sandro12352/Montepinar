@@ -1,67 +1,71 @@
 <section #root aria-labelledby="about-hero-title"
-  class="relative isolate overflow-hidden bg-[var(--brand-forest-900)] pb-[clamp(3.5rem,7vw,6rem)] pt-[clamp(8rem,14vw,11rem)] text-white">
+  class="relative isolate overflow-x-clip bg-[var(--brand-forest-900)] pt-[clamp(8rem,13vw,10.5rem)] text-white">
   <span aria-hidden="true"
-    class="pointer-events-none absolute -bottom-32 -left-24 -z-10 size-96 rounded-full bg-[var(--brand-primary)]/20 blur-3xl"></span>
+    class="pointer-events-none absolute -left-32 top-1/4 -z-10 size-[28rem] rounded-full bg-[var(--brand-primary)]/15 blur-3xl"></span>
   <span aria-hidden="true"
-    class="pointer-events-none absolute -right-24 -top-24 -z-10 size-96 rounded-full bg-[var(--brand-forest-400)]/20 blur-3xl"></span>
+    class="pointer-events-none absolute -right-24 -top-24 -z-10 size-[26rem] rounded-full bg-[var(--brand-forest-400)]/20 blur-3xl"></span>
 
-  <div class="mx-auto flex w-[min(88%,1400px)] flex-col items-center text-center">
-    <p data-reveal
-      class="m-0 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.16em] text-white/90">
-      <span class="size-1.5 rounded-full bg-[var(--brand-forest-400)]" aria-hidden="true"></span>
-      Sobre Montepinar
-    </p>
+  <div class="relative z-10">
+    <div class="mx-auto flex w-[min(88%,62rem)] flex-col items-center text-center">
+      <p data-reveal
+        class="m-0 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.16em] text-white/90">
+        <span class="size-1.5 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        Sobre Montepinar
+      </p>
 
-    <h1 id="about-hero-title" data-reveal
-      class="m-0 mt-6 max-w-[18ch] text-balance text-[clamp(2.75rem,6vw,5.25rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
-      Más que lotes, creamos <span class="text-[var(--brand-primary)]">posibilidades</span>.
-    </h1>
+      <h1 id="about-hero-title" data-reveal
+        class="m-0 mt-6 text-balance text-[clamp(2.75rem,7vw,6rem)] font-extrabold leading-[1] tracking-[-0.05em]">
+        Más que lotes, creamos <span class="text-[var(--brand-primary)]">posibilidades</span>.
+      </h1>
 
-    <p data-reveal class="mb-0 mt-6 max-w-2xl text-pretty text-base leading-[1.7] text-white/80 sm:text-lg">
-      Somos una inmobiliaria y constructora que desarrolla comunidades campestres para que cada familia viva con más
-      tranquilidad, rodeada de naturaleza y de buenos vecinos.
-    </p>
+      <p data-reveal class="mb-0 mt-6 max-w-2xl text-pretty text-base leading-[1.75] text-white/75 sm:text-lg">
+        Somos una inmobiliaria y constructora que desarrolla comunidades campestres para que cada familia viva con más
+        tranquilidad, rodeada de naturaleza y de buenos vecinos.
+      </p>
 
-    <div data-reveal class="mt-8 flex flex-wrap items-center justify-center gap-3">
-      <a href="/#proyectos"
-        class="group/btn relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-6 py-3.5 text-sm font-extrabold text-white no-underline shadow-lg shadow-black/25 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] motion-reduce:transition-none">
-        <span aria-hidden="true"
-          class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-orange-600)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
-        <span class="relative z-10">Ver proyectos</span>
-        <ng-icon name="lucideArrowRight" size="18" aria-hidden="true"
-          class="relative z-10 transition-transform duration-200 group-hover/btn:translate-x-1 motion-reduce:transition-none" />
-      </a>
-      <a href="tel:+51932284185"
-        class="group/btn relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl border border-white/60 bg-white/10 px-6 py-3.5 text-sm font-extrabold text-white no-underline backdrop-blur-sm transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] motion-reduce:transition-none">
-        <span aria-hidden="true"
-          class="absolute inset-0 origin-left scale-x-0 bg-white/20 transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
-        <ng-icon name="lucidePhone" size="18" aria-hidden="true" class="relative z-10" />
-        <span class="relative z-10">Hablar con un asesor</span>
-      </a>
+      <div data-reveal class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <a routerLink="/projects"
+          class="group/btn relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-6 py-3.5 text-sm font-extrabold text-white no-underline shadow-lg shadow-black/25 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] motion-reduce:transition-none">
+          <span aria-hidden="true"
+            class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-orange-600)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+          <span class="relative z-10">Ver proyectos</span>
+          <ng-icon name="lucideArrowRight" size="18" aria-hidden="true"
+            class="relative z-10 transition-transform duration-200 group-hover/btn:translate-x-1 motion-reduce:transition-none" />
+        </a>
+        <button type="button" (click)="openVisit()"
+          class="group/btn relative isolate inline-flex min-h-12 cursor-pointer items-center gap-3 overflow-hidden rounded-xl border border-white/60 bg-white/10 px-6 py-3.5 text-sm font-extrabold text-white backdrop-blur-sm transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] motion-reduce:transition-none">
+          <span aria-hidden="true"
+            class="absolute inset-0 origin-left scale-x-0 bg-white/20 transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+          <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" class="relative z-10" />
+          <span class="relative z-10">Agendar visita</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tarjetas a los lados del título (en pantallas pequeñas van debajo) -->
+    <div class="mx-auto mt-10 grid w-[min(88%,40rem)] gap-3 sm:grid-cols-2 lg:static lg:mt-0 lg:block lg:w-auto">
+      @for (card of trustCards; track card.title; let i = $index) {
+      <div data-card class="lg:absolute lg:w-[min(21rem,24vw)]"
+        [class]="i === 0 ? 'lg:left-[3%] lg:top-[48%]' : 'lg:right-[3%] lg:top-[66%]'">
+        <!-- La tarjeta completa es la que flota: caja y contenido se mueven juntos -->
+        <div data-float
+          class="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/10 p-5 shadow-xl shadow-black/25 backdrop-blur-md">
+          <span class="flex items-center gap-3">
+            <span class="grid size-10 shrink-0 place-items-center rounded-lg bg-[var(--brand-primary)] text-white" aria-hidden="true">
+              <ng-icon [name]="card.icon" size="20" />
+            </span>
+            <strong class="text-base font-extrabold leading-tight">{{ card.title }}</strong>
+          </span>
+          <span class="text-sm leading-relaxed text-white/70">{{ card.text }}</span>
+        </div>
+      </div>
+      }
     </div>
   </div>
 
-  <!-- Imagen grande con tarjetas flotantes -->
-  <div data-hero-image class="relative mx-auto mt-[clamp(3rem,6vw,4.5rem)] w-[min(88%,1400px)]">
-    <img class="block aspect-[4/3] w-full rounded-3xl object-cover shadow-2xl shadow-black/30 sm:aspect-[16/8]"
-      src="/images/AsociacionMontepinar.webp" alt="Ingreso principal y vista aérea del proyecto Montepinar"
-      loading="eager" />
-    <div
-      class="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-t from-black/35 via-transparent to-transparent"
-      aria-hidden="true"></div>
-
-    @for (card of trustCards; track card.title; let i = $index) {
-    <div
-      class="absolute flex items-center gap-3 rounded-2xl bg-white px-4 py-3 text-[var(--brand-forest-900)] shadow-xl shadow-black/20"
-      [class]="i === 0 ? 'left-3 top-3 sm:-top-6 sm:left-8' : 'bottom-3 right-3 sm:-top-6 sm:bottom-auto sm:right-8'">
-      <span class="grid size-10 shrink-0 place-items-center rounded-xl bg-[var(--brand-primary)] text-white">
-        <ng-icon [name]="card.icon" size="20" aria-hidden="true" />
-      </span>
-      <span class="text-left leading-tight">
-        <strong class="block text-sm font-extrabold sm:text-base">{{ card.title }}</strong>
-        <span class="mt-0.5 block text-[0.7rem] text-[#1f1a14]/65 sm:text-xs">{{ card.text }}</span>
-      </span>
-    </div>
-    }
+  <!-- Escena con el cielo transparente: se funde con el verde y asoma bajo el texto -->
+  <div data-media class="pointer-events-none relative z-0 -mt-[min(24vw,28rem)]">
+    <img data-media-img class="block h-auto w-full" src="/images/main-nosotros.png" width="1536" height="1024"
+      alt="Puerto de Chancay al atardecer, con la costa y la carretera que conectan los proyectos de Montepinar" loading="eager" />
   </div>
 </section>

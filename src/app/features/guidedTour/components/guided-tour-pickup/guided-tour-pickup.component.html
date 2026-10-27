@@ -1,0 +1,65 @@
+<section #root aria-labelledby="tour-pickup-title"
+  class="bg-white py-[clamp(4.5rem,8vw,7.5rem)] text-[var(--brand-forest-900)]">
+  <div class="mx-auto grid w-[min(88%,1400px)] gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+    <div data-heading class="lg:sticky lg:top-28 lg:self-start">
+      <p data-head class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        Punto de partida
+      </p>
+      <h2 id="tour-pickup-title" data-head
+        class="m-0 max-w-[13ch] text-balance text-[clamp(2.2rem,4.4vw,3.75rem)] font-extrabold leading-[1.04] tracking-[-0.04em]">
+        El bus te espera cerca de ti.
+      </h2>
+      <p data-head class="mb-0 mt-5 max-w-md text-pretty text-base leading-relaxed text-[#1f1a14]/65">
+        Al reservar eliges el punto que te quede mejor. Ahí te esperamos: sube al bus y nosotros nos encargamos del resto, ida y vuelta.
+      </p>
+      <button data-head type="button" (click)="openVisit()"
+        class="group/btn relative isolate mt-8 inline-flex min-h-12 cursor-pointer items-center gap-3 overflow-hidden rounded-xl border-0 bg-[var(--brand-forest-900)] px-6 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-[var(--brand-forest-900)]/20 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
+        <span aria-hidden="true"
+          class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-primary)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+        <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" class="relative z-10" />
+        <span class="relative z-10">Elegir punto y fecha</span>
+      </button>
+    </div>
+
+    <!-- Ruta: el bus avanza de parada en parada hasta Montepinar -->
+    <div data-route class="relative pl-[4.25rem] sm:pl-24">
+      <span aria-hidden="true" class="absolute bottom-[3.4rem] left-[1.9rem] top-5 w-0.5 bg-[var(--brand-forest-900)]/12 sm:left-[2.45rem]"></span>
+      <span data-fill aria-hidden="true"
+        class="absolute bottom-[3.4rem] left-[1.9rem] top-5 w-0.5 origin-top bg-[var(--brand-primary)] sm:left-[2.45rem]"></span>
+      <div aria-hidden="true" class="pointer-events-none absolute bottom-[3.4rem] left-0 top-5 w-[3.85rem] sm:w-[4.95rem]">
+        <span data-bus
+          class="absolute left-1/2 top-0 grid size-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[var(--brand-primary)] text-white shadow-lg shadow-[var(--brand-primary)]/40 sm:size-12">
+          <ng-icon name="lucideBus" size="22" />
+        </span>
+      </div>
+
+      <ol class="m-0 flex list-none flex-col gap-10 p-0 sm:gap-12">
+        @for (point of points; track point.place; let i = $index) {
+        <li data-stop class="relative">
+          <span data-dot aria-hidden="true"
+            class="absolute -left-[3.2rem] top-1.5 grid size-7 place-items-center rounded-full border-2 border-[var(--brand-primary)] bg-white text-xs font-extrabold text-[var(--brand-primary)] sm:-left-[4.4rem]">
+            {{ i + 1 }}
+          </span>
+          <p class="m-0 text-[clamp(2.4rem,4.6vw,3.6rem)] font-extrabold leading-none tracking-[-0.04em]">{{ point.time }}</p>
+          <h3 class="m-0 mt-2 flex items-center gap-2 text-lg font-extrabold tracking-tight sm:text-xl">
+            <ng-icon name="lucideMapPin" size="18" aria-hidden="true" class="shrink-0 text-[var(--brand-primary)]" />
+            {{ point.place }}
+          </h3>
+          @if (point.reference) {
+          <p class="mb-0 mt-1 text-sm text-[#1f1a14]/60">{{ point.reference }}</p>
+          }
+        </li>
+        }
+        <li data-stop class="relative">
+          <span data-dot aria-hidden="true"
+            class="absolute -left-[3.2rem] top-1.5 grid size-7 place-items-center rounded-full bg-[var(--brand-forest-900)] text-[var(--brand-orange-300)] sm:-left-[4.4rem]">
+            <ng-icon name="lucideFlag" size="14" />
+          </span>
+          <p class="m-0 text-[clamp(2rem,4vw,3rem)] font-extrabold leading-none tracking-[-0.04em] text-[var(--brand-primary)]">Montepinar</p>
+          <p class="mb-0 mt-2 text-sm leading-relaxed text-[#1f1a14]/60">Llegamos y empieza el día.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>

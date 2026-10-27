@@ -21,6 +21,14 @@ export const routes: Routes = [
             {
                 path:'projects/:slug',
                 loadComponent:()=>import('./features/projectDetail/components/project-detail/project-detail.component').then(m=>m.ProjectDetailComponent)
+            },
+            {
+                path:'equipo',
+                loadComponent:()=>import('./features/team/components/team/team.component').then(m=>m.TeamComponent)
+            },
+            {
+                path:'visita-guiada',
+                loadComponent:()=>import('./features/guidedTour/components/guided-tour/guided-tour.component').then(m=>m.GuidedTourComponent)
             }
         ]
     }

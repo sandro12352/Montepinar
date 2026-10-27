@@ -13,7 +13,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MainBannerComponent } from '../main-banner/main-banner.component';
 import { IntroduccionComponent } from '../introduccion/introduccion.component';
 import { HomeProjectsComponent } from '../projects/projects.component';
-import { Vision360Component } from '../vision360/vision360.component';
+import { TeamMembersComponent } from '../../../team/components/team-members/team-members.component';
 import { ResidentHelpComponent } from '../resident-help/resident-help.component';
 import { TestimonialsComponent } from '../testimonials/testimonials.component';
 import { GalleryComponent } from '../gallery/gallery.component';
@@ -23,7 +23,7 @@ import { FaqComponent } from '../faq/faq.component';
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
-  imports: [NgIcon, MainBannerComponent, IntroduccionComponent, HomeProjectsComponent, Vision360Component, ResidentHelpComponent, TestimonialsComponent, GalleryComponent, ContactCtaComponent, FaqComponent],
+  imports: [NgIcon, MainBannerComponent, IntroduccionComponent, HomeProjectsComponent, TeamMembersComponent, ResidentHelpComponent, TestimonialsComponent, GalleryComponent, ContactCtaComponent, FaqComponent],
   providers: [
     provideIcons({
       lucideArrowRight,

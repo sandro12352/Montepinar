@@ -1,0 +1,53 @@
+<section #root id="equipo" aria-labelledby="team-members-title" class="bg-[#f4f1ea] py-[clamp(4rem,7vw,6.5rem)] text-[var(--brand-forest-900)]">
+  <div class="mx-auto w-[min(92%,1600px)]">
+    <div data-heading class="mb-[clamp(2rem,4vw,3rem)] flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p data-head class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+          <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          Quiénes te atienden
+        </p>
+        <h2 id="team-members-title" data-head
+          class="m-0 max-w-[16ch] text-balance text-[clamp(2.2rem,4.2vw,3.75rem)] font-extrabold leading-[1.04] tracking-[-0.04em]">
+          Cada área, una persona de confianza.
+        </h2>
+      </div>
+      <p data-head class="m-0 max-w-xs text-pretty text-base leading-relaxed text-[#1f1a14]/65">
+        Trabajamos en equipo para que tu compra sea clara de principio a fin.
+      </p>
+    </div>
+
+    <ul data-members class="m-0 grid list-none grid-cols-2 gap-x-4 gap-y-10 p-0 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-15">
+      @for (member of members; track member.role) {
+      <li class="group/member">
+        <figure data-figure class="relative m-0 aspect-[4/5]">
+          <!-- Arco de fondo: la persona queda por delante y puede sobresalir -->
+          <span data-arch aria-hidden="true"
+            class="absolute inset-0 overflow-hidden rounded-t-full rounded-b-2xl bg-[var(--brand-forest-900)] transition-all duration-500 ease-out group-hover/member:shadow-2xl group-hover/member:shadow-[var(--brand-forest-900)]/30 motion-reduce:transition-none">
+            <span class="absolute inset-x-[15%] bottom-0 h-3/4 rounded-t-full bg-[var(--brand-primary)]/25 blur-2xl"></span>
+            <span class="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-[var(--brand-primary)] transition-transform duration-500 group-hover/member:scale-x-100"></span>
+          </span>
+          @if (member.photos?.length) {
+          <div data-front class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[108%] transition-transform duration-500 ease-out group-hover/member:-translate-y-1.5">
+            @for (photo of member.photos; track photo; let i = $index) {
+            <img data-photo class="absolute bottom-0 left-1/2 h-full w-auto max-w-180 -translate-x-1/2 object-contain object-bottom"
+              [class.opacity-0]="i > 0" [class.invisible]="i > 0" [src]="photo" [alt]="i === 0 ? member.name : ''" loading="lazy" />
+            }
+          </div>
+          } @else {
+          <span class="absolute inset-0 grid place-items-center">
+            <ng-icon [name]="member.icon" size="44" aria-hidden="true"
+              class="text-white/60 transition-all duration-500 group-hover/member:scale-110 group-hover/member:text-[var(--brand-primary)]" />
+          </span>
+          }
+        </figure>
+
+        <div data-info class="mt-4">
+          <p class="m-0 text-[0.65rem] font-extrabold uppercase tracking-[0.16em] text-[var(--brand-primary)]">{{ member.role }}</p>
+          <h3 class="m-0 mt-1.5 text-lg font-extrabold tracking-tight">{{ member.name }}</h3>
+          <p class="mb-0 mt-2 text-sm leading-relaxed text-[#1f1a14]/60">{{ member.focus }}</p>
+        </div>
+      </li>
+      }
+    </ul>
+  </div>
+</section>

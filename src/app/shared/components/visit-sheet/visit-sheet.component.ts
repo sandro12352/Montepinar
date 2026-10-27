@@ -13,6 +13,7 @@ import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
 import { gsap } from 'gsap';
 
 import { VisitSheetService } from '../../../core/services/visit-sheet.service';
+import { PICKUP_POINTS } from '../../../features/guidedTour/data/guided-tour.data';
 
 interface VisitModel {
   name: string;
@@ -29,18 +30,6 @@ const EMPTY_MODEL: VisitModel = {
   date: null,
   notes: '',
 };
-
-interface PickupPoint {
-  readonly place: string;
-  readonly reference?: string;
-  readonly time: string;
-}
-
-const PICKUP_POINTS: readonly PickupPoint[] = [
-  { place: 'Av. Alfredo Mendiola 3683', reference: 'Al costado del BBVA o de la Notaría Gómez Verástegui', time: '8:30 am' },
-  { place: 'Frente a Tottus Puente Piedra', time: '9:00 am' },
-  { place: 'Paradero Fundición de Puente Piedra', time: '9:15 am' },
-];
 
 // Feriados nacionales de Perú (mes-día). Las visitas solo se hacen los domingos que no sean feriado.
 const HOLIDAYS = new Set(['1-1', '5-1', '6-7', '6-29', '7-23', '7-28', '7-29', '8-6', '8-30', '10-8', '11-1', '12-8', '12-9', '12-25']);

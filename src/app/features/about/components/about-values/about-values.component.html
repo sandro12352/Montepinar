@@ -1,31 +1,45 @@
-<section #root aria-labelledby="about-values-title"
-  class="bg-white py-[clamp(4.5rem,8vw,7.5rem)] text-[#1f1a14]">
+<section #root aria-labelledby="about-values-title" class="overflow-hidden bg-white py-[clamp(4.5rem,8vw,7.5rem)] text-[var(--brand-forest-900)]">
   <div class="mx-auto w-[min(88%,1400px)]">
-    <header data-heading class="max-w-2xl">
-      <p
-        class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+    <header data-heading class="mb-[clamp(2rem,4vw,3rem)] max-w-2xl">
+      <p data-head class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
         <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
         Nuestros valores
       </p>
-      <h2 id="about-values-title"
-        class="m-0 text-balance text-[clamp(2.25rem,4.4vw,4rem)] font-extrabold leading-[1.04] tracking-[-0.04em] text-[var(--brand-forest-900)]">
+      <h2 id="about-values-title" data-head
+        class="m-0 text-balance text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.03] tracking-[-0.045em]">
         Lo que sostiene cada proyecto.
       </h2>
-      <p class="mb-0 mt-5 max-w-lg text-pretty text-base leading-[1.8] text-[#1f1a14]/70 sm:text-lg">
-        Cuatro principios guían cómo trabajamos con cada familia y cada comunidad.
-      </p>
     </header>
+  </div>
 
-    <ul class="m-0 mt-10 grid list-none grid-cols-1 gap-5 p-0 sm:grid-cols-2 xl:grid-cols-4">
+  <!-- Cintas de palabras -->
+  <div class="select-none" aria-hidden="true">
+    <div data-ribbon="a" class="flex w-max items-center gap-8 whitespace-nowrap py-2 text-[clamp(3.5rem,9vw,8rem)] font-black leading-none tracking-[-0.05em]">
+      @for (word of ribbon; track $index) {
+      <span class="text-transparent [-webkit-text-stroke:1.5px_rgb(3_48_26/0.35)]">{{ word }}</span>
+      <span class="text-[var(--brand-primary)]">✦</span>
+      }
+    </div>
+    <div data-ribbon="b" class="flex w-max items-center gap-8 whitespace-nowrap py-2 text-[clamp(3.5rem,9vw,8rem)] font-black leading-none tracking-[-0.05em]">
+      @for (word of ribbon; track $index) {
+      <span class="text-[var(--brand-forest-900)]">{{ word }}</span>
+      <span class="text-[var(--brand-primary)]">✦</span>
+      }
+    </div>
+  </div>
+
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <ul data-values class="m-0 mt-[clamp(2.5rem,5vw,4rem)] grid list-none gap-x-10 gap-y-2 p-0 sm:grid-cols-2 lg:grid-cols-4">
       @for (value of values; track value.title) {
-      <li data-card
-        class="h-full rounded-2xl border border-[#10271c]/10 bg-[#f4f1ea] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none">
-        <span class="mb-5 block h-1 w-10 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
-        <span class="grid size-12 place-items-center rounded-xl bg-[var(--brand-forest-900)] text-[var(--brand-primary)]">
-          <ng-icon [name]="value.icon" size="24" aria-hidden="true" />
+      <li data-value class="group/value relative py-7">
+        <span data-line aria-hidden="true"
+          class="absolute inset-x-0 top-0 h-px origin-left bg-[var(--brand-forest-900)]/20 transition-colors duration-500 group-hover/value:bg-[var(--brand-primary)]"></span>
+        <span
+          class="grid size-12 place-items-center rounded-full bg-[var(--brand-primary)]/12 text-[var(--brand-primary)] transition-all duration-300 group-hover/value:scale-110 group-hover/value:bg-[var(--brand-primary)] group-hover/value:text-white">
+          <ng-icon [name]="value.icon" size="22" aria-hidden="true" />
         </span>
-        <h3 class="m-0 mt-5 text-xl font-extrabold leading-snug text-[var(--brand-forest-900)]">{{ value.title }}</h3>
-        <p class="mb-0 mt-2 text-sm leading-relaxed text-[#1f1a14]/75">{{ value.text }}</p>
+        <h3 class="m-0 mt-5 text-xl font-extrabold tracking-tight transition-transform duration-300 group-hover/value:translate-x-1">{{ value.title }}</h3>
+        <p class="mb-0 mt-2 text-sm leading-relaxed text-[#1f1a14]/65">{{ value.text }}</p>
       </li>
       }
     </ul>

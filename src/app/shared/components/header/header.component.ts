@@ -67,7 +67,7 @@ export class HeaderComponent {
 
   protected readonly navigationItems: readonly NavigationItem[] = [
     { label: 'Nosotros', path: '/about' },
-    { label: 'Equipo', anchor: '/about#equipo' },
+    { label: 'Equipo', path: '/equipo' },
     {
       label: 'Proyectos',
       path: '/projects',
@@ -87,8 +87,7 @@ export class HeaderComponent {
       menu: {
         eyebrow: 'Conoce Montepinar',
         links: [
-          { label: 'Visita guiada', description: 'Recórrelo en persona con un asesor', image: '/images/entrada.png', action: 'visit' },
-          { label: 'Visión 360°', description: 'Explóralo desde donde estés', image: '/images/slide2.webp', anchor: '/#vision-360' },
+          { label: 'Visita guiada', description: 'Recórrelo en persona con un asesor', image: '/images/slide3.webp', path: '/visita-guiada' },
           { label: 'Galería', description: 'Cada rincón, en imágenes', image: '/images/slide3.webp', anchor: '/#galeria' },
         ],
         footer: { label: 'Preguntas frecuentes', anchor: '/#preguntas-frecuentes' },

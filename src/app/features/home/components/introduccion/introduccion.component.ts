@@ -1,7 +1,7 @@
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowRight, lucideCalendarDays, lucideScale, lucideTreePine, lucideUsers, lucideWallet } from '@ng-icons/lucide';
+import { lucideArrowRight, lucideCalendarDays, lucideCar, lucideScale, lucideShieldCheck, lucideWallet } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { VisitSheetService } from '../../../../core/services/visit-sheet.service';
@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   imports: [NgIcon, RouterLink],
-  providers: [provideIcons({ lucideArrowRight, lucideCalendarDays, lucideScale, lucideTreePine, lucideUsers, lucideWallet })],
+  providers: [provideIcons({ lucideArrowRight, lucideCalendarDays, lucideCar, lucideScale, lucideShieldCheck, lucideWallet })],
   selector: 'app-introduccion',
   templateUrl: './introduccion.component.html',
 })
@@ -20,10 +20,10 @@ export class IntroduccionComponent {
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 
   protected readonly highlights = [
-    { icon: 'lucideWallet', title: 'Financiamiento directo', text: 'Paga en cuotas, con inicial accesible.' },
-    { icon: 'lucideTreePine', title: 'Áreas verdes', text: 'Espacios de recreación y descanso.' },
-    { icon: 'lucideScale', title: 'Acompañamiento legal', text: 'Documentación clara y a la vista.' },
-    { icon: 'lucideUsers', title: 'Comunidad activa', text: 'Lugares pensados para compartir.' },
+    { icon: 'lucideScale', title: 'Información legal', text: 'Documentación y permisos en regla.' },
+    { icon: 'lucideShieldCheck', title: 'Seguridad 24/7', text: 'Vigilancia perimetral todo el año.' },
+    { icon: 'lucideCar', title: 'Estacionamiento', text: 'Zonas sectorizadas para visitantes.' },
+    { icon: 'lucideWallet', title: 'Facilidades de pago', text: 'Cancela tu terreno en cómodas cuotas.' },
   ];
 
   protected readonly stats = [
