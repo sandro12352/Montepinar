@@ -2,22 +2,25 @@ import { afterNextRender, afterRenderEffect, Component, DestroyRef, ElementRef, 
 import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowRight, lucideChevronDown } from '@ng-icons/lucide';
+import { lucideArrowRight, lucideChevronDown, lucideChevronRight, lucideArrowUpRight } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { VisitSheetService } from '../../../core/services/visit-sheet.service';
 import { VisitSheetComponent } from '../visit-sheet/visit-sheet.component';
 import { LoaderService } from '../../../core/services/loader.service';
 import { PROJECTS } from '../../../features/projects/data/projects.data';
 
-interface NavigationChild {
+interface NavigationAction {
   readonly label: string;
-  readonly description: string;
-  // Imagen de referencia que acompaña a la opción.
-  readonly image: string;
   readonly path?: string;
   readonly anchor?: string;
   // Acción en lugar de navegación (abre el sheet de visita).
   readonly action?: 'visit';
+}
+
+interface NavigationChild extends NavigationAction {
+  readonly description: string;
+  // Imagen que se muestra en la vista previa al pasar sobre la opción.
+  readonly image: string;
 }
 
 interface NavigationItem {
@@ -25,13 +28,17 @@ interface NavigationItem {
   // Ruta de página (se marca como activa) o ancla de la home.
   readonly path?: string;
   readonly anchor?: string;
-  // Subopciones: se muestran en un menú desplegable.
-  readonly children?: readonly NavigationChild[];
+  // Desplegable: lista numerada con vista previa y un enlace al pie.
+  readonly menu?: {
+    readonly eyebrow: string;
+    readonly links: readonly NavigationChild[];
+    readonly footer: NavigationAction;
+  };
 }
 
 @Component({
   imports: [NgIcon, NgTemplateOutlet, RouterLink, RouterLinkActive, VisitSheetComponent],
-  providers: [provideIcons({ lucideArrowRight, lucideChevronDown })],
+  providers: [provideIcons({ lucideArrowRight, lucideChevronDown, lucideChevronRight, lucideArrowUpRight })],
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
@@ -48,31 +55,44 @@ export class HeaderComponent {
   private readonly injector = inject(Injector);
   private readonly loaderService = inject(LoaderService);
   private readonly destroyRef = inject(DestroyRef);
+  /** Opción resaltada del desplegable abierto; define la imagen de la vista previa. */
+  protected readonly previewIndex = signal(0);
+  protected readonly rowClass =
+    'group/row relative flex w-full cursor-pointer items-center gap-4 rounded-2xl border-0 bg-transparent px-3 py-3 text-left text-[var(--brand-forest-900)] no-underline transition-colors duration-200 focus-visible:outline-none motion-reduce:transition-none max-md:py-2';
+  protected readonly footerClass =
+    'group/foot inline-flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-sm font-extrabold text-[var(--brand-forest-900)] no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2';
+
   private readonly header = viewChild.required<ElementRef<HTMLElement>>('header');
   private readonly nav = viewChild.required<ElementRef<HTMLElement>>('nav');
 
   protected readonly navigationItems: readonly NavigationItem[] = [
-    { label: 'Inicio', path: '/' },
     { label: 'Nosotros', path: '/about' },
+    { label: 'Equipo', anchor: '/about#equipo' },
     {
       label: 'Proyectos',
       path: '/projects',
-      children: [
-        ...PROJECTS.map((project) => ({
+      menu: {
+        eyebrow: 'Nuestros proyectos',
+        links: PROJECTS.map((project) => ({
           label: project.location,
-          description: project.name,
+          description: project.category,
           image: project.image,
           path: `/projects/${project.slug}`,
         })),
-        { label: 'Ver todos', description: 'Compara los tres proyectos', image: '/images/mapa.png', path: '/projects' },
-      ],
+        footer: { label: 'Ver todos los proyectos', path: '/projects' },
+      },
     },
     {
       label: 'Recorridos',
-      children: [
-        { label: 'Visita guiada', description: 'Conoce el proyecto en persona', image: '/images/entrada.png', action: 'visit' },
-        { label: 'Visión 360°', description: 'Recórrelo desde donde estés', image: '/images/slide2.webp', anchor: '/#vision-360' },
-      ],
+      menu: {
+        eyebrow: 'Conoce Montepinar',
+        links: [
+          { label: 'Visita guiada', description: 'Recórrelo en persona con un asesor', image: '/images/entrada.png', action: 'visit' },
+          { label: 'Visión 360°', description: 'Explóralo desde donde estés', image: '/images/slide2.webp', anchor: '/#vision-360' },
+          { label: 'Galería', description: 'Cada rincón, en imágenes', image: '/images/slide3.webp', anchor: '/#galeria' },
+        ],
+        footer: { label: 'Preguntas frecuentes', anchor: '/#preguntas-frecuentes' },
+      },
     },
     { label: 'Contacto', anchor: '/#contacto' },
   ];
@@ -127,6 +147,10 @@ export class HeaderComponent {
     });
   }
 
+  protected indexLabel(index: number): string {
+    return String(index + 1).padStart(2, '0');
+  }
+
   protected toggleMenu(): void {
     this.menuOpen() ? this.closeMenu() : this.openMenu();
   }
@@ -157,6 +181,7 @@ export class HeaderComponent {
     if (!panel || this.isMobile()) return;
 
     this.openDropdownLabel.set(label);
+    this.previewIndex.set(0);
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const items = panel.querySelectorAll('[data-dropdown-item]');
 
@@ -188,14 +213,16 @@ export class HeaderComponent {
   }
 
   private dropdownPanel(event: Event): HTMLElement | null {
-    return (event.currentTarget as HTMLElement).querySelector<HTMLElement>('[data-dropdown-panel]');
+    const target = event.currentTarget as HTMLElement;
+    // Desde el grupo del menú se busca hacia dentro; desde un enlace del panel, hacia fuera.
+    return target.querySelector<HTMLElement>('[data-dropdown-panel]') ?? target.closest<HTMLElement>('[data-dropdown-panel]');
   }
 
   private isMobile(): boolean {
     return window.matchMedia('(max-width: 767px)').matches;
   }
 
-  protected onChildClick(event: Event, child: NavigationChild, label: string): void {
+  protected onChildClick(event: Event, child: NavigationAction, label: string): void {
     this.closeDropdown(event, label);
     if (child.action === 'visit') this.openVisitSheet();
     else this.closeMenu();

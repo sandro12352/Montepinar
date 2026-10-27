@@ -1,43 +1,129 @@
-<section id="contacto" aria-labelledby="contact-cta-title" class="bg-[#f4f1ea] px-5 py-8 text-white sm:px-8 sm:py-12">
-  <div class="contact-cta-panel relative mx-auto grid  w-[min(88%,1400px)] items-center gap-10 overflow-hidden rounded-2xl bg-[#10271c] px-6 py-10 sm:px-10 sm:py-14 lg:min-h-[430px] lg:grid-cols-[1.25fr_0.75fr] lg:gap-14 lg:px-16">
-    <img
-      class="absolute inset-0 size-full object-cover"
-      src="/images/PalmerasdeMontepinar.png"
-      alt=""
-      loading="lazy"
-      aria-hidden="true" />
-    <div class="absolute inset-0 bg-gradient-to-r from-[#102018]/90 via-[#102018]/75 to-[#102018]/45" aria-hidden="true"></div>
+<section #root id="contacto" aria-labelledby="contact-cta-title"
+  class="bg-[#f4f1ea] py-[clamp(3rem,6vw,5.5rem)] text-white">
+  <div data-panel
+    class="relative isolate mx-auto grid w-[min(88%,1400px)] gap-3 overflow-hidden rounded-[2rem] bg-[var(--brand-forest-900)] p-3 shadow-[0_30px_80px_rgb(3_48_26_/_22%)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+    <!-- Halos de color de fondo -->
+    <span aria-hidden="true"
+      class="pointer-events-none absolute -left-32 -top-32 -z-10 size-[28rem] rounded-full bg-[var(--brand-forest-500)]/30 blur-3xl"></span>
+    <span aria-hidden="true"
+      class="pointer-events-none absolute -bottom-40 left-1/3 -z-10 size-[26rem] rounded-full bg-[var(--brand-primary)]/15 blur-3xl"></span>
 
-    <div class="relative max-w-2xl">
-      <h2 id="contact-cta-title" class="m-0 max-w-[13ch] text-balance text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
-        Tu próximo hogar empieza aquí.
-      </h2>
-      <p class="mb-0 mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
-        Cuéntanos qué proyecto te interesa y te enviaremos la información para dar el siguiente paso.
+    <!-- Texto + formulario -->
+    <div class="flex min-w-0 flex-col justify-center px-4 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
+      <p data-reveal
+        class="m-0 mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-forest-300)]">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        Hablemos
       </p>
-      <div class="mt-8 flex flex-wrap gap-x-10 gap-y-5">
-        <p class="m-0"><span class="block text-2xl font-bold">Atención cercana</span><span class="mt-1 block text-sm text-white/75">Resolvemos tus dudas sobre el proyecto</span></p>
-        <p class="m-0"><span class="block text-2xl font-bold">Por WhatsApp</span><span class="mt-1 block text-sm text-white/75">La conversación continúa contigo</span></p>
-      </div>
+
+      <h2 id="contact-cta-title" data-reveal
+        class="m-0 max-w-[14ch] text-balance text-[clamp(2.4rem,4.6vw,4.2rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
+        Tu próximo hogar empieza <span class="text-[var(--brand-primary)]">aquí.</span>
+      </h2>
+
+      <p data-reveal class="mb-0 mt-5 max-w-md text-pretty text-base leading-relaxed text-white/70 sm:text-lg">
+        Cuéntanos qué proyecto te interesa y un asesor continuará la conversación contigo por WhatsApp.
+      </p>
+
+      <form class="mt-8 grid gap-4" (submit)="requestInformation($event)">
+        <!-- Proyecto: chips seleccionables -->
+        <fieldset data-field class="m-0 min-w-0 border-0 p-0">
+          <legend class="mb-3 p-0 text-xs font-bold uppercase tracking-[0.14em] text-white/55">Proyecto de interés</legend>
+          <div class="flex flex-wrap gap-2">
+            @for (project of projects; track project.value) {
+            <label
+              class="group/chip relative inline-flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-bold transition-[background-color,border-color,color] duration-300 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--brand-primary)] has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-[var(--brand-forest-900)] motion-reduce:transition-none"
+              [class]="selectedProject() === project.value
+                ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white'
+                : 'border-white/15 bg-white/5 text-white/80 hover:border-white/40 hover:text-white'">
+              <input class="sr-only" type="radio" name="project" [value]="project.value"
+                [checked]="selectedProject() === project.value" (change)="selectedProject.set(project.value)" />
+              <span class="grid size-4 place-items-center rounded-full transition-all duration-300 motion-reduce:transition-none"
+                [class]="selectedProject() === project.value ? 'bg-white text-[var(--brand-primary)]' : 'border border-white/40'"
+                aria-hidden="true">
+                @if (selectedProject() === project.value) {
+                <ng-icon name="lucideCheck" size="11" />
+                }
+              </span>
+              {{ project.label }}
+            </label>
+            }
+          </div>
+        </fieldset>
+
+        <!-- Datos -->
+        <div data-field class="grid gap-3 sm:grid-cols-2">
+          <label class="group/field relative block">
+            <span class="sr-only">Nombre</span>
+            <input name="name" type="text" autocomplete="name" placeholder="Tu nombre" required
+              class="peer min-h-13 w-full rounded-2xl border border-white/12 bg-white/[0.06] px-4 text-sm text-white outline-none transition-[border-color,background-color] duration-300 placeholder:text-white/45 hover:border-white/25 focus:border-[var(--brand-primary)] focus:bg-white/[0.09] motion-reduce:transition-none" />
+          </label>
+          <label class="group/field relative block">
+            <span class="sr-only">Correo electrónico</span>
+            <input name="email" type="email" autocomplete="email" placeholder="nombre@correo.com" required
+              class="min-h-13 w-full rounded-2xl border border-white/12 bg-white/[0.06] px-4 text-sm text-white outline-none transition-[border-color,background-color] duration-300 placeholder:text-white/45 hover:border-white/25 focus:border-[var(--brand-primary)] focus:bg-white/[0.09] motion-reduce:transition-none" />
+          </label>
+        </div>
+
+        <div data-field class="mt-1 flex flex-wrap items-center gap-x-6 gap-y-4">
+          <button type="submit"
+            class="group/btn relative isolate inline-flex min-h-13 cursor-pointer items-center gap-3 overflow-hidden rounded-2xl border-0 bg-[var(--brand-primary)] py-2 pl-6 pr-2 text-sm font-extrabold text-white transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] active:scale-[0.98] motion-reduce:transition-none">
+            <span aria-hidden="true"
+              class="absolute inset-0 -z-10 origin-left scale-x-0 bg-[var(--brand-orange-600)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 motion-reduce:transition-none"></span>
+            Solicitar información
+            <span class="grid size-9 place-items-center rounded-xl bg-white/15 transition-transform duration-300 group-hover/btn:translate-x-0.5 motion-reduce:transition-none">
+              <ng-icon name="lucideArrowRight" size="17" aria-hidden="true" />
+            </span>
+          </button>
+
+          <button type="button" (click)="openVisit()"
+            class="group/link inline-flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-sm font-extrabold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)]">
+            <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" class="text-[var(--brand-primary)]" />
+            <span class="border-b-2 border-[var(--brand-primary)] pb-0.5">Prefiero agendar una visita</span>
+          </button>
+        </div>
+
+        <p data-field class="m-0 flex items-center gap-2 text-xs text-white/50">
+          <ng-icon name="lucideMessageCircle" size="14" aria-hidden="true" class="text-[var(--brand-forest-400)]" />
+          Revisarás el mensaje antes de enviarlo por WhatsApp.
+        </p>
+      </form>
     </div>
 
-    <form class="relative flex flex-col gap-3 rounded-xl border border-white/15 bg-[#1d211b]/90 p-5 shadow-[0_20px_60px_rgb(0_0_0_/_22%)] backdrop-blur-md sm:p-6" (submit)="requestInformation($event)">
-      <div class="flex flex-col gap-2">
-        <label for="contact-project" class="text-sm font-semibold text-white">Proyecto de interés</label>
-        <select id="contact-project" name="project" required class="min-h-12 w-full rounded-lg border border-white/20 bg-white/10 px-3 text-sm text-white outline-none transition-colors focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white/40">
-          <option value="" disabled selected class="text-[#1f1a14]">Selecciona un proyecto</option>
-          <option value="Montepinar Iquitos" class="text-[#1f1a14]">Montepinar Iquitos</option>
-          <option value="Palmeras de Montepinar" class="text-[#1f1a14]">Palmeras de Montepinar</option>
-        </select>
+    <!-- Imagen con tarjetas flotantes -->
+    <div data-media class="relative min-h-[22rem] overflow-hidden rounded-[1.5rem] bg-[var(--brand-forest-800)] lg:min-h-full">
+      <img data-media-img class="absolute inset-0 size-full object-cover" src="/images/PalmerasdeMontepinar.png"
+        alt="Pórtico de ingreso de Palmeras de Montepinar" loading="lazy" />
+      <span aria-hidden="true"
+        class="absolute inset-0 bg-gradient-to-t from-[var(--brand-forest-900)]/70 via-transparent to-[var(--brand-forest-900)]/20"></span>
+
+      <!-- Tarjeta: asesores -->
+      <div data-float
+        class="absolute left-4 top-4 flex items-center gap-3 rounded-2xl border border-white/20 bg-white/15 px-4 py-3 shadow-[0_12px_30px_rgb(0_0_0_/_18%)] backdrop-blur-md sm:left-6 sm:top-6">
+        <span class="flex -space-x-2.5" aria-hidden="true">
+          @for (avatar of avatars; track avatar) {
+          <img class="size-8 rounded-full object-cover ring-2 ring-white/80" [src]="avatar" alt="" width="32" height="32"
+            loading="lazy" />
+          }
+        </span>
+        <span class="leading-tight">
+          <span class="block text-sm font-extrabold">Asesoría personalizada</span>
+          <span class="block text-xs text-white/75">Te acompañamos en cada paso</span>
+        </span>
       </div>
-      <div class="flex flex-col gap-2">
-        <label for="contact-email" class="text-sm font-semibold text-white">Correo electrónico</label>
-        <input id="contact-email" name="email" type="email" autocomplete="email" placeholder="nombre@correo.com" required class="min-h-12 w-full rounded-lg border border-white/20 bg-white/10 px-3 text-sm text-white outline-none placeholder:text-white/65 transition-colors focus-visible:border-white focus-visible:ring-2 focus-visible:ring-white/40" />
-      </div>
-      <button type="submit" class="mt-1 inline-flex min-h-12 w-fit items-center justify-center whitespace-nowrap rounded-lg bg-[var(--brand-primary)] px-5 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1d211b] active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none">
-        Solicitar información
-      </button>
-      <p class="m-0 text-xs leading-relaxed text-white/75">Revisarás el mensaje antes de enviarlo por WhatsApp.</p>
-    </form>
+
+      <!-- Tarjeta: canal directo -->
+      <a data-float [href]="'https://wa.me/' + phone" target="_blank" rel="noopener noreferrer"
+        class="group/wa absolute bottom-4 right-4 flex items-center gap-3 rounded-2xl bg-white py-3 pl-3 pr-5 text-[var(--brand-forest-900)] no-underline shadow-[0_16px_40px_rgb(0_0_0_/_22%)] transition-shadow duration-300 hover:shadow-[0_20px_50px_rgb(0_0_0_/_30%)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] sm:bottom-6 sm:right-6">
+        <span class="relative grid size-11 place-items-center rounded-xl bg-[var(--brand-forest-500)] text-white">
+          <ng-icon name="lucidePhone" size="18" aria-hidden="true" />
+          <span class="absolute -right-0.5 -top-0.5 size-3 rounded-full bg-[var(--brand-green-400)] ring-2 ring-white motion-safe:animate-pulse" aria-hidden="true"></span>
+        </span>
+        <span class="leading-tight">
+          <span class="block text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#1f1a14]/55">Escríbenos directo</span>
+          <span class="block text-base font-extrabold tracking-tight">+51 932 284 185</span>
+        </span>
+      </a>
+    </div>
   </div>
 </section>

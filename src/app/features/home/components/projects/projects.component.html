@@ -89,7 +89,7 @@
         }
 
         <!-- Progreso -->
-        <div class="absolute inset-x-0 bottom-0 flex items-center gap-4">
+        <div data-stage-controls class="absolute inset-x-0 bottom-0 flex items-center gap-4">
           <ol class="m-0 flex list-none items-center gap-2 p-0">
             @for (project of projects; track project.slug; let i = $index) {
             <li>

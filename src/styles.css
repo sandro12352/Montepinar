@@ -209,6 +209,12 @@
     @apply border-none;
   }
 
+  /* Reserva siempre el hueco de la barra de scroll: al quitar el loader el ancho no cambia
+     y los pines de ScrollTrigger no quedan desplazados horizontalmente. */
+  html {
+    scrollbar-gutter: stable;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-corporate);

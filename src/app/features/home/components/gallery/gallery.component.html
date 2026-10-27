@@ -1,8 +1,9 @@
 <section #root id="galeria"
-  class="min-h-dvh bg-[#f4f1ea] py-10 pl-5 pr-0 text-[#1f1a14] sm:py-12 sm:pl-8 lg:py-12 lg:pl-[max(2rem,calc((100vw-88.5rem)/2))]">
+  class="min-h-dvh bg-[#f4f1ea] py-10 text-[#1f1a14] sm:py-12 lg:py-12">
   <div
     class="grid min-h-[calc(100dvh-5rem)] w-full grid-cols-1 lg:min-h-[calc(100dvh-6rem)] lg:grid-cols-1 lg:items-center lg:gap-10">
-    <header data-gallery-heading class="max-w-[30rem] pr-5 sm:pr-8 lg:pr-0">
+    <header data-gallery-heading
+      class="box-content max-w-[30rem] pl-5 pr-5 sm:pl-8 sm:pr-8 lg:pl-[max(2rem,calc((100vw-88.5rem)/2))] lg:pr-0">
       <p
         class="mb-4 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">
         <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
@@ -16,24 +17,38 @@
       </p>
     </header>
 
-    <hlm-carousel class="block w-full min-w-0" [options]="{ loop: true, align: 'start' }">
-      <hlm-carousel-content class="-ml-4 py-2">
+    <!-- Sin loop: Embla respeta el pl- del contenido solo en el primer slide; al desplazar ocupa todo el ancho -->
+    <hlm-carousel class="block w-full min-w-0" [options]="{ loop: false, align: 'start' }">
+      <hlm-carousel-content class="-ml-4 py-2 pl-5 sm:pl-8 lg:pl-[max(2rem,calc((100vw-88.5rem)/2))]">
         @for (image of images; track image.src; let index = $index) {
         <hlm-carousel-item #galeryItem class="basis-[82%] pl-4 sm:basis-[58%] lg:basis-[32%] galery-item">
-          <div data-gallery-item
-            class="relative z-0 min-w-0 transition-transform duration-500 ease-out hover:z-20 hover:-translate-y-2 hover:scale-[1.035] focus-within:z-20 focus-within:-translate-y-2 focus-within:scale-[1.035] motion-reduce:transition-none lg:hover:-translate-y-3 lg:focus-within:-translate-y-3">
+          <!-- El hover vive dentro de la tarjeta (overflow-hidden): nada se sale del carrusel -->
+          <div data-gallery-item class="min-w-0">
             <button type="button" data-gallery-card
-              class="group relative block aspect-square w-full cursor-zoom-in overflow-hidden rounded-xl bg-[#ded8cd] text-left shadow-[0_10px_24px_rgb(73_54_34_/_12%)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-4"
+              class="group relative isolate block aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl bg-[#ded8cd] text-left shadow-[0_10px_24px_rgb(73_54_34_/_12%)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--brand-primary)]"
               [attr.aria-label]="'Ampliar imagen: ' + image.alt" (click)="openImage(index)">
               <img data-gallery-image
-                class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
+                class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.07] group-focus-visible:scale-[1.07] motion-reduce:transition-none"
                 [src]="image.src" [alt]="image.alt" loading="lazy" />
-              <span
-                class="absolute inset-0 grid place-items-center bg-[#10271c]/0 text-white opacity-100 transition-[background-color,opacity] duration-300 group-hover:bg-[#10271c]/35 group-focus-visible:bg-[#10271c]/35 md:opacity-0 md:group-hover:opacity-100 md:group-focus-visible:opacity-100 motion-reduce:transition-none">
-                <span
-                  class="inline-flex items-center gap-2 rounded-full border border-white/70 bg-[#10271c]/65 px-4 py-2.5 text-sm font-bold text-white backdrop-blur-sm">
-                  <ng-icon name="lucideExpand" size="17" aria-hidden="true" />
-                  Ver imagen
+
+              <!-- Degradado inferior: se intensifica al pasar el mouse -->
+              <span aria-hidden="true"
+                class="absolute inset-0 bg-gradient-to-t from-[#10271c]/80 via-[#10271c]/10 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none"></span>
+
+              <!-- Botón de ampliar -->
+              <span aria-hidden="true"
+                class="absolute right-4 top-4 grid size-10 place-items-center rounded-full bg-white/90 text-[#10271c] shadow-sm backdrop-blur-sm transition-[transform,opacity,background-color,color] duration-300 group-hover:bg-[var(--brand-primary)] group-hover:text-white md:scale-75 md:opacity-0 md:group-hover:scale-100 md:group-hover:opacity-100 md:group-focus-visible:scale-100 md:group-focus-visible:opacity-100 motion-reduce:transition-none">
+                <ng-icon name="lucideExpand" size="17" />
+              </span>
+
+              <!-- Pie: número y descripción, sube suavemente al pasar el mouse -->
+              <span aria-hidden="true"
+                class="absolute inset-x-0 bottom-0 flex items-end gap-3 p-4 text-white transition-transform duration-500 ease-out md:translate-y-2 md:group-hover:translate-y-0 md:group-focus-visible:translate-y-0 motion-reduce:transition-none sm:p-5">
+                <span class="shrink-0 text-xs font-extrabold tabular-nums tracking-[0.14em] text-white/80">
+                  {{ (index + 1).toString().padStart(2, '0') }}
+                </span>
+                <span class="line-clamp-2 text-sm font-semibold leading-snug md:opacity-0 md:transition-opacity md:duration-500 md:group-hover:opacity-100 md:group-focus-visible:opacity-100">
+                  {{ image.alt }}
                 </span>
               </span>
             </button>
@@ -42,15 +57,15 @@
         }
       </hlm-carousel-content>
 
-      <div class="relative z-10 mt-5 flex w-full items-center justify-center gap-4 pr-5 sm:pr-8 lg:mt-6" role="group"
-        aria-label="Controles de testimonios">
+      <div class="relative z-10 mt-5 flex w-full items-center justify-center gap-4 px-5 sm:px-8 lg:mt-6" role="group"
+        aria-label="Controles de la galería">
         <button hlm-carousel-previous type="button"
           class="!static !top-auto !start-auto !end-auto !translate-y-0 !transform-none !h-12 !w-12 shrink-0 rounded-xl border-0 bg-white text-[#60666b] shadow-sm transition-colors hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 hover:cursor-pointer"
-          aria-label="Testimonio anterior"></button>
+          aria-label="Imagen anterior"></button>
 
         <button hlm-carousel-next type="button"
           class="!static !top-auto !start-auto !end-auto !translate-y-0 !transform-none !h-12 !w-12 shrink-0 rounded-xl border-0 bg-white text-[#60666b] shadow-sm transition-colors hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 hover:cursor-pointer"
-          aria-label="Siguiente testimonio"></button>
+          aria-label="Siguiente imagen"></button>
       </div>
     </hlm-carousel>
   </div>

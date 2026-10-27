@@ -1,4 +1,4 @@
-import { afterNextRender, Component, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { afterNextRender, Component, DestroyRef, effect, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -19,6 +19,7 @@ import {
 } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { LoaderService } from '../../../../core/services/loader.service';
 import { VisitSheetService } from '../../../../core/services/visit-sheet.service';
 import { PROJECTS } from '../../../projects/data/projects.data';
 
@@ -54,6 +55,7 @@ const PROJECT_STOPS = [0.4, 1.7, 3.0];
 export class HomeProjectsComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly visitSheet = inject(VisitSheetService);
+  private readonly loaderService = inject(LoaderService);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 
   protected readonly projects = PROJECTS;
@@ -79,6 +81,11 @@ export class HomeProjectsComponent {
   }
 
   constructor() {
+    // Al quitarse el loader cambia el layout (aparece el scroll); se recalcula el pin.
+    effect(() => {
+      if (this.loaderService.ready()) requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
+
     afterNextRender(() => {
       const root = this.root().nativeElement;
       const mm = gsap.matchMedia(root);
@@ -115,7 +122,7 @@ export class HomeProjectsComponent {
             end: '+=260%',
             pin: true,
             scrub: 0.6,
-            anticipatePin: 1,
+            invalidateOnRefresh: true,
             onUpdate: (self) => {
               const time = self.progress * TIMELINE_TOTAL;
               this.active.set(time < 1.05 ? 0 : time < 2.35 ? 1 : 2);
@@ -137,6 +144,23 @@ export class HomeProjectsComponent {
         timeline.fromTo('[data-progress]', { scaleX: 0.04 }, { scaleX: 1, duration: TIMELINE_TOTAL, ease: 'none' }, 0);
 
         this.trigger = timeline.scrollTrigger ?? null;
+
+        // Entrada: al aparecer el escenario (antes de fijarse) se revela el primer proyecto.
+        // Solo toca propiedades que la línea de tiempo del scroll no anima, para no pisarse.
+        gsap
+          .timeline({ defaults: { ease: 'power3.out' }, scrollTrigger: { trigger: stage, start: 'top 80%', once: true } })
+          .fromTo(slides[0], { clipPath: 'inset(14% 10% 14% 10% round 2rem)', autoAlpha: 0 }, { clipPath: open, autoAlpha: 1, duration: 1.2, ease: 'power4.out' })
+          .fromTo(panels[0].children, { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.08 }, 0.15)
+          .fromTo('[data-stage-controls]', { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.7 }, 0.6);
+
+        // Las fuentes y las imágenes diferidas de secciones anteriores cambian la altura del
+        // documento después de calcular el pin; se recalcula para que no salte al fijarse.
+        document.fonts.ready.then(() => ScrollTrigger.refresh());
+        const pendingImages = Array.from(document.querySelectorAll<HTMLImageElement>('img')).filter(
+          (img) => !img.complete && img.compareDocumentPosition(stage) & Node.DOCUMENT_POSITION_FOLLOWING,
+        );
+        pendingImages.forEach((img) => img.addEventListener('load', () => ScrollTrigger.refresh(), { once: true }));
+
         return () => {
           this.trigger = null;
         };
