@@ -13,9 +13,9 @@ export class AboutWhoComponent {
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 
   protected readonly points = [
-    { title: 'Financiamiento directo', text: 'Planes a tu medida, sin bancos ni intermediarios.' },
-    { title: 'Áreas verdes y recreación', text: 'Espacios pensados para respirar y compartir.' },
-    { title: 'Acompañamiento legal', text: 'Un asesor te guía en cada documento.' },
+    { title: '2018 · Nace la Inmobiliaria', text: 'Pedro Machuca ve la oportunidad de brindar más oportunidades a diferentes personas.' },
+    { title: 'El éxito de la Asociación', text: 'La satisfacción de los compradores de la Asociación de Vivienda Montepinar abre nuevos horizontes.' },
+    { title: 'Hoy', text: 'Terrenos en Chancayllo y en Iquitos, una de las mejores zonas selváticas del Perú.' },
   ];
 
   constructor() {

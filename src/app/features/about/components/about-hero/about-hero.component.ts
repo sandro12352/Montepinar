@@ -23,7 +23,7 @@ export class AboutHeroComponent {
 
   protected readonly trustCards = [
     { icon: 'lucideBadgeCheck', title: 'Proyectos verificados', text: 'Documentación y acompañamiento legal' },
-    { icon: 'lucideUsers', title: '+6,000 familias', text: 'ya construyen su sueño con nosotros' },
+    { icon: 'lucideUsers', title: '+5,000 familias', text: 'ya construyen su sueño con nosotros' },
   ];
 
   private animated = false;

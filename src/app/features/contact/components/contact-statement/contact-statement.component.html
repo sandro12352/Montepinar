@@ -1,0 +1,41 @@
+<section #root aria-labelledby="contact-statement-title"
+  class="relative isolate overflow-hidden bg-[var(--brand-forest-900)] text-white">
+  <div class="mx-auto grid min-h-[44rem] w-[min(88%,1400px)] items-center gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+    <!-- Dos círculos que se salen del borde de la sección -->
+    <div class="relative order-2 h-[30rem] sm:h-[36rem] lg:order-1 lg:h-full lg:min-h-[44rem]" aria-hidden="false">
+      <div data-circle="big"
+        class="absolute -top-24 left-[4%] size-[min(30rem,86%)] overflow-hidden rounded-full bg-[var(--brand-forest-800)] sm:-top-28 lg:-top-32 lg:left-[8%] lg:size-[min(36rem,88%)]">
+        <img data-img class="size-full object-cover" src="/images/visita/visita-mar.png" style="object-position: 50% 45%"
+          alt="Asesora mostrando el plano del proyecto a un grupo de visitantes" loading="lazy" />
+      </div>
+
+      <div data-circle="small"
+        class="absolute -bottom-16 left-[42%] size-[min(16rem,52%)] overflow-hidden rounded-full bg-[var(--brand-forest-800)] ring-8 ring-[var(--brand-forest-900)] sm:-bottom-20 lg:-bottom-24 lg:left-[44%] lg:size-[min(19rem,52%)]">
+        <img data-img class="size-full object-cover" src="/images/visita/oficina.png" style="object-position: 42% 30%"
+          alt="Asesora de Montepinar preparando documentos en la oficina" loading="lazy" />
+      </div>
+    </div>
+
+    <!-- Frase y botón -->
+    <div class="order-1 py-[clamp(4rem,8vw,6rem)] lg:order-2">
+      <h2 id="contact-statement-title"
+        class="m-0 max-w-[14ch] text-balance text-[clamp(2.4rem,5vw,4.5rem)] font-semibold leading-[1.08] tracking-[-0.04em]">
+        <span class="block overflow-hidden pb-[0.08em]"><span data-word class="block">¿Quieres conocer</span></span>
+        <span class="block overflow-hidden pb-[0.08em]"><span data-word class="block">Montepinar en</span></span>
+        <span class="block overflow-hidden pb-[0.08em]"><span data-word class="block text-[var(--brand-primary)]">persona?</span></span>
+      </h2>
+
+      <p data-fade class="mb-0 mt-5 max-w-sm text-pretty text-base leading-relaxed text-white/70">
+        La visita guiada es gratis: bus de ida y vuelta, desayuno y almuerzo incluidos.
+      </p>
+
+      <button data-fade type="button" (click)="openVisit()"
+        class="group/btn relative isolate mt-9 inline-flex min-h-13 cursor-pointer items-center gap-3 overflow-hidden rounded-full border-2 border-white/80 bg-transparent px-7 py-3 text-sm font-extrabold text-white transition-colors duration-300 hover:border-[#FB7A11] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] motion-reduce:transition-none">
+        <span aria-hidden="true"
+          class="absolute inset-0 -z-10 origin-left scale-x-0 bg-[var(--brand-primary)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
+        Agendar visita guiada
+        <ng-icon name="lucideArrowRight" size="18" aria-hidden="true" class="transition-transform duration-300 group-hover/btn:translate-x-1 motion-reduce:transition-none" />
+      </button>
+    </div>
+  </div>
+</section>

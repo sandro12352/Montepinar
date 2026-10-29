@@ -85,17 +85,17 @@ const EXTRA: Record<string, ProjectExtra> = {
   chancay: {
     tagline: 'Un lugar propio, a minutos del nuevo puerto.',
     overview:
-      'Proyecto Montepinar en Chancay es un desarrollo campestre de lotes amplios rodeados de áreas verdes, con club privado y seguridad permanente. Un terreno pensado para construir tu casa de campo hoy y ver crecer su valor mientras la zona se desarrolla.',
+      'Palmeras de Montepinar es un desarrollo campestre con lotes desde 120 m² hasta 1,000 m², más de 2,000 áreas verdes, country club y seguridad permanente. Un terreno pensado para construir tu casa de campo hoy y ver crecer su valor mientras la zona se desarrolla.',
     facts: [
-      { value: '300 m²', label: 'Lote mínimo' },
-      { value: '40%', label: 'Áreas verdes' },
+      { value: '120 m²', label: 'Lote mínimo' },
+      { value: '+2,000', label: 'Áreas verdes' },
       { value: '24/7', label: 'Seguridad' },
       { value: '60', label: 'Meses para pagar' },
     ],
     amenities: [
-      { icon: 'lucideUsers', label: 'Club privado', text: 'Zona social y parrilleras para toda la familia.' },
+      { icon: 'lucideUsers', label: 'Country club', text: 'Zona social y parrilleras para toda la familia.' },
       { icon: 'lucideShieldCheck', label: 'Seguridad 24/7', text: 'Ingreso controlado y vigilancia permanente.' },
-      { icon: 'lucideSprout', label: 'Áreas verdes', text: 'Jardines y alamedas que cubren el 40% del proyecto.' },
+      { icon: 'lucideSprout', label: 'Áreas verdes', text: 'Más de 2,000 áreas verdes, con jardines y alamedas.' },
       { icon: 'lucideZap', label: 'Servicios básicos', text: 'Accesos y servicios planificados hasta tu lote.' },
     ],
     gallery: [
@@ -106,9 +106,9 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/slide2.webp', alt: 'Áreas del proyecto' },
     ],
     plans: [
-      { name: 'Lote Jardín', area: 300, price: 18000, frontage: '10 × 30 m', description: 'Ideal para tu primera casa de campo.', tag: 'Más accesible' },
+      { name: 'Lote Jardín', area: 120, price: 18000, frontage: '8 × 15 m', description: 'Ideal para tu primera casa de campo.', tag: 'Más accesible' },
       { name: 'Lote Familiar', area: 450, price: 27000, frontage: '15 × 30 m', description: 'Espacio para casa, jardín y zona de parrilla.', tag: 'Más elegido' },
-      { name: 'Lote Premium', area: 650, price: 39000, frontage: '20 × 32.5 m', description: 'Frente amplio y máxima privacidad.' },
+      { name: 'Lote Premium', area: 1000, price: 39000, frontage: '25 × 40 m', description: 'Frente amplio y máxima privacidad.' },
     ],
     mapQuery: 'Chancay, Lima, Perú',
     address: 'Distrito de Chancay, provincia de Huaral, Lima',
@@ -122,18 +122,18 @@ const EXTRA: Record<string, ProjectExtra> = {
     legal: [],
   },
   huaral: {
-    tagline: 'Deporte, sol y comunidad en cada rincón.',
+    tagline: 'Tu lote cerca de todo, junto a Mall Montepinar.',
     overview:
-      'En Huaral reunimos lotes amplios con áreas recreativas y deportivas: canchas de pádel y tenis, riego tecnificado y un clima soleado casi todo el año. Un proyecto pensado para disfrutar el campo sin renunciar a la comodidad.',
+      'Asociación Montepinar reúne lotes de 120 a 200 m² junto a Mall Montepinar, con más de 5,000 áreas verdes y un clima soleado casi todo el año. Un proyecto pensado para disfrutar el campo sin renunciar a la comodidad.',
     facts: [
-      { value: '350 m²', label: 'Lote mínimo' },
-      { value: '2', label: 'Canchas deportivas' },
+      { value: '120 m²', label: 'Lote mínimo' },
+      { value: '+5,000', label: 'Áreas verdes' },
       { value: '365', label: 'Días de sol' },
       { value: '48', label: 'Meses para pagar' },
     ],
     amenities: [
-      { icon: 'lucideTrophy', label: 'Pádel y tenis', text: 'Canchas de uso exclusivo para propietarios.' },
-      { icon: 'lucideDroplets', label: 'Riego tecnificado', text: 'Áreas verdes cuidadas todo el año.' },
+      { icon: 'lucideStore', label: 'Mall Montepinar', text: 'Comercio y servicios cerca de tu lote.' },
+      { icon: 'lucideSprout', label: 'Áreas verdes', text: 'Más de 5,000 áreas verdes para el descanso y la recreación.' },
       { icon: 'lucideSun', label: 'Clima soleado', text: 'Sol casi todo el año, ideal para el descanso.' },
       { icon: 'lucideShieldCheck', label: 'Acceso controlado', text: 'Ingreso con vigilancia y registro de visitas.' },
     ],
@@ -145,9 +145,9 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/presentacion.webp', alt: 'Presentación del proyecto' },
     ],
     plans: [
-      { name: 'Lote Campo', area: 350, price: 18000, frontage: '10 × 35 m', description: 'Tu primer paso en el campo, listo para construir.', tag: 'Más accesible' },
-      { name: 'Lote Deportivo', area: 500, price: 25500, frontage: '12.5 × 40 m', description: 'Cerca de las canchas y la zona social.', tag: 'Más elegido' },
-      { name: 'Lote Hacienda', area: 800, price: 40000, frontage: '20 × 40 m', description: 'Amplitud para casa, huerto y piscina.' },
+      { name: 'Lote Campo', area: 120, price: 15000, frontage: '8 × 15 m', description: 'Tu primer paso en el campo, listo para construir.', tag: 'Más accesible' },
+      { name: 'Lote Jardín', area: 160, price: 25500, frontage: '8 × 20 m', description: 'Un poco más de espacio para tu jardín.', tag: 'Más elegido' },
+      { name: 'Lote Amplio', area: 200, price: 40000, frontage: '10 × 20 m', description: 'La mayor amplitud dentro del proyecto.' },
     ],
     mapQuery: 'Huaral, Lima, Perú',
     address: 'Provincia de Huaral, Lima',
@@ -163,7 +163,7 @@ const EXTRA: Record<string, ProjectExtra> = {
   iquitos: {
     tagline: 'Naturaleza viva a las puertas de la selva.',
     overview:
-      'Montepinar Iquitos es un proyecto eco-residencial con lotes generosos, laguna privada y bosque protegido. Un lugar para vivir cerca de la naturaleza con energía limpia y una comunidad que crece contigo.',
+      'Amazon Lodge Montepinar es un proyecto eco-residencial con lotes generosos, laguna privada y bosque protegido. Un lugar para vivir cerca de la naturaleza con energía limpia y una comunidad que crece contigo.',
     facts: [
       { value: '500 m²', label: 'Lote mínimo' },
       { value: '1', label: 'Laguna privada' },

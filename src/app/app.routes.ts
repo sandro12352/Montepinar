@@ -29,6 +29,10 @@ export const routes: Routes = [
             {
                 path:'visita-guiada',
                 loadComponent:()=>import('./features/guidedTour/components/guided-tour/guided-tour.component').then(m=>m.GuidedTourComponent)
+            },
+            {
+                path:'contacto',
+                loadComponent:()=>import('./features/contact/components/contact/contact.component').then(m=>m.ContactComponent)
             }
         ]
     }

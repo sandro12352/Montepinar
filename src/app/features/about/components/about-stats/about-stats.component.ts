@@ -18,8 +18,8 @@ export class AboutStatsComponent {
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 
   protected readonly stats = [
-    { value: 10, prefix: '+', suffix: '', label: 'Años de trayectoria', text: 'Desarrollando comunidades campestres con visión de largo plazo.' },
-    { value: 6000, prefix: '+', suffix: '', label: 'Familias felices', text: 'Hogares que ya construyen su sueño en Montepinar.' },
+    { value: 9, prefix: '+', suffix: '', label: 'Años de trayectoria', text: 'Desarrollando comunidades campestres con visión de largo plazo.' },
+    { value: 5000, prefix: '+', suffix: '', label: 'Familias felices', text: 'Hogares que ya construyen su sueño en Montepinar.' },
     { value: 15, prefix: '', suffix: '', label: 'Proyectos entregados', text: 'Entornos verdes listos para vivir y compartir.' },
     { value: 98, prefix: '', suffix: '%', label: 'Clientes satisfechos', text: 'Familias que recomiendan su experiencia con nosotros.' },
   ];

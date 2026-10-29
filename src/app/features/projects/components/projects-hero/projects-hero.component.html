@@ -6,7 +6,7 @@
     class="pointer-events-none absolute -right-24 -top-24 -z-10 size-[26rem] rounded-full bg-[var(--brand-forest-400)]/20 blur-3xl"></span>
 
   <div
-    class="mx-auto grid w-[min(88%,1400px)] items-center gap-[clamp(2.5rem,5vw,4rem)] pb-[clamp(3.5rem,6vw,5rem)] lg:grid-cols-[1.05fr_1fr]">
+    class="mx-auto grid w-[85%] items-center gap-[clamp(2.5rem,5vw,4rem)] pb-[clamp(3.5rem,6vw,5rem)] lg:grid-cols-[1.05fr_1fr]">
     <div class="flex flex-col items-start">
       <p data-reveal
         class="m-0 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.16em] text-white/90">
@@ -25,20 +25,19 @@
       </p>
 
       <div data-reveal class="mt-8 flex flex-wrap items-center gap-3">
-        <a href="#catalogo"
-          class="group/btn relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-6 py-3.5 text-sm font-extrabold text-white no-underline shadow-lg shadow-black/25 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] motion-reduce:transition-none">
+        <button type="button" (click)="openVisit()"
+          class="group/btn relative isolate inline-flex min-h-12 cursor-pointer items-center gap-3 overflow-hidden rounded-xl border-0 bg-[var(--brand-primary)] px-6 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-black/25 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] motion-reduce:transition-none">
           <span aria-hidden="true"
             class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-orange-600)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
-          <span class="relative z-10">Explorar proyectos</span>
-          <ng-icon name="lucideArrowRight" size="18" aria-hidden="true"
-            class="relative z-10 transition-transform duration-200 group-hover/btn:translate-x-1 motion-reduce:transition-none" />
-        </a>
-        <a href="tel:+51932284185"
+          <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" class="relative z-10" />
+          <span class="relative z-10">Agendar visita</span>
+        </button>
+        <a [href]="whatsapp" target="_blank" rel="noopener noreferrer"
           class="group/btn relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl border border-white/60 bg-white/10 px-6 py-3.5 text-sm font-extrabold text-white no-underline backdrop-blur-sm transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] motion-reduce:transition-none">
           <span aria-hidden="true"
             class="absolute inset-0 origin-left scale-x-0 bg-white/20 transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
-          <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" class="relative z-10" />
-          <span class="relative z-10">Agendar visita</span>
+          <ng-icon name="lucideMessageCircle" size="18" aria-hidden="true" class="relative z-10" />
+          <span class="relative z-10">Escribir por WhatsApp</span>
         </a>
       </div>
 
@@ -71,7 +70,7 @@
                 class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></span>
               <figcaption data-arch-label
                 class="absolute inset-x-0 bottom-4 text-center text-[0.65rem] font-extrabold uppercase tracking-[0.16em] text-white sm:text-xs">
-                {{ arch.project.location }}
+                {{ arch.project.name }}
               </figcaption>
             </figure>
           </div>

@@ -12,6 +12,8 @@ import {
   lucideSprout,
   lucideSun,
   lucideTreePine,
+  lucideStore,
+
   lucideTrophy,
   lucideUsers,
   lucideWaves,
@@ -45,6 +47,8 @@ const PROJECT_STOPS = [0.4, 1.7, 3.0];
       lucideSprout,
       lucideSun,
       lucideTreePine,
+      lucideStore,
+
       lucideTrophy,
       lucideUsers,
       lucideWaves,

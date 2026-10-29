@@ -25,7 +25,7 @@ export class ProjectDetailHeroComponent {
   protected readonly price = () => formatSoles(Math.min(...this.project().plans.map((plan) => plan.price)));
 
   protected whatsappLink(): string {
-    const message = `Hola, quisiera información del proyecto de ${this.project().location}.`;
+    const message = `Hola, quisiera información del proyecto ${this.project().name}.`;
     return `https://wa.me/51932284185?text=${encodeURIComponent(message)}`;
   }
 

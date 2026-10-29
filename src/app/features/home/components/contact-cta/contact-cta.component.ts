@@ -21,7 +21,7 @@ export class ContactCtaComponent {
   private readonly visitSheet = inject(VisitSheetService);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 
-  protected readonly projects = PROJECTS.map((project) => ({ value: `Montepinar ${project.location}`, label: project.location }));
+  protected readonly projects = PROJECTS.map((project) => ({ value: project.name, label: project.name }));
   protected readonly selectedProject = signal(this.projects[0].value);
   protected readonly phone = WHATSAPP_NUMBER;
   protected readonly avatars = [

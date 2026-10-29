@@ -13,6 +13,8 @@ interface NavigationAction {
   readonly label: string;
   readonly path?: string;
   readonly anchor?: string;
+  // Fragmento de la ruta (por ejemplo, la sección legal de un proyecto).
+  readonly fragment?: string;
   // Acción en lugar de navegación (abre el sheet de visita).
   readonly action?: 'visit';
 }
@@ -74,10 +76,24 @@ export class HeaderComponent {
       menu: {
         eyebrow: 'Nuestros proyectos',
         links: PROJECTS.map((project) => ({
-          label: project.location,
+          label: project.name,
           description: project.category,
           image: project.image,
           path: `/projects/${project.slug}`,
+        })),
+        footer: { label: 'Ver todos los proyectos', path: '/projects' },
+      },
+    },
+    {
+      label: 'Información legal',
+      menu: {
+        eyebrow: 'Documentación en regla',
+        links: PROJECTS.map((project) => ({
+          label: project.name,
+          description: 'Títulos, partidas y contrato',
+          image: project.image,
+          path: `/projects/${project.slug}`,
+          fragment: 'detalle-legal',
         })),
         footer: { label: 'Ver todos los proyectos', path: '/projects' },
       },
@@ -88,12 +104,12 @@ export class HeaderComponent {
         eyebrow: 'Conoce Montepinar',
         links: [
           { label: 'Visita guiada', description: 'Recórrelo en persona con un asesor', image: '/images/slide3.webp', path: '/visita-guiada' },
-          { label: 'Galería', description: 'Cada rincón, en imágenes', image: '/images/slide3.webp', anchor: '/#galeria' },
+          { label: 'Galería', description: 'Cada rincón, en imágenes', image: '/images/slide3.webp', path: '/', fragment: 'galeria' },
         ],
-        footer: { label: 'Preguntas frecuentes', anchor: '/#preguntas-frecuentes' },
+        footer: { label: 'Preguntas frecuentes', path: '/', fragment: 'preguntas-frecuentes' },
       },
     },
-    { label: 'Contacto', anchor: '/#contacto' },
+    { label: 'Contacto', path: '/contacto' },
   ];
 
   constructor() {
@@ -146,10 +162,6 @@ export class HeaderComponent {
     });
   }
 
-  protected indexLabel(index: number): string {
-    return String(index + 1).padStart(2, '0');
-  }
-
   protected toggleMenu(): void {
     this.menuOpen() ? this.closeMenu() : this.openMenu();
   }
@@ -178,6 +190,8 @@ export class HeaderComponent {
   protected openDropdown(event: Event, label: string): void {
     const panel = this.dropdownPanel(event);
     if (!panel || this.isMobile()) return;
+    // El foco al hacer mousedown en una opción dispararía de nuevo la animación y cancelaría el click.
+    if (this.openDropdownLabel() === label) return;
 
     this.openDropdownLabel.set(label);
     this.previewIndex.set(0);

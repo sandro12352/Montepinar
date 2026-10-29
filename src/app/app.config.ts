@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideBrnCalendarI18n } from '@spartan-ng/brain/calendar';
@@ -7,7 +7,7 @@ import { provideBrnCalendarI18n } from '@spartan-ng/brain/calendar';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes), provideClientHydration(),
+    provideRouter(routes, withInMemoryScrolling({ anchorScrolling: 'enabled' })), provideClientHydration(),
     provideBrnCalendarI18n({
       formatWeekdayName: (index) => ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'][index],
       months: () => ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],

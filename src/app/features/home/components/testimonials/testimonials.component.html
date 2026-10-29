@@ -21,22 +21,27 @@
     <hlm-carousel class="block w-full min-w-0" [options]="{ loop: true, align: 'center' }"
       [plugins]="carouselPlugins">
       <hlm-carousel-content>
-        @for (video of loopVideos; track $index) {
+        @for (item of testimonials; track item.author) {
         <hlm-carousel-item data-testimonial-item class="basis-[88%] pl-4 sm:basis-[70%] lg:basis-[48%]">
           <article
-            class="grid h-100 min-w-0 grid-cols-1 overflow-hidden rounded-3xl bg-white shadow-[0_14px_36px_rgb(73_54_34_/_10%)] md:grid-cols-[minmax(15rem,0.85fr)_minmax(0,1.5fr)] p-5">
-            <div class="relative  overflow-hidden bg-[#e4dfd6]  rounded-2xl h-auto">
-              @if (video.videoSrc) {
-              <video class="absolute inset-0 size-full object-cover" [src]="video.videoSrc" [poster]="video.poster"
-                controls playsinline preload="metadata" [attr.aria-label]="video.title">
+            class="grid min-w-0 grid-cols-1 overflow-hidden rounded-3xl bg-white p-5 shadow-[0_14px_36px_rgb(73_54_34_/_10%)] md:h-100 md:grid-cols-[minmax(15rem,0.85fr)_minmax(0,1.5fr)]">
+            <!-- Video; si no hay, la foto del cliente -->
+            <div class="relative aspect-[4/3] min-h-56 overflow-hidden rounded-2xl bg-[var(--brand-forest-900)] md:aspect-auto md:min-h-0">
+              @if (item.videoSrc) {
+              <video class="absolute inset-0 size-full object-cover" [src]="item.videoSrc" [poster]="item.poster"
+                controls playsinline preload="metadata" [attr.aria-label]="'Video de ' + item.author">
                 Tu navegador no admite la reproducción de video.
               </video>
               } @else {
-              <img class="absolute inset-0 size-full object-cover" [src]="video.poster" [alt]="video.title"
-                loading="lazy" />
-              <span
-                class="absolute inset-x-3 bottom-3 rounded-xl border border-white/60 bg-[#1f1a14]/80 px-4 py-3 text-center text-sm font-bold text-white backdrop-blur-sm">Video
-                pendiente</span>
+              <span aria-hidden="true" class="absolute -right-10 -top-10 size-44 rounded-full bg-[var(--brand-primary)]/25 blur-2xl"></span>
+              <span aria-hidden="true" class="absolute -bottom-12 -left-8 size-44 rounded-full bg-[var(--brand-forest-400)]/25 blur-2xl"></span>
+              <div class="absolute inset-0 grid place-items-center">
+                <figure class="m-0 text-center">
+                  <img class="mx-auto size-36 rounded-full object-cover ring-4 ring-white/80 shadow-xl shadow-black/30 sm:size-40"
+                    [src]="item.photo" [alt]="'Foto de ' + item.author" loading="lazy" width="160" height="160" />
+                  <figcaption class="mt-4 text-sm font-extrabold text-white">{{ item.author }}</figcaption>
+                </figure>
+              </div>
               }
             </div>
 
@@ -44,26 +49,24 @@
               <div>
                 <p class="mb-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">
                   Experiencia Montepinar</p>
-                <h3 class="m-0 text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">{{ video.title }}</h3>
+                <h3 class="m-0 text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">{{ item.title }}</h3>
               </div>
-              @if (video.comments[0]; as comment) {
               <blockquote class="my-7 flex-1">
                 <div class="mb-4 flex gap-1 text-sm leading-none text-[var(--brand-primary)]" role="img"
                   aria-label="5 de 5 estrellas">
                   @for (star of [1, 2, 3, 4, 5]; track star) { <span aria-hidden="true">★</span> }
                 </div>
-                <p class="m-0 text-base leading-relaxed text-[#1f1a14]/75 sm:text-lg">“{{ comment.text }}”</p>
+                <p class="m-0 text-base leading-relaxed text-[#1f1a14]/75 sm:text-lg">“{{ item.text }}”</p>
               </blockquote>
               <footer class="flex items-center gap-3 border-t border-[#1f1a14]/10 pt-5">
                 <span
                   class="grid size-11 shrink-0 place-items-center rounded-full bg-[var(--brand-tertiary)] text-xs font-extrabold text-white"
-                  aria-hidden="true">{{ comment.initials }}</span>
+                  aria-hidden="true">{{ item.initials }}</span>
                 <span>
-                  <strong class="block text-sm font-bold leading-tight text-[#1f1a14]">{{ comment.author }}</strong>
-                  <small class="mt-1 block text-xs leading-tight text-[#1f1a14]/60">{{ comment.role }}</small>
+                  <strong class="block text-sm font-bold leading-tight text-[#1f1a14]">{{ item.author }}</strong>
+                  <small class="mt-1 block text-xs leading-tight text-[#1f1a14]/60">{{ item.role }}</small>
                 </span>
               </footer>
-              }
             </div>
           </article>
         </hlm-carousel-item>

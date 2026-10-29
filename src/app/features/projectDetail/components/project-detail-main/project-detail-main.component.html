@@ -116,7 +116,7 @@
           <span class="relative z-10">Agendar una visita</span>
           <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" class="relative z-10" />
         </button>
-        <a [href]="whatsappLink('Hola, quisiera información del proyecto de ' + project().location + '.')" target="_blank" rel="noopener noreferrer"
+        <a [href]="whatsappLink('Hola, quisiera información del proyecto ' + project().name + '.')" target="_blank" rel="noopener noreferrer"
           class="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-[var(--brand-forest-900)]/15 bg-white px-6 py-3 text-sm font-extrabold text-[var(--brand-forest-900)] no-underline transition-colors duration-300 hover:border-[var(--brand-forest-900)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
           Consultar por WhatsApp
           <ng-icon name="lucideMessageCircle" size="18" aria-hidden="true" />
@@ -143,7 +143,7 @@
         </p>
       </div>
 
-      <a data-aside [href]="whatsappLink('Hola, quisiera recibir el dossier del proyecto de ' + project().location + '.')" target="_blank" rel="noopener noreferrer"
+      <a data-aside [href]="whatsappLink('Hola, quisiera recibir el dossier del proyecto ' + project().name + '.')" target="_blank" rel="noopener noreferrer"
         class="group/doc flex items-center gap-4 rounded-2xl bg-[var(--brand-forest-100)] p-5 no-underline transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]">
         <span class="grid size-10 shrink-0 place-items-center rounded-lg bg-white text-[var(--brand-forest-900)]">
           <ng-icon name="lucideFileText" size="20" aria-hidden="true" />

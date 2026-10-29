@@ -1,20 +1,25 @@
 import { afterRenderEffect, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowDown, lucideArrowRight, lucideCalendarDays } from '@ng-icons/lucide';
+import { lucideArrowDown, lucideArrowRight, lucideCalendarDays, lucideMessageCircle } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { LoaderService } from '../../../../core/services/loader.service';
+import { VisitSheetService } from '../../../../core/services/visit-sheet.service';
+import { whatsappLink } from '../../../contact/data/contact.data';
 import { PROJECTS } from '../../data/projects.data';
 
 @Component({
   imports: [NgIcon],
-  providers: [provideIcons({ lucideArrowDown, lucideArrowRight, lucideCalendarDays })],
+  providers: [provideIcons({ lucideArrowDown, lucideArrowRight, lucideCalendarDays, lucideMessageCircle })],
   selector: 'app-projects-hero',
   templateUrl: './projects-hero.component.html',
 })
 export class ProjectsHeroComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly loaderService = inject(LoaderService);
+  private readonly visitSheet = inject(VisitSheetService);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
+
+  protected readonly whatsapp = whatsappLink('Hola, quisiera información sobre los proyectos de Montepinar.');
 
   protected readonly arches = [
     { project: PROJECTS[0], heightClass: 'h-[78%]' },
@@ -24,13 +29,17 @@ export class ProjectsHeroComponent {
 
   protected readonly facts = [
     { value: '3', label: 'Ubicaciones' },
-    { value: '+6,000', label: 'Familias' },
-    { value: '300 m²', label: 'Desde' },
+    { value: '+5,000', label: 'Familias' },
+    { value: '120 m²', label: 'Desde' },
   ];
 
-  protected readonly marquee = ['Chancay', 'Huaral', 'Iquitos'];
+  protected readonly marquee = ['Palmeras de Montepinar', 'Asociación Montepinar', 'Amazon Lodge Montepinar'];
 
   private animated = false;
+
+  protected openVisit(): void {
+    this.visitSheet.open();
+  }
 
   constructor() {
     afterRenderEffect(() => {

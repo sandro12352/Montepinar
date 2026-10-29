@@ -67,12 +67,12 @@ export class ProjectDetailLotsComponent {
 
   protected whatsappLink(): string {
     const { id, area } = this.selected();
-    const message = `Hola, me interesa el lote ${id} (${area} m²) del proyecto de ${this.project().location}.`;
+    const message = `Hola, me interesa el lote ${id} (${area} m²) del proyecto ${this.project().name}.`;
     return `https://wa.me/51932284185?text=${encodeURIComponent(message)}`;
   }
 
   protected planLink(): string {
-    const message = `Hola, quisiera recibir el plano de lotes del proyecto de ${this.project().location}.`;
+    const message = `Hola, quisiera recibir el plano de lotes del proyecto ${this.project().name}.`;
     return `https://wa.me/51932284185?text=${encodeURIComponent(message)}`;
   }
 

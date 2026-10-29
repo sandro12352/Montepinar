@@ -29,7 +29,7 @@ export class GalleryComponent {
   private previousDialogSlide: number | null = null;
 
   protected readonly images: readonly GalleryImage[] = [
-    { src: '/images/MontepinarIquitos.webp', alt: 'Ingreso principal de Montepinar Iquitos' },
+    { src: '/images/MontepinarIquitos.webp', alt: 'Ingreso principal de Amazon Lodge Montepinar' },
     { src: '/images/PalmerasdeMontepinar.png', alt: 'Pórtico de ingreso de Palmeras de Montepinar' },
     { src: '/images/slide2.webp', alt: 'Cancha deportiva y áreas recreativas de Montepinar' },
     { src: '/images/slide3.webp', alt: 'Recorrido de visitantes por el proyecto Montepinar' },

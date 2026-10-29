@@ -1,0 +1,62 @@
+<section #root id="ubicacion" aria-labelledby="contact-map-title"
+  class="bg-[#f4f1ea] py-[clamp(4rem,7vw,6.5rem)] text-[var(--brand-forest-900)]">
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <header data-heading class="mb-[clamp(1.75rem,3.5vw,2.75rem)] flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p data-head class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+          <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          Dónde estamos
+        </p>
+        <h2 id="contact-map-title" data-head
+          class="m-0 max-w-[16ch] text-balance text-[clamp(2.2rem,4.4vw,3.75rem)] font-extrabold leading-[1.04] tracking-[-0.04em]">
+          Nuestros proyectos en el mapa.
+        </h2>
+      </div>
+
+      <!-- Selector de proyecto -->
+      <div data-head role="tablist" aria-label="Proyecto" class="flex flex-wrap gap-2">
+        @for (project of projects; track project.slug; let i = $index) {
+        <button type="button" role="tab" [attr.aria-selected]="activeIndex() === i" (click)="select(i)"
+          class="inline-flex cursor-pointer items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-extrabold transition-[background-color,border-color,color] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none"
+          [class]="activeIndex() === i
+            ? 'border-[color:var(--brand-forest-900)] bg-[var(--brand-forest-900)] text-white'
+            : 'border-[color:var(--brand-forest-900)]/15 bg-white text-[var(--brand-forest-900)]/75 hover:border-[color:var(--brand-forest-900)]/40'">
+          <ng-icon name="lucideMapPin" size="16" aria-hidden="true" [class]="activeIndex() === i ? 'text-[var(--brand-primary)]' : ''" />
+          {{ project.name }}
+        </button>
+        }
+      </div>
+    </header>
+
+    <div class="relative">
+      <!-- Mapa -->
+      <div data-map class="relative aspect-[16/10] overflow-hidden rounded-[1.75rem] bg-[var(--brand-forest-100)] shadow-2xl shadow-[var(--brand-forest-900)]/15 max-md:aspect-[4/5]">
+        <iframe data-swap class="absolute inset-0 size-full border-0" [src]="mapUrl()" [title]="'Mapa de ' + active().name"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+
+      <!-- Ficha del proyecto sobre el mapa -->
+      <div data-info
+        class="relative z-10 mx-3 -mt-12 rounded-[1.5rem] bg-[var(--brand-forest-900)] p-6 text-white shadow-2xl shadow-[var(--brand-forest-900)]/30 sm:p-7 md:absolute md:bottom-6 md:left-6 md:mx-0 md:mt-0 md:w-[22rem]">
+        <div data-swap>
+          <p class="m-0 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-orange-300)]">{{ active().category }}</p>
+          <h3 class="m-0 mt-2 text-2xl font-extrabold tracking-tight">{{ active().name }}</h3>
+          <p class="mb-0 mt-2 text-sm leading-relaxed text-white/70">Lotes desde {{ active().priceFrom }} · {{ active().status }}</p>
+
+          <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a [href]="directionsUrl()" target="_blank" rel="noopener noreferrer"
+              class="group/btn inline-flex items-center gap-2 rounded-xl bg-[var(--brand-primary)] px-4 py-2.5 text-sm font-extrabold text-white no-underline transition-colors duration-300 hover:bg-[var(--brand-orange-600)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+              <ng-icon name="lucideNavigation" size="16" aria-hidden="true" />
+              Cómo llegar
+            </a>
+            <a [routerLink]="['/projects', active().slug]"
+              class="group/link inline-flex items-center gap-2 text-sm font-extrabold text-white no-underline">
+              <span class="border-b-2 border-[color:var(--brand-primary)] pb-0.5">Ver proyecto</span>
+              <ng-icon name="lucideArrowRight" size="16" aria-hidden="true" class="transition-transform duration-300 group-hover/link:translate-x-1" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

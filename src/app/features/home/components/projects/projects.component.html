@@ -93,13 +93,13 @@
           <ol class="m-0 flex list-none items-center gap-2 p-0">
             @for (project of projects; track project.slug; let i = $index) {
             <li>
-              <button type="button" (click)="goTo(i)" [attr.aria-label]="'Ir al proyecto ' + project.location"
+              <button type="button" (click)="goTo(i)" [attr.aria-label]="'Ir al proyecto ' + project.name"
                 [attr.aria-current]="active() === i ? 'true' : null"
                 class="cursor-pointer rounded-full border px-3.5 py-1.5 text-[0.7rem] font-extrabold uppercase tracking-[0.12em] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
                 [class]="active() === i
                   ? 'border-[var(--brand-forest-900)] bg-[var(--brand-forest-900)] text-white'
                   : 'border-[var(--brand-forest-900)]/20 bg-transparent text-[var(--brand-forest-900)]/65 hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]'">
-                {{ indexLabel(i) }} · {{ project.location }}
+                {{ indexLabel(i) }} · {{ project.name }}
               </button>
             </li>
             }

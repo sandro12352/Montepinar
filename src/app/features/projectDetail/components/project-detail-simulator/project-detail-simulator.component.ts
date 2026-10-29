@@ -73,7 +73,7 @@ export class ProjectDetailSimulatorComponent {
 
   protected whatsappLink(): string {
     const { installment } = this.result();
-    const message = `Hola, simulé el ${this.plan().name} (${this.plan().area} m²) de ${this.project().location}: inicial ${this.initialPercent()}% y ${this.months()} cuotas de ${formatSoles(installment)}. Quisiera más información.`;
+    const message = `Hola, simulé el ${this.plan().name} (${this.plan().area} m²) de ${this.project().name}: inicial ${this.initialPercent()}% y ${this.months()} cuotas de ${formatSoles(installment)}. Quisiera más información.`;
     return `https://wa.me/51932284185?text=${encodeURIComponent(message)}`;
   }
 

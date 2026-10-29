@@ -27,9 +27,9 @@ export class IntroduccionComponent {
   ];
 
   protected readonly stats = [
-    { value: 10, prefix: '+', suffix: '', label: 'Años de trayectoria' },
-    { value: 6000, prefix: '+', suffix: '', label: 'Familias felices' },
-    { value: 15, prefix: '', suffix: '', label: 'Proyectos entregados' },
+    { value: 9, prefix: '+', suffix: '', label: 'Años de trayectoria' },
+    { value: 5000, prefix: '+', suffix: '', label: 'Familias felices' },
+    { value: 3, prefix: '', suffix: '', label: 'Proyectos en desarrollo' },
     { value: 98, prefix: '', suffix: '%', label: 'Clientes satisfechos' },
   ];
 

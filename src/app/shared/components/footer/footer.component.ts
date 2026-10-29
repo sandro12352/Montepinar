@@ -33,9 +33,9 @@ export class FooterComponent {
     {
       title: 'Proyectos',
       links: [
-        { label: 'Chancay', href: '#proyectos' },
-        { label: 'Huaral', href: '#proyectos' },
-        { label: 'Iquitos', href: '#proyectos' },
+        { label: 'Palmeras de Montepinar', href: '/projects/chancay' },
+        { label: 'Asociación Montepinar', href: '/projects/huaral' },
+        { label: 'Amazon Lodge Montepinar', href: '/projects/iquitos' },
       ],
     },
     {

@@ -1,0 +1,83 @@
+<section #root id="datos" aria-labelledby="contact-info-title"
+  class="bg-[#f4f1ea] py-[clamp(4rem,7vw,6rem)] text-[var(--brand-forest-900)]">
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <header data-heading class="mb-[clamp(1.75rem,3.5vw,2.75rem)] max-w-xl">
+      <p data-head class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        También puedes
+      </p>
+      <h2 id="contact-info-title" data-head
+        class="m-0 text-balance text-[clamp(2.2rem,4.4vw,3.5rem)] font-extrabold leading-[1.04] tracking-[-0.04em]">
+        Visitarnos o llamarnos.
+      </h2>
+    </header>
+
+    <div data-grid class="grid gap-x-12 gap-y-12 md:grid-cols-3">
+      <!-- Dirección -->
+      <article data-col class="relative pt-8">
+        <span data-bar aria-hidden="true" class="absolute inset-x-0 top-0 h-0.5 origin-left bg-[var(--brand-forest-900)]"></span>
+        <span data-icon class="grid size-14 place-items-center rounded-2xl bg-[var(--brand-primary)] text-white">
+          <ng-icon name="lucideMapPin" size="26" aria-hidden="true" />
+        </span>
+        <h3 class="m-0 mt-6 text-sm font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">Dirección</h3>
+        <p class="mb-0 mt-3 text-pretty text-2xl font-extrabold leading-snug tracking-tight">{{ address }}</p>
+        <a [href]="mapsUrl" target="_blank" rel="noopener noreferrer"
+          class="group/link mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[var(--brand-forest-900)] no-underline">
+          <span class="border-b-2 border-[#FB7A11] pb-0.5">Ver en Google Maps</span>
+          <ng-icon name="lucideArrowUpRight" size="16" aria-hidden="true" class="transition-transform duration-300 group-hover/link:rotate-45" />
+        </a>
+      </article>
+
+      <!-- Contacto -->
+      <article data-col class="relative pt-8">
+        <span data-bar aria-hidden="true" class="absolute inset-x-0 top-0 h-0.5 origin-left bg-[var(--brand-forest-900)]"></span>
+        <span data-icon class="grid size-14 place-items-center rounded-2xl bg-[var(--brand-primary)] text-white">
+          <ng-icon name="lucidePhone" size="26" aria-hidden="true" />
+        </span>
+        <h3 class="m-0 mt-6 text-sm font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">Llámanos</h3>
+        <ul class="m-0 mt-3 grid list-none gap-2 p-0">
+          @for (phone of phones; track phone.label) {
+          <li>
+            <a [href]="'tel:' + phone.tel"
+              class="group/tel flex items-baseline justify-between gap-4 border-b border-[#6f8f7e]/40 pb-2 text-[var(--brand-forest-900)] no-underline transition-colors duration-300 hover:border-[#FB7A11]">
+              <span class="text-sm font-bold text-[var(--brand-forest-900)]/65">{{ phone.label }}</span>
+              <span class="text-xl font-extrabold tracking-tight transition-transform duration-300 group-hover/tel:-translate-x-1">{{ phone.display }}</span>
+            </a>
+          </li>
+          }
+        </ul>
+        <a [href]="'mailto:' + email"
+          class="mt-4 flex items-center gap-2 break-all text-sm font-extrabold text-[var(--brand-forest-900)] no-underline hover:text-[var(--brand-primary)]">
+          <ng-icon name="lucideMail" size="16" aria-hidden="true" class="shrink-0 text-[var(--brand-primary)]" />
+          {{ email }}
+        </a>
+      </article>
+
+      <!-- Horarios -->
+      <article data-col class="relative pt-8">
+        <span data-bar aria-hidden="true" class="absolute inset-x-0 top-0 h-0.5 origin-left bg-[var(--brand-forest-900)]"></span>
+        <span data-icon class="grid size-14 place-items-center rounded-2xl bg-[var(--brand-primary)] text-white">
+          <svg viewBox="0 0 24 24" class="size-[26px]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 2" />
+          </svg>
+        </span>
+        <h3 class="m-0 mt-6 text-sm font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">Horarios de atención</h3>
+        <ul class="m-0 mt-3 grid list-none gap-2 p-0">
+          @for (slot of hours; track slot.days; let i = $index) {
+          <li class="flex items-baseline justify-between gap-4 rounded-xl px-3 py-2.5 transition-colors duration-500"
+            [class]="today() === i ? 'bg-[var(--brand-forest-900)] text-white' : 'bg-white/70 text-[var(--brand-forest-900)]'">
+            <span class="text-sm font-bold" [class]="today() === i ? 'text-white/80' : 'text-[var(--brand-forest-900)]/65'">
+              {{ slot.days }}
+              @if (today() === i) {
+              <span class="ml-1.5 rounded-full bg-[var(--brand-primary)] px-2 py-0.5 text-[0.65rem] font-extrabold uppercase tracking-wider text-white">Hoy</span>
+              }
+            </span>
+            <span class="text-base font-extrabold tracking-tight">{{ slot.time }}</span>
+          </li>
+          }
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>

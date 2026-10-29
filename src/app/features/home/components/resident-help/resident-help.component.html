@@ -1,22 +1,61 @@
-<section #residentHelp aria-labelledby="resident-help-title" class="min-h-[34rem] overflow-hidden  bg-foreground text-white sm:min-h-[40rem] lg:min-h-[42rem]">
-  <div class="relative mx-auto flex min-h-[34rem]  items-center py-16 sm:min-h-[40rem] sm:py-20 lg:min-h-[56rem]">
-    <div class="pointer-events-none absolute inset-y-0 right-0 hidden w-[62%] md:block">
-      <img #residentImage class="size-full object-cover object-right" src="/images/prueba2.png" alt="" aria-hidden="true" loading="lazy">
-    </div>
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#10271c] via-[#10271c]/25 to-[#10271c]/10" aria-hidden="true"></div>
-    <div class="relative z-10 mx-auto w-[min(88%,1400px)]">
-      <div #residentCopy class="max-w-[48rem] md:w-[48%]">
-      <h2 data-resident-text id="resident-help-title" class="m-0 max-w-[13ch] font-serif text-[clamp(2.75rem,6vw,6rem)] font-normal leading-[0.98] tracking-[-0.045em]">
-        ¿No sabes por dónde empezar? Hablemos de tu próximo hogar.
-      </h2>
-      <p data-resident-text class="mb-0 mt-8 max-w-xl text-base leading-relaxed text-white/85 sm:mt-10 sm:text-lg">
-        Cuéntanos qué estás buscando y te ayudaremos a conocer nuestros proyectos y opciones de financiamiento.
+<section #root aria-labelledby="resident-help-title"
+  class="relative isolate overflow-hidden bg-[var(--brand-forest-900)] py-[clamp(4rem,8vw,7rem)] text-white">
+  <span data-orb aria-hidden="true"
+    class="pointer-events-none absolute -right-24 top-1/2 -z-10 size-[40rem] -translate-y-1/2 rounded-full bg-[var(--brand-primary)]/20 blur-3xl"></span>
+  <span aria-hidden="true"
+    class="pointer-events-none absolute -left-32 bottom-0 -z-10 size-[24rem] rounded-full bg-[var(--brand-forest-400)]/15 blur-3xl"></span>
+
+  <div class="mx-auto grid w-[min(88%,1400px)] items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-6">
+    <div>
+      <p data-fade class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-orange-300)]">
+        <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+        Te ayudamos a decidir
       </p>
-      <a data-resident-text href="#contacto" class="mt-7 inline-flex min-h-12 items-center gap-4 rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-sm font-extrabold text-white no-underline shadow-lg shadow-black/20 transition-transform hover:-translate-y-0.5 hover:bg-[var(--brand-orange-600)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1b211b] active:scale-[.98] motion-reduce:transition-none sm:mt-8 ">
-        Solicitar asesoría
-        <span aria-hidden="true">→</span>
-      </a>
-    </div>
+
+      <h2 id="resident-help-title"
+        class="m-0 max-w-[14ch] text-balance text-[clamp(2.5rem,5.4vw,5rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
+        <span class="block overflow-hidden pb-[0.08em]"><span data-line class="block">¿No sabes por dónde</span></span>
+        <span class="block overflow-hidden pb-[0.08em]"><span data-line class="block">empezar? <span class="text-[var(--brand-primary)]">Hablemos.</span></span></span>
+      </h2>
+
+      <p data-fade class="mb-0 mt-6 max-w-lg text-pretty text-base leading-[1.75] text-white/80 sm:text-lg">
+        Cuéntanos qué estás buscando y te ayudaremos a conocer nuestros proyectos, los tamaños de lote disponibles y las
+        opciones de financiamiento.
+      </p>
+
+      <ul class="m-0 mt-7 flex list-none flex-wrap gap-2.5 p-0">
+        @for (option of options; track option.label) {
+        <li data-option class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.07] px-4 py-2 text-sm font-bold text-white/90">
+          <ng-icon [name]="option.icon" size="16" aria-hidden="true" class="text-[var(--brand-orange-300)]" />
+          {{ option.label }}
+        </li>
+        }
+      </ul>
+
+      <div data-fade class="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+        <a [href]="whatsapp" target="_blank" rel="noopener noreferrer"
+          class="group/btn relative isolate inline-flex min-h-14 items-center gap-3 rounded-2xl bg-[var(--brand-primary)] py-2 pl-3 pr-6 text-base font-extrabold text-white no-underline shadow-xl shadow-black/25 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-forest-900)] active:scale-[0.98] motion-reduce:transition-none">
+          <span aria-hidden="true"
+            class="absolute inset-0 -z-10 origin-left scale-x-0 overflow-hidden rounded-2xl bg-[var(--brand-orange-600)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 motion-reduce:transition-none"></span>
+          <span class="relative grid size-10 place-items-center rounded-xl bg-white/20">
+            <span data-pulse aria-hidden="true" class="absolute inset-0 rounded-xl bg-white/40"></span>
+            <ng-icon name="lucideMessageCircle" size="22" aria-hidden="true" class="relative" />
+          </span>
+          Asesoría por WhatsApp
+        </a>
+
+        <a routerLink="/projects"
+          class="group/link inline-flex items-center gap-2 text-sm font-extrabold text-white no-underline">
+          <span class="border-b-2 border-[var(--brand-primary)] pb-0.5">Ver proyectos</span>
+          <ng-icon name="lucideArrowRight" size="16" aria-hidden="true" class="transition-transform duration-300 group-hover/link:translate-x-1 motion-reduce:transition-none" />
+        </a>
       </div>
     </div>
+
+    <!-- Ilustración sin fondo -->
+    <div class="relative mx-auto w-full max-w-[40rem] lg:mr-0 lg:max-w-none">
+      <img data-art class="relative z-10 block h-auto w-full" src="/images/prueba2.png"
+        alt="Una persona frente a un cartel con tres caminos: lotes residenciales, lotes campestres e inversión" loading="lazy" />
+    </div>
+  </div>
 </section>
