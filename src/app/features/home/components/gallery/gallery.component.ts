@@ -29,11 +29,22 @@ export class GalleryComponent {
   private previousDialogSlide: number | null = null;
 
   protected readonly images: readonly GalleryImage[] = [
-    { src: '/images/MontepinarIquitos.webp', alt: 'Ingreso principal de Amazon Lodge Montepinar' },
-    { src: '/images/PalmerasdeMontepinar.png', alt: 'Pórtico de ingreso de Palmeras de Montepinar' },
-    { src: '/images/slide2.webp', alt: 'Cancha deportiva y áreas recreativas de Montepinar' },
-    { src: '/images/slide3.webp', alt: 'Recorrido de visitantes por el proyecto Montepinar' },
-    { src: '/images/presentacion.webp', alt: 'Presentación del plano y las etapas del proyecto Montepinar' },
+    { src: '/images/gallery/presentacion.webp', alt: 'Presentación del plano y las etapas del proyecto Montepinar' },
+    { src: '/images/gallery/foto-grupal-mapa.png', alt: 'Clientes posando junto al plano de lotes de Montepinar' },
+    { src: '/images/gallery/equipo-mapa.png', alt: 'El equipo de Montepinar explicando el plano de etapas y lotes' },
+    { src: '/images/gallery/visita-ingreso.png', alt: 'Visitantes atentos a la explicación en el ingreso del proyecto' },
+    { src: '/images/gallery/grupo-entrada.png', alt: 'Grupo de visitantes junto al módulo de ingreso de Montepinar' },
+    { src: '/images/gallery/atencion-oficina.png', alt: 'Asesora atendiendo a clientes en la oficina de Montepinar' },
+    { src: '/images/gallery/cliente-promocion.png', alt: 'Clienta con el brochure frente al panel de Montepinar Inmobiliaria & Constructora' },
+    { src: '/images/gallery/bus-recojo.png', alt: 'Bus de la visita guiada con los asesores esperando en el punto de recojo' },
+    { src: '/images/gallery/bus-llegada.png', alt: 'Bus de la visita llegando al módulo de atención de Montepinar' },
+    { src: '/images/gallery/terreno-cabanas.png', alt: 'Terreno de Montepinar con módulos de obra y las montañas al fondo' },
+    { src: '/images/gallery/modulos-colores.png', alt: 'Hilera de módulos de colores junto a una vía del proyecto' },
+    { src: '/images/gallery/modulos-turquesa.png', alt: 'Vista amplia de los módulos de los propietarios en el terreno' },
+    { src: '/images/gallery/casa-jardin.png', alt: 'Casa de un propietario con jardín y tanque de agua' },
+    { src: '/images/gallery/casa-verde.png', alt: 'Casa verde con terraza construida por un propietario' },
+    { src: '/images/gallery/cartel-mall.png', alt: 'Cartel del futuro Montepinar Mall, Sector 2 Etapa 2' },
+    { src: '/images/gallery/mercado.png', alt: 'Recreación del futuro Mercado de Montepinar, Sector 4 Etapa 2' },
   ];
 
   protected readonly selectedIndex = signal<number | null>(null);

@@ -23,7 +23,7 @@ export class GuidedTourHeroComponent {
 
   protected readonly perks = [
     { icon: 'lucideBus', label: 'Bus gratis', note: 'Ida y vuelta' },
-    { icon: 'lucideCoffee', label: 'Desayuno y almuerzo', note: 'Invita Montepinar' },
+    { icon: 'lucideCoffee', label: 'Desayuno', note: 'Invita Montepinar' },
     { icon: 'lucideLandPlot', label: 'Lotes en vivo', note: 'Recorrido guiado' },
     { icon: 'lucideFileSignature', label: 'Ayuda con el trámite', note: 'Si decides separar' },
   ];

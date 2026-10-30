@@ -23,7 +23,6 @@ export class ProjectDetailTabsComponent {
     { id: 'detalle-lotes', label: 'Plano de lotes' },
     { id: 'detalle-ubicacion', label: 'Ubicación' },
     { id: 'detalle-simulador', label: 'Simulador' },
-    { id: 'detalle-legal', label: 'Información legal' },
   ];
 
   protected readonly active = signal(this.tabs[0].id);

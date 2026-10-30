@@ -1,4 +1,4 @@
-import { afterNextRender, afterRenderEffect, Component, DestroyRef, ElementRef, inject, Injector, signal, viewChild } from '@angular/core';
+import { afterRenderEffect, Component, computed, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -7,110 +7,38 @@ import { gsap } from 'gsap';
 import { VisitSheetService } from '../../../core/services/visit-sheet.service';
 import { VisitSheetComponent } from '../visit-sheet/visit-sheet.component';
 import { LoaderService } from '../../../core/services/loader.service';
-import { PROJECTS } from '../../../features/projects/data/projects.data';
-
-interface NavigationAction {
-  readonly label: string;
-  readonly path?: string;
-  readonly anchor?: string;
-  // Fragmento de la ruta (por ejemplo, la sección legal de un proyecto).
-  readonly fragment?: string;
-  // Acción en lugar de navegación (abre el sheet de visita).
-  readonly action?: 'visit';
-}
-
-interface NavigationChild extends NavigationAction {
-  readonly description: string;
-  // Imagen que se muestra en la vista previa al pasar sobre la opción.
-  readonly image: string;
-}
-
-interface NavigationItem {
-  readonly label: string;
-  // Ruta de página (se marca como activa) o ancla de la home.
-  readonly path?: string;
-  readonly anchor?: string;
-  // Desplegable: lista numerada con vista previa y un enlace al pie.
-  readonly menu?: {
-    readonly eyebrow: string;
-    readonly links: readonly NavigationChild[];
-    readonly footer: NavigationAction;
-  };
-}
+import { MobileMenuService } from '../../../core/services/mobile-menu.service';
+import { MobileMenuComponent } from '../mobile-menu/mobile-menu.component';
+import { NAVIGATION_ITEMS, NavigationAction } from './navigation.data';
 
 @Component({
-  imports: [NgIcon, NgTemplateOutlet, RouterLink, RouterLinkActive, VisitSheetComponent],
+  imports: [NgIcon, NgTemplateOutlet, RouterLink, RouterLinkActive, VisitSheetComponent, MobileMenuComponent],
   providers: [provideIcons({ lucideArrowRight, lucideChevronDown, lucideChevronRight, lucideArrowUpRight })],
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  protected readonly menuOpen = signal(false);
   protected readonly scrolled = signal(false);
   protected readonly openDropdownLabel = signal<string | null>(null);
+  /** El header se pinta blanco al hacer scroll o mientras hay un desplegable abierto. */
+  protected readonly solid = computed(() => this.scrolled() || this.openDropdownLabel() !== null);
   private visitSheet = inject(VisitSheetService);
 
   // Cambia estas rutas para elegir el logo de cada estado del header.
   protected readonly transparentHeaderLogoSrc = '/images/LogotipoBlanco.png';
   protected readonly whiteHeaderLogoSrc = '/images/logo.webp';
 
-  private readonly injector = inject(Injector);
   private readonly loaderService = inject(LoaderService);
   private readonly destroyRef = inject(DestroyRef);
-  /** Opción resaltada del desplegable abierto; define la imagen de la vista previa. */
-  protected readonly previewIndex = signal(0);
-  protected readonly rowClass =
-    'group/row relative flex w-full cursor-pointer items-center gap-4 rounded-2xl border-0 bg-transparent px-3 py-3 text-left text-[var(--brand-forest-900)] no-underline transition-colors duration-200 focus-visible:outline-none motion-reduce:transition-none max-md:py-2';
+  protected readonly cardClass =
+    'group/card block w-full cursor-pointer rounded-3xl border-0 bg-transparent p-2 text-left text-[var(--brand-forest-900)] no-underline transition-colors duration-200 hover:bg-[var(--brand-forest-50)] focus-visible:bg-[var(--brand-forest-50)] focus-visible:outline-none';
   protected readonly footerClass =
     'group/foot inline-flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-sm font-extrabold text-[var(--brand-forest-900)] no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2';
 
   private readonly header = viewChild.required<ElementRef<HTMLElement>>('header');
-  private readonly nav = viewChild.required<ElementRef<HTMLElement>>('nav');
+  private readonly mobileMenu = inject(MobileMenuService);
 
-  protected readonly navigationItems: readonly NavigationItem[] = [
-    { label: 'Nosotros', path: '/about' },
-    { label: 'Equipo', path: '/equipo' },
-    {
-      label: 'Proyectos',
-      path: '/projects',
-      menu: {
-        eyebrow: 'Nuestros proyectos',
-        links: PROJECTS.map((project) => ({
-          label: project.name,
-          description: project.category,
-          image: project.image,
-          path: `/projects/${project.slug}`,
-        })),
-        footer: { label: 'Ver todos los proyectos', path: '/projects' },
-      },
-    },
-    {
-      label: 'Información legal',
-      menu: {
-        eyebrow: 'Documentación en regla',
-        links: PROJECTS.map((project) => ({
-          label: project.name,
-          description: 'Títulos, partidas y contrato',
-          image: project.image,
-          path: `/projects/${project.slug}`,
-          fragment: 'detalle-legal',
-        })),
-        footer: { label: 'Ver todos los proyectos', path: '/projects' },
-      },
-    },
-    {
-      label: 'Recorridos',
-      menu: {
-        eyebrow: 'Conoce Montepinar',
-        links: [
-          { label: 'Visita guiada', description: 'Recórrelo en persona con un asesor', image: '/images/slide3.webp', path: '/visita-guiada' },
-          { label: 'Galería', description: 'Cada rincón, en imágenes', image: '/images/slide3.webp', path: '/', fragment: 'galeria' },
-        ],
-        footer: { label: 'Preguntas frecuentes', path: '/', fragment: 'preguntas-frecuentes' },
-      },
-    },
-    { label: 'Contacto', path: '/contacto' },
-  ];
+  protected readonly navigationItems = NAVIGATION_ITEMS;
 
   constructor() {
     afterRenderEffect(() => {
@@ -162,39 +90,13 @@ export class HeaderComponent {
     });
   }
 
-  protected toggleMenu(): void {
-    this.menuOpen() ? this.closeMenu() : this.openMenu();
-  }
-
-  protected closeMenu(): void {
-    if (!this.menuOpen()) return;
-    const nav = this.nav().nativeElement;
-    if (!window.matchMedia('(max-width: 767px)').matches) {
-      this.menuOpen.set(false);
-      return;
-    }
-
-    gsap.to(nav, {
-      autoAlpha: 0,
-      y: -8,
-      duration: 0.18,
-      ease: 'power2.in',
-      onComplete: () => {
-        this.menuOpen.set(false);
-        gsap.set(nav, { clearProps: 'opacity,visibility,transform' });
-      },
-    });
-  }
-
-
   protected openDropdown(event: Event, label: string): void {
     const panel = this.dropdownPanel(event);
-    if (!panel || this.isMobile()) return;
+    if (!panel) return;
     // El foco al hacer mousedown en una opción dispararía de nuevo la animación y cancelaría el click.
     if (this.openDropdownLabel() === label) return;
 
     this.openDropdownLabel.set(label);
-    this.previewIndex.set(0);
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const items = panel.querySelectorAll('[data-dropdown-item]');
 
@@ -211,7 +113,7 @@ export class HeaderComponent {
 
   protected closeDropdown(event: Event, label: string): void {
     const panel = this.dropdownPanel(event);
-    if (!panel || this.isMobile()) return;
+    if (!panel) return;
 
     if (this.openDropdownLabel() === label) this.openDropdownLabel.set(null);
     gsap.killTweensOf(panel);
@@ -231,29 +133,16 @@ export class HeaderComponent {
     return target.querySelector<HTMLElement>('[data-dropdown-panel]') ?? target.closest<HTMLElement>('[data-dropdown-panel]');
   }
 
-  private isMobile(): boolean {
-    return window.matchMedia('(max-width: 767px)').matches;
-  }
-
   protected onChildClick(event: Event, child: NavigationAction, label: string): void {
     this.closeDropdown(event, label);
     if (child.action === 'visit') this.openVisitSheet();
-    else this.closeMenu();
   }
 
   protected openVisitSheet(): void {
-    this.closeMenu();
-
     this.visitSheet.open();
   }
 
-  private openMenu(): void {
-    this.menuOpen.set(true);
-    if (!window.matchMedia('(max-width: 767px)').matches) return;
-
-    afterNextRender(() => {
-      const nav = this.nav().nativeElement;
-      gsap.fromTo(nav, { autoAlpha: 0, y: -8 }, { autoAlpha: 1, y: 0, duration: 0.24, ease: 'power2.out' });
-    }, { injector: this.injector });
+  protected openMenu(): void {
+    this.mobileMenu.open();
   }
 }

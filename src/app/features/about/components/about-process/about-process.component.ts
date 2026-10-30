@@ -42,7 +42,7 @@ export class AboutProcessComponent {
       number: '03',
       title: 'Compara y decide',
       text: 'Revisamos contigo las opciones de financiamiento y las condiciones de compra.',
-      image: '/images/presentacion.webp',
+      image: '/images/gallery/presentacion.webp',
       imageAlt: 'Familias revisan el plano del proyecto con el equipo',
     },
     {

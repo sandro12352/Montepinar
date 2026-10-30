@@ -13,7 +13,7 @@
         Historias que empiezan en casa.
       </h2>
       <p class="mb-0 mt-5 max-w-2xl text-pretty text-base leading-relaxed text-[#1f1a14]/70 sm:text-lg">
-        Mira los videos y conoce las experiencias de la comunidad Montepinar.
+        Conoce las experiencias de la comunidad Montepinar.
       </p>
     </header>
     </div>
@@ -26,22 +26,21 @@
           <article
             class="grid min-w-0 grid-cols-1 overflow-hidden rounded-3xl bg-white p-5 shadow-[0_14px_36px_rgb(73_54_34_/_10%)] md:h-100 md:grid-cols-[minmax(15rem,0.85fr)_minmax(0,1.5fr)]">
             <!-- Video; si no hay, la foto del cliente -->
-            <div class="relative aspect-[4/3] min-h-56 overflow-hidden rounded-2xl bg-[var(--brand-forest-900)] md:aspect-auto md:min-h-0">
+            <div class="relative aspect-[4/3] min-h-56 overflow-hidden rounded-2xl md:aspect-auto md:min-h-0">
               @if (item.videoSrc) {
               <video class="absolute inset-0 size-full object-cover" [src]="item.videoSrc" [poster]="item.poster"
                 controls playsinline preload="metadata" [attr.aria-label]="'Video de ' + item.author">
                 Tu navegador no admite la reproducción de video.
               </video>
               } @else {
-              <span aria-hidden="true" class="absolute -right-10 -top-10 size-44 rounded-full bg-[var(--brand-primary)]/25 blur-2xl"></span>
-              <span aria-hidden="true" class="absolute -bottom-12 -left-8 size-44 rounded-full bg-[var(--brand-forest-400)]/25 blur-2xl"></span>
-              <div class="absolute inset-0 grid place-items-center">
-                <figure class="m-0 text-center">
-                  <img class="mx-auto size-36 rounded-full object-cover ring-4 ring-white/80 shadow-xl shadow-black/30 sm:size-40"
-                    [src]="item.photo" [alt]="'Foto de ' + item.author" loading="lazy" width="160" height="160" />
-                  <figcaption class="mt-4 text-sm font-extrabold text-white">{{ item.author }}</figcaption>
-                </figure>
-              </div>
+              <!-- PNG recortado, sin fondo: la persona y su nombre quedan centrados en el eje vertical -->
+              <figure class="absolute inset-0 m-0 flex flex-col items-center justify-center gap-3 py-3">
+                <div class="relative min-h-0 w-full flex-1 basis-0">
+                  <img class="absolute inset-0 mx-auto h-full w-auto max-w-full object-contain object-center drop-shadow-[0_10px_16px_rgb(0_0_0_/_18%)]"
+                    [src]="item.photo" [alt]="'Foto de ' + item.author" loading="lazy" />
+                </div>
+                <figcaption class="w-full shrink-0 px-3 text-center text-sm font-extrabold text-[#1f1a14]">{{ item.author }}</figcaption>
+              </figure>
               }
             </div>
 

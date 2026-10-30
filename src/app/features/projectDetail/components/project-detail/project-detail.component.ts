@@ -6,7 +6,6 @@ import { ContactCtaComponent } from '../../../home/components/contact-cta/contac
 import { FaqComponent } from '../../../home/components/faq/faq.component';
 import { getProjectDetail } from '../../data/project-detail.data';
 import { ProjectDetailHeroComponent } from '../project-detail-hero/project-detail-hero.component';
-import { ProjectDetailLegalComponent } from '../project-detail-legal/project-detail-legal.component';
 import { ProjectDetailLocationComponent } from '../project-detail-location/project-detail-location.component';
 import { ProjectDetailLotsComponent } from '../project-detail-lots/project-detail-lots.component';
 import { ProjectDetailMainComponent } from '../project-detail-main/project-detail-main.component';
@@ -23,7 +22,6 @@ import { ProjectDetailSimulatorComponent } from '../project-detail-simulator/pro
     ProjectDetailLotsComponent,
     ProjectDetailLocationComponent,
     ProjectDetailSimulatorComponent,
-    ProjectDetailLegalComponent,
     ContactCtaComponent,
     FaqComponent,
   ],

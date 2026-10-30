@@ -31,12 +31,12 @@ const EMPTY_MODEL: VisitModel = {
   notes: '',
 };
 
-// Feriados nacionales de Perú (mes-día). Las visitas solo se hacen los domingos que no sean feriado.
+// Feriados nacionales de Perú (mes-día). Las visitas se hacen sábados y domingos que no sean feriado.
 const HOLIDAYS = new Set(['1-1', '5-1', '6-7', '6-29', '7-23', '7-28', '7-29', '8-6', '8-30', '10-8', '11-1', '12-8', '12-9', '12-25']);
 
-const isVisitDay = (date: Date): boolean => date.getDay() === 0 && !HOLIDAYS.has(`${date.getMonth() + 1}-${date.getDate()}`);
+const isVisitDay = (date: Date): boolean => (date.getDay() === 0 || date.getDay() === 6) && !HOLIDAYS.has(`${date.getMonth() + 1}-${date.getDate()}`);
 
-const VISIT_OPTIONS = 3;
+const VISIT_OPTIONS = 4;
 
 const nextVisitDays = (): Date[] => {
   const days: Date[] = [];
@@ -103,7 +103,7 @@ export class VisitSheetComponent {
       if (!selectedDate) return undefined;
 
       if (selectedDate < this.startOfToday()) return { kind: 'pastDate', message: 'Selecciona hoy o una fecha futura.' };
-      return this.isDateDisabled(selectedDate) ? { kind: 'notVisitDay', message: 'Elige uno de los próximos 3 domingos disponibles.' } : undefined;
+      return this.isDateDisabled(selectedDate) ? { kind: 'notVisitDay', message: 'Elige uno de los próximos sábados o domingos disponibles.' } : undefined;
     });
     maxLength(schema.notes, 500, { message: 'El mensaje no puede superar los 500 caracteres.' });
   });

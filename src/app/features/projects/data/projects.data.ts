@@ -7,6 +7,8 @@ export interface ProjectItem {
   readonly slug: string;
   readonly name: string;
   readonly location: string;
+  /** Dirección o búsqueda que se abre en Google Maps. */
+  readonly mapQuery: string;
   readonly description: string;
   readonly image: string;
   readonly imageAlt: string;
@@ -21,6 +23,7 @@ export const PROJECTS: readonly ProjectItem[] = [
     slug: 'chancay',
     name: 'Palmeras de Montepinar',
     location: 'Chancay',
+    mapQuery: 'Chancay, Lima, Perú',
     description: 'Un desarrollo residencial pensado para construir un futuro a tu medida, rodeado de áreas verdes.',
     image: '/images/PalmerasdeMontepinar.png',
     imageAlt: 'Acceso principal a Montepinar',
@@ -38,6 +41,7 @@ export const PROJECTS: readonly ProjectItem[] = [
     slug: 'huaral',
     name: 'Asociación Montepinar',
     location: 'Huaral',
+    mapQuery: 'Asociacion Vivienda Montepinar Lt, Carretera Panamericana Norte, Huacho',
     description: 'Lotes accesibles junto a Mall Montepinar, con más de 5,000 áreas verdes para disfrutar en familia.',
     image: '/images/AsociacionMontepinar.webp',
     imageAlt: 'Vista aérea de las áreas deportivas de Montepinar',
@@ -55,6 +59,7 @@ export const PROJECTS: readonly ProjectItem[] = [
     slug: 'iquitos',
     name: 'Amazon Lodge Montepinar',
     location: 'Iquitos',
+    mapQuery: 'Iquitos, Loreto, Perú',
     description: 'Conoce los avances y el entorno natural que está dando vida a Montepinar en la selva.',
     image: '/images/MontepinarIquitos.webp',
     imageAlt: 'Recorrido de visitantes por el proyecto Montepinar',

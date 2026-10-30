@@ -29,27 +29,49 @@ export class TestimonialsComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 
-  // Testimonios de ejemplo: reemplaza textos, fotos y videos por los reales de cada cliente.
+  // Testimonios de ejemplo: reemplaza textos y fotos por los reales de cada cliente.
+  // `photo` debe ser un PNG recortado (sin fondo). Por ahora usan recortes de /images/equipo como marcador.
+  // Para volver a mostrar video, pon la ruta en `videoSrc`.
   protected readonly testimonials: readonly Testimonial[] = [
     {
       title: 'Una nueva forma de vivir', text: 'Nos encantó conocer el proyecto y sus áreas comunes.',
       author: 'María y Luis', role: 'Familia visitante · Ejemplo ficticio', initials: 'ML',
-      videoSrc: '/video/MONTEPINAR.mp4', poster: '/images/entrada.png', photo: '/images/avatars/women-44.jpg',
+      videoSrc: null, poster: '/images/entrada.png', photo: '/images/equipo/chavela-saucedo-3.png',
     },
     {
       title: 'Espacios para compartir', text: 'Nos gustó la tranquilidad del entorno y la distribución de los espacios.',
       author: 'Ana y Javier', role: 'Familia visitante · Ejemplo ficticio', initials: 'AJ',
-      videoSrc: null, poster: '/images/AsociacionMontepinar.webp', photo: '/images/avatars/men-32.jpg',
+      videoSrc: null, poster: '/images/AsociacionMontepinar.webp', photo: '/images/equipo/jose-maria-varillas-4.png',
     },
     {
       title: 'Un lugar para crecer', text: 'Pudimos resolver nuestras dudas y conocer mejor cada proyecto.',
       author: 'Lucía M.', role: 'Visitante · Ejemplo ficticio', initials: 'LM',
-      videoSrc: '/video/MONTEPINAR.mp4', poster: '/images/slide2.webp', photo: '/images/avatars/women-68.jpg',
+      videoSrc: null, poster: '/images/slide2.webp', photo: '/images/equipo/hillma-machuca-2.png',
     },
     {
       title: 'Atención desde el primer día', text: 'Nos sentimos bien atendidos desde el primer momento.',
       author: 'Familia Soto', role: 'Visitantes · Ejemplo ficticio', initials: 'FS',
-      videoSrc: null, poster: '/images/slide3.webp', photo: '/images/avatars/men-75.jpg',
+      videoSrc: null, poster: '/images/slide3.webp', photo: '/images/equipo/miguel-salgado-3.png',
+    },
+    {
+      title: 'El viaje valió la pena', text: 'El bus, el desayuno y el recorrido fueron muy ordenados. Se nota que cuidan cada detalle.',
+      author: 'Rosa y Pedro', role: 'Familia visitante · Ejemplo ficticio', initials: 'RP',
+      videoSrc: null, poster: '/images/slide3.webp', photo: '/images/equipo/chavela-saucedo-5.png',
+    },
+    {
+      title: 'Todo claro y en regla', text: 'Me mostraron los documentos del proyecto y me explicaron cada paso del trámite sin presiones.',
+      author: 'Carlos R.', role: 'Comprador · Ejemplo ficticio', initials: 'CR',
+      videoSrc: null, poster: '/images/entrada.png', photo: '/images/equipo/jose-maria-varillas-3.png',
+    },
+    {
+      title: 'Ver el terreno lo cambió todo', text: 'En plano uno imagina, pero caminar los lotes me dio la seguridad que necesitaba para decidir.',
+      author: 'Elena V.', role: 'Visitante · Ejemplo ficticio', initials: 'EV',
+      videoSrc: null, poster: '/images/slide2.webp', photo: '/images/equipo/hillma-machuca-3.png',
+    },
+    {
+      title: 'Un futuro para mis hijos', text: 'Buscaba un lugar para que mis hijos crezcan con espacio y tranquilidad, y lo encontramos aquí.',
+      author: 'Jorge y Karla', role: 'Familia compradora · Ejemplo ficticio', initials: 'JK',
+      videoSrc: null, poster: '/images/AsociacionMontepinar.webp', photo: '/images/equipo/miguel-salgado-2.png',
     },
   ];
 

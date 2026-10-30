@@ -72,7 +72,7 @@ export class Vision360Component {
       id: 'sala-de-ventas',
       label: 'Sala de ventas',
       description: 'Conoce el plano del proyecto con nuestro equipo.',
-      image: '/images/presentacion.webp',
+      image: '/images/gallery/presentacion.webp',
     },
   ];
 

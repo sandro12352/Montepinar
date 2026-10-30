@@ -31,6 +31,14 @@ export const routes: Routes = [
                 loadComponent:()=>import('./features/guidedTour/components/guided-tour/guided-tour.component').then(m=>m.GuidedTourComponent)
             },
             {
+                path:'informacion-legal',
+                loadComponent:()=>import('./features/legalInformation/components/legal-information/legal-information.component').then(m=>m.LegalInformationComponent)
+            },
+            {
+                path:'terminos-y-condiciones',
+                loadComponent:()=>import('./features/terms/components/terms/terms.component').then(m=>m.TermsComponent)
+            },
+            {
                 path:'contacto',
                 loadComponent:()=>import('./features/contact/components/contact/contact.component').then(m=>m.ContactComponent)
             }

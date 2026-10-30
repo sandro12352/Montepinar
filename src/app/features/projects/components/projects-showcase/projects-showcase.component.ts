@@ -5,6 +5,7 @@ import {
   lucideArrowUpRight,
   lucideCalendarDays,
   lucideDroplets,
+  lucideMap,
   lucideMapPin,
   lucideRuler,
   lucideShieldCheck,
@@ -33,6 +34,7 @@ type StatusFilter = 'Todos' | ProjectItem['status'];
       lucideArrowUpRight,
       lucideCalendarDays,
       lucideDroplets,
+      lucideMap,
       lucideMapPin,
       lucideRuler,
       lucideShieldCheck,
@@ -71,6 +73,10 @@ export class ProjectsShowcaseComponent {
 
   protected openVisit(): void {
     this.visitSheet.open();
+  }
+
+  protected mapUrl(project: ProjectItem): string {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(project.mapQuery)}`;
   }
 
   protected indexLabel(index: number): string {

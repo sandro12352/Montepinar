@@ -36,14 +36,18 @@
           <ng-icon name="lucideMessageCircle" size="22" class="shrink-0" aria-hidden="true" />
           Escríbenos por WhatsApp
         </a>
+        <p class="m-0 mb-3 mt-8 text-sm font-semibold text-[var(--brand-forest-900)]/60">Síguenos</p>
+        <app-social-links />
       </div>
     </div>
 
     <!-- Copyright -->
-    <p data-footer-reveal
-      class="m-0 pt-10 text-sm tracking-[-0.02em] text-[var(--brand-forest-900)] md:pr-[45px] md:text-right lg:text-lg">
-      © {{ year }} Montepinar, Todos los derechos reservados
-    </p>
+    <div data-footer-reveal
+      class="flex flex-col gap-3 pt-10 text-sm tracking-[-0.02em] text-[var(--brand-forest-900)] md:flex-row md:items-center md:justify-between md:pr-[45px] lg:text-lg">
+      <a href="/terminos-y-condiciones"
+        class="text-[var(--brand-forest-900)] underline-offset-4 transition-colors hover:text-[var(--brand-primary)] hover:underline focus-visible:outline-none focus-visible:text-[var(--brand-primary)]">Términos y condiciones</a>
+      <p class="m-0">© {{ year }} Montepinar, Todos los derechos reservados</p>
+    </div>
   </div>
 
   <!-- Imagen del proyecto con marca gigante -->

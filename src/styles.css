@@ -304,3 +304,10 @@ body:has(#app-loader) {
     transform: none;
   }
 }
+
+/* Calendario de la visita: las fechas no disponibles se ven en gris y no se pueden elegir. */
+button[brnCalendarCellButton][data-disabled] {
+  color: rgb(0 0 0 / 0.3);
+  cursor: not-allowed;
+  pointer-events: none;
+}

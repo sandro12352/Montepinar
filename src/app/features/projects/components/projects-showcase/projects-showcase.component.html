@@ -93,6 +93,12 @@
                 <ng-icon name="lucideMapPin" size="14" aria-hidden="true" />
                 {{ project.location }}
               </span>
+              <a [href]="mapUrl(project)" target="_blank" rel="noopener noreferrer"
+                [attr.aria-label]="'Ver la ubicación de ' + project.name + ' en Google Maps'"
+                [title]="'Ver ubicación en Google Maps'"
+                class="group/map inline-flex size-8 items-center justify-center rounded-full border border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] no-underline transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--brand-primary)] hover:bg-[var(--brand-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
+                <ng-icon name="lucideMap" size="16" aria-hidden="true" />
+              </a>
               <span class="h-3 w-px bg-[var(--brand-forest-900)]/25" aria-hidden="true"></span>
               <span class="text-[#1f1a14]/60">{{ project.category }}</span>
             </p>

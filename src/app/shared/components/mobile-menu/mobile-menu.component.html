@@ -1,0 +1,74 @@
+<hlm-sheet side="right" class="block" [scrollStrategy]="blockScroll">
+  <hlm-sheet-content *hlmSheetPortal aria-label="Menú de navegación"
+    class="no-scrollbar w-full! max-w-none! gap-0 overflow-y-auto border-l-0 bg-[#f4f1ea] text-[var(--brand-forest-900)] sm:max-w-none! [&>button]:right-4 [&>button]:top-4 [&>button]:z-20 [&>button]:size-11 [&>button]:rounded-full [&>button]:bg-white [&>button]:text-[var(--brand-forest-900)] [&>button]:shadow-sm">
+
+    <div class="flex min-h-full w-full shrink-0 flex-col px-6 pb-8 pt-5">
+      <!-- Cabecera -->
+      <hlm-sheet-header class="gap-0 p-0 text-left">
+        <a routerLink="/" (click)="onNavigate()" aria-label="Montepinar, volver al inicio"
+          class="inline-flex w-fit rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-4">
+          <img class="block h-auto w-36" src="/images/logo.webp" alt="Montepinar" />
+        </a>
+        <h2 hlmSheetTitle class="sr-only">Menú de navegación</h2>
+        <p hlmSheetDescription class="sr-only">Enlaces a las secciones principales de Montepinar.</p>
+      </hlm-sheet-header>
+
+      <!-- Opciones -->
+      <nav aria-label="Navegación principal" class="mt-8 flex-1">
+        <!-- Las opciones con submenú arrancan comprimidas: el usuario las despliega -->
+        <hlm-accordion type="single" class="gap-1">
+          @for (item of items; track item.label) {
+          @if (item.menu; as menu) {
+          <hlm-accordion-item class="border-0">
+            <hlm-accordion-trigger
+              triggerClass="rounded-2xl px-3 py-3 text-[1.65rem] font-extrabold leading-tight tracking-[-0.03em] text-inherit hover:no-underline items-center **:data-[slot=accordion-trigger-icon]:text-[var(--brand-primary)]! **:data-[slot=accordion-trigger-icon]:text-[length:1.25rem]">
+              {{ item.label }}
+            </hlm-accordion-trigger>
+            <hlm-accordion-content>
+              <ul class="m-0 mb-3 ml-5 grid list-none gap-1 border-l-2 border-[var(--brand-primary)]/30 p-0 pl-3">
+                @for (link of menu.links; track link.label) {
+                <li>
+                  <a [routerLink]="link.path" [fragment]="link.fragment" (click)="onNavigate()"
+                    class="flex items-center gap-3 rounded-xl p-2 !text-inherit !no-underline transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]">
+                    <img class="size-12 shrink-0 rounded-lg object-cover" [src]="link.image" alt="" loading="lazy" />
+                    <span class="min-w-0 leading-tight">
+                      <span class="block text-base font-extrabold">{{ link.label }}</span>
+                      <span class="mt-0.5 block truncate text-xs text-[#1f1a14]/60">{{ link.description }}</span>
+                    </span>
+                  </a>
+                </li>
+                }
+                <li>
+                  <a [routerLink]="menu.footer.path" [fragment]="menu.footer.fragment" (click)="onNavigate()"
+                    class="inline-flex items-center gap-2 p-2 text-sm font-extrabold !text-[var(--brand-forest-900)] !no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]">
+                    <span class="border-b-2 border-[var(--brand-primary)] pb-0.5">{{ menu.footer.label }}</span>
+                    <ng-icon name="lucideArrowUpRight" size="16" aria-hidden="true" class="text-[var(--brand-primary)]" />
+                  </a>
+                </li>
+              </ul>
+            </hlm-accordion-content>
+          </hlm-accordion-item>
+          } @else {
+          <a [routerLink]="item.path" routerLinkActive="text-[var(--brand-primary)]" [routerLinkActiveOptions]="{ exact: true }"
+            ariaCurrentWhenActive="page" (click)="onNavigate()"
+            class="flex items-center justify-between gap-4 rounded-2xl px-3 py-3 text-[1.65rem] font-extrabold leading-tight tracking-[-0.03em] text-inherit no-underline transition-colors hover:text-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]">
+            {{ item.label }}
+            <ng-icon name="lucideArrowRight" size="20" aria-hidden="true" class="shrink-0 text-[var(--brand-primary)]" />
+          </a>
+          }
+          }
+        </hlm-accordion>
+      </nav>
+
+      <!-- Pie: llamada a la acción y redes -->
+      <div class="mt-8 grid gap-6 border-t border-[var(--brand-forest-900)]/10 pt-6">
+        <button type="button" (click)="openVisit()"
+          class="inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-3 rounded-xl border-0 bg-[var(--brand-primary)] px-6 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-[var(--brand-primary)]/25 transition-transform duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
+          <ng-icon name="lucideCalendarDays" size="18" aria-hidden="true" />
+          Agendar visita
+        </button>
+        <app-social-links />
+      </div>
+    </div>
+  </hlm-sheet-content>
+</hlm-sheet>

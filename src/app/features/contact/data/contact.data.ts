@@ -24,3 +24,17 @@ export const OFFICE_HOURS: readonly { readonly days: string; readonly time: stri
   { days: 'Sábados', time: '09:00 - 13:00' },
   { days: 'Domingo', time: 'Cerrado' },
 ];
+
+export interface SocialLink {
+  readonly name: string;
+  readonly href: string;
+  /** Nombre del ícono lucide, o 'tiktok' (no existe en lucide, se dibuja aparte). */
+  readonly icon: string;
+}
+
+// Enlaces provisionales a la portada de cada red: reemplázalos por los perfiles reales de Montepinar.
+export const SOCIAL_LINKS: readonly SocialLink[] = [
+  { name: 'Facebook', href: 'https://www.facebook.com/', icon: 'lucideFacebook' },
+  { name: 'Instagram', href: 'https://www.instagram.com/', icon: 'lucideInstagram' },
+  { name: 'TikTok', href: 'https://www.tiktok.com/', icon: 'tiktok' },
+];

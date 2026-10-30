@@ -1,90 +1,80 @@
 <header #header
-  class="invisible absolute inset-x-0 top-2 z-50 text-white transition-[background-color,box-shadow] duration-200 motion-reduce:transition-none"
-  [class.bg-white]="scrolled()" [style.background-color]="scrolled() ? 'var(--card)' : 'transparent'"
-  [style.color]="scrolled() ? 'var(--foreground)' : '#FFFFFF'" [class.shadow-lg]="scrolled()">
-  <div class="relative mx-auto flex w-[85%] items-center justify-between gap-5 py-2 max-md:w-full max-m:px-5">
+  class="invisible absolute inset-x-0 z-50 text-white transition-[background-color,box-shadow] duration-300 motion-reduce:transition-none"
+  [class.top-2]="!solid()" [class.pt-2]="solid() && !scrolled()" [class.bg-white]="solid()" [style.background-color]="solid() ? 'var(--card)' : 'transparent'"
+  [style.color]="solid() ? 'var(--foreground)' : '#FFFFFF'" [class.shadow-lg]="scrolled()">
+  <div class="mx-auto flex w-[85%] items-center justify-between gap-5 py-2">
     <a data-anim="logo"
-      class="col-start-1 row-start-1 flex w-fit shrink-0 items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-4 max-md:p-1.5"
-      routerLink="/" aria-label="Montepinar, volver al inicio" (click)="closeMenu()">
-      <img class="block h-auto w-32 sm:w-42" [src]="scrolled() ? whiteHeaderLogoSrc : transparentHeaderLogoSrc"
-        alt="Montepinar" />
+      class="col-start-1 row-start-1 flex w-fit shrink-0 items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-4"
+      routerLink="/" aria-label="Montepinar, volver al inicio">
+      <span class="relative block">
+        <img class="block h-auto w-32 transition-opacity duration-300 sm:w-42" [class.opacity-0]="solid()" [src]="transparentHeaderLogoSrc" alt="Montepinar" />
+        <img class="absolute inset-0 block h-auto w-32 opacity-0 transition-opacity duration-300 sm:w-42" [class.opacity-100]="solid()" [src]="whiteHeaderLogoSrc" alt="" aria-hidden="true" />
+      </span>
     </a>
 
     <nav #nav id="main-navigation"
-      class="hidden w-full items-center gap-[clamp(0.5rem,1.5vw,1.5rem)] text-inherit md:col-start-2 md:row-start-1 md:flex md:w-max md:justify-self-center max-md:col-span-2 max-md:col-start-1 max-md:row-start-2 max-md:flex-col max-md:items-stretch max-md:gap-1 max-md:rounded-2xl max-md:border max-md:border-stone-900/10 max-md:bg-white max-md:p-3 max-md:text-stone-900 max-md:shadow-[0_16px_36px_rgb(31_26_20_/_16%)]"
-      [class.flex]="menuOpen()" [class.hidden]="!menuOpen()" aria-label="Navegación principal">
+      class="hidden w-full items-center gap-[clamp(0.5rem,1.5vw,1.5rem)] text-inherit md:col-start-2 md:row-start-1 md:flex md:w-max md:justify-self-center"
+      aria-label="Navegación principal">
       @for (item of navigationItems; track item.label) {
       @if (item.menu) {
-      <div data-anim="link" class="max-md:flex max-md:flex-col" (mouseenter)="openDropdown($event, item.label)"
+      <div data-anim="link" (mouseenter)="openDropdown($event, item.label)"
         (mouseleave)="closeDropdown($event, item.label)" (focusin)="openDropdown($event, item.label)"
         (focusout)="onDropdownFocusOut($event, item.label)" (keydown.escape)="closeDropdown($event, item.label)">
         @if (item.path) {
         <a class="inline-flex items-center gap-1 relative px-1 py-[0.65rem] text-[0.92rem] font-semibold no-underline transition-colors duration-200 after:absolute after:bottom-[0.35rem] after:left-1 after:right-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-(--brand-primary) after:transition-transform after:duration-200 after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100"
-          [style.color]="scrolled() || menuOpen()? 'var(--foreground)': '#FFFFFF'" [routerLink]="item.path"
+          [style.color]="solid() ? 'var(--foreground)': '#FFFFFF'" [routerLink]="item.path"
           routerLinkActive="after:scale-x-100" [routerLinkActiveOptions]="{ exact: false }" ariaCurrentWhenActive="page"
-          aria-haspopup="true" [attr.aria-expanded]="openDropdownLabel() === item.label" (click)="closeMenu()">
+          aria-haspopup="true" [attr.aria-expanded]="openDropdownLabel() === item.label">
           {{ item.label }}
-          <ng-icon name="lucideChevronDown" size="15" aria-hidden="true" class="transition-transform duration-300 max-md:hidden" [class.rotate-180]="openDropdownLabel() === item.label" />
+          <ng-icon name="lucideChevronDown" size="15" aria-hidden="true" class="transition-transform duration-300" [class.rotate-180]="openDropdownLabel() === item.label" />
         </a>
         } @else {
         <button type="button" class="inline-flex cursor-pointer items-center gap-1 border-0 bg-transparent relative px-1 py-[0.65rem] text-[0.92rem] font-semibold no-underline transition-colors duration-200 after:absolute after:bottom-[0.35rem] after:left-1 after:right-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-(--brand-primary) after:transition-transform after:duration-200 after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100"
-          [style.color]="scrolled() || menuOpen()? 'var(--foreground)': '#FFFFFF'" aria-haspopup="true"
+          [style.color]="solid() ? 'var(--foreground)': '#FFFFFF'" aria-haspopup="true"
           [attr.aria-expanded]="openDropdownLabel() === item.label">
           {{ item.label }}
-          <ng-icon name="lucideChevronDown" size="15" aria-hidden="true" class="transition-transform duration-300 max-md:hidden" [class.rotate-180]="openDropdownLabel() === item.label" />
+          <ng-icon name="lucideChevronDown" size="15" aria-hidden="true" class="transition-transform duration-300" [class.rotate-180]="openDropdownLabel() === item.label" />
         </button>
         }
 
-        <!-- Desplegable: lista numerada a la izquierda y vista previa que cambia al pasar el mouse -->
+        <!-- Desplegable a todo el ancho: introducción a la izquierda y tarjetas ordenadas en columnas -->
         <div data-dropdown-panel
-          class="invisible absolute inset-x-0 top-[calc(100%-0.75rem)] z-50 mx-auto w-[min(100%,46rem)] pt-6 opacity-0 max-md:visible max-md:static max-md:w-full max-md:pt-0 max-md:opacity-100">
-          <div class="grid grid-cols-[minmax(0,1fr)_17rem] gap-2 rounded-[1.75rem] border border-[var(--brand-forest-900)]/10 bg-white p-2 text-[var(--brand-forest-900)] shadow-[0_24px_60px_rgb(3_48_26_/_16%)] max-md:grid-cols-1 max-md:border-0 max-md:p-0 max-md:shadow-none">
-            <div class="flex min-w-0 flex-col p-3 max-md:p-0">
-              <p data-dropdown-item
-                class="m-0 mb-2 flex items-center gap-3 px-3 text-[0.68rem] font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)] max-md:hidden">
-                <span class="h-0.5 w-6 bg-[var(--brand-primary)]" aria-hidden="true"></span>
-                {{ item.menu.eyebrow }}
-              </p>
+          class="invisible absolute inset-x-0 top-[calc(100%-1rem)] z-50 pt-4 opacity-0">
+          <div class="bg-white text-[var(--brand-forest-900)] shadow-[0_28px_60px_rgb(3_48_26_/_16%)]">
+            <div class="mx-auto grid w-[85%] grid-cols-[16rem_minmax(0,1fr)] gap-[clamp(2rem,5vw,5rem)] pb-14 pt-10">
+              <!-- Introducción -->
+              <div class="flex flex-col">
+                <p data-dropdown-item
+                  class="m-0 flex items-center gap-3 text-[0.68rem] font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+                  <span class="h-0.5 w-6 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+                  {{ item.menu.eyebrow }}
+                </p>
+                <p data-dropdown-item class="m-0 mt-5 text-[2.5rem] font-extrabold leading-[1.05] tracking-[-0.035em]">{{ item.label }}</p>
+                <div data-dropdown-item class="mt-auto pt-8">
+                  <ng-container [ngTemplateOutlet]="navAction" [ngTemplateOutletContext]="{
+                    $implicit: item.menu.footer,
+                    menu: item.label,
+                    cls: footerClass,
+                    body: footerBody,
+                    ctx: { $implicit: item.menu.footer }
+                  }" />
+                </div>
+              </div>
 
-              <ul class="m-0 list-none p-0">
-                @for (link of item.menu.links; track link.label; let i = $index) {
-                <li data-dropdown-item (mouseenter)="previewIndex.set(i)" (focusin)="previewIndex.set(i)">
+              <!-- Tarjetas -->
+              <ul class="m-0 grid list-none gap-5 p-0" [style.grid-template-columns]="'repeat(' + item.menu.links.length + ', minmax(0, 1fr))'">
+                @for (link of item.menu.links; track link.label) {
+                <li data-dropdown-item class="min-w-0">
                   <ng-container [ngTemplateOutlet]="navAction" [ngTemplateOutletContext]="{
                     $implicit: link,
                     menu: item.label,
-                    cls: rowClass + (previewIndex() === i ? ' bg-[var(--brand-forest-50)]' : ''),
-                    body: rowBody,
-                    ctx: { $implicit: link, index: i, active: previewIndex() === i }
+                    cls: cardClass,
+                    body: cardBody,
+                    ctx: { $implicit: link }
                   }" />
                 </li>
                 }
               </ul>
-
-              <div data-dropdown-item
-                class="mt-auto border-t border-[var(--brand-forest-900)]/10 px-3 pt-4 max-md:mt-2 max-md:pt-3">
-                <ng-container [ngTemplateOutlet]="navAction" [ngTemplateOutletContext]="{
-                  $implicit: item.menu.footer,
-                  menu: item.label,
-                  cls: footerClass,
-                  body: footerBody,
-                  ctx: { $implicit: item.menu.footer }
-                }" />
-              </div>
-            </div>
-
-            <!-- Vista previa -->
-            @let preview = item.menu.links[previewIndex()] ?? item.menu.links[0];
-            <div data-dropdown-item aria-hidden="true"
-              class="relative isolate flex min-h-[20rem] flex-col justify-end overflow-hidden rounded-[1.4rem] bg-[var(--brand-forest-800)] p-5 text-white max-md:hidden">
-              @for (link of item.menu.links; track link.label; let i = $index) {
-              <img class="absolute inset-0 -z-10 size-full object-cover transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none"
-                [class.opacity-0]="previewIndex() !== i" [class.scale-110]="previewIndex() !== i" [src]="link.image" alt=""
-                loading="lazy" />
-              }
-              <span class="absolute inset-0 -z-10 bg-gradient-to-t from-[var(--brand-forest-900)]/90 via-[var(--brand-forest-900)]/20 to-transparent"></span>
-
-              <span class="block text-xl font-extrabold leading-tight tracking-[-0.02em]">{{ preview.label }}</span>
-              <span class="mt-1 block text-sm text-white/75">{{ preview.description }}</span>
             </div>
           </div>
         </div>
@@ -92,28 +82,20 @@
       } @else if (item.path) {
       <a data-anim="link"
         class="relative px-1 py-[0.65rem] text-[0.92rem] font-semibold no-underline transition-colors duration-200 after:absolute after:bottom-[0.35rem] after:left-1 after:right-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-(--brand-primary) after:transition-transform after:duration-200 after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100"
-        [style.color]="scrolled() || menuOpen()? 'var(--foreground)': '#FFFFFF'" [routerLink]="item.path"
+        [style.color]="solid() ? 'var(--foreground)': '#FFFFFF'" [routerLink]="item.path"
         routerLinkActive="after:scale-x-100" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page"
-        (click)="closeMenu()">{{ item.label }}</a>
+       >{{ item.label }}</a>
       } @else {
       <a data-anim="link"
         class="relative px-1 py-[0.65rem] text-[0.92rem] font-semibold no-underline transition-colors duration-200 after:absolute after:bottom-[0.35rem] after:left-1 after:right-1 after:h-0.5 after:origin-left after:scale-x-0 after:bg-(--brand-primary) after:transition-transform after:duration-200 after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100"
-        [style.color]="scrolled() || menuOpen()? 'var(--foreground)': '#FFFFFF'" [href]="item.anchor"
-        (click)="closeMenu()">{{ item.label }}</a>
+        [style.color]="solid() ? 'var(--foreground)': '#FFFFFF'" [href]="item.anchor"
+       >{{ item.label }}</a>
       }
       }
-      <button data-anim="cta"
-        class="group relative isolate inline-flex min-h-[2.9rem] items-center justify-center gap-2 overflow-hidden rounded-xl border-0 bg-primary text-primary-foreground px-[1.4rem] text-[0.9rem] font-extrabold transition-transform duration-200 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-tertiary)] focus-visible:ring-offset-2 md:hidden max-md:mt-1 motion-reduce:transition-none"
-        type="button" (click)="openVisitSheet()">
-        <span aria-hidden="true" class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-tertiary)] transition-transform duration-500 ease-out group-hover:scale-x-100 motion-reduce:transition-none"></span>
-        <span class="relative z-10">Agendar visita</span>
-        <ng-icon name="lucideArrowRight" size="18" aria-hidden="true"
-          class="transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
-      </button>
     </nav>
 
     <button data-anim="cta"
-      class="group relative isolate col-start-3 row-start-1 inline-flex min-h-[2.9rem] items-center justify-center justify-self-end gap-2 overflow-hidden rounded-xl border-0 bg-primary px-[1.4rem] text-[0.9rem] font-extrabold text-primary-foreground transition-transform duration-200 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-forest-500)] focus-visible:ring-offset-2 max-md:hidden motion-reduce:transition-none hover:cursor-pointer"
+      class="group relative isolate col-start-3 row-start-1 hidden md:inline-flex min-h-[2.9rem] items-center justify-center justify-self-end gap-2 overflow-hidden rounded-xl border-0 bg-primary px-[1.4rem] text-[0.9rem] font-extrabold text-primary-foreground transition-transform duration-200 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-forest-500)] focus-visible:ring-offset-2 motion-reduce:transition-none hover:cursor-pointer"
       type="button" aria-label="Agendar una visita a Montepinar" (click)="openVisitSheet()">
       <span aria-hidden="true"
         class="absolute inset-0 origin-left scale-x-0 bg-(--brand-orange-600) transition-transform duration-500 ease-out group-hover:scale-x-100 motion-reduce:transition-none"></span>
@@ -127,20 +109,21 @@
     </button>
 
     <button
-      class="col-start-2 row-start-1 grid size-11 place-items-center rounded-xl border border-white/75 bg-white text-stone-900 shadow-[0_3px_12px_rgb(31_26_20_/_14%)] md:hidden"
-      type="button" [attr.aria-label]="menuOpen() ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'"
-      [attr.aria-expanded]="menuOpen()" aria-controls="main-navigation" (click)="toggleMenu()">
-      <span class="relative flex h-4 w-[1.2rem] flex-col justify-between" aria-hidden="true">
-        <span class="h-0.5 w-full rounded-sm bg-current transition-transform duration-200 motion-reduce:transition-none"
-          [class.translate-y-1.5]="menuOpen()" [class.rotate-45]="menuOpen()"></span>
-        <span class="h-0.5 w-full rounded-sm bg-current transition-opacity duration-200 motion-reduce:transition-none"
-          [class.opacity-0]="menuOpen()"></span>
-        <span class="h-0.5 w-full rounded-sm bg-current transition-transform duration-200 motion-reduce:transition-none"
-          [class.-translate-y-1.5]="menuOpen()" [class.-rotate-45]="menuOpen()"></span>
+      class="grid size-11 cursor-pointer place-items-center rounded-xl border-0 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] md:hidden"
+      [style.color]="solid() ? 'var(--foreground)' : '#FFFFFF'"
+      type="button" aria-label="Abrir menú de navegación" aria-haspopup="dialog" (click)="openMenu()">
+      <span class="flex h-4 w-[1.2rem] flex-col justify-between" aria-hidden="true">
+        <span class="h-0.5 w-full rounded-sm bg-current"></span>
+        <span class="h-0.5 w-full rounded-sm bg-current"></span>
+        <span class="h-0.5 w-full rounded-sm bg-current"></span>
       </span>
     </button>
   </div>
 </header>
+
+@defer (on idle) {
+<app-mobile-menu />
+}
 
 
 <!-- Enlace genérico del desplegable: elige <a routerLink>, <a href> o <button> según la opción -->
@@ -160,14 +143,17 @@
   }
 </ng-template>
 
-<ng-template #rowBody let-link let-index="index" let-active="active">
-  <span class="min-w-0 flex-1 leading-tight">
-    <span class="block text-base font-extrabold tracking-[-0.01em]">{{ link.label }}</span>
-    <span class="mt-1 block truncate text-xs text-[#1f1a14]/55">{{ link.description }}</span>
+<ng-template #cardBody let-link>
+  <span class="relative block aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[var(--brand-forest-100)]">
+    <img class="size-full object-cover transition-transform duration-500 ease-out group-hover/card:scale-105 motion-reduce:transition-none"
+      [src]="link.image" alt="" loading="lazy" />
+    <span class="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-white/90 text-[var(--brand-forest-900)] opacity-0 shadow-sm transition-all duration-300 group-hover/card:bg-[var(--brand-primary)] group-hover/card:text-white group-hover/card:opacity-100 group-focus-visible/card:opacity-100 motion-reduce:transition-none">
+      <ng-icon name="lucideArrowUpRight" size="16" aria-hidden="true" />
+    </span>
   </span>
-  <span class="grid size-8 shrink-0 place-items-center rounded-full transition-all duration-300 motion-reduce:transition-none max-md:hidden"
-    [class]="active ? 'translate-x-0 bg-[var(--brand-primary)] text-white opacity-100' : '-translate-x-2 opacity-0'">
-    <ng-icon name="lucideArrowRight" size="15" aria-hidden="true" />
+  <span class="mt-3 block leading-tight">
+    <span class="block text-lg font-extrabold tracking-[-0.01em] transition-colors group-hover/card:text-[var(--brand-primary)]">{{ link.label }}</span>
+    <span class="mt-1 block text-sm text-[#1f1a14]/60">{{ link.description }}</span>
   </span>
 </ng-template>
 

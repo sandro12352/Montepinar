@@ -3,6 +3,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMessageCircle, lucidePhone } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SocialLinksComponent } from '../social-links/social-links.component';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,7 +18,7 @@ interface FooterColumn {
 }
 
 @Component({
-  imports: [NgIcon],
+  imports: [NgIcon, SocialLinksComponent],
   providers: [provideIcons({ lucideMessageCircle, lucidePhone })],
   selector: 'app-footer',
   styleUrl: './footer.component.css',

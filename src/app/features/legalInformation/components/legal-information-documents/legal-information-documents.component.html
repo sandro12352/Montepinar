@@ -1,0 +1,54 @@
+<section #root id="documentos" aria-labelledby="legal-documents-title"
+  class="bg-[#f4f1ea] py-[clamp(4rem,7vw,6.5rem)] text-[var(--brand-forest-900)]">
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <div data-head class="mb-8 flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+          <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          Documentos por proyecto
+        </p>
+        <h2 id="legal-documents-title"
+          class="m-0 max-w-[18ch] text-balance text-[clamp(2.2rem,4.2vw,3.5rem)] font-extrabold leading-[1.04] tracking-[-0.04em]">
+          Todo lo que respalda tu lote.
+        </h2>
+      </div>
+      <p class="m-0 max-w-xs text-pretty text-base leading-relaxed text-[#1f1a14]/65">
+        Elige un proyecto para ver su documentación legal.
+      </p>
+    </div>
+
+    <!-- Selector de proyecto -->
+    <div data-head role="tablist" aria-label="Proyectos" class="mb-10 flex flex-wrap gap-2">
+      @for (project of projects; track project.slug) {
+      <button type="button" role="tab" [attr.aria-selected]="selected().slug === project.slug" (click)="select(project)"
+        class="cursor-pointer rounded-full border px-5 py-2.5 text-sm font-extrabold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f1ea]"
+        [class]="selected().slug === project.slug
+          ? 'border-[var(--brand-forest-900)] bg-[var(--brand-forest-900)] text-white'
+          : 'border-[var(--brand-forest-900)]/15 bg-white/60 text-[var(--brand-forest-900)]/70 hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]'">
+        {{ project.name }}
+        <span class="ml-1 font-semibold opacity-70">· {{ project.location }}</span>
+      </button>
+      }
+    </div>
+
+    @if (selected().documents.length) {
+    <ul class="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-3">
+      @for (doc of selected().documents; track doc.title; let i = $index) {
+      <li data-card>
+        <app-legal-document-card [document]="doc" [index]="i" />
+      </li>
+      }
+    </ul>
+    } @else {
+    <div data-card class="grid place-items-center rounded-3xl border border-dashed border-[var(--brand-forest-900)]/20 bg-white/50 px-6 py-16 text-center">
+      <span class="grid size-14 place-items-center rounded-full bg-[var(--brand-primary)]/10 text-[var(--brand-primary)]">
+        <ng-icon name="lucideClock" size="24" aria-hidden="true" />
+      </span>
+      <h3 class="m-0 mt-5 text-xl font-extrabold tracking-tight">Documentos próximamente</h3>
+      <p class="mb-0 mt-2 max-w-sm text-sm leading-relaxed text-[#1f1a14]/60">
+        Estamos preparando la documentación de {{ selected().name }}. Si la necesitas antes, escríbenos y te la enviamos.
+      </p>
+    </div>
+    }
+  </div>
+</section>

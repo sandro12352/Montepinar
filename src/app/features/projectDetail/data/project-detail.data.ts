@@ -37,7 +37,6 @@ export interface ProjectDetail extends ProjectItem {
   readonly amenities: readonly Amenity[];
   readonly gallery: readonly { readonly src: string; readonly alt: string }[];
   readonly plans: readonly LotPlan[];
-  readonly mapQuery: string;
   readonly address: string;
   readonly nearby: readonly NearbyPlace[];
   readonly financing: {
@@ -101,7 +100,7 @@ const EXTRA: Record<string, ProjectExtra> = {
     gallery: [
       { src: '/images/PalmerasdeMontepinar.png', alt: 'Ingreso principal de Montepinar' },
       { src: '/images/entrada.png', alt: 'Entrada al proyecto' },
-      { src: '/images/presentacion.webp', alt: 'Presentación del proyecto' },
+      { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
       { src: '/images/introduccion.png', alt: 'Vista del entorno' },
       { src: '/images/slide2.webp', alt: 'Áreas del proyecto' },
     ],
@@ -110,7 +109,6 @@ const EXTRA: Record<string, ProjectExtra> = {
       { name: 'Lote Familiar', area: 450, price: 27000, frontage: '15 × 30 m', description: 'Espacio para casa, jardín y zona de parrilla.', tag: 'Más elegido' },
       { name: 'Lote Premium', area: 1000, price: 39000, frontage: '25 × 40 m', description: 'Frente amplio y máxima privacidad.' },
     ],
-    mapQuery: 'Chancay, Lima, Perú',
     address: 'Distrito de Chancay, provincia de Huaral, Lima',
     nearby: [
       { label: 'Puerto de Chancay', distance: '15 min' },
@@ -142,15 +140,14 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/slide3.webp', alt: 'Áreas comunes' },
       { src: '/images/Entrada%20Montepinar%20entre%20jardines%20y%20banderas.png', alt: 'Entrada entre jardines' },
       { src: '/images/introduccion.png', alt: 'Vista del entorno' },
-      { src: '/images/presentacion.webp', alt: 'Presentación del proyecto' },
+      { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
     ],
     plans: [
       { name: 'Lote Campo', area: 120, price: 15000, frontage: '8 × 15 m', description: 'Tu primer paso en el campo, listo para construir.', tag: 'Más accesible' },
       { name: 'Lote Jardín', area: 160, price: 25500, frontage: '8 × 20 m', description: 'Un poco más de espacio para tu jardín.', tag: 'Más elegido' },
       { name: 'Lote Amplio', area: 200, price: 40000, frontage: '10 × 20 m', description: 'La mayor amplitud dentro del proyecto.' },
     ],
-    mapQuery: 'Huaral, Lima, Perú',
-    address: 'Provincia de Huaral, Lima',
+    address: 'Asociación Vivienda Montepinar Lt, Carretera Panamericana Norte, Huacho',
     nearby: [
       { label: 'Centro de Huaral', distance: '10 min' },
       { label: 'Panamericana Norte', distance: '8 min' },
@@ -180,7 +177,7 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/MontepinarIquitos.webp', alt: 'Recorrido de visitantes por el proyecto' },
       { src: '/images/slide2.webp', alt: 'Entorno natural' },
       { src: '/images/slide3.webp', alt: 'Áreas del proyecto' },
-      { src: '/images/presentacion.webp', alt: 'Presentación del proyecto' },
+      { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
       { src: '/images/introduccion.png', alt: 'Vista del entorno' },
     ],
     plans: [
@@ -188,7 +185,6 @@ const EXTRA: Record<string, ProjectExtra> = {
       { name: 'Lote Laguna', area: 800, price: 28800, frontage: '20 × 40 m', description: 'Cerca de la laguna y las áreas sociales.', tag: 'Más elegido' },
       { name: 'Lote Selva', area: 1200, price: 43200, frontage: '30 × 40 m', description: 'La máxima amplitud para tu proyecto de vida.' },
     ],
-    mapQuery: 'Iquitos, Loreto, Perú',
     address: 'Iquitos, provincia de Maynas, Loreto',
     nearby: [
       { label: 'Aeropuerto de Iquitos', distance: '25 min' },

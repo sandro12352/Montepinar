@@ -3,12 +3,13 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUpRight, lucideMail, lucideMapPin, lucidePhone } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SocialLinksComponent } from '../../../../shared/components/social-links/social-links.component';
 import { CONTACT_EMAIL, CONTACT_PHONES, OFFICE_ADDRESS, OFFICE_HOURS } from '../../data/contact.data';
 
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
-  imports: [NgIcon],
+  imports: [NgIcon, SocialLinksComponent],
   providers: [provideIcons({ lucideArrowUpRight, lucideMail, lucideMapPin, lucidePhone })],
   selector: 'app-contact-info',
   templateUrl: './contact-info.component.html',

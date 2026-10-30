@@ -21,7 +21,7 @@ export class ProjectDetailLocationComponent {
 
   protected readonly mapUrl = computed(() =>
     this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://www.google.com/maps?q=${encodeURIComponent(this.project().mapQuery)}&z=11&output=embed`,
+      `https://www.google.com/maps?q=${encodeURIComponent(this.project().mapQuery)}&z=14&output=embed`,
     ),
   );
 
