@@ -20,7 +20,7 @@ export class AboutStatsComponent {
   protected readonly stats = [
     { value: 9, prefix: '+', suffix: '', label: 'Años de trayectoria', text: 'Desarrollando comunidades campestres con visión de largo plazo.' },
     { value: 5000, prefix: '+', suffix: '', label: 'Familias felices', text: 'Hogares que ya construyen su sueño en Montepinar.' },
-    { value: 15, prefix: '', suffix: '', label: 'Proyectos entregados', text: 'Entornos verdes listos para vivir y compartir.' },
+    { value: 3, prefix: '', suffix: '', label: 'Proyectos en desarrollo', text: 'Chancay, Huaral e Iquitos: nuevos entornos verdes en marcha.' },
     { value: 98, prefix: '', suffix: '%', label: 'Clientes satisfechos', text: 'Familias que recomiendan su experiencia con nosotros.' },
   ];
 

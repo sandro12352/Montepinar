@@ -1,23 +1,36 @@
-/* El marco de cada foto no se mueve: al pasar el mouse solo crece la imagen por dentro
-   y las demás pasan a gris. Sin hover, todas se ven a color. */
-.bento-tile img {
-  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
-}
-
-@media (hover: hover) {
-  .bento:has(.bento-item:hover, .bento-item:focus-within) .bento-item:not(:hover, :focus-within) .bento-tile img {
-    filter: grayscale(1);
-    transform: scale(0.98);
+/* Escritorio: cada foto es un contenedor flexible. Al pasar el mouse su contenedor se ensancha
+   y los de su fila (y las otras filas) se reducen; la fila conserva su ancho y alto, así que nada se descuadra. */
+@media (min-width: 1024px) {
+  .bento {
+    height: var(--bento-h);
   }
 
-  .bento-item:hover .bento-tile img,
-  .bento-item:focus-within .bento-tile img {
-    transform: scale(1.12);
+  .bento-row {
+    flex: var(--rg, 1) 1 0%;
+    min-height: 0;
+    transition: flex-grow 0.85s cubic-bezier(0.33, 0.1, 0.2, 1);
+  }
+
+  .bento-item {
+    flex: var(--g, 1) 1 0%;
+    transition: flex-grow 0.5s cubic-bezier(0.33, 0.1, 0.2, 1);
+  }
+}
+
+@media (hover: hover) and (min-width: 1024px) {
+  .bento-row:has(.bento-item:hover, .bento-item:focus-within) {
+    flex-grow: calc(var(--rg, 1) * 1.7);
+  }
+
+  .bento-item:hover,
+  .bento-item:focus-within {
+    flex-grow: calc(var(--g, 1) * 2.4);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bento-tile img {
+  .bento-item,
+  .bento-row {
     transition: none;
   }
 }

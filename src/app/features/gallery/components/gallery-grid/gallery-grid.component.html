@@ -13,29 +13,33 @@
       }
     </div>
 
-    <!-- Bento -->
-    <ul class="bento m-0 grid list-none auto-rows-[11rem] grid-flow-dense grid-cols-2 gap-3 p-0 sm:auto-rows-[14rem] sm:gap-4 lg:auto-rows-[15rem] lg:grid-cols-4">
-      @for (photo of photos(); track photo.src; let i = $index) {
-      <li data-tile class="bento-item relative min-h-0 min-w-0" [class]="spanFor(i)">
-        <button type="button" (click)="open(i)" [attr.aria-label]="'Ampliar foto: ' + photo.alt"
-          class="bento-tile group/tile relative block size-full cursor-pointer overflow-hidden rounded-2xl border-0 bg-[var(--brand-forest-800)] p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 sm:rounded-3xl">
-          <img class="size-full object-cover "
-            [src]="photo.src" [alt]="photo.alt" loading="lazy" decoding="async" />
-          <span aria-hidden="true"
-            class="absolute inset-0 bg-gradient-to-t from-[var(--brand-forest-900)]/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover/tile:opacity-100 group-focus-visible/tile:opacity-100 motion-reduce:transition-none"></span>
-          <span
-            class="absolute inset-x-4 bottom-4 flex translate-y-2 items-center justify-between gap-3 text-left text-white opacity-0 transition-all duration-500 group-hover/tile:translate-y-0 group-hover/tile:opacity-100 group-focus-visible/tile:translate-y-0 group-focus-visible/tile:opacity-100 motion-reduce:transition-none">
-            <span class="rounded-full bg-white/15 px-3 py-1 text-[0.68rem] font-extrabold uppercase tracking-[0.14em] backdrop-blur-sm">{{ labelFor(photo.category) }}</span>
-            <ng-icon name="lucideMaximize2" size="18" aria-hidden="true" />
-          </span>
-        </button>
-      </li>
+    <!-- Bento: al pasar el mouse el contenedor se expande a lo ancho y a lo alto, y los de alrededor ceden -->
+    <div class="bento grid grid-cols-2 gap-3 sm:gap-4 lg:flex lg:flex-col" [style.--bento-h]="bentoHeight()">
+      @for (row of rows(); track $index) {
+      <div class="bento-row contents lg:flex lg:gap-4" [style.--rg]="row.height">
+        @for (tile of row.tiles; track tile.photo.src) {
+        <div data-tile [attr.data-tile-index]="tile.index" class="bento-item relative h-44 min-w-0 sm:h-56 lg:h-auto" [style.--g]="tile.grow"
+          [class.col-span-2]="tile.grow > 1">
+          <button type="button" (click)="open(tile.index, $event)" [attr.aria-label]="'Ampliar foto: ' + tile.photo.alt"
+            class="bento-tile group/tile relative block size-full cursor-pointer overflow-hidden rounded-2xl border-0 bg-[var(--brand-forest-800)] p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 sm:rounded-3xl">
+            <img class="size-full object-cover" [src]="tile.photo.src" [alt]="tile.photo.alt" loading="lazy" decoding="async" />
+            <span aria-hidden="true"
+              class="absolute inset-0 bg-gradient-to-t from-[var(--brand-forest-900)]/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover/tile:opacity-100 group-focus-visible/tile:opacity-100 motion-reduce:transition-none"></span>
+            <span
+              class="absolute inset-x-4 bottom-4 flex translate-y-2 items-center justify-between gap-3 text-left text-white opacity-0 transition-all duration-500 group-hover/tile:translate-y-0 group-hover/tile:opacity-100 group-focus-visible/tile:translate-y-0 group-focus-visible/tile:opacity-100 motion-reduce:transition-none">
+              <span class="rounded-full bg-white/15 px-3 py-1 text-[0.68rem] font-extrabold uppercase tracking-[0.14em] backdrop-blur-sm">{{ labelFor(tile.photo.category) }}</span>
+              <ng-icon name="lucideMaximize2" size="18" aria-hidden="true" />
+            </span>
+          </button>
+        </div>
+        }
+      </div>
       }
-    </ul>
+    </div>
   </div>
 
   <!-- Visor -->
-  <dialog #dialog aria-label="Visor de fotos" (click)="closeOnBackdrop($event)" (close)="onClose()"
+  <dialog #dialog aria-label="Visor de fotos" (click)="closeOnBackdrop($event)" (close)="onClose()" (cancel)="onCancel($event)"
     (keydown.arrowleft)="step(-1)" (keydown.arrowright)="step(1)"
     class="m-auto max-h-[94dvh] w-[min(94vw,90rem)] max-w-none border-0 bg-transparent p-0 text-white backdrop:bg-[#10271c]/92">
     @if (current(); as photo) {
@@ -45,7 +49,7 @@
         <ng-icon name="lucideX" size="21" aria-hidden="true" />
       </button>
 
-      <img [src]="photo.src" [alt]="photo.alt" class="mx-auto max-h-[76dvh] max-w-full rounded-xl object-contain" />
+      <img data-modal-photo style="view-transition-name: gallery-photo" [src]="photo.src" [alt]="photo.alt" class="mx-auto max-h-[76dvh] max-w-full rounded-xl object-contain" />
 
       <div class="flex w-full items-center justify-between gap-4 px-1">
         <p class="m-0 min-w-0 flex-1 text-sm leading-snug text-white/85">{{ photo.alt }}</p>
