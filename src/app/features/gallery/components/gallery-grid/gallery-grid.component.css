@@ -1,0 +1,23 @@
+/* El marco de cada foto no se mueve: al pasar el mouse solo crece la imagen por dentro
+   y las demás pasan a gris. Sin hover, todas se ven a color. */
+.bento-tile img {
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+}
+
+@media (hover: hover) {
+  .bento:has(.bento-item:hover, .bento-item:focus-within) .bento-item:not(:hover, :focus-within) .bento-tile img {
+    filter: grayscale(1);
+    transform: scale(0.98);
+  }
+
+  .bento-item:hover .bento-tile img,
+  .bento-item:focus-within .bento-tile img {
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bento-tile img {
+    transition: none;
+  }
+}

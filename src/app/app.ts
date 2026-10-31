@@ -22,7 +22,7 @@ export class App {
             ? res()
             : window.addEventListener('load', () => res(), { once: true })
         ),
-        new Promise<void>(res => setTimeout(res, 1500)), // tiempo mínimo del loader
+        new Promise<void>(res => setTimeout(res, 2920)), // tiempo mínimo del loader
       ]);
       this.loader.hide();
     })

@@ -43,7 +43,7 @@ export class FooterComponent {
       title: 'Enlaces',
       links: [
         { label: 'Nosotros', href: '/about' },
-        { label: 'Galería', href: '#galeria' },
+        { label: 'Galería', href: '/galeria' },
         { label: 'Preguntas frecuentes', href: '#preguntas-frecuentes' },
       ],
     },

@@ -227,9 +227,15 @@ body:has(#app-loader) {
   overflow: hidden;
 }
 
-/* styles.css: solo lo imprescindible para que tape todo */
-/* styles.css */
+/* Loader inicial: una casita que se arma pieza por pieza mientras sube el contador. */
+@property --n {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+
 #app-loader {
+  --w: clamp(260px, 32vw, 440px);
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -237,70 +243,99 @@ body:has(#app-loader) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: .6rem;
   background: #faf6f0;
 }
 
-#app-loader .loader-logo {
+#app-loader .loader-lockup {
   position: relative;
-  width: clamp(240px, 22vw, 240px);
+  width: var(--w);
 }
 
-#app-loader .loader-logo img {
+#app-loader .loader-house {
   display: block;
   width: 100%;
+  overflow: visible;
 }
 
-/* silueta tenue de fondo */
-#app-loader .logo-base {
-  opacity: .18;
+#app-loader .p {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: loader-drop .55s cubic-bezier(.34, 1.4, .64, 1) var(--d) forwards;
 }
 
-/* capa que se revela de abajo hacia arriba */
-#app-loader .logo-fill {
+#app-loader .loader-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+}
+
+#app-loader .loader-word {
+  display: flex;
+  justify-content: center;
   position: absolute;
-  inset: 0;
-  clip-path: inset(100% 0 0 0);
-  animation: loader-fill 1.4s cubic-bezier(.65, 0, .35, 1) .2s forwards;
+  top: 71%;
+  left: 22%;
+  right: 0;
+  font: 800 calc(var(--w) * .08)/1 var(--font-corporate, system-ui), sans-serif;
+  letter-spacing: .18em;
+  color: #0b442d;
 }
 
-#app-loader .loader-bar {
-  width: clamp(140px, 22vw, 240px);
-  height: 2px;
-  border-radius: 2px;
-  background: rgb(8 121 64 / 16%);
-  overflow: hidden;
+#app-loader .loader-word span {
+  opacity: 0;
+  transform: translateY(.5em);
+  animation: loader-letter .45s cubic-bezier(.22, 1, .36, 1) calc(.3s + var(--i) * .17s) forwards;
 }
 
-#app-loader .loader-bar span {
-  display: block;
-  height: 100%;
-  background: var(--brand-primary);
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: loader-bar 1.4s cubic-bezier(.65, 0, .35, 1) .2s forwards;
+#app-loader .loader-count {
+  --n: 0;
+  counter-reset: n var(--n);
+  font: 800 .8rem/1 var(--font-corporate, system-ui), sans-serif;
+  letter-spacing: .18em;
+  color: #087940;
+  animation: loader-count 2.62s cubic-bezier(.65, 0, .35, 1) forwards;
 }
 
-@keyframes loader-fill {
+#app-loader .loader-count::after {
+  content: counter(n) '%';
+}
+
+@keyframes loader-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-46px);
+  }
   to {
-    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@keyframes loader-bar {
+@keyframes loader-letter {
   to {
-    transform: scaleX(1);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes loader-count {
+  to {
+    --n: 100;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #app-loader .logo-fill {
+  #app-loader .p {
     animation: none;
-    clip-path: none;
+    opacity: 1;
   }
 
-  #app-loader .loader-bar span {
+  #app-loader .loader-word span {
     animation: none;
+    opacity: 1;
     transform: none;
   }
 }

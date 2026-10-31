@@ -24,8 +24,8 @@ export const TEAM_FOUNDER: TeamFounder = {
 };
 
 export const TEAM_MEMBERS: readonly TeamMember[] = [
-  { role: 'Gerencia comercial', name: 'Nombre y apellido', focus: 'Te acompaña a elegir tu lote y tu plan de pago.', icon: 'lucideHandshake', photos: ['/images/equipo/chavela-saucedo-3.png', '/images/equipo/chavela-saucedo-5.png'] },
-  { role: 'Asesoría legal', name: 'Nombre y apellido', focus: 'Cuida que cada documento esté claro y en regla.', icon: 'lucideScale', photos: ['/images/equipo/jose-maria-varillas-4.png', '/images/equipo/jose-maria-varillas-3.png'] },
-  { role: 'Jefatura de obras', name: 'Nombre y apellido', focus: 'Supervisa el avance y la calidad en el terreno.', icon: 'lucideHardHat', photos: ['/images/equipo/hillma-machuca-2.png', '/images/equipo/hillma-machuca-3.png'] },
-  { role: 'Atención al cliente', name: 'Nombre y apellido', focus: 'Resuelve tus dudas antes y después de comprar.', icon: 'lucideHeadset', photos: ['/images/equipo/miguel-salgado-3.png', '/images/equipo/miguel-salgado-2.png'] },
+  { role: 'Asesora inmobiliaria', name: 'Jesús Chavela Saucedo Arteaga', focus: 'Te acompaña a elegir tu lote y tu plan de pago en MontePinar.', icon: 'lucideHandshake', photos: ['/images/equipo/chavela-saucedo-3.png', '/images/equipo/chavela-saucedo-5.png'] },
+  { role: 'Asesor inmobiliario', name: 'Zandro Ricardo Quispe Rojas', focus: 'Te orienta en cada paso para invertir en tu lote con confianza.', icon: 'lucideScale', photos: ['/images/equipo/jose-maria-varillas-4.png', '/images/equipo/jose-maria-varillas-3.png'] },
+  { role: 'Asesora inmobiliaria', name: 'Hillma Machuca Díaz', focus: 'Te asesora de principio a fin en Montepinar Inmobiliaria y Constructora.', icon: 'lucideHardHat', photos: ['/images/equipo/hillma-machuca-2.png', '/images/equipo/hillma-machuca-3.png'] },
+  { role: 'Comunicador social', name: 'Miguel Salgado Salesi', focus: 'Apasionado por el deporte y por servir a las personas.', icon: 'lucideHeadset', photos: ['/images/equipo/miguel-salgado-3.png', '/images/equipo/miguel-salgado-2.png'] },
 ];

@@ -27,6 +27,10 @@ export const routes: Routes = [
                 loadComponent:()=>import('./features/team/components/team/team.component').then(m=>m.TeamComponent)
             },
             {
+                path:'galeria',
+                loadComponent:()=>import('./features/gallery/components/gallery/gallery.component').then(m=>m.GalleryPageComponent)
+            },
+            {
                 path:'visita-guiada',
                 loadComponent:()=>import('./features/guidedTour/components/guided-tour/guided-tour.component').then(m=>m.GuidedTourComponent)
             },

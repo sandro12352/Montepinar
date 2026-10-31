@@ -48,8 +48,8 @@ export class AboutPurposeComponent {
 
   protected readonly slides: readonly PurposeSlide[] = [
     {
-      image: '/images/slide3.webp',
-      imageAlt: 'Visitantes recorren el proyecto Montepinar',
+      image: '/images/about/Familia contemplando el valle al atardecer.png',
+      imageAlt: 'Una familia contempla el valle al atardecer',
       eyebrow: 'Nuestra misión',
       title: 'Un hogar con orgullo, a un costo justo.',
       text: 'Brindamos lugares de vivienda y entregamos terrenos que generan en nuestros clientes sentido de pertenencia, identificación y orgullo, a un costo justo y accesible para todos.',
@@ -59,8 +59,8 @@ export class AboutPurposeComponent {
       ],
     },
     {
-      image: '/images/MontepinarIquitos.webp',
-      imageAlt: 'Atardecer sobre el proyecto Amazon Lodge Montepinar',
+      image: '/images/about/Familia contempla comunidad al amanecer.png',
+      imageAlt: 'Una familia mira su comunidad al amanecer',
       eyebrow: 'Nuestra visión',
       title: 'La mejor inmobiliaria, con respeto por el planeta.',
       text: 'Queremos que Montepinar sea la mejor empresa inmobiliaria: la que ofrece a sus clientes una opción de vivienda digna y a sus colaboradores e inversionistas una exitosa oportunidad de desarrollo, reconocida además por su respeto al medio ambiente y la conservación del planeta.',

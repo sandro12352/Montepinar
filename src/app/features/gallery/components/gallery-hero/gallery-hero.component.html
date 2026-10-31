@@ -1,0 +1,45 @@
+<section #root aria-labelledby="gallery-hero-title"
+  class="relative isolate overflow-hidden bg-[var(--brand-forest-900)] pb-[clamp(3rem,6vw,5rem)] pt-[clamp(7.5rem,12vw,9.5rem)] text-white">
+  <span aria-hidden="true"
+    class="pointer-events-none absolute -left-32 top-1/3 -z-10 size-[26rem] rounded-full bg-[var(--brand-primary)]/12 blur-3xl"></span>
+  <span aria-hidden="true"
+    class="pointer-events-none absolute -bottom-32 -right-24 -z-10 size-[24rem] rounded-full bg-[var(--brand-orange-500)]/10 blur-3xl"></span>
+
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <nav data-reveal hlmBreadcrumb aria-label="Migas de pan" class="mb-8">
+      <ol hlmBreadcrumbList class="gap-1.5 text-xs font-extrabold uppercase tracking-[0.14em] text-white/70 sm:gap-2">
+        <li hlmBreadcrumbItem>
+          <a hlmBreadcrumbLink link="/" class="text-white/70 no-underline hover:text-white">Inicio</a>
+        </li>
+        <li hlmBreadcrumbSeparator class="text-white/50"></li>
+        <li hlmBreadcrumbItem>
+          <span hlmBreadcrumbPage class="text-white">Galería</span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <p data-reveal
+          class="m-0 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.16em] text-white/90">
+          <span class="size-1.5 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+          Galería
+        </p>
+        <h1 id="gallery-hero-title" data-reveal
+          class="m-0 mt-6 max-w-[14ch] text-balance text-[clamp(2.6rem,5.6vw,5rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
+          Montepinar, <span class="text-[var(--brand-primary)]">en imágenes</span>.
+        </h1>
+      </div>
+
+      <div class="flex max-w-md flex-col gap-5">
+        <p data-reveal class="m-0 text-pretty text-base leading-[1.75] text-white/75 sm:text-lg">
+          Proyectos, visitas guiadas, familias y el equipo que las acompaña: cada rincón de Montepinar, tal como es.
+        </p>
+        <p data-reveal class="m-0 flex items-baseline gap-3">
+          <strong class="text-5xl font-extrabold leading-none tracking-[-0.04em] text-[var(--brand-orange-500)]">{{ total }}</strong>
+          <span class="text-xs font-extrabold uppercase tracking-[0.16em] text-white/70">fotos para recorrer</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

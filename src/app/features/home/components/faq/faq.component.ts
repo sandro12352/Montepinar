@@ -1,4 +1,4 @@
-import { afterNextRender, Component, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -13,8 +13,6 @@ gsap.registerPlugin(ScrollTrigger);
 export class FaqComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
-
-  protected readonly videoPlaying = signal(false);
 
   constructor() {
     afterNextRender(() => {
@@ -89,13 +87,5 @@ export class FaqComponent {
 
       this.destroyRef.onDestroy(() => context.revert());
     });
-  }
-
-  protected playVideo(video: HTMLVideoElement): void {
-    void video.play().then(() => this.videoPlaying.set(true));
-  }
-
-  protected onVideoPause(): void {
-    this.videoPlaying.set(false);
   }
 }

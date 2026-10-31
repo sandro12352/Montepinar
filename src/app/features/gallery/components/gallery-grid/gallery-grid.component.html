@@ -1,0 +1,67 @@
+<section #root aria-label="Galería de fotos" class="bg-[#f4f1ea] py-[clamp(3rem,6vw,5.5rem)] text-[var(--brand-forest-900)]">
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <!-- Filtros -->
+    <div role="group" aria-label="Filtrar fotos por categoría" class="mb-8 flex flex-wrap gap-2 sm:mb-10">
+      @for (filter of filters; track filter.id) {
+      <button type="button" (click)="setFilter(filter.id)" [attr.aria-pressed]="active() === filter.id"
+        class="cursor-pointer rounded-full border px-5 py-2.5 text-xs font-extrabold uppercase tracking-[0.12em] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none"
+        [class]="active() === filter.id
+          ? 'border-[var(--brand-forest-900)] bg-[var(--brand-forest-900)] text-white'
+          : 'border-[var(--brand-forest-900)]/20 bg-transparent text-[var(--brand-forest-900)]/70 hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]'">
+        {{ filter.label }}
+      </button>
+      }
+    </div>
+
+    <!-- Bento -->
+    <ul class="bento m-0 grid list-none auto-rows-[11rem] grid-flow-dense grid-cols-2 gap-3 p-0 sm:auto-rows-[14rem] sm:gap-4 lg:auto-rows-[15rem] lg:grid-cols-4">
+      @for (photo of photos(); track photo.src; let i = $index) {
+      <li data-tile class="bento-item relative min-h-0 min-w-0" [class]="spanFor(i)">
+        <button type="button" (click)="open(i)" [attr.aria-label]="'Ampliar foto: ' + photo.alt"
+          class="bento-tile group/tile relative block size-full cursor-pointer overflow-hidden rounded-2xl border-0 bg-[var(--brand-forest-800)] p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 sm:rounded-3xl">
+          <img class="size-full object-cover "
+            [src]="photo.src" [alt]="photo.alt" loading="lazy" decoding="async" />
+          <span aria-hidden="true"
+            class="absolute inset-0 bg-gradient-to-t from-[var(--brand-forest-900)]/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover/tile:opacity-100 group-focus-visible/tile:opacity-100 motion-reduce:transition-none"></span>
+          <span
+            class="absolute inset-x-4 bottom-4 flex translate-y-2 items-center justify-between gap-3 text-left text-white opacity-0 transition-all duration-500 group-hover/tile:translate-y-0 group-hover/tile:opacity-100 group-focus-visible/tile:translate-y-0 group-focus-visible/tile:opacity-100 motion-reduce:transition-none">
+            <span class="rounded-full bg-white/15 px-3 py-1 text-[0.68rem] font-extrabold uppercase tracking-[0.14em] backdrop-blur-sm">{{ labelFor(photo.category) }}</span>
+            <ng-icon name="lucideMaximize2" size="18" aria-hidden="true" />
+          </span>
+        </button>
+      </li>
+      }
+    </ul>
+  </div>
+
+  <!-- Visor -->
+  <dialog #dialog aria-label="Visor de fotos" (click)="closeOnBackdrop($event)" (close)="onClose()"
+    (keydown.arrowleft)="step(-1)" (keydown.arrowright)="step(1)"
+    class="m-auto max-h-[94dvh] w-[min(94vw,90rem)] max-w-none border-0 bg-transparent p-0 text-white backdrop:bg-[#10271c]/92">
+    @if (current(); as photo) {
+    <div class="relative flex flex-col items-center gap-4">
+      <button type="button" (click)="close()" aria-label="Cerrar visor"
+        class="absolute right-2 top-2 z-10 grid size-11 cursor-pointer place-items-center rounded-full border border-white/35 bg-[#10271c]/70 text-white transition-colors hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white motion-reduce:transition-none sm:right-4 sm:top-4">
+        <ng-icon name="lucideX" size="21" aria-hidden="true" />
+      </button>
+
+      <img [src]="photo.src" [alt]="photo.alt" class="mx-auto max-h-[76dvh] max-w-full rounded-xl object-contain" />
+
+      <div class="flex w-full items-center justify-between gap-4 px-1">
+        <p class="m-0 min-w-0 flex-1 text-sm leading-snug text-white/85">{{ photo.alt }}</p>
+        <div class="flex shrink-0 items-center gap-3">
+          <span class="text-xs font-extrabold tracking-[0.14em] text-white/60">{{ (selected() ?? 0) + 1 }} / {{ photos().length }}</span>
+          <button type="button" (click)="step(-1)" aria-label="Foto anterior"
+            class="grid size-11 cursor-pointer place-items-center rounded-full border border-white/35 bg-[#10271c]/70 text-white transition-colors hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white motion-reduce:transition-none">
+            <ng-icon name="lucideChevronLeft" size="22" aria-hidden="true" />
+          </button>
+          <button type="button" (click)="step(1)" aria-label="Foto siguiente"
+            class="grid size-11 cursor-pointer place-items-center rounded-full border border-white/35 bg-[#10271c]/70 text-white transition-colors hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white motion-reduce:transition-none">
+            <ng-icon name="lucideChevronRight" size="22" aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+    </div>
+    }
+  </dialog>
+</section>

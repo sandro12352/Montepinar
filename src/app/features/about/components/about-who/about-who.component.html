@@ -1,8 +1,8 @@
 <section #root id="equipo" aria-labelledby="about-who-title"
   class="relative isolate overflow-x-clip bg-[#f4f1ea] py-[clamp(5.5rem,9vw,8.5rem)] text-[var(--brand-forest-900)]">
-  <div class="mx-auto grid w-[min(88%,1400px)] items-center gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
+  <div class="mx-auto grid w-[min(88%,1400px)] items-center gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
     <!-- Imagen en arco con bloque decorativo -->
-    <div class="relative mx-auto w-full max-w-[28rem] lg:max-w-none">
+    <div class="relative mx-auto w-full max-w-[30rem] lg:max-w-[34rem]">
       <span data-block aria-hidden="true"
         class="absolute -bottom-5 -left-5 -z-10 size-3/4 rounded-[2rem] bg-[var(--brand-primary)]/20"></span>
       <figure data-frame class="relative m-0 aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2rem] bg-[var(--brand-forest-800)] shadow-2xl shadow-[var(--brand-forest-900)]/20 ">
@@ -23,21 +23,24 @@
         Quiénes somos
       </p>
       <h2 id="about-who-title" data-reveal
-        class="m-0 max-w-[16ch] text-balance text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.03] tracking-[-0.045em]">
+        class="m-0 max-w-[20ch] text-balance text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.03] tracking-[-0.045em]">
         Nacimos en 2018 para abrir <span class="text-[var(--brand-primary)]">más oportunidades</span>.
       </h2>
-      <p data-reveal class="mb-0 mt-6 max-w-xl text-pretty text-base leading-[1.85] text-[#1f1a14]/75 sm:text-lg">
+      <p data-reveal class="mb-0 mt-6 max-w-2xl text-pretty text-base leading-[1.85] text-[#1f1a14]/75 sm:text-lg">
         Nuestra historia y nuestra autoridad en el sector inmobiliario comienzan en 2018. Ese año, nuestro director general,
         Pedro Machuca, vio en el sector la oportunidad de ofrecer más oportunidades a distintas personas, y lanzó la
         Inmobiliaria Montepinar: un servicio justo y de calidad para todos.
       </p>
-      <p data-reveal class="mb-0 mt-4 max-w-xl text-pretty text-base leading-[1.85] text-[#1f1a14]/65">
+      <p data-reveal class="mb-0 mt-4 max-w-2xl text-pretty text-base leading-[1.85] text-[#1f1a14]/65">
         Abrimos nuestras puertas tras el éxito de ventas de terrenos de la Asociación de Vivienda Montepinar. Al ver la
         satisfacción de sus compradores, ampliamos horizontes: hoy tenemos terrenos en Chancayllo y en una de las mejores
         zonas selváticas del Perú, Iquitos.
       </p>
+    </div>
+  </div>
 
-      <ol data-points class="m-0 mt-9 list-none p-0">
+  <div data-bottom class="mx-auto mt-16 w-[min(88%,1400px)] lg:mt-20">
+      <ol data-points class="m-0 grid list-none gap-x-10 p-0 md:grid-cols-3">
         @for (point of points; track point.title; let i = $index) {
         <li data-reveal class="group/row relative flex items-start gap-5 py-5">
           <span data-line aria-hidden="true"
@@ -51,9 +54,10 @@
         }
       </ol>
 
-      <p data-reveal class="mb-0 mt-8 max-w-xl border-l-4 border-[#FB7A11] pl-5 text-xl font-extrabold leading-snug tracking-tight">
+
+      <p data-reveal class="mb-0 mt-10 max-w-3xl border-l-4 border-[#FB7A11] pl-5 text-xl font-extrabold leading-snug tracking-tight">
         Inmobiliaria Montepinar, una empresa creada y pensada en ti.
       </p>
-    </div>
+
   </div>
 </section>

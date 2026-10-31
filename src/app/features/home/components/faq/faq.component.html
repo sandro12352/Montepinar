@@ -29,29 +29,11 @@
 
     <div class="grid items-center gap-8 lg:mb-12 lg:grid-cols-1">
       <!-- VIDEO MÁS ANCHO -->
-      <div data-faq-video class="relative h-[220px] w-full overflow-hidden rounded-2xl bg-[#10271c] sm:h-[260px] lg:h-[580px]">
-        <video #faqVideo class="absolute inset-0 size-full object-cover" poster="/images/entrada.png" preload="none"
-          [controls]="videoPlaying()" playsinline aria-label="Video de presentación de los proyectos Montepinar"
-          (pause)="onVideoPause()" (ended)="onVideoPause()">
-          <source src="/video/MONTEPINAR.mp4" type="video/mp4" />
-          Tu navegador no puede reproducir este video.
-        </video>
-
-        <div
-          class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#10271c]/85 via-transparent to-transparent"
-          aria-hidden="true"></div>
-
-        @if (!videoPlaying()) {
-        <button type="button"
-          class="absolute left-1/2 top-1/2 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-[var(--brand-primary)] shadow-xl transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70 active:scale-95"
-          aria-label="Reproducir video de Montepinar" (click)="playVideo(faqVideo)">
-          <span class="ml-1 text-2xl" aria-hidden="true">▶</span>
-        </button>
-        }
-
-        <p class="pointer-events-none absolute inset-x-4 bottom-4 m-0 font-serif text-lg font-bold text-white">
-          Conoce nuestros proyectos
-        </p>
+      <div data-faq-video class="relative aspect-video w-full overflow-hidden rounded-2xl bg-[#10271c]">
+        <iframe class="absolute inset-0 size-full" src="https://www.youtube.com/embed/1DKvhA9rYQg?si=zUh8C_Pc5u34uW-2&vq=hd1080&rel=0"
+          title="Video de presentación de los proyectos Montepinar" loading="lazy" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
 
       <!-- FAQ: CARDS ESTÁTICAS, SIN ACORDEÓN -->
