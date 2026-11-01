@@ -1,4 +1,5 @@
 import {
+  afterNextRender,
   afterRenderEffect,
   Component,
   DestroyRef,
@@ -31,7 +32,7 @@ const COLORS = ['#f43f5e', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899'
         class="pointer-events-none fixed inset-0 z-[70] overflow-hidden"
         aria-hidden="true"
       >
-        @for (piece of pieces; track piece.id) {
+        @for (piece of pieces(); track piece.id) {
           <span
             #particle
             class="absolute block h-6 w-1 rounded-lg opacity-0"
@@ -54,12 +55,18 @@ export class AnniversaryConfettiComponent {
   private readonly particles = viewChildren<ElementRef<HTMLSpanElement>>('particle');
 
   readonly finished = signal(false);
-  readonly pieces: ConfettiPiece[] = this.createPieces(150);
+  // Se crean solo en el navegador y según el ancho: en celular muchas piezas dan tirones.
+  readonly pieces = signal<ConfettiPiece[]>([]);
 
   private timeline?: gsap.core.Timeline;
   private started = false;
 
   constructor() {
+    afterNextRender(() => {
+      const width = window.innerWidth;
+      this.pieces.set(this.createPieces(width < 768 ? 40 : width < 1024 ? 80 : 150));
+    });
+
     afterRenderEffect(() => {
       const ready = this.loader.ready(); // ajusta al API real de tu LoaderService
       const elements = this.particles();
@@ -103,7 +110,7 @@ export class AnniversaryConfettiComponent {
     this.timeline = tl;
 
     elements.forEach((el, i) => {
-      const piece = this.pieces[i];
+      const piece = this.pieces()[i];
       // Desde la izquierda se empuja a la derecha, y desde la derecha hacia la izquierda
       const dir = piece.side === 'left' ? 1 : -1;
 
