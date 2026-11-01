@@ -1,4 +1,4 @@
-import { afterNextRender, Component, DestroyRef, effect, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { afterNextRender, Component, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -21,7 +21,6 @@ import {
 } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { LoaderService } from '../../../../core/services/loader.service';
 import { VisitSheetService } from '../../../../core/services/visit-sheet.service';
 import { PROJECTS } from '../../../projects/data/projects.data';
 
@@ -59,7 +58,6 @@ const PROJECT_STOPS = [0.4, 1.7, 3.0];
 export class HomeProjectsComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly visitSheet = inject(VisitSheetService);
-  private readonly loaderService = inject(LoaderService);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 
   protected readonly projects = PROJECTS;
@@ -85,11 +83,6 @@ export class HomeProjectsComponent {
   }
 
   constructor() {
-    // Al quitarse el loader cambia el layout (aparece el scroll); se recalcula el pin.
-    effect(() => {
-      if (this.loaderService.ready()) requestAnimationFrame(() => ScrollTrigger.refresh());
-    });
-
     afterNextRender(() => {
       const root = this.root().nativeElement;
       const mm = gsap.matchMedia(root);

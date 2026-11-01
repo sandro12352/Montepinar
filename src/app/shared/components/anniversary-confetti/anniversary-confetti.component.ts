@@ -34,7 +34,7 @@ const COLORS = ['#f43f5e', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899'
         @for (piece of pieces; track piece.id) {
           <span
             #particle
-            class="absolute block h-6 w-1 rounded-lg opacity-0 will-change-transform"
+            class="absolute block h-6 w-1 rounded-lg opacity-0"
             [class.h-10]="piece.long"
             [class.w-2.5]="piece.long"
             [class.rounded-full]="piece.round"
@@ -54,7 +54,7 @@ export class AnniversaryConfettiComponent {
   private readonly particles = viewChildren<ElementRef<HTMLSpanElement>>('particle');
 
   readonly finished = signal(false);
-  readonly pieces: ConfettiPiece[] = this.createPieces(250);
+  readonly pieces: ConfettiPiece[] = this.createPieces(150);
 
   private timeline?: gsap.core.Timeline;
   private started = false;
@@ -95,7 +95,9 @@ export class AnniversaryConfettiComponent {
     const w = window.innerWidth;
     const h = window.innerHeight;
 
+    // Arranca un instante después que el banner para no cargar todo en el mismo frame.
     const tl = gsap.timeline({
+      delay: 0.25,
       onComplete: () => this.finished.set(true),
     });
     this.timeline = tl;

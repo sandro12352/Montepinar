@@ -10,8 +10,8 @@
   <!-- Estilos del loader inline: así cubre toda la pantalla desde el primer frame,
        sin depender de que styles.css ya se haya cargado. -->
   <style>
-    html:has(#app-loader),
-    body:has(#app-loader) {
+    html:has(#app-loader:not(.is-leaving)),
+    body:has(#app-loader:not(.is-leaving)) {
       overflow: hidden;
       background: #faf6f0;
     }
