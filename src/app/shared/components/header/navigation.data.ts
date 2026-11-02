@@ -52,7 +52,7 @@ export const NAVIGATION_ITEMS: readonly NavigationItem[] = [
     menu: {
       eyebrow: 'Conoce Montepinar',
       links: [
-        { label: 'Visita guiada', description: 'Recórrelo en persona con un asesor', image: '/images/slide3.webp', path: '/visita-guiada' },
+        { label: 'Visita guiada', description: 'Recórrelo en persona con un asesor', image: '/images/carousel/slide3.webp', path: '/visita-guiada' },
         { label: 'Galería', description: 'Cada rincón, en imágenes', image: '/images/gallery/presentacion.webp', path: '/galeria' },
       ],
       footer: { label: 'Preguntas frecuentes', path: '/', fragment: 'preguntas-frecuentes' },

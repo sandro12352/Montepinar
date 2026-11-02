@@ -102,7 +102,7 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/entrada.png', alt: 'Entrada al proyecto' },
       { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
       { src: '/images/introduccion.png', alt: 'Vista del entorno' },
-      { src: '/images/slide2.webp', alt: 'Áreas del proyecto' },
+      { src: '/images/carousel/slide2.webp', alt: 'Áreas del proyecto' },
     ],
     plans: [
       { name: 'Lote Jardín', area: 120, price: 18000, frontage: '8 × 15 m', description: 'Ideal para tu primera casa de campo.', tag: 'Más accesible' },
@@ -137,7 +137,7 @@ const EXTRA: Record<string, ProjectExtra> = {
     ],
     gallery: [
       { src: '/images/AsociacionMontepinar.webp', alt: 'Vista aérea de las áreas deportivas' },
-      { src: '/images/slide3.webp', alt: 'Áreas comunes' },
+      { src: '/images/carousel/slide3.webp', alt: 'Áreas comunes' },
       { src: '/images/Entrada%20Montepinar%20entre%20jardines%20y%20banderas.png', alt: 'Entrada entre jardines' },
       { src: '/images/introduccion.png', alt: 'Vista del entorno' },
       { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
@@ -175,8 +175,8 @@ const EXTRA: Record<string, ProjectExtra> = {
     ],
     gallery: [
       { src: '/images/MontepinarIquitos.webp', alt: 'Recorrido de visitantes por el proyecto' },
-      { src: '/images/slide2.webp', alt: 'Entorno natural' },
-      { src: '/images/slide3.webp', alt: 'Áreas del proyecto' },
+      { src: '/images/carousel/slide2.webp', alt: 'Entorno natural' },
+      { src: '/images/carousel/slide3.webp', alt: 'Áreas del proyecto' },
       { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
       { src: '/images/introduccion.png', alt: 'Vista del entorno' },
     ],

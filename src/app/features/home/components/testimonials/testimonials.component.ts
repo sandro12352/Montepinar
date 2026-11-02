@@ -46,17 +46,17 @@ export class TestimonialsComponent {
     {
       title: 'Un lugar para crecer', text: 'Pudimos resolver nuestras dudas y conocer mejor cada proyecto.',
       author: 'Lucía M.', role: 'Visitante · Ejemplo ficticio', initials: 'LM',
-      videoSrc: null, poster: '/images/slide2.webp', photo: '/images/equipo/hillma-machuca-2.png',
+      videoSrc: null, poster: '/images/carousel/slide2.webp', photo: '/images/equipo/hillma-machuca-2.png',
     },
     {
       title: 'Atención desde el primer día', text: 'Nos sentimos bien atendidos desde el primer momento.',
       author: 'Familia Soto', role: 'Visitantes · Ejemplo ficticio', initials: 'FS',
-      videoSrc: null, poster: '/images/slide3.webp', photo: '/images/equipo/miguel-salgado-3.png',
+      videoSrc: null, poster: '/images/carousel/slide3.webp', photo: '/images/equipo/miguel-salgado-3.png',
     },
     {
       title: 'El viaje valió la pena', text: 'El bus, el desayuno y el recorrido fueron muy ordenados. Se nota que cuidan cada detalle.',
       author: 'Rosa y Pedro', role: 'Familia visitante · Ejemplo ficticio', initials: 'RP',
-      videoSrc: null, poster: '/images/slide3.webp', photo: '/images/equipo/chavela-saucedo-5.png',
+      videoSrc: null, poster: '/images/carousel/slide3.webp', photo: '/images/equipo/chavela-saucedo-5.png',
     },
     {
       title: 'Todo claro y en regla', text: 'Me mostraron los documentos del proyecto y me explicaron cada paso del trámite sin presiones.',
@@ -66,7 +66,7 @@ export class TestimonialsComponent {
     {
       title: 'Ver el terreno lo cambió todo', text: 'En plano uno imagina, pero caminar los lotes me dio la seguridad que necesitaba para decidir.',
       author: 'Elena V.', role: 'Visitante · Ejemplo ficticio', initials: 'EV',
-      videoSrc: null, poster: '/images/slide2.webp', photo: '/images/equipo/hillma-machuca-3.png',
+      videoSrc: null, poster: '/images/carousel/slide2.webp', photo: '/images/equipo/hillma-machuca-3.png',
     },
     {
       title: 'Un futuro para mis hijos', text: 'Buscaba un lugar para que mis hijos crezcan con espacio y tranquilidad, y lo encontramos aquí.',

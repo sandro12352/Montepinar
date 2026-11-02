@@ -28,6 +28,7 @@ interface BannerSlide {
   readonly href: string;
   readonly video?: string;
   readonly imagen?: string;
+  readonly imagenMobile?: string;
 }
 
 @Component({
@@ -79,7 +80,8 @@ export class MainBannerComponent {
       description: 'Descubre un entorno tranquilo, cercano y lleno de vida para disfrutar cada día.',
       action: 'Ver proyectos',
       href: '#proyectos',
-      imagen:'/images/prueba1.webp'
+      imagen: '/images/carousel/slide1.webp',
+      imagenMobile: '/images/carousel/slide1-mobile.webp'
     },
     {
       eyebrow: 'Naturaleza y bienestar',
@@ -87,7 +89,8 @@ export class MainBannerComponent {
       description: 'Espacios abiertos, aire libre y la calma que necesitas sin renunciar a estar conectado.',
       action: 'Ver recorrido virtual',
       href: '#vision-360',
-      imagen: '/images/slide2.webp',
+      imagen: '/images/carousel/slide2.webp',
+      imagenMobile: '/images/carousel/slide2-mobile.webp',
     },
     {
       eyebrow: 'Una comunidad activa',
@@ -95,7 +98,8 @@ export class MainBannerComponent {
       description: 'Descubre las experiencias que forman parte de la comunidad Montepinar.',
       action: 'Ver testimonios',
       href: '#testimonios',
-      imagen: '/images/slide3.webp',
+      imagen: '/images/carousel/slide3.webp',
+      imagenMobile: '/images/carousel/slide3-mobile.webp',
     },
   ];
 
