@@ -157,15 +157,16 @@
     <!-- CTA DEBAJO DE LAS FAQ -->
     <div data-faq-cta class="mt-10 flex flex-col items-center text-center sm:mt-12">
       <p class="mb-5 max-w-xl text-base leading-relaxed text-[#34433d]/80 sm:text-lg">
-        ¿Tienes más preguntas? Descubre nuestros proyectos y encuentra el terreno ideal para ti.
+        ¿Tienes más preguntas? Escríbenos por WhatsApp y un asesor te responde.
       </p>
 
-      <a href="#contacto"
-        class="group inline-flex items-center justify-center gap-3 rounded-xl bg-[var(--brand-primary)] px-8 py-4 text-sm font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--brand-primary)]/30">
-        Conoce más sobre Montepinar
-        <span class="text-lg transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-          →
-        </span>
+      <a [href]="whatsappHref" target="_blank" rel="noopener noreferrer"
+        class="group relative inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl bg-(--brand-primary) px-6 py-3.5 text-sm font-extrabold text-white no-underline shadow-lg shadow-black/25 transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-primary) focus-visible:ring-offset-2">
+        <span aria-hidden="true"
+          class="absolute inset-0 origin-left scale-x-0 bg-(--brand-orange-500) transition-transform duration-500 ease-out group-hover:scale-x-100 motion-reduce:transition-none"></span>
+        <span class="relative z-10">Escríbenos por WhatsApp</span>
+        <ng-icon class="relative z-10 transition-transform duration-200 group-hover:translate-x-1"
+          name="lucideMessageCircle" size="20" aria-hidden="true" />
       </a>
     </div>
 

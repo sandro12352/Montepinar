@@ -18,7 +18,7 @@ export class TeamHeroComponent {
   private readonly visitSheet = inject(VisitSheetService);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 
-  protected readonly teamPhoto = '/images/equipo/team.png';
+  protected readonly teamPhoto = '/images/equipo/team.webp';
 
   private animated = false;
 

@@ -1,16 +1,22 @@
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideMessageCircle } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
+import { whatsappLink } from '../../../contact/data/contact.data';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
-  imports: [],
+  imports: [NgIcon],
+  providers: [provideIcons({ lucideMessageCircle })],
   selector: 'app-faq',
   styleUrl: './faq.component.css',
   templateUrl: './faq.component.html',
 })
 export class FaqComponent {
+  protected readonly whatsappHref = whatsappLink('Hola, tengo una consulta sobre Montepinar.');
+
   private readonly destroyRef = inject(DestroyRef);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 

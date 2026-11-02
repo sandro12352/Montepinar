@@ -48,7 +48,7 @@ export class AboutPurposeComponent {
 
   protected readonly slides: readonly PurposeSlide[] = [
     {
-      image: '/images/about/Familia contemplando el valle al atardecer.png',
+      image: '/images/about/Familia contemplando el valle al atardecer.webp',
       imageAlt: 'Una familia contempla el valle al atardecer',
       eyebrow: 'Nuestra misión',
       title: 'Un hogar con orgullo, a un costo justo.',
@@ -59,7 +59,7 @@ export class AboutPurposeComponent {
       ],
     },
     {
-      image: '/images/about/Familia contempla comunidad al amanecer.png',
+      image: '/images/about/Familia contempla comunidad al amanecer.webp',
       imageAlt: 'Una familia mira su comunidad al amanecer',
       eyebrow: 'Nuestra visión',
       title: 'La mejor inmobiliaria, con respeto por el planeta.',

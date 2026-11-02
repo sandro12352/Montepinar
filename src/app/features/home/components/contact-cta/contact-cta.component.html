@@ -90,27 +90,12 @@
       </form>
     </div>
 
-    <!-- Imagen con tarjetas flotantes -->
-    <div data-media class="relative min-h-[22rem] overflow-hidden rounded-[1.5rem] bg-[var(--brand-forest-800)] lg:min-h-full">
-      <img data-media-img class="absolute inset-0 size-full object-cover" src="/images/PalmerasdeMontepinar.png"
-        alt="Pórtico de ingreso de Palmeras de Montepinar" loading="lazy" />
+    <!-- Imagen con tarjeta flotante (solo escritorio: en móvil queda únicamente el formulario) -->
+    <div data-media class="relative hidden min-h-[22rem] overflow-hidden rounded-[1.5rem] bg-[var(--brand-forest-800)] lg:block lg:min-h-full">
+      <img data-media-img class="absolute inset-0 size-full object-cover" src="/images/entrada.webp"
+        alt="Entrada principal de Montepinar vista desde el aire" width="1122" height="1402" decoding="async" loading="lazy" />
       <span aria-hidden="true"
         class="absolute inset-0 bg-gradient-to-t from-[var(--brand-forest-900)]/70 via-transparent to-[var(--brand-forest-900)]/20"></span>
-
-      <!-- Tarjeta: asesores -->
-      <div data-float
-        class="absolute left-4 top-4 flex items-center gap-3 rounded-2xl border border-white/20 bg-white/15 px-4 py-3 shadow-[0_12px_30px_rgb(0_0_0_/_18%)] backdrop-blur-md sm:left-6 sm:top-6">
-        <span class="flex -space-x-2.5" aria-hidden="true">
-          @for (avatar of avatars; track avatar) {
-          <img class="size-8 rounded-full object-cover ring-2 ring-white/80" [src]="avatar" alt="" width="32" height="32"
-            loading="lazy" />
-          }
-        </span>
-        <span class="leading-tight">
-          <span class="block text-sm font-extrabold">Asesoría personalizada</span>
-          <span class="block text-xs text-white/75">Te acompañamos en cada paso</span>
-        </span>
-      </div>
 
       <!-- Tarjeta: canal directo -->
       <a data-float [href]="'https://wa.me/' + phone" target="_blank" rel="noopener noreferrer"

@@ -19,27 +19,35 @@ export class TeamMembersComponent {
 
   protected readonly members = TEAM_MEMBERS;
 
-  /** Pasa a la siguiente foto con una apertura circular desde abajo. */
-  private nextPhoto(figure: HTMLElement): void {
-    const photos = Array.from(figure.querySelectorAll<HTMLElement>('[data-photo]'));
+  /**
+   * Pasa a la siguiente foto con un fundido cruzado corto.
+   * Las fotos son recortes con transparencia: la anterior debe desvanecerse rápido para no
+   * verse por debajo de la nueva, y la nueva se decodifica antes de entrar para que no aparezca tarde.
+   */
+  private async nextPhoto(figure: HTMLElement): Promise<void> {
+    const photos = Array.from(figure.querySelectorAll<HTMLImageElement>('[data-photo]'));
     if (photos.length < 2) return;
 
     const current = Number(figure.dataset['current'] ?? 0);
     const next = (current + 1) % photos.length;
     figure.dataset['current'] = String(next);
 
+    // Con loading="lazy" la foto siguiente puede no estar lista: se fuerza y se espera su decodificación.
+    photos[next].loading = 'eager';
+    await photos[next].decode().catch(() => undefined);
+
     gsap.killTweensOf(photos);
-    gsap.set(photos[next], { zIndex: 2, autoAlpha: 1, scale: 1.12, clipPath: 'circle(0% at 50% 100%)' });
+    gsap.set(photos, { zIndex: 0 });
     gsap.set(photos[current], { zIndex: 1 });
-    gsap.to(photos[next], { clipPath: 'circle(150% at 50% 100%)', scale: 1, duration: 1.9, ease: 'power3.inOut' });
+    gsap.set(photos[next], { zIndex: 2 });
+
+    gsap.fromTo(photos[next], { autoAlpha: 0, scale: 1.05 }, { autoAlpha: 1, scale: 1, duration: 0.7, ease: 'power2.out' });
     gsap.to(photos[current], {
-      scale: 0.94,
-      autoAlpha: 0.6,
-      duration: 1.9,
-      ease: 'power3.inOut',
+      autoAlpha: 0,
+      duration: 0.4,
+      ease: 'power1.out',
       onComplete: () => {
-        gsap.set(photos[current], { autoAlpha: 0, scale: 1, zIndex: 0 });
-        gsap.set(photos[next], { clipPath: 'none' });
+        gsap.set(photos[current], { zIndex: 0, scale: 1 });
       },
     });
   }

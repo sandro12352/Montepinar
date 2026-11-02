@@ -99,15 +99,15 @@ const EXTRA: Record<string, ProjectExtra> = {
     ],
     gallery: [
       { src: '/images/PalmerasdeMontepinar.png', alt: 'Ingreso principal de Montepinar' },
-      { src: '/images/entrada.png', alt: 'Entrada al proyecto' },
+      { src: '/images/entrada.webp', alt: 'Entrada al proyecto' },
       { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
       { src: '/images/introduccion.png', alt: 'Vista del entorno' },
       { src: '/images/carousel/slide2.webp', alt: 'Áreas del proyecto' },
     ],
     plans: [
-      { name: 'Lote Jardín', area: 120, price: 18000, frontage: '8 × 15 m', description: 'Ideal para tu primera casa de campo.', tag: 'Más accesible' },
-      { name: 'Lote Familiar', area: 450, price: 27000, frontage: '15 × 30 m', description: 'Espacio para casa, jardín y zona de parrilla.', tag: 'Más elegido' },
-      { name: 'Lote Premium', area: 1000, price: 39000, frontage: '25 × 40 m', description: 'Frente amplio y máxima privacidad.' },
+      { name: 'Interior', area: 120, price: 18000, frontage: '8 × 15 m', description: 'Ubicado en el interior del proyecto: tranquilo, resguardado y listo para construir.', tag: 'Más accesible' },
+      { name: 'Parque', area: 450, price: 27000, frontage: '15 × 30 m', description: 'Frente a las áreas verdes, ideal para disfrutar del aire libre en familia.', tag: 'Más elegido' },
+      { name: 'Avenida', area: 1000, price: 39000, frontage: '25 × 40 m', description: 'Frente a la avenida principal: fácil acceso y mayor visibilidad.' },
     ],
     address: 'Distrito de Chancay, provincia de Huaral, Lima',
     nearby: [
@@ -143,9 +143,9 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
     ],
     plans: [
-      { name: 'Lote Campo', area: 120, price: 15000, frontage: '8 × 15 m', description: 'Tu primer paso en el campo, listo para construir.', tag: 'Más accesible' },
-      { name: 'Lote Jardín', area: 160, price: 25500, frontage: '8 × 20 m', description: 'Un poco más de espacio para tu jardín.', tag: 'Más elegido' },
-      { name: 'Lote Amplio', area: 200, price: 40000, frontage: '10 × 20 m', description: 'La mayor amplitud dentro del proyecto.' },
+      { name: 'Interior', area: 120, price: 15000, frontage: '8 × 15 m', description: 'Ubicado en el interior del proyecto: tranquilo, resguardado y listo para construir.', tag: 'Más accesible' },
+      { name: 'Parque', area: 160, price: 25500, frontage: '8 × 20 m', description: 'Frente a las áreas verdes, ideal para disfrutar del aire libre en familia.', tag: 'Más elegido' },
+      { name: 'Avenida', area: 200, price: 40000, frontage: '10 × 20 m', description: 'Frente a la avenida principal: fácil acceso y mayor visibilidad.' },
     ],
     address: 'Asociación Vivienda Montepinar Lt, Carretera Panamericana Norte, Huacho',
     nearby: [
@@ -181,9 +181,9 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/introduccion.png', alt: 'Vista del entorno' },
     ],
     plans: [
-      { name: 'Lote Bosque', area: 500, price: 18000, frontage: '15 × 33 m', description: 'Rodeado de vegetación, ideal para empezar.', tag: 'Más accesible' },
-      { name: 'Lote Laguna', area: 800, price: 28800, frontage: '20 × 40 m', description: 'Cerca de la laguna y las áreas sociales.', tag: 'Más elegido' },
-      { name: 'Lote Selva', area: 1200, price: 43200, frontage: '30 × 40 m', description: 'La máxima amplitud para tu proyecto de vida.' },
+      { name: 'Interior', area: 500, price: 18000, frontage: '15 × 33 m', description: 'Ubicado en el interior del proyecto: tranquilo, resguardado y listo para construir.', tag: 'Más accesible' },
+      { name: 'Parque', area: 800, price: 28800, frontage: '20 × 40 m', description: 'Frente a las áreas verdes, ideal para disfrutar del aire libre en familia.', tag: 'Más elegido' },
+      { name: 'Avenida', area: 1200, price: 43200, frontage: '30 × 40 m', description: 'Frente a la avenida principal: fácil acceso y mayor visibilidad.' },
     ],
     address: 'Iquitos, provincia de Maynas, Loreto',
     nearby: [

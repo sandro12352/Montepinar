@@ -24,11 +24,6 @@ export class ContactCtaComponent {
   protected readonly projects = PROJECTS.map((project) => ({ value: project.name, label: project.name }));
   protected readonly selectedProject = signal(this.projects[0].value);
   protected readonly phone = WHATSAPP_NUMBER;
-  protected readonly avatars = [
-    '/images/avatars/women-44.jpg',
-    '/images/avatars/men-32.jpg',
-    '/images/avatars/women-68.jpg',
-  ];
 
   protected openVisit(): void {
     this.visitSheet.open();

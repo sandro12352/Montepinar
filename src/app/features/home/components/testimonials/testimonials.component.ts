@@ -16,7 +16,7 @@ interface Testimonial {
   readonly videoSrc: string | null;
   /** Imagen de portada del video. */
   readonly poster: string;
-  /** Foto del cliente, que ocupa el lugar del video cuando no hay. */
+  /** Foto del cliente (4:5), que ocupa el lugar del video cuando no hay. */
   readonly photo: string;
 }
 
@@ -29,49 +29,44 @@ export class TestimonialsComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 
-  // Testimonios de ejemplo: reemplaza textos y fotos por los reales de cada cliente.
-  // `photo` debe ser un PNG recortado (sin fondo). Por ahora usan recortes de /images/equipo como marcador.
+  // Fotos reales de clientes que ya compraron su lote (public/images/testimonios, 800x1000, 4:5).
+  // TODO: reemplazar `author` por nombre y apellido reales (y `initials`) y los textos por sus palabras.
   // Para volver a mostrar video, pon la ruta en `videoSrc`.
   protected readonly testimonials: readonly Testimonial[] = [
     {
-      title: 'Una nueva forma de vivir', text: 'Nos encantó conocer el proyecto y sus áreas comunes.',
-      author: 'María y Luis', role: 'Familia visitante · Ejemplo ficticio', initials: 'ML',
-      videoSrc: null, poster: '/images/entrada.png', photo: '/images/equipo/chavela-saucedo-3.png',
+      title: 'Ya abrió la puerta de su lote', text: 'Compró su terreno en Montepinar y hoy visita su caseta, listo para empezar a construir su futuro.',
+      author: 'Propietario', role: 'Compró su lote en Montepinar', initials: 'MP',
+      videoSrc: null, poster: '/images/testimonios/joven-mzj-lt33.webp', photo: '/images/testimonios/joven-mzj-lt33.webp',
     },
     {
-      title: 'Espacios para compartir', text: 'Nos gustó la tranquilidad del entorno y la distribución de los espacios.',
-      author: 'Ana y Javier', role: 'Familia visitante · Ejemplo ficticio', initials: 'AJ',
-      videoSrc: null, poster: '/images/AsociacionMontepinar.webp', photo: '/images/equipo/jose-maria-varillas-4.png',
+      title: 'Ver su lote lo hizo todo más real', text: 'Después de recorrer el terreno decidió comprarlo y hoy posa feliz frente a su caseta.',
+      author: 'Propietaria', role: 'Compró su lote en Montepinar', initials: 'MP',
+      videoSrc: null, poster: '/images/testimonios/mujer-mzq-lt27.webp', photo: '/images/testimonios/mujer-mzq-lt27.webp',
     },
     {
-      title: 'Un lugar para crecer', text: 'Pudimos resolver nuestras dudas y conocer mejor cada proyecto.',
-      author: 'Lucía M.', role: 'Visitante · Ejemplo ficticio', initials: 'LM',
-      videoSrc: null, poster: '/images/carousel/slide2.webp', photo: '/images/equipo/hillma-machuca-2.png',
+      title: 'El primer paso de una familia', text: 'Madre e hijo dan la bienvenida a su nuevo espacio: ya son propietarios de su lote en Montepinar.',
+      author: 'Madre e hijo', role: 'Compraron su lote en Montepinar', initials: 'MP',
+      videoSrc: null, poster: '/images/testimonios/madre-hijo-mzd-lt01.webp', photo: '/images/testimonios/madre-hijo-mzd-lt01.webp',
     },
     {
-      title: 'Atención desde el primer día', text: 'Nos sentimos bien atendidos desde el primer momento.',
-      author: 'Familia Soto', role: 'Visitantes · Ejemplo ficticio', initials: 'FS',
-      videoSrc: null, poster: '/images/carousel/slide3.webp', photo: '/images/equipo/miguel-salgado-3.png',
+      title: 'Un sueño que se cumple en pareja', text: 'Una pareja celebra la compra de su lote con la ilusión de empezar esta etapa juntos.',
+      author: 'Pareja propietaria', role: 'Compraron su lote en Montepinar', initials: 'MP',
+      videoSrc: null, poster: '/images/testimonios/pareja-mza-lt09.webp', photo: '/images/testimonios/pareja-mza-lt09.webp',
     },
     {
-      title: 'El viaje valió la pena', text: 'El bus, el desayuno y el recorrido fueron muy ordenados. Se nota que cuidan cada detalle.',
-      author: 'Rosa y Pedro', role: 'Familia visitante · Ejemplo ficticio', initials: 'RP',
-      videoSrc: null, poster: '/images/carousel/slide3.webp', photo: '/images/equipo/chavela-saucedo-5.png',
+      title: 'Una decisión que tomaron juntas', text: 'Dos amigas conocieron el proyecto, eligieron su terreno y hoy lo recorren como propietarias.',
+      author: 'Propietarias', role: 'Compraron su lote en Montepinar', initials: 'MP',
+      videoSrc: null, poster: '/images/testimonios/amigas-mzl-lt26.webp', photo: '/images/testimonios/amigas-mzl-lt26.webp',
     },
     {
-      title: 'Todo claro y en regla', text: 'Me mostraron los documentos del proyecto y me explicaron cada paso del trámite sin presiones.',
-      author: 'Carlos R.', role: 'Comprador · Ejemplo ficticio', initials: 'CR',
-      videoSrc: null, poster: '/images/entrada.png', photo: '/images/equipo/jose-maria-varillas-3.png',
+      title: 'Una compra con toda la confianza', text: 'Tras la visita guiada, compraron su lote y hoy disfrutan de ver su terreno en persona.',
+      author: 'Propietarias', role: 'Compraron su lote en Montepinar', initials: 'MP',
+      videoSrc: null, poster: '/images/testimonios/visitantes-mza1-lt25.webp', photo: '/images/testimonios/visitantes-mza1-lt25.webp',
     },
     {
-      title: 'Ver el terreno lo cambió todo', text: 'En plano uno imagina, pero caminar los lotes me dio la seguridad que necesitaba para decidir.',
-      author: 'Elena V.', role: 'Visitante · Ejemplo ficticio', initials: 'EV',
-      videoSrc: null, poster: '/images/carousel/slide2.webp', photo: '/images/equipo/hillma-machuca-3.png',
-    },
-    {
-      title: 'Un futuro para mis hijos', text: 'Buscaba un lugar para que mis hijos crezcan con espacio y tranquilidad, y lo encontramos aquí.',
-      author: 'Jorge y Karla', role: 'Familia compradora · Ejemplo ficticio', initials: 'JK',
-      videoSrc: null, poster: '/images/AsociacionMontepinar.webp', photo: '/images/equipo/miguel-salgado-2.png',
+      title: 'Toda la familia en su terreno', text: 'Tres generaciones celebran juntas la compra de su lote y el comienzo de su proyecto en Montepinar.',
+      author: 'Familia propietaria', role: 'Compraron su lote en Montepinar', initials: 'MP',
+      videoSrc: null, poster: '/images/testimonios/familia-mzk-lt14.webp', photo: '/images/testimonios/familia-mzk-lt14.webp',
     },
   ];
 

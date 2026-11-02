@@ -1,7 +1,7 @@
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowRight, lucideHouse, lucideMessageCircle, lucideTrees, lucideTrendingUp } from '@ng-icons/lucide';
+import { lucideArrowRight, lucideHouse, lucideMessageCircle, lucideTrees, lucideRoute } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { whatsappLink } from '../../../contact/data/contact.data';
@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   imports: [NgIcon, RouterLink],
-  providers: [provideIcons({ lucideArrowRight, lucideHouse, lucideMessageCircle, lucideTrees, lucideTrendingUp })],
+  providers: [provideIcons({ lucideArrowRight, lucideHouse, lucideMessageCircle, lucideTrees, lucideRoute })],
   selector: 'app-resident-help',
   templateUrl: './resident-help.component.html',
 })
@@ -21,9 +21,9 @@ export class ResidentHelpComponent {
   protected readonly whatsapp = whatsappLink('Hola, quisiera asesoría para elegir mi terreno en Montepinar.');
 
   protected readonly options = [
-    { icon: 'lucideHouse', label: 'Lotes residenciales' },
-    { icon: 'lucideTrees', label: 'Lotes campestres' },
-    { icon: 'lucideTrendingUp', label: 'Inversión' },
+    { icon: 'lucideHouse', label: 'Interior' },
+    { icon: 'lucideTrees', label: 'Parque' },
+    { icon: 'lucideRoute', label: 'Avenida' },
   ];
 
   constructor() {

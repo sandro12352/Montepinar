@@ -22,9 +22,9 @@
       [plugins]="carouselPlugins">
       <hlm-carousel-content>
         @for (item of testimonials; track item.author) {
-        <hlm-carousel-item data-testimonial-item class="basis-[88%] pl-4 sm:basis-[70%] lg:basis-[48%]">
-          <article
-            class="grid min-w-0 grid-cols-1 overflow-hidden rounded-3xl bg-white p-5 shadow-[0_14px_36px_rgb(73_54_34_/_10%)] md:h-100 md:grid-cols-[minmax(15rem,0.85fr)_minmax(0,1.5fr)]">
+        <hlm-carousel-item class="basis-[88%] pl-4 sm:basis-[70%] lg:basis-[48%]">
+          <article data-testimonial-item
+            class="grid min-w-0 grid-cols-1 overflow-hidden rounded-3xl bg-white p-5 shadow-[0_14px_36px_rgb(73_54_34_/_10%)] h-full md:min-h-100 md:grid-cols-[minmax(15rem,0.85fr)_minmax(0,1.5fr)]">
             <!-- Video; si no hay, la foto del cliente -->
             <div class="relative aspect-[4/3] min-h-56 overflow-hidden rounded-2xl md:aspect-auto md:min-h-0">
               @if (item.videoSrc) {
@@ -33,14 +33,10 @@
                 Tu navegador no admite la reproducción de video.
               </video>
               } @else {
-              <!-- PNG recortado, sin fondo: la persona y su nombre quedan centrados en el eje vertical -->
-              <figure class="absolute inset-0 m-0 flex flex-col items-center justify-center gap-3 py-3">
-                <div class="relative min-h-0 w-full flex-1 basis-0">
-                  <img class="absolute inset-0 mx-auto h-full w-auto max-w-full object-contain object-center drop-shadow-[0_10px_16px_rgb(0_0_0_/_18%)]"
-                    [src]="item.photo" [alt]="'Foto de ' + item.author" loading="lazy" />
-                </div>
-                <figcaption class="w-full shrink-0 px-3 text-center text-sm font-extrabold text-[#1f1a14]">{{ item.author }}</figcaption>
-              </figure>
+              <!-- Foto 4:5 a sangre: llena todo el recuadro -->
+              <img class="absolute inset-0 size-full object-cover object-center"
+                [src]="item.photo" [alt]="item.title + ' · ' + item.role" width="800" height="1000" decoding="async"
+                loading="lazy" />
               }
             </div>
 

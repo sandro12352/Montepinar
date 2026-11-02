@@ -101,6 +101,15 @@ export class MainBannerComponent {
       imagen: '/images/carousel/slide3.webp',
       imagenMobile: '/images/carousel/slide3-mobile.webp',
     },
+    {
+      eyebrow: 'Tu nuevo hogar',
+      title: 'Una entrada que te da la bienvenida',
+      description: 'Jardines, palmeras y un acceso diseñado para que cada llegada se sienta como estar en casa.',
+      action: 'Ver galería',
+      href: '/galeria',
+      imagen: '/images/carousel/entrada-palmeras.webp',
+      imagenMobile: '/images/carousel/palmeras-mobile.webp',
+    },
   ];
 
   readonly carrouselPlugins = [Autoplay({

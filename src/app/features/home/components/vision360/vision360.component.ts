@@ -48,7 +48,7 @@ export class Vision360Component {
       id: 'entrada',
       label: 'Entrada',
       description: 'Acceso principal y áreas verdes de Montepinar.',
-      image: '/images/entrada.png',
+      image: '/images/entrada.webp',
     },
     {
       id: 'chancay',

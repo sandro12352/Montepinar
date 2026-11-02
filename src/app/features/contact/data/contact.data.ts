@@ -32,9 +32,9 @@ export interface SocialLink {
   readonly icon: string;
 }
 
-// Enlaces provisionales a la portada de cada red: reemplázalos por los perfiles reales de Montepinar.
+// Perfiles oficiales de Montepinar en redes sociales.
 export const SOCIAL_LINKS: readonly SocialLink[] = [
-  { name: 'Facebook', href: 'https://www.facebook.com/', icon: 'lucideFacebook' },
-  { name: 'Instagram', href: 'https://www.instagram.com/', icon: 'lucideInstagram' },
-  { name: 'TikTok', href: 'https://www.tiktok.com/', icon: 'tiktok' },
+  { name: 'Facebook', href: 'https://www.facebook.com/MontepinarInmobiliaria', icon: 'lucideFacebook' },
+  { name: 'Instagram', href: 'https://www.instagram.com/montepinar.of/', icon: 'lucideInstagram' },
+  { name: 'TikTok', href: 'https://www.tiktok.com/@montepinarinmobiliaria', icon: 'tiktok' },
 ];
