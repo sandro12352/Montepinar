@@ -34,8 +34,9 @@
       justify-content: center;
       gap: .6rem;
       background: #faf6f0;
+      contain: layout paint;
     }
-    
+
     #app-loader .loader-lockup {
       position: relative;
       width: var(--w);
@@ -76,6 +77,7 @@
     #app-loader .loader-word span {
       opacity: 0;
       transform: translateY(.5em);
+      will-change: transform, opacity;
       animation: loader-letter .45s cubic-bezier(.22, 1, .36, 1) calc(.3s + var(--i) * .17s) forwards;
     }
     
@@ -85,7 +87,13 @@
       font: 800 .8rem/1 var(--font-corporate, system-ui), sans-serif;
       letter-spacing: .18em;
       color: #087940;
-      animation: loader-count 2.62s cubic-bezier(.65, 0, .35, 1) forwards;
+      /* Con steps() el número se actualiza ~25 veces en vez de en cada frame: cada cambio
+         del contador fuerza estilo+layout en el hilo principal, que en móvil ya está
+         ocupado arrancando Angular. */
+      animation: loader-count 2.62s steps(25, end) forwards;
+      contain: layout paint style;
+      min-width: 4ch;
+      text-align: center;
     }
     
     #app-loader .loader-count::after {
