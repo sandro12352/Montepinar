@@ -79,7 +79,7 @@ export class MainBannerComponent {
       description: 'Descubre un entorno tranquilo, cercano y lleno de vida para disfrutar cada día.',
       action: 'Ver proyectos',
       href: '#proyectos',
-      imagen:'/images/prueba1.png'
+      imagen:'/images/prueba1.webp'
     },
     {
       eyebrow: 'Naturaleza y bienestar',
@@ -216,7 +216,8 @@ export class MainBannerComponent {
         gsap.set(img, { scale: 1 });
         return;
       }
-      if (i !== index) return;
+      // En móvil el zoom continuo de una imagen a pantalla completa hace tirones al deslizar.
+      if (i !== index || window.matchMedia('(max-width: 767px)').matches) return;
       gsap.fromTo(
         img,
         { scale: 1 },

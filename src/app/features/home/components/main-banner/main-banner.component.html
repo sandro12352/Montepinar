@@ -12,7 +12,7 @@
 
           <div data-banner-media class="absolute -inset-y-[6%] inset-x-0 overflow-hidden bg-mauve-100">
             <img data-zoom class="inset-0 size-full object-cover will-change-transform " [src]="slide.imagen"
-              alt="" [attr.loading]="index === 0 ? 'eager' : 'lazy'" aria-hidden="true" />
+              alt="" decoding="async" [attr.loading]="index === 0 ? 'eager' : 'lazy'" aria-hidden="true" />
             <!-- Velo base muy ligero: unifica cualquier imagen o video -->
             <div
               class="pointer-events-none absolute inset-0 z-1 bg-linear-to-r from-black/75 via-black/35 to-black/5 max-sm:from-black/65 max-sm:via-black/40 max-sm:to-black/20 "
@@ -51,7 +51,7 @@
                   name="lucideMapPinHouse" size="20" aria-hidden="true" />
               </a>
               <button #boton type="button" (click)="openVisitSheet()"
-                class="slide-copy-item group relative cursor-pointer inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl border border-white/70 bg-white/10 px-6 py-3.5 text-sm font-extrabold text-white no-underline backdrop-blur-sm transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50">
+                class="slide-copy-item group relative cursor-pointer inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl border border-white/70 bg-white/10 px-6 py-3.5 text-sm font-extrabold text-white no-underline md:backdrop-blur-sm transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50">
                 <span aria-hidden="true"
                   class="absolute inset-0 origin-left scale-x-0 bg-(--brand-orange-500) transition-transform duration-500 ease-out group-hover:scale-x-100 motion-reduce:transition-none"></span>
                 <span class="relative z-10">Agendar visita</span>
@@ -83,7 +83,7 @@
 
     <!-- Barra de preventa -->
     <div #cardFloat data-card-float
-      class="slide-copy-item absolute w-screen bottom-0 z-20 border-t border-white/15 bg-[#191613]/70 text-white backdrop-blur-md"
+      class="slide-copy-item absolute w-screen bottom-0 z-20 border-t border-white/15 bg-[#191613]/85 text-white md:bg-[#191613]/70 md:backdrop-blur-md"
       role="region" aria-label="Lotes disponibles desde 18 mil soles">
       <div
         class="mx-auto flex w-[85%] items-center justify-between gap-x-8 gap-y-3 py-4 pl-4 max-md:w-full max-md:px-5 max-md:py-3">
