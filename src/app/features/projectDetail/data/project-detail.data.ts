@@ -101,7 +101,7 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/PalmerasdeMontepinar.png', alt: 'Ingreso principal de Montepinar' },
       { src: '/images/entrada.webp', alt: 'Entrada al proyecto' },
       { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
-      { src: '/images/introduccion.png', alt: 'Vista del entorno' },
+      { src: '/images/carousel/entrada-palmeras.webp', alt: 'Vista del entorno' },
       { src: '/images/carousel/slide2.webp', alt: 'Áreas del proyecto' },
     ],
     plans: [
@@ -139,7 +139,7 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/AsociacionMontepinar.webp', alt: 'Vista aérea de las áreas deportivas' },
       { src: '/images/carousel/slide3.webp', alt: 'Áreas comunes' },
       { src: '/images/Entrada%20Montepinar%20entre%20jardines%20y%20banderas.png', alt: 'Entrada entre jardines' },
-      { src: '/images/introduccion.png', alt: 'Vista del entorno' },
+      { src: '/images/carousel/entrada-palmeras.webp', alt: 'Vista del entorno' },
       { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
     ],
     plans: [
@@ -178,7 +178,7 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/carousel/slide2.webp', alt: 'Entorno natural' },
       { src: '/images/carousel/slide3.webp', alt: 'Áreas del proyecto' },
       { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
-      { src: '/images/introduccion.png', alt: 'Vista del entorno' },
+      { src: '/images/carousel/entrada-palmeras.webp', alt: 'Vista del entorno' },
     ],
     plans: [
       { name: 'Interior', area: 500, price: 18000, frontage: '15 × 33 m', description: 'Ubicado en el interior del proyecto: tranquilo, resguardado y listo para construir.', tag: 'Más accesible' },
