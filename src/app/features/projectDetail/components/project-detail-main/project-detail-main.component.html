@@ -91,8 +91,8 @@
         </div>
 
         <p class="m-0 mt-5 text-sm text-[#1f1a14]/65">Tu lote desde</p>
-        <p class="m-0 mt-1 text-4xl font-extrabold tracking-tight text-[var(--brand-forest-900)]">{{ formatSoles(entryPlan().price) }}</p>
-        <p class="m-0 mt-1 text-xs text-[#1f1a14]/55">{{ entryPlan().area }} m² · {{ formatSoles(entryQuote().perM2) }} por m²</p>
+        <p class="m-0 mt-1 text-4xl font-extrabold tracking-tight text-[var(--brand-forest-900)]">{{ formatSoles(entryQuote().cash) }}</p>
+        <p class="m-0 mt-1 text-xs text-[#1f1a14]/55">{{ entryQuote().area }} m² · {{ formatSoles(entryQuote().perM2) }} por m²</p>
 
         <dl class="m-0 mt-5 text-sm">
           <div class="flex items-center justify-between border-t border-[var(--brand-forest-900)]/10 py-3">
@@ -103,10 +103,17 @@
             <dt class="text-[#1f1a14]/60">{{ entryQuote().months }} cuotas de</dt>
             <dd class="m-0 font-extrabold text-[var(--brand-forest-900)]">{{ formatSoles(entryQuote().installment) }}</dd>
           </div>
+          @if (entryQuote().financed; as financed) {
+          <div class="flex items-center justify-between border-y border-[var(--brand-forest-900)]/10 py-3">
+            <dt class="text-[#1f1a14]/60">Precio financiado</dt>
+            <dd class="m-0 font-extrabold text-[var(--brand-forest-900)]">{{ formatSoles(financed) }}</dd>
+          </div>
+          } @else {
           <div class="flex items-center justify-between border-y border-[var(--brand-forest-900)]/10 py-3">
             <dt class="text-[#1f1a14]/60">Interés del ejemplo</dt>
             <dd class="m-0 font-extrabold text-[var(--brand-forest-900)]">{{ project().financing.annualRate }}%</dd>
           </div>
+          }
         </dl>
 
         <button type="button" (click)="openVisit()"
@@ -128,7 +135,7 @@
 
       <div data-aside class="rounded-3xl border border-[var(--brand-forest-900)]/12 bg-white p-6">
         <div class="flex items-center gap-4">
-          <img class="size-14 rounded-full object-cover" src="/images/avatars/women-68.jpg" alt="" width="56" height="56" loading="lazy" />
+          <img class="size-14 rounded-full bg-[var(--brand-forest-100)] object-cover object-top" src="/images/equipo/hillma-machuca-2.webp" alt="Hillma Machuca Díaz, asesora de Montepinar" width="56" height="56" loading="lazy" />
           <div>
             <p class="m-0 text-base font-extrabold text-[var(--brand-forest-900)]">Tu asesor Montepinar</p>
             <p class="m-0 text-sm text-[#1f1a14]/55">Atención personalizada</p>
@@ -143,14 +150,15 @@
         </p>
       </div>
 
-      <a data-aside [href]="whatsappLink('Hola, quisiera recibir el dossier del proyecto ' + project().name + '.')" target="_blank" rel="noopener noreferrer"
+      <a data-aside [href]="project().dossier ?? whatsappLink('Hola, quisiera recibir el dossier del proyecto ' + project().name + '.')" target="_blank" rel="noopener noreferrer"
+        [attr.download]="project().dossier ? '' : null"
         class="group/doc flex items-center gap-4 rounded-2xl bg-[var(--brand-forest-100)] p-5 no-underline transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]">
         <span class="grid size-10 shrink-0 place-items-center rounded-lg bg-white text-[var(--brand-forest-900)]">
           <ng-icon name="lucideFileText" size="20" aria-hidden="true" />
         </span>
         <span class="leading-tight">
           <span class="block text-sm font-extrabold text-[var(--brand-forest-900)]">Dossier del proyecto</span>
-          <span class="block text-xs text-[#1f1a14]/55">Solicítalo por WhatsApp</span>
+          <span class="block text-xs text-[#1f1a14]/55">{{ project().dossier ? 'Descarga la lista de precios 2026 (PDF)' : 'Solicítalo por WhatsApp' }}</span>
         </span>
       </a>
     </aside>

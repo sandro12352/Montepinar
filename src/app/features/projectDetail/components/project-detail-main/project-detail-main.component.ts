@@ -64,7 +64,29 @@ export class ProjectDetailMainComponent {
     this.project().plans.reduce((min, plan) => (plan.price < min.price ? plan : min)),
   );
 
+  /** Si el proyecto publica lista de precios, la tarjeta usa el lote más económico real. */
+  private readonly entryRow = computed(() => {
+    const rows = (this.project().sectors ?? []).flatMap((sector) =>
+      sector.stages.flatMap((stage) => stage.groups.flatMap((group) => group.rows.map((row) => ({ ...row, area: group.area })))),
+    );
+    return rows.length ? rows.reduce((min, row) => (row.cash < min.cash ? row : min)) : null;
+  });
+
   protected readonly entryQuote = computed(() => {
+    const real = this.entryRow();
+    if (real) {
+      return {
+        initialPercent: Math.round((real.initial / real.financed) * 100),
+        initial: real.initial,
+        months: real.months,
+        installment: real.installment,
+        perM2: real.cash / real.area,
+        financed: real.financed,
+        area: real.area,
+        cash: real.cash,
+      };
+    }
+
     const plan = this.entryPlan();
     const { minInitialPercent, maxMonths } = this.project().financing;
     const initial = Math.round((plan.price * minInitialPercent) / 100);
@@ -74,6 +96,9 @@ export class ProjectDetailMainComponent {
       months: maxMonths,
       installment: (plan.price - initial) / maxMonths,
       perM2: plan.price / plan.area,
+      financed: null,
+      area: plan.area,
+      cash: plan.price,
     };
   });
 

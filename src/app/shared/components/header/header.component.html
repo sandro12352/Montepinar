@@ -2,7 +2,7 @@
   class="invisible absolute inset-x-0 z-50 text-white transition-[background-color,box-shadow] duration-300 motion-reduce:transition-none"
   [class.top-2]="!solid()" [class.pt-2]="solid() && !scrolled()" [class.bg-white]="solid()" [style.background-color]="solid() ? 'var(--card)' : 'transparent'"
   [style.color]="solid() ? 'var(--foreground)' : '#FFFFFF'" [class.shadow-lg]="scrolled()">
-  <div class="mx-auto flex w-[85%] items-center justify-between gap-5 py-2">
+  <div class="mx-auto flex w-[min(88%,1400px)] items-center justify-between gap-5 py-2">
     <a data-anim="logo"
       class="col-start-1 row-start-1 flex w-fit shrink-0 items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-4"
       routerLink="/" aria-label="Montepinar, volver al inicio">

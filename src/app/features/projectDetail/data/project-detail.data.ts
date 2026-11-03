@@ -1,4 +1,5 @@
 import { PROJECTS, ProjectItem } from '../../projects/data/projects.data';
+import { PALMERAS_SECTORS, PriceRow, PriceSector } from './price-list.data';
 
 export interface LotPlan {
   readonly name: string;
@@ -7,6 +8,8 @@ export interface LotPlan {
   readonly frontage: string;
   readonly description: string;
   readonly tag?: string;
+  /** Línea extra bajo el precio (financiamiento, ubicación exacta, etc.). */
+  readonly detail?: string;
 }
 
 export interface Amenity {
@@ -37,6 +40,8 @@ export interface ProjectDetail extends ProjectItem {
   readonly amenities: readonly Amenity[];
   readonly gallery: readonly { readonly src: string; readonly alt: string }[];
   readonly plans: readonly LotPlan[];
+  /** Lista de precios por sector y etapa, si el proyecto la publica. */
+  readonly sectors?: readonly PriceSector[];
   readonly address: string;
   readonly nearby: readonly NearbyPlace[];
   readonly financing: {
@@ -46,6 +51,8 @@ export interface ProjectDetail extends ProjectItem {
     readonly annualRate: number;
   };
   readonly legal: readonly LegalItem[];
+  /** PDF descargable del proyecto (dossier o lista de precios), dentro de public. */
+  readonly dossier?: string;
 }
 
 type ProjectExtra = Omit<ProjectDetail, keyof ProjectItem>;
@@ -80,6 +87,45 @@ const LEGAL_FILES = ['titulo-propiedad', 'partida-registral', 'habilitacion-zoni
 const legalFor = (slug: string): readonly LegalItem[] =>
   LEGAL_DOCS.map((doc, index) => ({ ...doc, file: `/documents/${slug}/${LEGAL_FILES[index]}.pdf` }));
 
+const fmt = (value: number): string => value.toLocaleString('en-US');
+const areaRange = (min: number, max: number): string => (min === max ? `${fmt(min)} m²` : `de ${fmt(min)} a ${fmt(max)} m²`);
+
+/** El lote más económico de la lista que cumple el criterio, y el rango de áreas donde existe. */
+function cheapest(sectors: readonly PriceSector[], match: (row: PriceRow) => boolean) {
+  const hits = sectors.flatMap((sector) =>
+    sector.stages.flatMap((stage) =>
+      stage.groups.flatMap((group) =>
+        group.rows.filter(match).map((row) => ({ row, area: group.area, where: `${sector.name} · ${stage.label}` })),
+      ),
+    ),
+  );
+  const best = hits.reduce((min, hit) => (hit.row.cash < min.row.cash ? hit : min));
+  const areas = hits.map((hit) => hit.area);
+  return { ...best, range: areaRange(Math.min(...areas), Math.max(...areas)) };
+}
+
+/** Interior, Parque y Avenida con los precios "desde" reales de la lista de precios. */
+function plansFromSectors(sectors: readonly PriceSector[]): readonly LotPlan[] {
+  const build = (name: string, description: (range: string) => string, match: (row: PriceRow) => boolean, tag?: string): LotPlan => {
+    const { row, area, where, range } = cheapest(sectors, match);
+    return {
+      name,
+      area,
+      price: row.cash,
+      frontage: where,
+      description: description(range),
+      tag,
+      detail: `${row.location} · financiado S/ ${fmt(row.financed)}, inicial S/ ${fmt(row.initial)} y ${row.months} cuotas de S/ ${fmt(row.installment)}`,
+    };
+  };
+
+  return [
+    build('Interior', (range) => `Lotes interiores ${range}: tranquilos, resguardados y listos para construir.`, (row) => row.location.startsWith('Lote interior'), 'Más accesible'),
+    build('Parque', (range) => `Frente al parque, lotes ${range}: ideales para disfrutar del aire libre en familia.`, (row) => /^Frente a .*parque/i.test(row.location)),
+    build('Avenida', (range) => `Frente a la avenida principal, lotes ${range}: fácil acceso y mayor visibilidad.`, (row) => row.location.startsWith('Frente a Av. principal')),
+  ];
+}
+
 const EXTRA: Record<string, ProjectExtra> = {
   chancay: {
     tagline: 'Un lugar propio, a minutos del nuevo puerto.',
@@ -89,7 +135,7 @@ const EXTRA: Record<string, ProjectExtra> = {
       { value: '120 m²', label: 'Lote mínimo' },
       { value: '+2,000', label: 'Áreas verdes' },
       { value: '24/7', label: 'Seguridad' },
-      { value: '60', label: 'Meses para pagar' },
+      { value: '42', label: 'Cuotas máximas' },
     ],
     amenities: [
       { icon: 'lucideUsers', label: 'Country club', text: 'Zona social y parrilleras para toda la familia.' },
@@ -104,11 +150,9 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/carousel/entrada-palmeras.webp', alt: 'Vista del entorno' },
       { src: '/images/carousel/slide2.webp', alt: 'Áreas del proyecto' },
     ],
-    plans: [
-      { name: 'Interior', area: 120, price: 18000, frontage: '8 × 15 m', description: 'Ubicado en el interior del proyecto: tranquilo, resguardado y listo para construir.', tag: 'Más accesible' },
-      { name: 'Parque', area: 450, price: 27000, frontage: '15 × 30 m', description: 'Frente a las áreas verdes, ideal para disfrutar del aire libre en familia.', tag: 'Más elegido' },
-      { name: 'Avenida', area: 1000, price: 39000, frontage: '25 × 40 m', description: 'Frente a la avenida principal: fácil acceso y mayor visibilidad.' },
-    ],
+    plans: plansFromSectors(PALMERAS_SECTORS),
+    sectors: PALMERAS_SECTORS,
+    dossier: '/documents/chancay/lista-de-precios-2026.pdf',
     address: 'Distrito de Chancay, provincia de Huaral, Lima',
     nearby: [
       { label: 'Puerto de Chancay', distance: '15 min' },
@@ -116,7 +160,7 @@ const EXTRA: Record<string, ProjectExtra> = {
       { label: 'Centro de Chancay', distance: '10 min' },
       { label: 'Lima', distance: '1 h 30 min' },
     ],
-    financing: { minInitialPercent: 10, maxMonths: 60, annualRate: 0 },
+    financing: { minInitialPercent: 17, maxMonths: 42, annualRate: 0 },
     legal: [],
   },
   huaral: {

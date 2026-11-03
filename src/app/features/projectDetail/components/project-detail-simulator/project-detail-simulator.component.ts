@@ -44,7 +44,8 @@ export class ProjectDetailSimulatorComponent {
 
   protected readonly monthOptions = computed(() => {
     const max = this.project().financing.maxMonths;
-    return [12, 24, 36, 48, 60].filter((value) => value <= max);
+    // Siempre incluye el plazo máximo del proyecto (por ejemplo 42 cuotas).
+    return [...new Set([...[12, 24, 36, 48, 60].filter((value) => value < max), max])];
   });
 
   protected readonly plan = computed(() => this.project().plans[this.planIndex()] ?? this.project().plans[0]);

@@ -28,24 +28,18 @@ export class GalleryComponent {
   private modalAnimation?: gsap.core.Timeline;
   private previousDialogSlide: number | null = null;
 
+  // Solo las imágenes de public/images/gallery/home.
   protected readonly images: readonly GalleryImage[] = [
-    { src: '/images/gallery/presentacion.webp', alt: 'Presentación del plano y las etapas del proyecto Montepinar' },
-    { src: '/images/gallery/foto-grupal-mapa.png', alt: 'Clientes posando junto al plano de lotes de Montepinar' },
-    { src: '/images/gallery/equipo-mapa.png', alt: 'El equipo de Montepinar explicando el plano de etapas y lotes' },
-    { src: '/images/gallery/visita-ingreso.png', alt: 'Visitantes atentos a la explicación en el ingreso del proyecto' },
-    { src: '/images/gallery/grupo-entrada.png', alt: 'Grupo de visitantes junto al módulo de ingreso de Montepinar' },
-    { src: '/images/gallery/atencion-oficina.png', alt: 'Asesora atendiendo a clientes en la oficina de Montepinar' },
-    { src: '/images/gallery/cliente-promocion.png', alt: 'Clienta con el brochure frente al panel de Montepinar Inmobiliaria & Constructora' },
-    { src: '/images/gallery/bus-recojo.png', alt: 'Bus de la visita guiada con los asesores esperando en el punto de recojo' },
-    { src: '/images/gallery/bus-llegada.png', alt: 'Bus de la visita llegando al módulo de atención de Montepinar' },
-    { src: '/images/gallery/terreno-cabanas.png', alt: 'Terreno de Montepinar con módulos de obra y las montañas al fondo' },
-    { src: '/images/gallery/modulos-colores.png', alt: 'Hilera de módulos de colores junto a una vía del proyecto' },
-    { src: '/images/gallery/modulos-turquesa.png', alt: 'Vista amplia de los módulos de los propietarios en el terreno' },
-    { src: '/images/gallery/casa-jardin.png', alt: 'Casa de un propietario con jardín y tanque de agua' },
-    { src: '/images/gallery/casa-verde.png', alt: 'Casa verde con terraza construida por un propietario' },
-    { src: '/images/gallery/cartel-mall.png', alt: 'Cartel del futuro Montepinar Mall, Sector 2 Etapa 2' },
-    { src: '/images/gallery/mercado.png', alt: 'Recreación del futuro Mercado de Montepinar, Sector 4 Etapa 2' },
+    { src: '/images/gallery/home/centro-comercial.webp', alt: 'Centro comercial de Montepinar: variedad de tiendas y rentabilidad para la comunidad' },
+    { src: '/images/gallery/home/colegio-educacion-cerca.webp', alt: 'Colegio de Montepinar: educación cerca de casa' },
+    { src: '/images/gallery/home/colegio-educacion-futuro.webp', alt: 'Colegio de Montepinar: educación pensada para el futuro de los niños' },
+    { src: '/images/gallery/home/hospital-municipal.webp', alt: 'Hospital municipal de Montepinar: salud para toda la comunidad' },
+    { src: '/images/gallery/home/mercado-compras.webp', alt: 'Mercado de Montepinar: compras cerca de casa' },
+    { src: '/images/gallery/home/mercado.webp', alt: 'Recreación del futuro Mercado de Montepinar, Sector 4 Etapa 2' },
+    { src: '/images/gallery/home/cartel-mall.webp', alt: 'Cartel del futuro Montepinar Mall, Sector 2 Etapa 2' },
+    { src: '/images/gallery/home/bus-recojo.webp', alt: 'Bus de la visita guiada con los asesores esperando en el punto de recojo' },
   ];
+
 
   protected readonly selectedIndex = signal<number | null>(null);
   protected openImage(index: number): void {

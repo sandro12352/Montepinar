@@ -9,7 +9,11 @@
           Un lote a tu medida.
         </h2>
         <p data-head class="mb-0 mt-3 max-w-xl text-base leading-relaxed text-[#1f1a14]/65">
+          @if (sector()) {
+          Elige tu sector y etapa, y conoce el precio de cada ubicación: contado, financiado y cuotas.
+          } @else {
           Explora la distribución del proyecto y conoce las medidas de cada lote.
+          }
         </p>
       </div>
       <a data-head [href]="planLink()" target="_blank" rel="noopener noreferrer"
@@ -19,6 +23,165 @@
       </a>
     </div>
 
+    @if (sector(); as current) {
+    <div class="grid gap-5 lg:grid-cols-[minmax(0,1.9fr)_minmax(0,1fr)]">
+      <!-- Sectores, etapas y plano -->
+      <div data-panel class="min-w-0 rounded-3xl bg-white p-4 shadow-sm sm:p-6">
+        <div class="flex flex-col gap-4 sm:flex-row sm:gap-5">
+        <div role="tablist" aria-label="Sectores del proyecto" aria-orientation="vertical" class="-mx-1 flex gap-2 overflow-x-auto px-1 pb-2 [scrollbar-width:thin] sm:mx-0 sm:w-36 sm:shrink-0 sm:flex-col sm:overflow-visible sm:px-0 sm:pb-0">
+          @for (item of sectors(); track item.name; let i = $index) {
+          <button type="button" role="tab" (click)="selectSector(i)" [attr.aria-selected]="sectorIndex() === i"
+            class="shrink-0 cursor-pointer rounded-xl border px-4 py-2.5 text-left transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-1"
+            [class]="sectorIndex() === i
+              ? 'border-[var(--brand-forest-900)] bg-[var(--brand-forest-900)] text-white'
+              : 'border-[var(--brand-forest-200)] bg-[var(--brand-forest-50)] text-[var(--brand-forest-900)] hover:border-[var(--brand-primary)]'">
+            <span class="block text-sm font-extrabold">{{ item.name }}</span>
+            <span class="block text-[0.7rem] opacity-70">{{ item.areas }}</span>
+          </button>
+          }
+        </div>
+
+        <div class="min-w-0 flex-1">
+        <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <h3 class="m-0 text-base font-extrabold text-[var(--brand-forest-900)] sm:text-lg">
+            {{ current.name }} · desde {{ formatSoles(summary()?.fromCash ?? 0) }}
+          </h3>
+          @if (current.stages.length > 1) {
+          <div role="tablist" aria-label="Etapas del sector" class="flex flex-wrap gap-2">
+            @for (item of current.stages; track item.label; let i = $index) {
+            <button type="button" role="tab" (click)="selectStage(i)" [attr.aria-selected]="stageIndex() === i"
+              class="cursor-pointer rounded-full border px-3.5 py-1.5 text-xs font-extrabold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-1"
+              [class]="stageIndex() === i
+                ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white'
+                : 'border-[var(--brand-forest-200)] bg-white text-[var(--brand-forest-900)] hover:border-[var(--brand-primary)]'">
+              {{ item.label }}
+            </button>
+            }
+          </div>
+          } @else {
+          <span class="text-[0.65rem] font-extrabold uppercase tracking-[0.16em] text-[#1f1a14]/55">{{ current.stages[0].label }}</span>
+          }
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl bg-[var(--brand-forest-50)] [scrollbar-width:thin]">
+          <div data-map class="grid min-w-[38rem] grid-cols-[minmax(0,1fr)_3.5rem_7.5rem] gap-3 p-4 sm:p-5">
+            <!-- Grupos de lotes por área -->
+            <!-- Todas las etapas comparten la misma celda: la altura es la de la etapa más larga y no salta al cambiar. -->
+            <div class="grid min-w-0">
+              @for (sec of sectors(); track sec.name; let si = $index) {
+              @for (stg of sec.stages; track stg.label; let ti = $index) {
+              <div class="col-start-1 row-start-1 flex min-w-0 flex-col gap-3" [class.invisible]="sectorIndex() !== si || stageIndex() !== ti"
+                [attr.data-active]="sectorIndex() === si && stageIndex() === ti ? '' : null"
+                [attr.aria-hidden]="sectorIndex() !== si || stageIndex() !== ti">
+              @for (group of stg.groups; track group.area; let g = $index; let first = $first) {
+              @if (!first) {
+              <div class="flex h-14 items-center justify-center rounded-lg bg-[var(--brand-forest-100)]/70 text-xs font-semibold text-[#1f1a14]/50">
+                Vía interior
+              </div>
+              }
+              <div>
+                <p class="m-0 mb-2 text-center text-[0.65rem] font-extrabold uppercase tracking-[0.16em] text-[#1f1a14]/50">
+                  Lotes de {{ group.area }} m²
+                </p>
+                <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                  @for (item of group.rows; track item.location; let r = $index) {
+                  <button data-lot type="button" (click)="selectRow(g, r)"
+                    [attr.aria-pressed]="pick().group === g && pick().row === r"
+                    [attr.aria-label]="item.location + ', ' + group.area + ' metros cuadrados, ' + formatSoles(item.cash) + ' al contado'"
+                    class="flex min-h-20 cursor-pointer flex-col items-center justify-center gap-1 rounded-md border px-2 py-2 text-center transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-1"
+                    [class]="pick().group === g && pick().row === r
+                      ? 'border-[var(--brand-forest-900)] bg-[var(--brand-forest-900)] text-white shadow-lg'
+                      : 'border-[var(--brand-forest-200)] bg-[var(--brand-forest-100)]/70 text-[var(--brand-forest-900)] hover:-translate-y-0.5 hover:border-[var(--brand-primary)] hover:bg-white hover:shadow-md'">
+                    <span class="text-[0.65rem] font-extrabold leading-tight sm:text-xs">{{ item.location }}</span>
+                    <span class="text-[0.7rem] opacity-80">{{ formatSoles(item.cash) }}</span>
+                  </button>
+                  }
+                </div>
+              </div>
+              }
+              </div>
+              }
+              }
+            </div>
+
+            <!-- Vía vertical -->
+            <div class="rounded-md bg-[var(--brand-forest-100)]/80" aria-hidden="true"></div>
+
+            <!-- Zonas comunes -->
+            <div class="flex flex-col justify-between gap-3">
+              <div data-zone class="flex flex-1 flex-col items-center justify-center gap-2 rounded-xl bg-[var(--brand-forest-500)] p-3 text-center text-sm font-extrabold text-white">
+                <ng-icon name="lucideTreePine" size="24" aria-hidden="true" />
+                Áreas verdes
+              </div>
+              <div data-zone class="flex flex-1 flex-col items-center justify-center gap-2 rounded-xl border border-[var(--brand-forest-200)] bg-[var(--brand-forest-100)]/70 p-3 text-center text-sm font-extrabold text-[var(--brand-forest-900)]">
+                <ng-icon name="lucideHouse" size="24" aria-hidden="true" />
+                Club privado
+              </div>
+              <p class="m-0 text-right text-[0.65rem] font-bold text-[#1f1a14]/50">↑ Ingreso</p>
+            </div>
+          </div>
+        </div>
+
+        <ul class="m-0 mt-4 flex list-none flex-wrap items-center gap-x-6 gap-y-2 p-0 text-xs text-[#1f1a14]/65">
+          <li class="flex items-center gap-2"><span class="size-3 rounded-sm border border-[var(--brand-forest-200)] bg-[var(--brand-forest-100)]"></span>Ubicación disponible</li>
+          <li class="flex items-center gap-2"><span class="size-3 rounded-sm bg-[var(--brand-forest-900)]"></span>Ubicación seleccionada</li>
+          <li class="flex items-center gap-2 text-[#1f1a14]/55">Esquema no oficial · precios al contado</li>
+        </ul>
+        </div>
+        </div>
+      </div>
+
+      <!-- Detalle de la ubicación elegida -->
+      <div data-panel data-detail class="flex flex-col rounded-3xl bg-white p-5 shadow-sm sm:p-6">
+        @if (offer(); as o) {
+        <p class="m-0 text-[0.65rem] font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+          {{ current.name }} · {{ stage()?.label }}
+        </p>
+        <h3 class="m-0 mt-2 text-xl font-extrabold leading-tight tracking-tight text-[var(--brand-forest-900)]">{{ o.location }}</h3>
+
+        <div class="relative mx-auto my-4 w-full max-w-[10rem] pb-5">
+          <div #drawing class="grid w-full place-items-center rounded-sm border-2 border-[var(--brand-forest-500)] bg-[var(--brand-forest-100)]"
+            style="aspect-ratio: 4 / 3">
+            <span class="text-2xl font-extrabold tracking-tight text-[var(--brand-forest-900)]">{{ o.area }} m²</span>
+          </div>
+          <span class="absolute inset-x-0 bottom-0 text-center text-[0.65rem] text-[#1f1a14]/50">Dibujo referencial</span>
+        </div>
+
+        <div class="flex items-baseline justify-between border-t border-[var(--brand-forest-900)]/10 pt-4">
+          <span class="text-sm text-[#1f1a14]/60">Precio al contado</span>
+          <span class="text-2xl font-extrabold tracking-tight text-[var(--brand-forest-900)]">{{ formatSoles(o.cash) }}</span>
+        </div>
+
+        <dl class="m-0 mt-2 text-sm">
+          <div class="flex items-center justify-between border-t border-[var(--brand-forest-900)]/10 py-3">
+            <dt class="text-[#1f1a14]/60">Precio financiado</dt>
+            <dd class="m-0 font-extrabold text-[var(--brand-forest-900)]">{{ formatSoles(o.financed) }}</dd>
+          </div>
+          <div class="flex items-center justify-between border-t border-[var(--brand-forest-900)]/10 py-3">
+            <dt class="text-[#1f1a14]/60">Cuota inicial</dt>
+            <dd class="m-0 font-extrabold text-[var(--brand-forest-900)]">{{ formatSoles(o.initial) }}</dd>
+          </div>
+          <div class="flex items-center justify-between border-y border-[var(--brand-forest-900)]/10 py-3">
+            <dt class="text-[#1f1a14]/60">{{ o.months }} cuotas de</dt>
+            <dd class="m-0 font-extrabold text-[var(--brand-forest-900)]">{{ formatSoles(o.installment) }}</dd>
+          </div>
+        </dl>
+
+        <a [href]="offerLink()" target="_blank" rel="noopener noreferrer"
+          class="group/btn relative isolate mt-4 inline-flex min-h-12 items-center justify-center gap-2 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-4 py-3 text-sm font-extrabold text-white no-underline transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
+          <span aria-hidden="true"
+            class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-forest-900)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 motion-reduce:transition-none"></span>
+          <ng-icon name="lucideMessageCircle" size="18" aria-hidden="true" class="relative z-10" />
+          <span class="relative z-10">Quiero este lote</span>
+        </a>
+        }
+
+        <p class="mb-0 mt-auto pt-4 text-[0.7rem] leading-relaxed text-[#1f1a14]/50">
+          Lista de precios 2026, en soles. Esquema no oficial y sin escala; ubicación referencial según el plano de lotización 1/500. Sujeto a disponibilidad y a la validación del equipo comercial.
+        </p>
+      </div>
+    </div>
+    } @else {
     <div class="grid gap-5 lg:grid-cols-[minmax(0,1.9fr)_minmax(0,1fr)]">
       <!-- Plano -->
       <div data-panel class="rounded-3xl bg-white p-4 shadow-sm sm:p-6">
@@ -135,5 +298,6 @@
         </p>
       </div>
     </div>
+    }
   </div>
 </section>

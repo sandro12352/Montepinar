@@ -2,7 +2,7 @@
   class="min-h-dvh overflow-x-clip bg-[#f4f1ea] py-10 text-[#1f1a14] sm:py-12 lg:py-12">
   <div
     class="mx-auto grid min-h-[calc(100dvh-14rem)] w-full grid-cols-1 lg:min-h-[calc(100dvh-6rem)] lg:grid-cols-1 lg:items-center lg:gap-10 ">
-    <div class="px-5 sm:px-8 lg:px-[max(2rem,calc((100vw-88.5rem)/2))]">
+    <div class="ml-[max(6%,calc((100vw-1400px)/2))]">
     <header data-testimonials-content class="mb-3 max-w-[30rem]">
       <p
         class="mb-4 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
@@ -22,7 +22,7 @@
       [plugins]="carouselPlugins">
       <hlm-carousel-content>
         @for (item of testimonials; track item.author) {
-        <hlm-carousel-item class="basis-[88%] pl-4 sm:basis-[70%] lg:basis-[48%]">
+        <hlm-carousel-item class="basis-[88%] pl-4 sm:basis-[85%] lg:basis-[72%] xl:basis-[62%] 2xl:basis-[52%]">
           <article data-testimonial-item
             class="grid min-w-0 grid-cols-1 overflow-hidden rounded-3xl bg-white p-5 shadow-[0_14px_36px_rgb(73_54_34_/_10%)] h-full md:min-h-100 md:grid-cols-[minmax(15rem,0.85fr)_minmax(0,1.5fr)]">
             <!-- Video; si no hay, la foto del cliente -->
@@ -40,7 +40,7 @@
               }
             </div>
 
-            <div class="flex min-w-0 flex-col justify-between p-6 sm:p-9 lg:p-12">
+            <div class="flex min-w-0 flex-col justify-between p-6 sm:p-8 2xl:p-10">
               <div>
                 <p class="mb-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-tertiary)]">
                   Experiencia Montepinar</p>

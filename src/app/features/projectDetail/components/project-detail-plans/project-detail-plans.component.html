@@ -17,7 +17,11 @@
         Elige el lote que se ajusta a tu sueño.
       </h2>
       <p data-head class="mb-0 mt-5 max-w-lg text-pretty text-base leading-[1.75] text-white/75 sm:text-lg">
+        @if (project().sectors) {
+        Tres ubicaciones de lote (interior, parque y avenida) con el precio más bajo de cada una según la lista 2026. El precio cambia por sector y etapa: míralo en la sección siguiente.
+        } @else {
         Tres ubicaciones de lote (interior, parque y avenida) con precio final y financiamiento directo, sin intermediarios.
+        }
       </p>
     </div>
 
@@ -53,9 +57,12 @@
           </div>
 
           <div data-plan-item>
-            <p class="m-0 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white/60">Precio del lote</p>
+            <p class="m-0 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white/60">{{ project().sectors ? 'Desde (contado)' : 'Precio del lote' }}</p>
             <p class="m-0 mt-1 text-3xl font-extrabold tracking-tight sm:text-4xl">{{ formatSoles(plan.price) }}</p>
-            <p class="m-0 mt-1 text-xs font-semibold text-white/55">≈ {{ pricePerM2(plan.price, plan.area) }} por m²</p>
+            <p class="m-0 mt-1 text-xs font-semibold text-white/55">{{ plan.area }} m² · ≈ {{ pricePerM2(plan.price, plan.area) }} por m²</p>
+            @if (plan.detail) {
+            <p class="m-0 mt-2 max-w-xs text-xs leading-relaxed text-white/60">{{ plan.detail }}</p>
+            }
           </div>
 
           <button data-plan-item type="button" (click)="simulate(i)"

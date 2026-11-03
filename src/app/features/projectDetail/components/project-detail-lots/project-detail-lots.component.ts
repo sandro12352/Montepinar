@@ -16,6 +16,7 @@ import { lucideCalculator, lucideHouse, lucideMessageCircle, lucideTreePine } fr
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { buildLotBlocks, Lot } from '../../data/lots.data';
+import { summarizeSector } from '../../data/price-list.data';
 import { ProjectDetail } from '../../data/project-detail.data';
 import { formatSoles, prefersReducedMotion } from '../../utils/reveal';
 
@@ -55,6 +56,55 @@ export class ProjectDetailLotsComponent {
     return Math.min(Math.max(depth / width, 0.7), 1.6);
   });
 
+  // --- Lista de precios por sector (proyectos que la publican) ---
+  protected readonly sectors = computed(() => this.project().sectors ?? []);
+  protected readonly sectorIndex = linkedSignal(() => {
+    this.project();
+    return 0;
+  });
+  protected readonly sector = computed(() => this.sectors()[this.sectorIndex()]);
+  protected readonly summary = computed(() => {
+    const sector = this.sector();
+    return sector ? summarizeSector(sector) : null;
+  });
+  protected readonly stageIndex = linkedSignal(() => {
+    this.sectorIndex();
+    return 0;
+  });
+  protected readonly stage = computed(() => this.sector()?.stages[this.stageIndex()]);
+  /** Fila elegida de la tabla: grupo de área y fila dentro del grupo. */
+  protected readonly pick = linkedSignal<{ group: number; row: number }>(() => {
+    this.sectorIndex();
+    this.stageIndex();
+    return { group: 0, row: 0 };
+  });
+  protected readonly offer = computed(() => {
+    const group = this.stage()?.groups[this.pick().group];
+    const row = group?.rows[this.pick().row];
+    return group && row ? { ...row, area: group.area } : null;
+  });
+
+  protected selectSector(index: number): void {
+    this.sectorIndex.set(index);
+  }
+
+  protected selectStage(index: number): void {
+    this.stageIndex.set(index);
+  }
+
+  protected selectRow(group: number, row: number): void {
+    this.pick.set({ group, row });
+  }
+
+  protected offerLink(): string {
+    const offer = this.offer();
+    const sector = this.sector();
+    const stage = this.stage();
+    if (!offer || !sector || !stage) return this.planLink();
+    const message = `Hola, me interesa un lote de ${offer.area} m² (${offer.location.toLowerCase()}) en el ${sector.name}, ${stage.label.toLowerCase()} de ${this.project().name}. Precio al contado: ${formatSoles(offer.cash)}.`;
+    return `https://wa.me/51932284185?text=${encodeURIComponent(message)}`;
+  }
+
   protected select(lot: Lot): void {
     if (lot.status === 'reserved') return;
     this.selectedId.set(lot.id);
@@ -85,6 +135,32 @@ export class ProjectDetailLotsComponent {
       gsap.fromTo(drawing, { scale: 0.86, autoAlpha: 0.4 }, { scale: 1, autoAlpha: 1, duration: 0.55, ease: 'back.out(1.8)' });
     });
 
+    // Al cambiar de sector o de etapa, reaparecen los lotes y el detalle de la derecha.
+    // La primera vez la anima el scroll (más abajo), por eso se omite.
+    let firstRun = true;
+    afterRenderEffect((onCleanup) => {
+      this.sectorIndex();
+      this.stageIndex();
+      if (firstRun) {
+        firstRun = false;
+        return;
+      }
+      if (prefersReducedMotion()) return;
+
+      const root = this.root().nativeElement;
+      const lots = Array.from(root.querySelectorAll<HTMLElement>('[data-active] [data-lot]'));
+      const detail = Array.from(root.querySelectorAll<HTMLElement>('[data-detail] > *'));
+      const tweens = [
+        gsap.fromTo(
+          lots,
+          { autoAlpha: 0, scale: 0.85 },
+          { autoAlpha: 1, scale: 1, duration: 0.45, stagger: { amount: 0.5, from: 'start' }, ease: 'back.out(1.6)', clearProps: 'transform' },
+        ),
+        gsap.fromTo(detail, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.06, ease: 'power3.out', clearProps: 'transform' }),
+      ];
+      onCleanup(() => tweens.forEach((tween) => tween.kill()));
+    });
+
     afterNextRender(() => {
       const root = this.root().nativeElement;
       const context = gsap.context(() => {
@@ -102,7 +178,7 @@ export class ProjectDetailLotsComponent {
           { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.14, ease: 'power3.out', scrollTrigger: { trigger: '[data-panel]', start: 'top 85%', once: true } },
         );
 
-        gsap.fromTo(
+        if (root.querySelector('[data-map]')) gsap.fromTo(
           '[data-lot], [data-zone]',
           { autoAlpha: 0, scale: 0.85 },
           {
