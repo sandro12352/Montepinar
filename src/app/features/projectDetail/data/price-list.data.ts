@@ -269,3 +269,166 @@ export const PALMERAS_SECTORS: readonly PriceSector[] = [
     ],
   },
 ];
+
+/**
+ * Asociación de Vivienda Montepinar · Valor de adjudicación, lista del 25/05/2026.
+ * Fuente: PDF "PRECIO 3RA Y 4TA", "PRECIO 5TA, 6TA Y 4TA SECTOR 2" y "PRECIO 7MA, 8VA Y 9NA".
+ * El PDF no indica el sector de las etapas 7 a 9, por eso se agrupan bajo su propio nombre.
+ */
+export const HUARAL_SECTORS: readonly PriceSector[] = [
+  {
+    name: 'Sector I',
+    areas: '200 m²',
+    stages: [
+      {
+        label: 'Etapa 3',
+        groups: [
+          {
+            area: 200,
+            rows: [
+              row('Lote interior', 38000, 43000, 14200, 800, 36),
+              row('Esquina interior', 45000, 50000, 16200, 800, 36),
+              row('Frente a parque y mercado', 48000, 53000, 17300, 850, 42),
+              row('Esquina parque y mercado', 53000, 58000, 20200, 900, 42),
+              row('Frente a Av. secundaria', 48000, 53000, 17300, 850, 42),
+              row('Esquina Av. secundaria', 53000, 58000, 20200, 900, 42),
+              row('Frente a Av. principal', 56000, 61000, 23200, 900, 42),
+            ],
+          },
+        ],
+      },
+      {
+        label: 'Etapa 4',
+        groups: [
+          {
+            area: 200,
+            rows: [
+              row('Lote interior', 40000, 45000, 14400, 850, 36),
+              row('Esquina interior', 42000, 47000, 14600, 900, 36),
+              row('Frente a parque y colegio', 50000, 55000, 17200, 900, 42),
+              row('Esquina parque y colegio', 55000, 60000, 20100, 950, 42),
+              row('Frente a Av. secundaria', 50000, 55000, 17200, 900, 42),
+              row('Esquina Av. secundaria', 55000, 60000, 20100, 950, 42),
+              row('Frente a Av. principal', 58000, 63000, 23100, 950, 42),
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Sector II',
+    areas: '120 y 160 m²',
+    stages: [
+      {
+        label: 'Etapa 4',
+        groups: [
+          {
+            area: 120,
+            rows: [
+              row('Lote interior', 18000, 20000, 4600, 700, 22),
+              row('Esquina interior', 22000, 27000, 10800, 700, 24),
+              row('Frente a parque y colegio', 23000, 28000, 9800, 700, 26),
+              row('Esquina parque y colegio', 24000, 29000, 10800, 700, 26),
+              row('Frente a Av. secundaria', 25000, 30000, 9400, 700, 28),
+              row('Esquina Av. secundaria', 26000, 31000, 11400, 700, 28),
+            ],
+          },
+        ],
+      },
+      {
+        label: 'Etapa 5',
+        groups: [
+          {
+            area: 160,
+            rows: [
+              row('Lote interior', 27000, 32000, 12800, 800, 24),
+              row('Esquina interior', 29000, 34000, 14800, 800, 24),
+              row('Frente a parque y mercado', 30000, 35000, 15800, 800, 24),
+              row('Esquina parque y mercado', 31000, 36000, 16800, 800, 24),
+              row('Frente a Av. secundaria', 29000, 34000, 15800, 800, 24),
+              row('Esquina Av. secundaria', 30000, 35000, 16800, 800, 24),
+              row('Frente a Av. principal', 35000, 40000, 20800, 800, 24),
+              row('Esquina Av. principal', 36000, 41000, 21800, 800, 24),
+            ],
+          },
+        ],
+      },
+      {
+        label: 'Etapa 6',
+        groups: [
+          {
+            area: 160,
+            rows: [
+              row('Lote interior', 26000, 31000, 11800, 800, 24),
+              row('Esquina interior', 28000, 33000, 13800, 800, 24),
+              row('Frente a parque y colegio', 29000, 34000, 14800, 800, 24),
+              row('Esquina parque y colegio', 30000, 35000, 15800, 800, 24),
+              row('Frente a Av. secundaria', 29000, 34000, 14800, 800, 24),
+              row('Esquina Av. secundaria', 30000, 35000, 15800, 800, 24),
+              row('Frente a Av. principal', 34000, 39000, 19800, 800, 24),
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Etapas 7 a 9',
+    areas: '160 m²',
+    stages: [
+      {
+        label: 'Etapa 7',
+        groups: [
+          {
+            area: 160,
+            rows: [
+              row('Lote interior', 25000, 30000, 10400, 700, 28),
+              row('Esquina interior', 28000, 33000, 13400, 700, 28),
+              row('Frente a parque, colegio y mercado', 29000, 34000, 13000, 700, 30),
+              row('Esquina parque, colegio y mercado', 30000, 35000, 14000, 700, 30),
+              row('Frente a Av. secundaria', 31000, 36000, 13500, 750, 30),
+              row('Esquina Av. secundaria', 32000, 37000, 14000, 750, 30),
+              row('Frente a Av. principal', 33000, 38000, 15500, 750, 30),
+              row('Esquina Av. principal', 35000, 40000, 17500, 750, 30),
+            ],
+          },
+        ],
+      },
+      {
+        label: 'Etapa 8',
+        groups: [
+          {
+            area: 160,
+            rows: [
+              row('Lote interior', 24000, 29000, 9400, 700, 28),
+              row('Esquina interior', 27000, 32000, 11000, 700, 30),
+              row('Frente a parque y colegio', 28000, 33000, 12000, 700, 30),
+              row('Esquina parque y colegio', 29000, 34000, 11500, 750, 30),
+              row('Frente a Av. secundaria', 30000, 35000, 14000, 700, 30),
+              row('Esquina Av. secundaria', 31000, 36000, 13500, 750, 30),
+              row('Frente a Av. principal', 32000, 37000, 14500, 750, 30),
+            ],
+          },
+        ],
+      },
+      {
+        label: 'Etapa 9',
+        groups: [
+          {
+            area: 160,
+            rows: [
+              row('Lote interior', 23000, 28000, 11200, 600, 28),
+              row('Esquina interior', 26000, 31000, 12800, 650, 28),
+              row('Frente a parque y mercado', 27000, 32000, 12400, 700, 28),
+              row('Esquina parque y mercado', 28000, 33000, 13400, 700, 28),
+              row('Frente a Av. secundaria', 27000, 32000, 12400, 700, 28),
+              row('Esquina Av. secundaria', 28000, 33000, 13400, 700, 28),
+              row('Frente a Av. principal', 31000, 36000, 13500, 750, 30),
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];

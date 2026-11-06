@@ -1,5 +1,5 @@
 import { PROJECTS, ProjectItem } from '../../projects/data/projects.data';
-import { PALMERAS_SECTORS, PriceRow, PriceSector } from './price-list.data';
+import { HUARAL_SECTORS, PALMERAS_SECTORS, PriceRow, PriceSector } from './price-list.data';
 
 export interface LotPlan {
   readonly name: string;
@@ -53,6 +53,10 @@ export interface ProjectDetail extends ProjectItem {
   readonly legal: readonly LegalItem[];
   /** PDF descargable del proyecto (dossier o lista de precios), dentro de public. */
   readonly dossier?: string;
+  /** Nombre de la lista de precios, para los textos ("la lista de precios 2026"). */
+  readonly priceListName?: string;
+  /** Nota al pie de la sección de lotes. */
+  readonly priceListNote?: string;
 }
 
 type ProjectExtra = Omit<ProjectDetail, keyof ProjectItem>;
@@ -153,6 +157,8 @@ const EXTRA: Record<string, ProjectExtra> = {
     plans: plansFromSectors(PALMERAS_SECTORS),
     sectors: PALMERAS_SECTORS,
     dossier: '/documents/chancay/lista-de-precios-2026.pdf',
+    priceListName: 'lista de precios 2026',
+    priceListNote: 'Lista de precios 2026, en soles. Esquema no oficial y sin escala; ubicación referencial según el plano de lotización 1/500. Sujeto a disponibilidad y a la validación del equipo comercial.',
     address: 'Distrito de Chancay, provincia de Huaral, Lima',
     nearby: [
       { label: 'Puerto de Chancay', distance: '15 min' },
@@ -171,7 +177,7 @@ const EXTRA: Record<string, ProjectExtra> = {
       { value: '120 m²', label: 'Lote mínimo' },
       { value: '+5,000', label: 'Áreas verdes' },
       { value: '365', label: 'Días de sol' },
-      { value: '48', label: 'Meses para pagar' },
+      { value: '42', label: 'Cuotas máximas' },
     ],
     amenities: [
       { icon: 'lucideStore', label: 'Mall Montepinar', text: 'Comercio y servicios cerca de tu lote.' },
@@ -186,11 +192,11 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/carousel/entrada-palmeras.webp', alt: 'Vista del entorno' },
       { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
     ],
-    plans: [
-      { name: 'Interior', area: 120, price: 15000, frontage: '8 × 15 m', description: 'Ubicado en el interior del proyecto: tranquilo, resguardado y listo para construir.', tag: 'Más accesible' },
-      { name: 'Parque', area: 160, price: 25500, frontage: '8 × 20 m', description: 'Frente a las áreas verdes, ideal para disfrutar del aire libre en familia.', tag: 'Más elegido' },
-      { name: 'Avenida', area: 200, price: 40000, frontage: '10 × 20 m', description: 'Frente a la avenida principal: fácil acceso y mayor visibilidad.' },
-    ],
+    plans: plansFromSectors(HUARAL_SECTORS),
+    sectors: HUARAL_SECTORS,
+    dossier: '/documents/huaral/lista-de-precios-2026.pdf',
+    priceListName: 'lista de precios del 25/05/2026',
+    priceListNote: 'Lista de precios del 25/05/2026, en soles. Esquema no oficial y sin escala; la ubicación de los lotes es referencial. Sujeto a disponibilidad y a la validación del equipo comercial.',
     address: 'Asociación Vivienda Montepinar Lt, Carretera Panamericana Norte, Huacho',
     nearby: [
       { label: 'Centro de Huaral', distance: '10 min' },
@@ -198,7 +204,7 @@ const EXTRA: Record<string, ProjectExtra> = {
       { label: 'Puerto de Chancay', distance: '35 min' },
       { label: 'Lima', distance: '1 h 15 min' },
     ],
-    financing: { minInitialPercent: 15, maxMonths: 48, annualRate: 0 },
+    financing: { minInitialPercent: 23, maxMonths: 42, annualRate: 0 },
     legal: [],
   },
   iquitos: {
