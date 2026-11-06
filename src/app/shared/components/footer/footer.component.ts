@@ -65,46 +65,34 @@ export class FooterComponent {
         const items = Array.from(root.querySelectorAll<HTMLElement>('[data-footer-reveal]'));
         const image = root.querySelector<HTMLElement>('[data-footer-image]');
 
-        gsap.fromTo(items,
-          { autoAlpha: 0, y: 24 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: root, start: 'top 85%', once: true },
-          },
-        );
-
-        // Mismo acercamiento lento del banner principal, solo sobre la imagen.
-        const zoom = root.querySelector<HTMLElement>('[data-footer-zoom]');
-        if (image && zoom) {
-          gsap.fromTo(zoom,
-            { scale: 1 },
-            {
-              scale: 1.2,
-              duration: 20,
-              ease: 'none',
-              repeat: -1,
-              yoyo: true,
-              scrollTrigger: { trigger: image, start: 'top 95%', once: true },
-            },
+        // Se revela con IntersectionObserver y no con ScrollTrigger: el footer vive en el layout y
+        // persiste entre páginas, así que una posición calculada en el home quedaba obsoleta al
+        // cambiar de ruta y el footer se quedaba oculto (en blanco).
+        const reveal = () => {
+          gsap.fromTo(items,
+            { autoAlpha: 0, y: 24 },
+            { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out' },
           );
-        }
+          // Mismo acercamiento lento del banner principal, solo sobre la imagen.
+          const zoom = root.querySelector<HTMLElement>('[data-footer-zoom]');
+          if (image && zoom) {
+            gsap.fromTo(zoom, { scale: 1 }, { scale: 1.2, duration: 20, ease: 'none', repeat: -1, yoyo: true });
+          }
+          if (image) {
+            gsap.fromTo(image, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1, ease: 'power2.out' });
+          }
+        };
 
-        if (image) {
-          gsap.fromTo(image,
-            { autoAlpha: 0, y: 40 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 1,
-              ease: 'power2.out',
-              scrollTrigger: { trigger: image, start: 'top 95%', once: true },
-            },
-          );
-        }
+        gsap.set(items, { autoAlpha: 0 });
+        if (image) gsap.set(image, { autoAlpha: 0 });
+
+        const observer = new IntersectionObserver((entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          observer.disconnect();
+          reveal();
+        }, { rootMargin: '0px 0px -10% 0px' });
+        observer.observe(root);
+        this.destroyRef.onDestroy(() => observer.disconnect());
       }, root);
 
       this.destroyRef.onDestroy(() => context.revert());

@@ -16,9 +16,10 @@
               @if (slide.imagenMobile) {
               <source media="(max-aspect-ratio: 3/4)" [srcset]="slide.imagenMobile" />
               }
-              <img data-zoom class="inset-0 size-full object-cover will-change-transform " [src]="slide.imagen"
+              <img [attr.data-zoom]="slide.promo ? null : ''" class="inset-0 size-full object-cover will-change-transform " [src]="slide.imagen"
                 alt="" decoding="async" [attr.loading]="index === 0 ? 'eager' : 'lazy'" aria-hidden="true" />
             </picture>
+            @if (!slide.promo) {
             <!-- Velo base muy ligero: unifica cualquier imagen o video -->
             <div
               class="pointer-events-none absolute inset-0 z-1 bg-linear-to-r from-black/75 via-black/35 to-black/5 max-sm:from-black/65 max-sm:via-black/40 max-sm:to-black/20 "
@@ -26,9 +27,10 @@
             <div
               class="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-48 bg-linear-to-t from-black/45 to-transparent"
               aria-hidden="true"></div>
+            }
           </div>
 
-          <div data-banner-copy class="relative z-2 mx-auto w-[min(88%,1400px)] pl-4 max-md:w-full max-md:px-5 max-md:pl-5">
+          <div data-banner-copy [class.!hidden]="slide.promo" class="relative z-2 mx-auto w-[min(88%,1400px)] pl-4 max-md:w-full max-md:px-5 max-md:pl-5">
 
             <p #subtitulo
               class="slide-copy-item mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-white">

@@ -29,6 +29,10 @@ interface BannerSlide {
   readonly video?: string;
   readonly imagen?: string;
   readonly imagenMobile?: string;
+  /** La imagen ya trae su propio texto: no se superpone copy ni velo, ni zoom. */
+  readonly promo?: boolean;
+  /** Solo se muestra en pantallas de escritorio y tableta (no en móvil). */
+  readonly pcOnly?: boolean;
 }
 
 @Component({
@@ -73,7 +77,7 @@ export class MainBannerComponent {
   // La barra inferior es fija: solo hace su entrada la primera vez.
   private cardIntroDone = false;
 
-  protected readonly slides: readonly BannerSlide[] = [
+  private readonly allSlides: readonly BannerSlide[] = [
     {
       eyebrow: 'Bienvenido a Montepinar',
       title: 'Un lugar para vivir a tu manera',
@@ -110,7 +114,22 @@ export class MainBannerComponent {
       imagen: '/images/carousel/entrada-palmeras.webp',
       imagenMobile: '/images/carousel/palmeras-mobile.webp',
     },
+    {
+      eyebrow: 'Promoción de Navidad',
+      title: 'Esta Navidad elige tu mejor opción',
+      description: 'Descuentos de hasta S/ 2,500 en tu lote de Palmeras de Montepinar.',
+      action: 'Ver proyecto',
+      href: '/projects/chancay',
+      imagen: '/images/carousel/banner-navidad.webp',
+      promo: true,
+      pcOnly: true,
+    },
   ];
+
+  // En móvil la imagen horizontal con texto se cortaría: esa diapositiva solo se muestra en PC.
+  protected readonly slides: readonly BannerSlide[] = this.allSlides.filter(
+    (slide) => !(slide.pcOnly && typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches),
+  );
 
   readonly carrouselPlugins = [Autoplay({
     delay: 8000,
