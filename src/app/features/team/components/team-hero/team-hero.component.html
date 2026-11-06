@@ -46,9 +46,12 @@
     </div>
 
     <!-- Foto del equipo (PNG sin fondo, apoyada sobre el borde inferior) -->
-    <div class="relative mx-auto w-full max-w-[56rem] self-end lg:-mr-[4%] lg:w-[100%] lg:max-w-none">
-      <img data-img class="relative z-10 block h-auto w-full scale-120" [src]="teamPhoto"
-        alt="El equipo de Montepinar reunido, con polos verdes de la marca" fetchpriority="high" />
+    <div class="relative mx-auto w-full max-w-[56rem] self-end lg:-mr-[4%] lg:w-[100%]">
+      <!-- El zoom va en este contenedor: GSAP anima el scale de la imagen y pisaba el de la clase. -->
+      <div class="origin-bottom scale-115">
+        <img data-img class="relative z-10 block h-auto w-full" [src]="teamPhoto"
+          alt="El equipo de Montepinar reunido, con polos verdes de la marca" fetchpriority="high" />
+      </div>
 
       <div data-tag
         class="absolute bottom-6 left-0 z-20 flex items-center gap-3 rounded-2xl border border-white/20 bg-[var(--brand-forest-900)]/75 px-5 py-3.5 shadow-xl shadow-black/30 backdrop-blur-md sm:-left-6">
