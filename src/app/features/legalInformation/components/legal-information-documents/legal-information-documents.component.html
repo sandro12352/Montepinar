@@ -1,27 +1,27 @@
 <section #root id="documentos" aria-labelledby="legal-documents-title"
-  class="bg-[#f4f1ea] py-[clamp(4rem,7vw,6.5rem)] text-[var(--brand-forest-900)]">
+  class="bg-[#f4f1ea] py-[clamp(3rem,5vw,4.5rem)] text-[var(--brand-forest-900)]">
   <div class="mx-auto w-[min(88%,1400px)]">
-    <div data-head class="mb-8 flex flex-wrap items-end justify-between gap-6">
+    <div data-head class="mb-6 flex flex-wrap items-end justify-between gap-6">
       <div>
-        <p class="mb-5 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
+        <p class="mb-3 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">
           <span class="h-0.5 w-9 bg-[var(--brand-primary)]" aria-hidden="true"></span>
           Documentos por proyecto
         </p>
         <h2 id="legal-documents-title"
-          class="m-0 max-w-[18ch] text-balance text-[clamp(2.2rem,4.2vw,3.5rem)] font-extrabold leading-[1.04] tracking-[-0.04em]">
+          class="m-0 max-w-[18ch] text-balance text-[clamp(1.8rem,3.2vw,2.6rem)] font-extrabold leading-[1.04] tracking-[-0.04em]">
           Todo lo que respalda tu lote.
         </h2>
       </div>
       <p class="m-0 max-w-xs text-pretty text-base leading-relaxed text-[#1f1a14]/65">
-        Elige un proyecto para ver su documentación legal.
+        Elige un proyecto y revisa cada documento aquí mismo, sin descargar nada.
       </p>
     </div>
 
     <!-- Selector de proyecto -->
-    <div data-head role="tablist" aria-label="Proyectos" class="mb-10 flex flex-wrap gap-2">
+    <div data-head role="tablist" aria-label="Proyectos" class="mb-5 flex flex-wrap gap-2">
       @for (project of projects; track project.slug) {
       <button type="button" role="tab" [attr.aria-selected]="selected().slug === project.slug" (click)="select(project)"
-        class="cursor-pointer rounded-full border px-5 py-2.5 text-sm font-extrabold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f1ea]"
+        class="cursor-pointer rounded-full border px-4 py-2 text-sm font-extrabold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f1ea]"
         [class]="selected().slug === project.slug
           ? 'border-[var(--brand-forest-900)] bg-[var(--brand-forest-900)] text-white'
           : 'border-[var(--brand-forest-900)]/15 bg-white/60 text-[var(--brand-forest-900)]/70 hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]'">
@@ -32,15 +32,94 @@
     </div>
 
     @if (selected().documents.length) {
-    <ul class="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-3">
-      @for (doc of selected().documents; track doc.title; let i = $index) {
-      <li data-card>
-        <app-legal-document-card [document]="doc" [index]="i" />
-      </li>
+    <div data-head class="grid gap-4 lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] lg:items-start">
+      <!-- Lista de documentos -->
+      <div class="rounded-2xl border border-[var(--brand-forest-900)]/8 bg-white p-2 shadow-sm shadow-[var(--brand-forest-900)]/5">
+        <p class="m-0 px-3 pb-1.5 pt-1.5 text-[0.7rem] font-extrabold uppercase tracking-[0.14em] text-[var(--brand-forest-900)]/50">
+          {{ availableCount() }} de {{ selected().documents.length }} documentos disponibles
+        </p>
+        <ul class="m-0 flex list-none flex-col gap-1 p-0 lg:max-h-[min(78vh,40rem)] lg:overflow-y-auto">
+          @for (item of selected().documents; track item.title; let i = $index) {
+          <li data-item>
+            @if (item.file) {
+            <button type="button" (click)="open(i)" [attr.aria-current]="docIndex() === i ? 'true' : null"
+              class="group/doc flex w-full cursor-pointer items-center gap-2.5 rounded-xl border-0 px-2.5 py-2 text-left transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] motion-reduce:transition-none"
+              [class]="docIndex() === i
+                ? 'bg-[var(--brand-forest-900)] text-white'
+                : 'bg-transparent text-[var(--brand-forest-900)] hover:bg-[#f4f1ea]'">
+              <span class="grid size-8 shrink-0 place-items-center rounded-lg transition-colors"
+                [class]="docIndex() === i ? 'bg-[var(--brand-primary)] text-white' : 'bg-[var(--brand-primary)]/10 text-[var(--brand-primary)]'">
+                <ng-icon [name]="item.icon" size="16" aria-hidden="true" />
+              </span>
+              <span class="min-w-0 flex-1 text-[0.8rem] font-extrabold leading-snug">{{ item.title }}</span>
+            </button>
+            } @else {
+            <div class="flex items-center gap-2.5 rounded-xl px-2.5 py-2 opacity-60" aria-disabled="true">
+              <span class="grid size-8 shrink-0 place-items-center rounded-lg bg-[#f4f1ea] text-[var(--brand-forest-900)]/50">
+                <ng-icon [name]="item.icon" size="16" aria-hidden="true" />
+              </span>
+              <span class="min-w-0 flex-1 text-[0.8rem] font-bold leading-snug">{{ item.title }}</span>
+              <span class="inline-flex shrink-0 items-center gap-1 rounded-full bg-[#f4f1ea] px-2.5 py-1 text-[0.65rem] font-extrabold uppercase tracking-wide text-[var(--brand-forest-900)]/55">
+                <ng-icon name="lucideClock" size="12" aria-hidden="true" />
+                Pronto
+              </span>
+            </div>
+            }
+          </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Visor -->
+      @if (doc(); as current) {
+      <div data-viewer class="overflow-hidden rounded-2xl border border-[var(--brand-forest-900)]/8 bg-white shadow-sm shadow-[var(--brand-forest-900)]/5 lg:sticky lg:top-20">
+        <header class="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--brand-forest-900)]/8 px-4 py-3 sm:px-5">
+          <div class="flex min-w-0 items-center gap-3">
+            <span class="grid size-10 shrink-0 place-items-center rounded-xl bg-[var(--brand-primary)]/10 text-[var(--brand-primary)]">
+              <ng-icon [name]="current.icon" size="18" aria-hidden="true" />
+            </span>
+            <div class="min-w-0">
+              <h3 class="m-0 text-balance text-base font-extrabold leading-snug tracking-tight">{{ current.title }}</h3>
+              <p class="mb-0 mt-0.5 text-pretty text-xs leading-relaxed text-[#1f1a14]/60">{{ current.description }}</p>
+            </div>
+          </div>
+
+          @if (current.file; as file) {
+          <div class="flex shrink-0 flex-wrap gap-2">
+            <a [href]="file" target="_blank" rel="noopener"
+              class="inline-flex items-center gap-2 rounded-full bg-[var(--brand-forest-900)] px-3.5 py-2 text-xs font-extrabold text-white no-underline transition-colors hover:bg-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
+              <ng-icon name="lucideExternalLink" size="16" aria-hidden="true" />
+              Abrir
+            </a>
+            <a [href]="file" [attr.download]="current.title + '.pdf'"
+              class="inline-flex items-center gap-2 rounded-full border border-[var(--brand-forest-900)]/15 px-3.5 py-2 text-xs font-extrabold text-[var(--brand-forest-900)] no-underline transition-colors hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
+              <ng-icon name="lucideDownload" size="16" aria-hidden="true" />
+              Descargar
+            </a>
+          </div>
+          }
+        </header>
+
+        @if (canEmbed() && viewerUrl(); as url) {
+        <div class="bg-[#e9e5db]">
+          <iframe [src]="url" [title]="'Visor de ' + current.title"
+            class="block h-[min(78vh,44rem)] w-full border-0 bg-white" loading="lazy"></iframe>
+        </div>
+        } @else {
+        <div class="grid place-items-center bg-[#f4f1ea] px-6 py-14 text-center lg:hidden">
+          <span class="grid size-14 place-items-center rounded-full bg-white text-[var(--brand-primary)] shadow-sm">
+            <ng-icon name="lucideFileText" size="24" aria-hidden="true" />
+          </span>
+          <p class="mb-0 mt-4 max-w-xs text-sm leading-relaxed text-[#1f1a14]/65">
+            Toca <strong>Abrir</strong> para ver el documento a pantalla completa en tu celular.
+          </p>
+        </div>
+        }
+      </div>
       }
-    </ul>
+    </div>
     } @else {
-    <div data-card class="grid place-items-center rounded-3xl border border-dashed border-[var(--brand-forest-900)]/20 bg-white/50 px-6 py-16 text-center">
+    <div data-head class="grid place-items-center rounded-3xl border border-dashed border-[var(--brand-forest-900)]/20 bg-white/50 px-6 py-16 text-center">
       <span class="grid size-14 place-items-center rounded-full bg-[var(--brand-primary)]/10 text-[var(--brand-primary)]">
         <ng-icon name="lucideClock" size="24" aria-hidden="true" />
       </span>
