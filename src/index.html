@@ -37,6 +37,12 @@
       contain: layout paint;
     }
 
+    #app-loader.is-fading {
+      opacity: 0;
+      transition: opacity .5s ease-out;
+      pointer-events: none;
+    }
+
     #app-loader .loader-lockup {
       position: relative;
       width: var(--w);

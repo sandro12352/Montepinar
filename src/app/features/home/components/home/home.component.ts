@@ -42,7 +42,7 @@ export class HomeComponent {
   private readonly financingPanel = viewChild<ElementRef<HTMLElement>>('financingPanel');
   protected readonly financingBenefits = [
     { icon: 'lucideShieldCheck', label: 'Sin historial crediticio' },
-    { icon: 'lucideLandmark', label: 'Cuotas desde $199/mes' },
+    { icon: 'lucideLandmark', label: 'Cuotas desde S/ 500/mes' },
     { icon: 'lucideTrendingUp', label: '0% interés en inicial' },
   ];
 

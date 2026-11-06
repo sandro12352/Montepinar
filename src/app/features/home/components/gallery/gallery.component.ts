@@ -37,7 +37,6 @@ export class GalleryComponent {
     { src: '/images/gallery/home/mercado-compras.webp', alt: 'Mercado de Montepinar: compras cerca de casa' },
     { src: '/images/gallery/home/mercado.webp', alt: 'Recreación del futuro Mercado de Montepinar, Sector 4 Etapa 2' },
     { src: '/images/gallery/home/cartel-mall.webp', alt: 'Cartel del futuro Montepinar Mall, Sector 2 Etapa 2' },
-    { src: '/images/gallery/home/bus-recojo.webp', alt: 'Bus de la visita guiada con los asesores esperando en el punto de recojo' },
   ];
 
 

@@ -23,7 +23,7 @@ export const PROJECTS: readonly ProjectItem[] = [
     slug: 'chancay',
     name: 'Palmeras de Montepinar',
     location: 'Chancay',
-    mapQuery: 'Chancay, Lima, Perú',
+    mapQuery: '-11.291139,-77.495750',
     description: 'Un desarrollo residencial pensado para construir un futuro a tu medida, rodeado de áreas verdes.',
     image: '/images/PalmerasdeMontepinar.png',
     imageAlt: 'Acceso principal a Montepinar',
@@ -39,7 +39,7 @@ export const PROJECTS: readonly ProjectItem[] = [
   },
   {
     slug: 'huaral',
-    name: 'Asociación Montepinar',
+    name: 'Asociación de Vivienda Montepinar',
     location: 'Huaral',
     mapQuery: 'Asociacion Vivienda Montepinar Lt, Carretera Panamericana Norte, Huacho',
     description: 'Lotes accesibles junto a Mall Montepinar, con más de 5,000 áreas verdes para disfrutar en familia.',

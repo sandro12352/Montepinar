@@ -33,7 +33,7 @@ export class ProjectsHeroComponent {
     { value: '120 m²', label: 'Desde' },
   ];
 
-  protected readonly marquee = ['Palmeras de Montepinar', 'Asociación Montepinar', 'Amazon Lodge Montepinar'];
+  protected readonly marquee = ['Palmeras de Montepinar', 'Asociación de Vivienda Montepinar', 'Amazon Lodge Montepinar'];
 
   private animated = false;
 

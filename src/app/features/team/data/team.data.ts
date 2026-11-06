@@ -18,7 +18,7 @@ export interface TeamFounder {
 // Los nombres son marcadores: reemplázalos por los reales y agrega `photo` con la ruta de cada foto.
 export const TEAM_FOUNDER: TeamFounder = {
   name: 'Nombre del fundador',
-  role: 'Fundador y director general',
+  role: 'Fundador de Montepinar',
   quote: 'Queremos que cada familia sienta que compró un lugar, no solo un terreno.',
   photo: '/images/about/dueno.webp',
 };

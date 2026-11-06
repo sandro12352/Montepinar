@@ -35,7 +35,7 @@ export class FooterComponent {
       title: 'Proyectos',
       links: [
         { label: 'Palmeras de Montepinar', href: '/projects/chancay' },
-        { label: 'Asociación Montepinar', href: '/projects/huaral' },
+        { label: 'Asociación de Vivienda Montepinar', href: '/projects/huaral' },
         { label: 'Amazon Lodge Montepinar', href: '/projects/iquitos' },
       ],
     },

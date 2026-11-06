@@ -166,7 +166,7 @@ const EXTRA: Record<string, ProjectExtra> = {
   huaral: {
     tagline: 'Tu lote cerca de todo, junto a Mall Montepinar.',
     overview:
-      'Asociación Montepinar reúne lotes de 120 a 200 m² junto a Mall Montepinar, con más de 5,000 áreas verdes y un clima soleado casi todo el año. Un proyecto pensado para disfrutar el campo sin renunciar a la comodidad.',
+      'Asociación de Vivienda Montepinar reúne lotes de 120 a 200 m² junto a Mall Montepinar, con más de 5,000 áreas verdes y un clima soleado casi todo el año. Un proyecto pensado para disfrutar el campo sin renunciar a la comodidad.',
     facts: [
       { value: '120 m²', label: 'Lote mínimo' },
       { value: '+5,000', label: 'Áreas verdes' },
