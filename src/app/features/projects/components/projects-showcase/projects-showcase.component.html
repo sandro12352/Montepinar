@@ -49,9 +49,9 @@
             [class]="even
               ? 'rounded-[1.5rem] lg:rounded-[1.5rem_1.5rem_1.5rem_9rem]'
               : 'rounded-[1.5rem] lg:rounded-[1.5rem_9rem_1.5rem_1.5rem]'">
-            <img data-parallax
-              class="absolute inset-x-0 -top-[10%] h-[120%] w-full object-cover" [src]="project.image"
-              [alt]="project.imageAlt" loading="lazy" />
+            <img width="1600" height="1200" data-parallax
+              class="absolute inset-x-0 -top-[10%] h-[120%] w-full object-cover" [ngSrc]="project.image"
+              [alt]="project.imageAlt" />
             <span aria-hidden="true"
               class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></span>
 

@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideHandshake, lucideHardHat, lucideHeadset, lucideMegaphone, lucideScale } from '@ng-icons/lucide';
@@ -8,7 +9,7 @@ import { TEAM_MEMBERS } from '../../data/team.data';
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
-  imports: [NgIcon],
+  imports: [NgOptimizedImage, NgIcon],
   providers: [provideIcons({ lucideHandshake, lucideHardHat, lucideHeadset, lucideMegaphone, lucideScale })],
   selector: 'app-team-members',
   templateUrl: './team-members.component.html',

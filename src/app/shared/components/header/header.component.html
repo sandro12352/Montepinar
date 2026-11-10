@@ -7,8 +7,8 @@
       class="col-start-1 row-start-1 flex w-fit shrink-0 items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-4"
       routerLink="/" aria-label="Montepinar, volver al inicio">
       <span class="relative block">
-        <img class="block h-auto w-32 transition-opacity duration-300 sm:w-42" [class.opacity-0]="solid()" [src]="transparentHeaderLogoSrc" alt="Montepinar" />
-        <img class="absolute inset-0 block h-auto w-32 opacity-0 transition-opacity duration-300 sm:w-42" [class.opacity-100]="solid()" [src]="whiteHeaderLogoSrc" alt="" aria-hidden="true" />
+        <img priority width="480" height="160" class="block h-auto w-32 transition-opacity duration-300 sm:w-42" [class.opacity-0]="solid()" [ngSrc]="transparentHeaderLogoSrc" alt="Montepinar" />
+        <img loading="eager" width="480" height="160" class="absolute inset-0 block h-auto w-32 opacity-0 transition-opacity duration-300 sm:w-42" [class.opacity-100]="solid()" [ngSrc]="whiteHeaderLogoSrc" alt="" aria-hidden="true" />
       </span>
     </a>
 
@@ -145,8 +145,8 @@
 
 <ng-template #cardBody let-link>
   <span class="relative block aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[var(--brand-forest-100)]">
-    <img class="size-full object-cover transition-transform duration-500 ease-out group-hover/card:scale-105 motion-reduce:transition-none"
-      [src]="link.image" alt="" loading="lazy" />
+    <img width="800" height="600" class="size-full object-cover transition-transform duration-500 ease-out group-hover/card:scale-105 motion-reduce:transition-none"
+      [ngSrc]="link.image" alt="" />
     <span class="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-white/90 text-[var(--brand-forest-900)] opacity-0 shadow-sm transition-all duration-300 group-hover/card:bg-[var(--brand-primary)] group-hover/card:text-white group-hover/card:opacity-100 group-focus-visible/card:opacity-100 motion-reduce:transition-none">
       <ng-icon name="lucideArrowUpRight" size="16" aria-hidden="true" />
     </span>

@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, computed, DestroyRef, ElementRef, inject, input, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -27,7 +28,7 @@ import { formatSoles, prefersReducedMotion } from '../../utils/reveal';
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
-  imports: [NgIcon, HlmDialogImports],
+  imports: [NgOptimizedImage, NgIcon, HlmDialogImports],
   providers: [
     provideIcons({
       lucideCalendarDays,

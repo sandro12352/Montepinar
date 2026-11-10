@@ -22,7 +22,7 @@
           [class.col-span-2]="tile.grow > 1">
           <button type="button" (click)="open(tile.index, $event)" [attr.aria-label]="'Ampliar foto: ' + tile.photo.alt"
             class="bento-tile group/tile relative block size-full cursor-pointer overflow-hidden rounded-2xl border-0 bg-[var(--brand-forest-800)] p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 sm:rounded-3xl">
-            <img class="size-full object-cover" [src]="tile.photo.src" [alt]="tile.photo.alt" loading="lazy" decoding="async" />
+            <img width="1536" height="1024" class="size-full object-cover" [ngSrc]="tile.photo.src" [alt]="tile.photo.alt" decoding="async" />
             <span aria-hidden="true"
               class="absolute inset-0 bg-gradient-to-t from-[var(--brand-forest-900)]/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover/tile:opacity-100 group-focus-visible/tile:opacity-100 motion-reduce:transition-none"></span>
             <span
@@ -49,7 +49,7 @@
         <ng-icon name="lucideX" size="21" aria-hidden="true" />
       </button>
 
-      <img data-modal-photo style="view-transition-name: gallery-photo" [src]="photo.src" [alt]="photo.alt" class="mx-auto max-h-[76dvh] max-w-full rounded-xl object-contain" />
+      <img width="1536" height="1024" data-modal-photo style="view-transition-name: gallery-photo" [ngSrc]="photo.src" [alt]="photo.alt" class="mx-auto max-h-[76dvh] max-w-full rounded-xl object-contain" />
 
       <div class="flex w-full items-center justify-between gap-4 px-1">
         <p class="m-0 min-w-0 flex-1 text-sm leading-snug text-white/85">{{ photo.alt }}</p>

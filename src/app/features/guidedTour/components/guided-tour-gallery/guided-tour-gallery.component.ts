@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -6,6 +7,7 @@ import { TOUR_PHOTOS } from '../../data/guided-tour.data';
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
+  imports: [NgOptimizedImage],
   selector: 'app-guided-tour-gallery',
   templateUrl: './guided-tour-gallery.component.html',
 })

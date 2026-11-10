@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterRenderEffect, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCalendarDays, lucideUsers } from '@ng-icons/lucide';
@@ -7,7 +8,7 @@ import { LoaderService } from '../../../../core/services/loader.service';
 import { VisitSheetService } from '../../../../core/services/visit-sheet.service';
 
 @Component({
-  imports: [NgIcon, HlmBreadcrumbImports],
+  imports: [NgOptimizedImage, NgIcon, HlmBreadcrumbImports],
   providers: [provideIcons({ lucideCalendarDays, lucideUsers })],
   selector: 'app-team-hero',
   templateUrl: './team-hero.component.html',

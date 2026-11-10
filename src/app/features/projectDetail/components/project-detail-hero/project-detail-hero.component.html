@@ -1,7 +1,7 @@
 <section #root aria-labelledby="detail-hero-title"
   class="relative isolate flex min-h-[clamp(36rem,92vh,60rem)] items-end overflow-hidden bg-[var(--brand-forest-900)] pt-[clamp(8rem,13vw,10.5rem)] text-white">
   <div class="absolute inset-0 -z-20 overflow-hidden" aria-hidden="true">
-    <img data-hero-zoom class="size-full object-cover" [src]="project().image" [alt]="project().imageAlt" fetchpriority="high" />
+    <img priority width="1672" height="941" data-hero-zoom class="size-full object-cover" [ngSrc]="project().image" [alt]="project().imageAlt" />
   </div>
   <span aria-hidden="true"
     class="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgb(3_48_26/0.82)_0%,rgb(3_48_26/0.45)_38%,transparent_70%),linear-gradient(to_top,rgb(3_48_26/0.55)_0%,transparent_32%)]"></span>

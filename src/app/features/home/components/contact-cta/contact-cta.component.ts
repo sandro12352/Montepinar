@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowRight, lucideCalendarDays, lucideCheck, lucideMessageCircle, lucidePhone } from '@ng-icons/lucide';
@@ -13,7 +14,7 @@ const WHATSAPP_NUMBER = '51932284185';
 @Component({
   selector: 'app-contact-cta',
   templateUrl: './contact-cta.component.html',
-  imports: [NgIcon],
+  imports: [NgOptimizedImage, NgIcon],
   providers: [provideIcons({ lucideArrowRight, lucideCalendarDays, lucideCheck, lucideMessageCircle, lucidePhone })],
 })
 export class ContactCtaComponent {

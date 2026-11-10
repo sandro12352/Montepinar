@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterRenderEffect, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBus, lucideCalendarDays, lucideCoffee, lucideFileSignature, lucideLandPlot } from '@ng-icons/lucide';
@@ -10,7 +11,7 @@ import { VisitSheetService } from '../../../../core/services/visit-sheet.service
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
-  imports: [NgIcon, HlmBreadcrumbImports],
+  imports: [NgOptimizedImage, NgIcon, HlmBreadcrumbImports],
   providers: [provideIcons({ lucideBus, lucideCalendarDays, lucideCoffee, lucideFileSignature, lucideLandPlot })],
   selector: 'app-guided-tour-hero',
   templateUrl: './guided-tour-hero.component.html',

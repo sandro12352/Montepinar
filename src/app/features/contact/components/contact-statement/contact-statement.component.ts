@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowRight } from '@ng-icons/lucide';
@@ -8,7 +9,7 @@ import { VisitSheetService } from '../../../../core/services/visit-sheet.service
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
-  imports: [NgIcon],
+  imports: [NgOptimizedImage, NgIcon],
   providers: [provideIcons({ lucideArrowRight })],
   selector: 'app-contact-statement',
   templateUrl: './contact-statement.component.html',

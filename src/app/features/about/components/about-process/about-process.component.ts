@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -13,6 +14,7 @@ interface ProcessStep {
 }
 
 @Component({
+  imports: [NgOptimizedImage],
   selector: 'app-about-process',
   templateUrl: './about-process.component.html',
 })

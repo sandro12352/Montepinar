@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { HlmCarouselImports } from '@spartan-ng/helm/carousel';
 import AutoScroll from 'embla-carousel-auto-scroll';
@@ -21,7 +22,7 @@ interface Testimonial {
 }
 
 @Component({
-  imports: [HlmCarouselImports],
+  imports: [NgOptimizedImage, HlmCarouselImports],
   selector: 'app-testimonials',
   templateUrl: './testimonials.component.html',
 })

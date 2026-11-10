@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterRenderEffect, Component, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { form, FormField, FormRoot, maxLength, minLength, pattern, required, submit, validate } from '@angular/forms/signals';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -54,7 +55,7 @@ const formatLongDate = (date: Date): string =>
 
 @Component({
   selector: 'app-visit-sheet',
-  imports: [
+  imports: [NgOptimizedImage, 
     FormField,
     FormRoot,
     NgIcon,

@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -9,7 +10,7 @@ import { whatsappLink } from '../../../contact/data/contact.data';
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
-  imports: [NgIcon, RouterLink],
+  imports: [NgOptimizedImage, NgIcon, RouterLink],
   providers: [provideIcons({ lucideArrowRight, lucideHouse, lucideMessageCircle, lucideTrees, lucideRoute })],
   selector: 'app-resident-help',
   templateUrl: './resident-help.component.html',

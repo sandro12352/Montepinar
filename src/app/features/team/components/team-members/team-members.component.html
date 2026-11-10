@@ -29,8 +29,8 @@
           @if (member.photos?.length) {
           <div data-front class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[108%] transition-transform duration-500 ease-out group-hover/member:-translate-y-1.5">
             @for (photo of member.photos; track photo; let i = $index) {
-            <img data-photo class="absolute bottom-0 left-1/2 h-full w-auto max-w-180 -translate-x-1/2 object-contain object-bottom"
-              [class.opacity-0]="i > 0" [class.invisible]="i > 0" [src]="photo" [alt]="i === 0 ? member.name : ''" loading="lazy" />
+            <img width="1536" height="1024" data-photo class="absolute bottom-0 left-1/2 h-full w-auto max-w-180 -translate-x-1/2 object-contain object-bottom"
+              [class.opacity-0]="i > 0" [class.invisible]="i > 0" [ngSrc]="photo" [alt]="i === 0 ? member.name : ''" />
             }
           </div>
           } @else {

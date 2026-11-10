@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import {
   afterNextRender,
   Component,
@@ -31,7 +32,7 @@ interface Scene {
 }
 
 @Component({
-  imports: [NgIcon],
+  imports: [NgOptimizedImage, NgIcon],
   providers: [
     provideIcons({ lucideChevronLeft, lucideChevronRight, lucideHand, lucideMapPin, lucideRotate3d, lucideX }),
   ],

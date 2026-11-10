@@ -20,8 +20,8 @@
       @for (slide of slides; track slide.eyebrow; let i = $index) {
       <article data-panel tabindex="0" (mouseenter)="activate(i)" (focus)="activate(i)" [attr.data-active]="active() === i"
         class="group/panel relative isolate flex min-h-[32rem] flex-col justify-end overflow-hidden rounded-[2rem] bg-[var(--brand-forest-800)] text-white outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 lg:min-h-0 lg:min-w-0 lg:flex-1">
-        <img class="absolute inset-0 -z-20 size-full object-cover transition-transform duration-[1200ms] ease-out group-hover/panel:scale-105 motion-reduce:transition-none"
-          [src]="slide.image" [alt]="slide.imageAlt" loading="lazy" />
+        <img width="1600" height="1000" class="absolute inset-0 -z-20 size-full object-cover transition-transform duration-[1200ms] ease-out group-hover/panel:scale-105 motion-reduce:transition-none"
+          [ngSrc]="slide.image" [alt]="slide.imageAlt" />
         <span aria-hidden="true"
           class="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgb(3_48_26/0.92)_0%,rgb(3_48_26/0.55)_45%,transparent_80%)]"></span>
 

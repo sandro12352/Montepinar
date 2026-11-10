@@ -25,16 +25,16 @@
       <!-- Imágenes -->
       <div class="mt-8 grid h-[clamp(18rem,40vw,30rem)] grid-cols-[1.9fr_1fr] grid-rows-2 gap-3">
         <figure data-tile class="group/tile relative row-span-2 m-0 overflow-hidden rounded-2xl bg-[var(--brand-forest-800)]">
-          <img class="size-full object-cover transition-transform duration-700 ease-out group-hover/tile:scale-105 motion-reduce:transition-none"
-            [src]="project().gallery[0].src" [alt]="project().gallery[0].alt" loading="eager" />
+          <img width="1600" height="1000" class="size-full object-cover transition-transform duration-700 ease-out group-hover/tile:scale-105 motion-reduce:transition-none"
+            [ngSrc]="project().gallery[0].src" [alt]="project().gallery[0].alt" loading="eager" />
         </figure>
         <figure data-tile class="group/tile relative m-0 overflow-hidden rounded-2xl bg-[var(--brand-forest-800)]">
-          <img class="size-full object-cover transition-transform duration-700 ease-out group-hover/tile:scale-105 motion-reduce:transition-none"
-            [src]="project().gallery[1].src" [alt]="project().gallery[1].alt" loading="lazy" />
+          <img width="1600" height="1000" class="size-full object-cover transition-transform duration-700 ease-out group-hover/tile:scale-105 motion-reduce:transition-none"
+            [ngSrc]="project().gallery[1].src" [alt]="project().gallery[1].alt" />
         </figure>
         <figure data-tile class="group/tile relative m-0 overflow-hidden rounded-2xl bg-[var(--brand-forest-800)]">
-          <img class="size-full object-cover transition-transform duration-700 ease-out group-hover/tile:scale-105 motion-reduce:transition-none"
-            [src]="project().gallery[2].src" [alt]="project().gallery[2].alt" loading="lazy" />
+          <img width="1600" height="1000" class="size-full object-cover transition-transform duration-700 ease-out group-hover/tile:scale-105 motion-reduce:transition-none"
+            [ngSrc]="project().gallery[2].src" [alt]="project().gallery[2].alt" />
 
           <hlm-dialog>
             <button hlmDialogTrigger type="button"
@@ -52,7 +52,7 @@
               <div class="mt-4 grid gap-3 sm:grid-cols-2">
                 @for (photo of project().gallery; track photo.src) {
                 <figure class="m-0 overflow-hidden rounded-xl">
-                  <img class="aspect-[4/3] w-full object-cover" [src]="photo.src" [alt]="photo.alt" loading="lazy" />
+                  <img width="1600" height="1000" class="aspect-[4/3] w-full object-cover" [ngSrc]="photo.src" [alt]="photo.alt" />
                 </figure>
                 }
               </div>
@@ -135,7 +135,7 @@
 
       <div data-aside class="rounded-3xl border border-[var(--brand-forest-900)]/12 bg-white p-6">
         <div class="flex items-center gap-4">
-          <img class="size-14 rounded-full bg-[var(--brand-forest-100)] object-cover object-top" src="/images/equipo/hillma-machuca-2.webp" alt="Hillma Machuca Díaz, asesora de Montepinar" width="56" height="56" loading="lazy" />
+          <img class="size-14 rounded-full bg-[var(--brand-forest-100)] object-cover object-top" ngSrc="/images/equipo/hillma-machuca-2.webp" alt="Hillma Machuca Díaz, asesora de Montepinar" width="56" height="56" />
           <div>
             <p class="m-0 text-base font-extrabold text-[var(--brand-forest-900)]">Tu asesor Montepinar</p>
             <p class="m-0 text-sm text-[#1f1a14]/55">Atención personalizada</p>

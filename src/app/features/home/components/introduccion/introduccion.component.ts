@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -9,7 +10,7 @@ import { VisitSheetService } from '../../../../core/services/visit-sheet.service
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
-  imports: [NgIcon, RouterLink],
+  imports: [NgOptimizedImage, NgIcon, RouterLink],
   providers: [provideIcons({ lucideArrowRight, lucideCalendarDays, lucideCar, lucideScale, lucideShieldCheck, lucideWallet })],
   selector: 'app-introduccion',
   templateUrl: './introduccion.component.html',

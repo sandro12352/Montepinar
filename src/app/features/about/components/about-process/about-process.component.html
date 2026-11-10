@@ -20,7 +20,7 @@
         <div class="sticky top-28">
           <div class="relative aspect-[3/2] overflow-hidden rounded-[2rem] bg-[var(--brand-forest-800)] shadow-2xl shadow-[var(--brand-forest-900)]/20">
             @for (step of steps; track step.number; let i = $index) {
-            <img data-frame class="absolute inset-0 size-full object-cover" [src]="step.image" [alt]="step.imageAlt"
+            <img width="1536" height="1024" data-frame class="absolute inset-0 size-full object-cover" [ngSrc]="step.image" [alt]="step.imageAlt"
               [loading]="i === 0 ? 'eager' : 'lazy'" />
             }
           </div>
@@ -43,7 +43,7 @@
             </span>
 
             <figure data-step-item class="m-0 mb-5 aspect-[16/10] overflow-hidden rounded-3xl bg-[var(--brand-forest-800)] lg:hidden">
-              <img class="size-full object-cover" [src]="step.image" [alt]="step.imageAlt" loading="lazy" />
+              <img width="1536" height="1024" class="size-full object-cover" [ngSrc]="step.image" [alt]="step.imageAlt" />
             </figure>
 
             <p data-step-item class="m-0 text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--brand-tertiary)]">Paso {{ step.number }}</p>

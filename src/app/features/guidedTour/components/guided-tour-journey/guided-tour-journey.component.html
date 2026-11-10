@@ -37,10 +37,10 @@
         <!-- Arco con la foto -->
         <div class="relative aspect-[4/3] w-full max-w-[30rem] shrink-0 overflow-hidden rounded-[1.5rem] rounded-tl-[5rem] bg-[var(--brand-forest-800)] ring-1 ring-white/15 sm:w-[24rem] lg:w-[30rem]">
           @if (step.contain) {
-          <img class="absolute inset-0 size-full object-contain object-center p-3" [src]="step.image" [alt]="step.imageAlt" loading="lazy" />
+          <img width="1536" height="1024" class="absolute inset-0 size-full object-contain object-center p-3" [ngSrc]="step.image" [alt]="step.imageAlt" />
           } @else {
-          <img data-parallax class="absolute -inset-x-[12%] inset-y-0 h-full w-[124%] max-w-none object-cover" [src]="step.image" [alt]="step.imageAlt"
-            [style.object-position]="step.position ?? '50% 50%'" loading="lazy" />
+          <img width="1536" height="1024" data-parallax class="absolute -inset-x-[12%] inset-y-0 h-full w-[124%] max-w-none object-cover" [ngSrc]="step.image" [alt]="step.imageAlt"
+            [style.object-position]="step.position ?? '50% 50%'" />
           }
           <span aria-hidden="true" class="absolute inset-0 bg-gradient-to-t from-[var(--brand-forest-900)]/50 via-transparent to-transparent"></span>
         </div>

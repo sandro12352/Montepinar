@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterRenderEffect, Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -28,7 +29,7 @@ gsap.registerPlugin(ScrollTrigger);
 type StatusFilter = 'Todos' | ProjectItem['status'];
 
 @Component({
-  imports: [NgIcon, RouterLink],
+  imports: [NgOptimizedImage, NgIcon, RouterLink],
   providers: [
     provideIcons({
       lucideArrowUpRight,

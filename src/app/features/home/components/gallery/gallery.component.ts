@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, effect, inject, signal, viewChild, viewChildren } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronLeft, lucideChevronRight, lucideExpand, lucideX } from '@ng-icons/lucide';
@@ -13,7 +14,7 @@ interface GalleryImage {
 }
 
 @Component({
-  imports: [HlmCarouselImports, NgIcon],
+  imports: [NgOptimizedImage, HlmCarouselImports, NgIcon],
   providers: [provideIcons({ lucideChevronLeft, lucideChevronRight, lucideExpand, lucideX })],
   selector: 'app-gallery',
   styleUrl: './gallery.component.css',

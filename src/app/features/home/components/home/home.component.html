@@ -83,10 +83,34 @@
     </div>
   </div>
 </section>
+@defer (hydrate on viewport({ rootMargin: '500px' })) {
 <app-gallery></app-gallery>
+} @placeholder {
+<div class="min-h-[60dvh]"></div>
+}
 
+@defer (hydrate on viewport({ rootMargin: '500px' })) {
 <app-team-members></app-team-members>
+} @placeholder {
+<div class="min-h-[60dvh]"></div>
+}
+@defer (hydrate on viewport({ rootMargin: '500px' })) {
 <app-faq></app-faq>
+} @placeholder {
+<div class="min-h-[60dvh]"></div>
+}
+@defer (hydrate on viewport({ rootMargin: '500px' })) {
 <app-resident-help></app-resident-help>
+} @placeholder {
+<div class="min-h-[60dvh]"></div>
+}
+@defer (hydrate on viewport({ rootMargin: '500px' })) {
 <app-testimonials></app-testimonials>
+} @placeholder {
+<div class="min-h-[60dvh]"></div>
+}
+@defer (hydrate on viewport({ rootMargin: '500px' })) {
 <app-contact-cta></app-contact-cta>
+} @placeholder {
+<div class="min-h-[60dvh]"></div>
+}

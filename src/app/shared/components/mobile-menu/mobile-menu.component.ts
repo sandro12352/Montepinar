@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Overlay } from '@angular/cdk/overlay';
 import { Component, DestroyRef, inject, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -17,7 +18,7 @@ import { SocialLinksComponent } from '../social-links/social-links.component';
 const SHEET_CLOSE_MS = 350;
 
 @Component({
-  imports: [HlmAccordionImports, HlmSheetImports, NgIcon, RouterLink, RouterLinkActive, SocialLinksComponent],
+  imports: [NgOptimizedImage, HlmAccordionImports, HlmSheetImports, NgIcon, RouterLink, RouterLinkActive, SocialLinksComponent],
   providers: [provideIcons({ lucideArrowRight, lucideArrowUpRight, lucideCalendarDays })],
   selector: 'app-mobile-menu',
   templateUrl: './mobile-menu.component.html',

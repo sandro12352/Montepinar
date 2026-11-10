@@ -114,7 +114,7 @@
       <div class="relative min-w-0">
         @for (project of projects; track project.slug; let i = $index) {
         <figure data-slide class="absolute inset-0 m-0 overflow-hidden rounded-[2rem] bg-[var(--brand-forest-800)] shadow-2xl shadow-[var(--brand-forest-900)]/20">
-          <img data-slide-img class="absolute inset-0 size-full object-cover" [src]="project.image" [alt]="project.imageAlt"
+          <img width="1600" height="1200" data-slide-img class="absolute inset-0 size-full object-cover" [ngSrc]="project.image" [alt]="project.imageAlt"
             [loading]="i === 0 ? 'eager' : 'lazy'" />
           <span aria-hidden="true" class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/30 to-transparent"></span>
           <span
@@ -134,8 +134,8 @@
       @for (project of projects; track project.slug; let i = $index) {
       <article data-item class="grid gap-6 lg:grid-cols-2">
         <figure data-item-media class="relative m-0 aspect-[4/3] overflow-hidden rounded-3xl bg-[var(--brand-forest-800)]">
-          <img data-item-img class="absolute inset-0 -top-[6%] h-[112%] w-full object-cover" [src]="project.image" [alt]="project.imageAlt"
-            loading="lazy" />
+          <img width="1600" height="1200" data-item-img class="absolute inset-0 -top-[6%] h-[112%] w-full object-cover" [ngSrc]="project.image" [alt]="project.imageAlt"
+            />
           <span
             class="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-[0.65rem] font-extrabold uppercase tracking-[0.14em] text-[var(--brand-forest-900)]">
             <span class="size-1.5 rounded-full"

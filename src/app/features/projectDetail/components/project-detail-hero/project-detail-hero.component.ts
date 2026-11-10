@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, input, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { HlmBreadcrumbImports } from '@spartan-ng/helm/breadcrumb';
@@ -9,7 +10,7 @@ import { ProjectDetail } from '../../data/project-detail.data';
 import { formatSoles, prefersReducedMotion } from '../../utils/reveal';
 
 @Component({
-  imports: [NgIcon, HlmBreadcrumbImports],
+  imports: [NgOptimizedImage, NgIcon, HlmBreadcrumbImports],
   providers: [provideIcons({ lucideCalendarDays, lucideMessageCircle })],
   selector: 'app-project-detail-hero',
   templateUrl: './project-detail-hero.component.html',

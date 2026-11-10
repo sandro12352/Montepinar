@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterRenderEffect, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowDown, lucideArrowRight, lucideCalendarDays, lucideMessageCircle } from '@ng-icons/lucide';
@@ -8,7 +9,7 @@ import { whatsappLink } from '../../../contact/data/contact.data';
 import { PROJECTS } from '../../data/projects.data';
 
 @Component({
-  imports: [NgIcon],
+  imports: [NgOptimizedImage, NgIcon],
   providers: [provideIcons({ lucideArrowDown, lucideArrowRight, lucideCalendarDays, lucideMessageCircle })],
   selector: 'app-projects-hero',
   templateUrl: './projects-hero.component.html',

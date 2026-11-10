@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBus, lucideCoffee, lucideFileSignature, lucideLandPlot, lucideMapPin, lucideMic, lucideUndo2 } from '@ng-icons/lucide';
@@ -8,7 +9,7 @@ import { TOUR_STEPS } from '../../data/guided-tour.data';
 gsap.registerPlugin(ScrollTrigger);
 
 @Component({
-  imports: [NgIcon],
+  imports: [NgOptimizedImage, NgIcon],
   providers: [provideIcons({ lucideBus, lucideCoffee, lucideFileSignature, lucideLandPlot, lucideMapPin, lucideMic, lucideUndo2 })],
   selector: 'app-guided-tour-journey',
   templateUrl: './guided-tour-journey.component.html',

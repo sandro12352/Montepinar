@@ -7,7 +7,7 @@
       <hlm-sheet-header class="gap-0 p-0 text-left">
         <a routerLink="/" (click)="onNavigate()" aria-label="Montepinar, volver al inicio"
           class="inline-flex w-fit rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-4">
-          <img class="block h-auto w-36" width="500" height="155" src="/images/logo.webp" alt="Montepinar" />
+          <img class="block h-auto w-36" width="500" height="155" ngSrc="/images/logo.webp" alt="Montepinar" />
         </a>
         <h2 hlmSheetTitle class="sr-only">Menú de navegación</h2>
         <p hlmSheetDescription class="sr-only">Enlaces a las secciones principales de Montepinar.</p>
@@ -30,7 +30,7 @@
                 <li>
                   <a [routerLink]="link.path" [fragment]="link.fragment" (click)="onNavigate()"
                     class="flex items-center gap-3 rounded-xl p-2 !text-inherit !no-underline transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]">
-                    <img class="size-12 shrink-0 rounded-lg object-cover" [src]="link.image" alt="" loading="lazy" />
+                    <img width="96" height="96" class="size-12 shrink-0 rounded-lg object-cover" [ngSrc]="link.image" alt="" />
                     <span class="min-w-0 leading-tight">
                       <span class="block text-base font-extrabold">{{ link.label }}</span>
                       <span class="mt-0.5 block truncate text-xs text-[#1f1a14]/60">{{ link.description }}</span>

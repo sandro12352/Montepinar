@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterRenderEffect, Component, computed, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -12,7 +13,7 @@ import { MobileMenuComponent } from '../mobile-menu/mobile-menu.component';
 import { NAVIGATION_ITEMS, NavigationAction } from './navigation.data';
 
 @Component({
-  imports: [NgIcon, NgTemplateOutlet, RouterLink, RouterLinkActive, VisitSheetComponent, MobileMenuComponent],
+  imports: [NgOptimizedImage, NgIcon, NgTemplateOutlet, RouterLink, RouterLinkActive, VisitSheetComponent, MobileMenuComponent],
   providers: [provideIcons({ lucideArrowRight, lucideChevronDown, lucideChevronRight, lucideArrowUpRight })],
   selector: 'app-header',
   templateUrl: './header.component.html',

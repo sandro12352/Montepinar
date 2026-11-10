@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterRenderEffect, ApplicationRef, Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronLeft, lucideChevronRight, lucideMaximize2, lucideX } from '@ng-icons/lucide';
@@ -34,7 +35,7 @@ const CATEGORY_LABEL: Record<GalleryCategory, string> = {
 };
 
 @Component({
-  imports: [NgIcon],
+  imports: [NgOptimizedImage, NgIcon],
   providers: [provideIcons({ lucideChevronLeft, lucideChevronRight, lucideMaximize2, lucideX })],
   selector: 'app-gallery-grid',
   styleUrl: './gallery-grid.component.css',

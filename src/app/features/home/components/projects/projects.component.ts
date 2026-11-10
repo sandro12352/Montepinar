@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -33,7 +34,7 @@ const PROJECT_STOPS = [0.4, 1.7, 3.0];
 @Component({
   selector: 'app-home-projects',
   templateUrl: './projects.component.html',
-  imports: [NgIcon, RouterLink],
+  imports: [NgOptimizedImage, NgIcon, RouterLink],
   providers: [
     provideIcons({
       lucideArrowRight,

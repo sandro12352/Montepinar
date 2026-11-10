@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, afterRenderEffect, Component, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -32,7 +33,7 @@ interface PurposeSlide {
 }
 
 @Component({
-  imports: [NgIcon],
+  imports: [NgOptimizedImage, NgIcon],
   providers: [
     provideIcons({ lucideCompass, lucideEye, lucideFileCheck, lucideHandshake, lucideHouse, lucideScale, lucideSprout, lucideTrees, lucideUsers }),
   ],

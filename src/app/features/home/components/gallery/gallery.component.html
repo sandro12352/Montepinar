@@ -27,9 +27,9 @@
             <button type="button" data-gallery-card
               class="group relative isolate block aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl bg-[#ded8cd] text-left shadow-[0_10px_24px_rgb(73_54_34_/_12%)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--brand-primary)]"
               [attr.aria-label]="'Ampliar imagen: ' + image.alt" (click)="openImage(index)">
-              <img data-gallery-image
+              <img width="1400" height="800" data-gallery-image
                 class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.07] group-focus-visible:scale-[1.07] motion-reduce:transition-none"
-                [src]="image.src" [alt]="image.alt" loading="lazy" />
+                [ngSrc]="image.src" [alt]="image.alt" />
 
               <!-- Degradado inferior: se intensifica al pasar el mouse -->
               <span aria-hidden="true"
@@ -85,7 +85,7 @@
         <hlm-carousel-content class="-ml-0">
           @for (image of images; track $index) {
           <hlm-carousel-item class="basis-full pl-0">
-            <img data-dialog-image class="mx-auto max-h-[76dvh] max-w-full rounded-xl object-contain" [src]="image.src"
+            <img width="1400" height="800" data-dialog-image class="mx-auto max-h-[76dvh] max-w-full rounded-xl object-contain" [ngSrc]="image.src"
               [alt]="image.alt" />
           </hlm-carousel-item>
           }

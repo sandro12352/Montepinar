@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMessageCircle, lucidePhone } from '@ng-icons/lucide';
@@ -18,7 +19,7 @@ interface FooterColumn {
 }
 
 @Component({
-  imports: [NgIcon, SocialLinksComponent],
+  imports: [NgOptimizedImage, NgIcon, SocialLinksComponent],
   providers: [provideIcons({ lucideMessageCircle, lucidePhone })],
   selector: 'app-footer',
   styleUrl: './footer.component.css',
