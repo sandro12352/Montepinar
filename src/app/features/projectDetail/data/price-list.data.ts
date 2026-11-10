@@ -273,12 +273,12 @@ export const PALMERAS_SECTORS: readonly PriceSector[] = [
 /**
  * Asociación de Vivienda Montepinar · Valor de adjudicación, lista del 25/05/2026.
  * Fuente: PDF "PRECIO 3RA Y 4TA", "PRECIO 5TA, 6TA Y 4TA SECTOR 2" y "PRECIO 7MA, 8VA Y 9NA".
- * El PDF no indica el sector de las etapas 7 a 9, por eso se agrupan bajo su propio nombre.
+ * El Sector II es solo la 4.ª etapa de lotes de 120 m²; las demás etapas pertenecen al Sector I.
  */
 export const HUARAL_SECTORS: readonly PriceSector[] = [
   {
     name: 'Sector I',
-    areas: '200 m²',
+    areas: '160 y 200 m²',
     stages: [
       {
         label: 'Etapa 3',
@@ -310,28 +310,6 @@ export const HUARAL_SECTORS: readonly PriceSector[] = [
               row('Frente a Av. secundaria', 50000, 55000, 17200, 900, 42),
               row('Esquina Av. secundaria', 55000, 60000, 20100, 950, 42),
               row('Frente a Av. principal', 58000, 63000, 23100, 950, 42),
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    name: 'Sector II',
-    areas: '120 y 160 m²',
-    stages: [
-      {
-        label: 'Etapa 4',
-        groups: [
-          {
-            area: 120,
-            rows: [
-              row('Lote interior', 18000, 20000, 4600, 700, 22),
-              row('Esquina interior', 22000, 27000, 10800, 700, 24),
-              row('Frente a parque y colegio', 23000, 28000, 9800, 700, 26),
-              row('Esquina parque y colegio', 24000, 29000, 10800, 700, 26),
-              row('Frente a Av. secundaria', 25000, 30000, 9400, 700, 28),
-              row('Esquina Av. secundaria', 26000, 31000, 11400, 700, 28),
             ],
           },
         ],
@@ -371,12 +349,6 @@ export const HUARAL_SECTORS: readonly PriceSector[] = [
           },
         ],
       },
-    ],
-  },
-  {
-    name: 'Etapas 7 a 9',
-    areas: '160 m²',
-    stages: [
       {
         label: 'Etapa 7',
         groups: [
@@ -425,6 +397,54 @@ export const HUARAL_SECTORS: readonly PriceSector[] = [
               row('Frente a Av. secundaria', 27000, 32000, 12400, 700, 28),
               row('Esquina Av. secundaria', 28000, 33000, 13400, 700, 28),
               row('Frente a Av. principal', 31000, 36000, 13500, 750, 30),
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Sector II',
+    areas: '120 m²',
+    stages: [
+      {
+        label: 'Etapa 4',
+        groups: [
+          {
+            area: 120,
+            rows: [
+              row('Lote interior', 18000, 20000, 4600, 700, 22),
+              row('Esquina interior', 22000, 27000, 10800, 700, 24),
+              row('Frente a parque y colegio', 23000, 28000, 9800, 700, 26),
+              row('Esquina parque y colegio', 24000, 29000, 10800, 700, 26),
+              row('Frente a Av. secundaria', 25000, 30000, 9400, 700, 28),
+              row('Esquina Av. secundaria', 26000, 31000, 11400, 700, 28),
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
+
+/**
+ * Amazon Lodge Montepinar (Iquitos) · Lotes de 450 m².
+ * Fuente: PDF "PRECIOS - IQUITOS". El valor incluye memoria descriptiva y título notarial por acciones y derechos.
+ */
+export const IQUITOS_SECTORS: readonly PriceSector[] = [
+  {
+    name: 'Amazon Lodge',
+    areas: '450 m²',
+    stages: [
+      {
+        label: 'Lotes de 450 m²',
+        groups: [
+          {
+            area: 450,
+            rows: [
+              row('Mz A, Mz B y Mz C', 25000, 30000, 6200, 700, 34),
+              row('Mz C · Lote 01', 28000, 33000, 7400, 800, 34),
+              row('Mz B · Lote 12', 28000, 33000, 7400, 800, 34),
             ],
           },
         ],

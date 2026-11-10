@@ -54,7 +54,7 @@ export class Vision360Component {
       id: 'chancay',
       label: 'Chancay',
       description: 'Costa emergente con vistas abiertas al mar.',
-      image: '/images/PalmerasdeMontepinar.png',
+      image: '/images/PalmerasdeMontepinar.webp',
     },
     {
       id: 'huaral',

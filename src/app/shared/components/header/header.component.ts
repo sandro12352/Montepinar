@@ -25,7 +25,7 @@ export class HeaderComponent {
   private visitSheet = inject(VisitSheetService);
 
   // Cambia estas rutas para elegir el logo de cada estado del header.
-  protected readonly transparentHeaderLogoSrc = '/images/LogotipoBlanco.png';
+  protected readonly transparentHeaderLogoSrc = '/images/LogotipoBlanco.webp';
   protected readonly whiteHeaderLogoSrc = '/images/logo.webp';
 
   private readonly loaderService = inject(LoaderService);

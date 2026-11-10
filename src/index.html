@@ -7,6 +7,10 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="favicon.png">
+  <!-- Fuente principal y primera imagen del banner: se piden de inmediato (la imagen según la orientación). -->
+  <link rel="preload" href="/fonts/urbanist-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/images/carousel/slide1-mobile.webp" media="(max-aspect-ratio: 3/4)" fetchpriority="high">
+  <link rel="preload" as="image" href="/images/carousel/slide1.webp" media="not all and (max-aspect-ratio: 3/4)" fetchpriority="high">
   <!-- Estilos del loader inline: así cubre toda la pantalla desde el primer frame,
        sin depender de que styles.css ya se haya cargado. -->
   <style>
@@ -58,7 +62,7 @@
       opacity: 0;
       transform-box: fill-box;
       transform-origin: center bottom;
-      animation: loader-drop .55s cubic-bezier(.34, 1.4, .64, 1) var(--d) forwards;
+      animation: loader-drop .35s cubic-bezier(.34, 1.4, .64, 1) calc(var(--d) * .45) forwards;
     }
     
     #app-loader .loader-meta {
@@ -84,7 +88,7 @@
       opacity: 0;
       transform: translateY(.5em);
       will-change: transform, opacity;
-      animation: loader-letter .45s cubic-bezier(.22, 1, .36, 1) calc(.3s + var(--i) * .17s) forwards;
+      animation: loader-letter .3s cubic-bezier(.22, 1, .36, 1) calc(.15s + var(--i) * .07s) forwards;
     }
     
     #app-loader .loader-count {
@@ -96,7 +100,7 @@
       /* Con steps() el número se actualiza ~25 veces en vez de en cada frame: cada cambio
          del contador fuerza estilo+layout en el hilo principal, que en móvil ya está
          ocupado arrancando Angular. */
-      animation: loader-count 2.62s steps(25, end) forwards;
+      animation: loader-count 1.2s steps(25, end) forwards;
       contain: layout paint style;
       min-width: 4ch;
       text-align: center;

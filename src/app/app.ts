@@ -38,7 +38,7 @@ export class App {
             ? res()
             : window.addEventListener('load', () => res(), { once: true })
         ),
-        new Promise<void>(res => setTimeout(res, 2920)), // tiempo mínimo del loader
+        new Promise<void>(res => setTimeout(res, 1300)), // tiempo mínimo del loader (que termine la animación)
       ]);
       this.loader.hide();
     })

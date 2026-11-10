@@ -1,5 +1,5 @@
 import { PROJECTS, ProjectItem } from '../../projects/data/projects.data';
-import { HUARAL_SECTORS, PALMERAS_SECTORS, PriceRow, PriceSector } from './price-list.data';
+import { HUARAL_SECTORS, IQUITOS_SECTORS, PALMERAS_SECTORS, PriceRow, PriceSector } from './price-list.data';
 
 export interface LotPlan {
   readonly name: string;
@@ -10,6 +10,8 @@ export interface LotPlan {
   readonly tag?: string;
   /** Línea extra bajo el precio (financiamiento, ubicación exacta, etc.). */
   readonly detail?: string;
+  /** Posición de la fila real de la lista de precios que representa este lote (para el simulador). */
+  readonly pick?: { readonly sector: number; readonly stage: number; readonly group: number; readonly row: number };
 }
 
 export interface Amenity {
@@ -57,6 +59,10 @@ export interface ProjectDetail extends ProjectItem {
   readonly priceListName?: string;
   /** Nota al pie de la sección de lotes. */
   readonly priceListNote?: string;
+  /** Texto bajo el título de la sección de lotes (si no, se usa el genérico de Interior, Parque y Avenida). */
+  readonly plansIntro?: string;
+  /** Dibuja la vía y las zonas comunes (áreas verdes, club) junto a los lotes del esquema. */
+  readonly mapZones?: boolean;
 }
 
 type ProjectExtra = Omit<ProjectDetail, keyof ProjectItem>;
@@ -96,10 +102,12 @@ const areaRange = (min: number, max: number): string => (min === max ? `${fmt(mi
 
 /** El lote más económico de la lista que cumple el criterio, y el rango de áreas donde existe. */
 function cheapest(sectors: readonly PriceSector[], match: (row: PriceRow) => boolean) {
-  const hits = sectors.flatMap((sector) =>
-    sector.stages.flatMap((stage) =>
-      stage.groups.flatMap((group) =>
-        group.rows.filter(match).map((row) => ({ row, area: group.area, where: `${sector.name} · ${stage.label}` })),
+  const hits = sectors.flatMap((sector, si) =>
+    sector.stages.flatMap((stage, ti) =>
+      stage.groups.flatMap((group, gi) =>
+        group.rows
+          .map((row, ri) => ({ row, area: group.area, where: `${sector.name} · ${stage.label}`, pick: { sector: si, stage: ti, group: gi, row: ri } }))
+          .filter((hit) => match(hit.row)),
       ),
     ),
   );
@@ -111,7 +119,7 @@ function cheapest(sectors: readonly PriceSector[], match: (row: PriceRow) => boo
 /** Interior, Parque y Avenida con los precios "desde" reales de la lista de precios. */
 function plansFromSectors(sectors: readonly PriceSector[]): readonly LotPlan[] {
   const build = (name: string, description: (range: string) => string, match: (row: PriceRow) => boolean, tag?: string): LotPlan => {
-    const { row, area, where, range } = cheapest(sectors, match);
+    const { row, area, where, range, pick } = cheapest(sectors, match);
     return {
       name,
       area,
@@ -119,6 +127,7 @@ function plansFromSectors(sectors: readonly PriceSector[]): readonly LotPlan[] {
       frontage: where,
       description: description(range),
       tag,
+      pick,
       detail: `${row.location} · financiado S/ ${fmt(row.financed)}, inicial S/ ${fmt(row.initial)} y ${row.months} cuotas de S/ ${fmt(row.installment)}`,
     };
   };
@@ -128,6 +137,25 @@ function plansFromSectors(sectors: readonly PriceSector[]): readonly LotPlan[] {
     build('Parque', (range) => `Frente al parque, lotes ${range}: ideales para disfrutar del aire libre en familia.`, (row) => /^Frente a .*parque/i.test(row.location)),
     build('Avenida', (range) => `Frente a la avenida principal, lotes ${range}: fácil acceso y mayor visibilidad.`, (row) => row.location.startsWith('Frente a Av. principal')),
   ];
+}
+
+/** Un lote por cada fila de la lista de precios, para proyectos cuyas ubicaciones no son interior, parque y avenida. */
+function plansFromRows(sectors: readonly PriceSector[], describe: (row: PriceRow) => { description: string; tag?: string }): readonly LotPlan[] {
+  return sectors.flatMap((sector, si) =>
+    sector.stages.flatMap((stage, ti) =>
+      stage.groups.flatMap((group, gi) =>
+        group.rows.map((row, ri) => ({
+          name: row.location,
+          area: group.area,
+          price: row.cash,
+          frontage: `${sector.name} · ${stage.label}`,
+          ...describe(row),
+          detail: `financiado S/ ${fmt(row.financed)}, inicial S/ ${fmt(row.initial)} y ${row.months} cuotas de S/ ${fmt(row.installment)}`,
+          pick: { sector: si, stage: ti, group: gi, row: ri },
+        })),
+      ),
+    ),
+  );
 }
 
 const EXTRA: Record<string, ProjectExtra> = {
@@ -148,7 +176,7 @@ const EXTRA: Record<string, ProjectExtra> = {
       { icon: 'lucideZap', label: 'Servicios básicos', text: 'Accesos y servicios planificados hasta tu lote.' },
     ],
     gallery: [
-      { src: '/images/PalmerasdeMontepinar.png', alt: 'Ingreso principal de Montepinar' },
+      { src: '/images/PalmerasdeMontepinar.webp', alt: 'Ingreso principal de Montepinar' },
       { src: '/images/entrada.webp', alt: 'Entrada al proyecto' },
       { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
       { src: '/images/carousel/entrada-palmeras.webp', alt: 'Vista del entorno' },
@@ -157,6 +185,7 @@ const EXTRA: Record<string, ProjectExtra> = {
     plans: plansFromSectors(PALMERAS_SECTORS),
     sectors: PALMERAS_SECTORS,
     dossier: '/documents/chancay/lista-de-precios-2026.pdf',
+    mapZones: true,
     priceListName: 'lista de precios 2026',
     priceListNote: 'Lista de precios 2026, en soles. Esquema no oficial y sin escala; ubicación referencial según el plano de lotización 1/500. Sujeto a disponibilidad y a la validación del equipo comercial.',
     address: 'Distrito de Chancay, provincia de Huaral, Lima',
@@ -188,7 +217,7 @@ const EXTRA: Record<string, ProjectExtra> = {
     gallery: [
       { src: '/images/AsociacionMontepinar.webp', alt: 'Vista aérea de las áreas deportivas' },
       { src: '/images/carousel/slide3.webp', alt: 'Áreas comunes' },
-      { src: '/images/Entrada%20Montepinar%20entre%20jardines%20y%20banderas.png', alt: 'Entrada entre jardines' },
+      { src: '/images/Entrada%20Montepinar%20entre%20jardines%20y%20banderas.webp', alt: 'Entrada entre jardines' },
       { src: '/images/carousel/entrada-palmeras.webp', alt: 'Vista del entorno' },
       { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
     ],
@@ -212,10 +241,10 @@ const EXTRA: Record<string, ProjectExtra> = {
     overview:
       'Amazon Lodge Montepinar es un proyecto eco-residencial con lotes generosos, laguna privada y bosque protegido. Un lugar para vivir cerca de la naturaleza con energía limpia y una comunidad que crece contigo.',
     facts: [
-      { value: '500 m²', label: 'Lote mínimo' },
+      { value: '450 m²', label: 'Lote mínimo' },
       { value: '1', label: 'Laguna privada' },
       { value: '100%', label: 'Eco-energía' },
-      { value: '60', label: 'Meses para pagar' },
+      { value: '34', label: 'Cuotas máximas' },
     ],
     amenities: [
       { icon: 'lucideWaves', label: 'Laguna privada', text: 'Un espejo de agua para el descanso y la recreación.' },
@@ -230,11 +259,15 @@ const EXTRA: Record<string, ProjectExtra> = {
       { src: '/images/gallery/presentacion.webp', alt: 'Presentación del proyecto' },
       { src: '/images/carousel/entrada-palmeras.webp', alt: 'Vista del entorno' },
     ],
-    plans: [
-      { name: 'Interior', area: 500, price: 18000, frontage: '15 × 33 m', description: 'Ubicado en el interior del proyecto: tranquilo, resguardado y listo para construir.', tag: 'Más accesible' },
-      { name: 'Parque', area: 800, price: 28800, frontage: '20 × 40 m', description: 'Frente a las áreas verdes, ideal para disfrutar del aire libre en familia.', tag: 'Más elegido' },
-      { name: 'Avenida', area: 1200, price: 43200, frontage: '30 × 40 m', description: 'Frente a la avenida principal: fácil acceso y mayor visibilidad.' },
-    ],
+    plans: plansFromRows(IQUITOS_SECTORS, (row) =>
+      row.location.startsWith('Mz A')
+        ? { description: 'Lotes de 450 m² en las manzanas A, B y C: el precio más accesible del proyecto.', tag: 'Más accesible' }
+        : { description: `${row.location}, de 450 m².` },
+    ),
+    sectors: IQUITOS_SECTORS,
+    plansIntro: 'Lotes de 450 m² con el precio de la lista de Iquitos: contado, financiado, inicial y cuotas. Elige el tuyo en la sección siguiente.',
+    priceListName: 'lista de precios de Iquitos',
+    priceListNote: 'Lista de precios de Iquitos, en soles, para lotes de 450 m². El valor del terreno incluye memoria descriptiva y título notarial por acciones y derechos. La separación de un lote se realiza con S/ 500. El interesado costea su pasaje aéreo y coordina la visita. Sujeto a disponibilidad.',
     address: 'Iquitos, provincia de Maynas, Loreto',
     nearby: [
       { label: 'Aeropuerto de Iquitos', distance: '25 min' },
@@ -242,7 +275,7 @@ const EXTRA: Record<string, ProjectExtra> = {
       { label: 'Río Nanay', distance: '15 min' },
       { label: 'Colegios y clínicas', distance: '25 min' },
     ],
-    financing: { minInitialPercent: 10, maxMonths: 60, annualRate: 0 },
+    financing: { minInitialPercent: 21, maxMonths: 34, annualRate: 0 },
     legal: [],
   },
 };

@@ -25,10 +25,10 @@ export const PROJECTS: readonly ProjectItem[] = [
     location: 'Chancay',
     mapQuery: '-11.291139,-77.495750',
     description: 'Un desarrollo residencial pensado para construir un futuro a tu medida, rodeado de áreas verdes.',
-    image: '/images/PalmerasdeMontepinar.png',
+    image: '/images/PalmerasdeMontepinar.webp',
     imageAlt: 'Acceso principal a Montepinar',
     category: 'Desarrollo residencial',
-    priceFrom: 'S/ 18,000',
+    priceFrom: 'S/ 25,000',
     status: 'En construcción',
     features: [
       { icon: 'lucideRuler', label: '120 m² a 1,000 m²' },
@@ -67,7 +67,7 @@ export const PROJECTS: readonly ProjectItem[] = [
     priceFrom: 'S/ 18,000',
     status: 'En construcción',
     features: [
-      { icon: 'lucideRuler', label: '500 m² a 1,200 m²' },
+      { icon: 'lucideRuler', label: 'Lotes de 450 m²' },
       { icon: 'lucideWaves', label: 'Laguna privada' },
       { icon: 'lucideZap', label: 'Eco-energía' },
       { icon: 'lucideTreePine', label: 'Bosque protegido' },
