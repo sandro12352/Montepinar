@@ -2,6 +2,7 @@ import {
   afterNextRender,
   afterRenderEffect,
   Component,
+  computed,
   DestroyRef,
   ElementRef,
   inject,
@@ -127,8 +128,11 @@ export class MainBannerComponent {
   ];
 
   // En móvil la imagen horizontal con texto se cortaría: esa diapositiva solo se muestra en PC.
-  protected readonly slides: readonly BannerSlide[] = this.allSlides.filter(
-    (slide) => !(slide.pcOnly && typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches),
+  // El servidor no conoce el ancho de pantalla: se renderizan todas las diapositivas y, ya hidratado,
+  // se quita la exclusiva de PC en móvil. Filtrar antes rompía la hidratación y re-creaba el banner.
+  private readonly isMobile = signal(false);
+  protected readonly slides = computed<readonly BannerSlide[]>(() =>
+    this.isMobile() ? this.allSlides.filter((slide) => !slide.pcOnly) : this.allSlides,
   );
 
   readonly carrouselPlugins = [Autoplay({
@@ -139,6 +143,8 @@ export class MainBannerComponent {
 
 
   constructor() {
+    afterNextRender(() => this.isMobile.set(window.matchMedia('(max-width: 767px)').matches));
+
     afterNextRender(() => {
       const root = this.bannerRoot().nativeElement;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;

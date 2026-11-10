@@ -3,7 +3,7 @@
   <hlm-carousel class="absolute inset-0 h-full w-full" [options]="{ loop: true ,duration:40}"
     [plugins]="carrouselPlugins">
     <hlm-carousel-content class="h-dvh min-h-152 max-sm:min-h-136">
-      @for (slide of slides; track slide.title; let index = $index) {
+      @for (slide of slides(); track slide.title; let index = $index) {
 
       <hlm-carousel-item class="h-full basis-full pl-0 ">
 
@@ -79,7 +79,7 @@
     <div
       class="banner-controls absolute right-[7.5vw] top-1/2 z-20 flex -translate-y-1/2 flex-col gap-3 max-sm:right-4 motion-reduce:animate-none"
       role="group" aria-label="Seleccionar diapositiva">
-      @for (slide of slides; track slide.title; let index = $index) {
+      @for (slide of slides(); track slide.title; let index = $index) {
       <button
         class="grid size-4 cursor-pointer place-items-center rounded-full border border-white/85 bg-black/30 transition-[background-color,transform] duration-200 hover:scale-110 hover:border-primary hover:bg-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none"
         [class.!border-primary]="activeSlide() === index" [class.!bg-primary]="activeSlide() === index"
