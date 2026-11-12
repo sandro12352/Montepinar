@@ -20,7 +20,7 @@ export const whatsappLink = (message?: string): string =>
   `https://wa.me/${WHATSAPP_NUMBER}${message ? `?text=${encodeURIComponent(message)}` : ''}`;
 
 export const OFFICE_ADDRESS = 'Jr. César Vallejo 958 Urb. Covida, Los Olivos, Lima, Perú';
-export const CONTACT_EMAIL = 'montepinar.inversiones.2020@gmail.com';
+export const CONTACT_EMAIL = 'info.inmobiliariamontelipar@gmail.com';
 
 export const OFFICE_HOURS: readonly { readonly days: string; readonly time: string }[] = [
   { days: 'Lunes - Viernes', time: '09:00 - 18:00' },
