@@ -120,7 +120,7 @@ export class MainBannerComponent {
       title: 'Esta Navidad elige tu mejor opción',
       description: 'Descuentos de hasta S/ 2,500 en tu lote de Palmeras de Montepinar.',
       action: 'Ver proyecto',
-      href: '/projects/chancay',
+      href: '/projects/palmeras-de-montepinar',
       imagen: '/images/carousel/banner-navidad.webp',
       promo: true,
       pcOnly: true,

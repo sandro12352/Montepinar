@@ -35,7 +35,7 @@ const PALMERAS_DOCUMENTS: readonly LegalDocument[] = [
 
 // Los demás proyectos aún no tienen documentos cargados: se completan igual que el de Huaral.
 export const LEGAL_PROJECTS: readonly LegalProject[] = [
-  { slug: 'chancay', name: 'Palmeras de Montepinar', location: 'Chancay', documents: PALMERAS_DOCUMENTS },
-  { slug: 'huaral', name: 'Asociación de Vivienda Montepinar', location: 'Huaral', documents: MONTEPINAR_DOCUMENTS },
-  { slug: 'iquitos', name: 'Amazon Lodge Montepinar', location: 'Iquitos', documents: [] },
+  { slug: 'palmeras-de-montepinar', name: 'Palmeras de Montepinar', location: 'Chancay', documents: PALMERAS_DOCUMENTS },
+  { slug: 'asociacion-de-vivienda-montepinar', name: 'Asociación de Vivienda Montepinar', location: 'Huaral', documents: MONTEPINAR_DOCUMENTS },
+  { slug: 'amazon-lodge-montepinar', name: 'Amazon Lodge Montepinar', location: 'Iquitos', documents: [] },
 ];
