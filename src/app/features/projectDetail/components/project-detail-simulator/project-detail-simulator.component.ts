@@ -20,6 +20,7 @@ import { VisitSheetService } from '../../../../core/services/visit-sheet.service
 import { PriceRow } from '../../data/price-list.data';
 import { LotPlan, ProjectDetail } from '../../data/project-detail.data';
 import { formatSoles, prefersReducedMotion } from '../../utils/reveal';
+import { whatsappLink } from '../../../contact/data/contact.data';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -131,7 +132,7 @@ export class ProjectDetailSimulatorComponent {
       ? `lote de ${lot.area} m² (${this.sector().name} · ${this.stage()?.label}, ${lot.row.location})`
       : `${this.plan().name} (${this.plan().area} m²)`;
     const message = `Hola, simulé el ${what} de ${this.project().name}: inicial ${formatSoles(this.result().initial)} y ${this.lot()?.row.months ?? this.months()} cuotas de ${formatSoles(installment)}. Quisiera más información.`;
-    return `https://wa.me/51932284185?text=${encodeURIComponent(message)}`;
+    return whatsappLink(message);
   }
 
   protected openVisit(): void {

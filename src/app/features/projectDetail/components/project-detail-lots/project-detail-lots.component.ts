@@ -19,6 +19,7 @@ import { buildLotBlocks, Lot } from '../../data/lots.data';
 import { summarizeSector } from '../../data/price-list.data';
 import { ProjectDetail } from '../../data/project-detail.data';
 import { formatSoles, prefersReducedMotion } from '../../utils/reveal';
+import { whatsappLink } from '../../../contact/data/contact.data';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -102,7 +103,7 @@ export class ProjectDetailLotsComponent {
     const stage = this.stage();
     if (!offer || !sector || !stage) return this.planLink();
     const message = `Hola, me interesa un lote de ${offer.area} m² (${offer.location.toLowerCase()}) en el ${sector.name}, ${stage.label.toLowerCase()} de ${this.project().name}. Precio al contado: ${formatSoles(offer.cash)}.`;
-    return `https://wa.me/51932284185?text=${encodeURIComponent(message)}`;
+    return whatsappLink(message);
   }
 
   protected select(lot: Lot): void {
@@ -118,12 +119,12 @@ export class ProjectDetailLotsComponent {
   protected whatsappLink(): string {
     const { id, area } = this.selected();
     const message = `Hola, me interesa el lote ${id} (${area} m²) del proyecto ${this.project().name}.`;
-    return `https://wa.me/51932284185?text=${encodeURIComponent(message)}`;
+    return whatsappLink(message);
   }
 
   protected planLink(): string {
     const message = `Hola, quisiera recibir el plano de lotes del proyecto ${this.project().name}.`;
-    return `https://wa.me/51932284185?text=${encodeURIComponent(message)}`;
+    return whatsappLink(message);
   }
 
   constructor() {

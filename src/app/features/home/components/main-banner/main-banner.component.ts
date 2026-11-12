@@ -10,6 +10,7 @@ import {
   viewChild,
   viewChildren,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMapPinHouse, lucideArrowRight, lucidePhone } from '@ng-icons/lucide';
 import { HlmCarousel, HlmCarouselImports } from '@spartan-ng/helm/carousel';
@@ -26,7 +27,10 @@ interface BannerSlide {
   readonly title: string;
   readonly description: string;
   readonly action: string;
+  /** Ruta interna de la página. */
   readonly href: string;
+  /** Sección de la página a la que baja el enlace. */
+  readonly fragment?: string;
   readonly video?: string;
   readonly imagen?: string;
   readonly imagenMobile?: string;
@@ -37,7 +41,7 @@ interface BannerSlide {
 }
 
 @Component({
-  imports: [HlmCarouselImports, NgIcon],
+  imports: [HlmCarouselImports, NgIcon, RouterLink],
   providers: [provideIcons({ lucideMapPinHouse,lucideArrowRight,lucidePhone })],
   selector: 'app-main-banner',
   styleUrl: './main-banner.component.css',
@@ -84,7 +88,7 @@ export class MainBannerComponent {
       title: 'Un lugar para vivir a tu manera',
       description: 'Descubre un entorno tranquilo, cercano y lleno de vida para disfrutar cada día.',
       action: 'Ver proyectos',
-      href: '#proyectos',
+      href: '/projects',
       imagen: '/images/carousel/slide1.webp',
       imagenMobile: '/images/carousel/slide1-mobile.webp'
     },
@@ -92,8 +96,8 @@ export class MainBannerComponent {
       eyebrow: 'Naturaleza y bienestar',
       title: 'Tu entorno, tu refugio',
       description: 'Espacios abiertos, aire libre y la calma que necesitas sin renunciar a estar conectado.',
-      action: 'Ver recorrido virtual',
-      href: '#vision-360',
+      action: 'Conocer Montepinar',
+      href: '/about',
       imagen: '/images/carousel/slide2.webp',
       imagenMobile: '/images/carousel/slide2-mobile.webp',
     },
@@ -102,7 +106,8 @@ export class MainBannerComponent {
       title: 'Mucho más que una urbanización',
       description: 'Descubre las experiencias que forman parte de la comunidad Montepinar.',
       action: 'Ver testimonios',
-      href: '#testimonios',
+      href: '/',
+      fragment: 'testimonios',
       imagen: '/images/carousel/slide3.webp',
       imagenMobile: '/images/carousel/slide3-mobile.webp',
     },
@@ -110,8 +115,8 @@ export class MainBannerComponent {
       eyebrow: 'Tu nuevo hogar',
       title: 'Una entrada que te da la bienvenida',
       description: 'Jardines, palmeras y un acceso diseñado para que cada llegada se sienta como estar en casa.',
-      action: 'Ver galería',
-      href: '/galeria',
+      action: 'Conocer proyecto',
+      href: '/projects/chancay',
       imagen: '/images/carousel/entrada-palmeras.webp',
       imagenMobile: '/images/carousel/palmeras-mobile.webp',
     },

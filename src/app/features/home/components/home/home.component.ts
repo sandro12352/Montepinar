@@ -10,6 +10,7 @@ import {
 } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { whatsappLink } from '../../../contact/data/contact.data';
 import { MainBannerComponent } from '../main-banner/main-banner.component';
 import { IntroduccionComponent } from '../introduccion/introduccion.component';
 import { HomeProjectsComponent } from '../projects/projects.component';
@@ -39,6 +40,7 @@ gsap.registerPlugin(ScrollTrigger);
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+  protected readonly whatsappHref = whatsappLink();
   private readonly financingPanel = viewChild<ElementRef<HTMLElement>>('financingPanel');
   protected readonly financingBenefits = [
     { icon: 'lucideShieldCheck', label: 'Sin historial crediticio' },

@@ -93,9 +93,16 @@ const LEGAL_DOCS: readonly Omit<LegalItem, 'file'>[] = [
 
 const LEGAL_FILES = ['titulo-propiedad', 'partida-registral', 'habilitacion-zonificacion', 'contrato-compraventa'];
 
-/** Los PDF viven en public/documents/<slug>/<archivo>.pdf. */
+/** Carpeta de documentos de cada proyecto (el slug de la URL no coincide con el nombre de la carpeta). */
+const DOCUMENT_FOLDERS: Record<string, string> = {
+  chancay: 'palmeras-de-montepinar',
+  huaral: 'asociacion-de-vivienda-montepinar',
+  iquitos: 'amazon-lodge-montepinar',
+};
+
+/** Los PDF viven en public/documents/<carpeta>/<archivo>.pdf. */
 const legalFor = (slug: string): readonly LegalItem[] =>
-  LEGAL_DOCS.map((doc, index) => ({ ...doc, file: `/documents/${slug}/${LEGAL_FILES[index]}.pdf` }));
+  LEGAL_DOCS.map((doc, index) => ({ ...doc, file: `/documents/${DOCUMENT_FOLDERS[slug] ?? slug}/${LEGAL_FILES[index]}.pdf` }));
 
 const fmt = (value: number): string => value.toLocaleString('en-US');
 const areaRange = (min: number, max: number): string => (min === max ? `${fmt(min)} m²` : `de ${fmt(min)} a ${fmt(max)} m²`);
@@ -162,17 +169,17 @@ const EXTRA: Record<string, ProjectExtra> = {
   chancay: {
     tagline: 'Un lugar propio, a minutos del nuevo puerto.',
     overview:
-      'Palmeras de Montepinar es un desarrollo campestre con lotes desde 120 m² hasta 1,000 m², más de 2,000 áreas verdes, country club y seguridad permanente. Un terreno pensado para construir tu casa de campo hoy y ver crecer su valor mientras la zona se desarrolla.',
+      'Palmeras de Montepinar es un desarrollo campestre con lotes desde 120 m² hasta 1,000 m², 70 áreas verdes, country club y seguridad permanente. Un terreno pensado para construir tu casa de campo hoy y ver crecer su valor mientras la zona se desarrolla.',
     facts: [
       { value: '120 m²', label: 'Lote mínimo' },
-      { value: '+2,000', label: 'Áreas verdes' },
+      { value: '70', label: 'Áreas verdes' },
       { value: '24/7', label: 'Seguridad' },
       { value: '42', label: 'Cuotas máximas' },
     ],
     amenities: [
       { icon: 'lucideUsers', label: 'Country club', text: 'Zona social y parrilleras para toda la familia.' },
       { icon: 'lucideShieldCheck', label: 'Seguridad 24/7', text: 'Ingreso controlado y vigilancia permanente.' },
-      { icon: 'lucideSprout', label: 'Áreas verdes', text: 'Más de 2,000 áreas verdes, con jardines y alamedas.' },
+      { icon: 'lucideSprout', label: 'Áreas verdes', text: '70 áreas verdes, con jardines y alamedas.' },
       { icon: 'lucideZap', label: 'Servicios básicos', text: 'Accesos y servicios planificados hasta tu lote.' },
     ],
     gallery: [
@@ -184,15 +191,15 @@ const EXTRA: Record<string, ProjectExtra> = {
     ],
     plans: plansFromSectors(PALMERAS_SECTORS),
     sectors: PALMERAS_SECTORS,
-    dossier: '/documents/chancay/lista-de-precios-2026.pdf',
+    dossier: '/documents/palmeras-de-montepinar/lista-de-precios-2026.pdf',
     mapZones: true,
     priceListName: 'lista de precios 2026',
     priceListNote: 'Lista de precios 2026, en soles. Esquema no oficial y sin escala; ubicación referencial según el plano de lotización 1/500. Sujeto a disponibilidad y a la validación del equipo comercial.',
-    address: 'Distrito de Chancay, provincia de Huaral, Lima',
+    address: 'Carretera Panamericana Norte, Huacho, provincia de Huaura, Lima',
     nearby: [
       { label: 'Puerto de Chancay', distance: '15 min' },
       { label: 'Panamericana Norte', distance: '5 min' },
-      { label: 'Centro de Chancay', distance: '10 min' },
+      { label: 'Centro de Huacho', distance: '10 min' },
       { label: 'Lima', distance: '1 h 30 min' },
     ],
     financing: { minInitialPercent: 17, maxMonths: 42, annualRate: 0 },
@@ -201,16 +208,16 @@ const EXTRA: Record<string, ProjectExtra> = {
   huaral: {
     tagline: 'Tu lote cerca de todo, junto a Mall Montepinar.',
     overview:
-      'Asociación de Vivienda Montepinar reúne lotes de 120 a 200 m² junto a Mall Montepinar, con más de 5,000 áreas verdes y un clima soleado casi todo el año. Un proyecto pensado para disfrutar el campo sin renunciar a la comodidad.',
+      'Asociación de Vivienda Montepinar reúne lotes de 120 a 200 m² junto a Mall Montepinar, con 70 áreas verdes y un clima soleado casi todo el año. Un proyecto pensado para disfrutar el campo sin renunciar a la comodidad.',
     facts: [
       { value: '120 m²', label: 'Lote mínimo' },
-      { value: '+5,000', label: 'Áreas verdes' },
+      { value: '70', label: 'Áreas verdes' },
       { value: '365', label: 'Días de sol' },
       { value: '42', label: 'Cuotas máximas' },
     ],
     amenities: [
       { icon: 'lucideStore', label: 'Mall Montepinar', text: 'Comercio y servicios cerca de tu lote.' },
-      { icon: 'lucideSprout', label: 'Áreas verdes', text: 'Más de 5,000 áreas verdes para el descanso y la recreación.' },
+      { icon: 'lucideSprout', label: 'Áreas verdes', text: '70 áreas verdes para el descanso y la recreación.' },
       { icon: 'lucideSun', label: 'Clima soleado', text: 'Sol casi todo el año, ideal para el descanso.' },
       { icon: 'lucideShieldCheck', label: 'Acceso controlado', text: 'Ingreso con vigilancia y registro de visitas.' },
     ],
@@ -223,12 +230,12 @@ const EXTRA: Record<string, ProjectExtra> = {
     ],
     plans: plansFromSectors(HUARAL_SECTORS),
     sectors: HUARAL_SECTORS,
-    dossier: '/documents/huaral/lista-de-precios-2026.pdf',
+    dossier: '/documents/asociacion-de-vivienda-montepinar/lista-de-precios-2026.pdf',
     priceListName: 'lista de precios del 25/05/2026',
     priceListNote: 'Lista de precios del 25/05/2026, en soles. Esquema no oficial y sin escala; la ubicación de los lotes es referencial. Sujeto a disponibilidad y a la validación del equipo comercial.',
     address: 'Asociación Vivienda Montepinar Lt, Carretera Panamericana Norte, Huacho',
     nearby: [
-      { label: 'Centro de Huaral', distance: '10 min' },
+      { label: 'Centro de Huacho', distance: '10 min' },
       { label: 'Panamericana Norte', distance: '8 min' },
       { label: 'Puerto de Chancay', distance: '35 min' },
       { label: 'Lima', distance: '1 h 15 min' },

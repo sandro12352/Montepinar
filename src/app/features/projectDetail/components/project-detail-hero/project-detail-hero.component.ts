@@ -8,6 +8,7 @@ import { LoaderService } from '../../../../core/services/loader.service';
 import { VisitSheetService } from '../../../../core/services/visit-sheet.service';
 import { ProjectDetail } from '../../data/project-detail.data';
 import { formatSoles, prefersReducedMotion } from '../../utils/reveal';
+import { whatsappLink } from '../../../contact/data/contact.data';
 
 @Component({
   imports: [NgOptimizedImage, NgIcon, HlmBreadcrumbImports],
@@ -27,7 +28,7 @@ export class ProjectDetailHeroComponent {
 
   protected whatsappLink(): string {
     const message = `Hola, quisiera información del proyecto ${this.project().name}.`;
-    return `https://wa.me/51932284185?text=${encodeURIComponent(message)}`;
+    return whatsappLink(message);
   }
 
   protected openVisit(): void {

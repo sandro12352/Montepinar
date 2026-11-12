@@ -73,7 +73,7 @@
       <!-- Visor -->
       @if (doc(); as current) {
       <div data-viewer class="overflow-hidden rounded-2xl border border-[var(--brand-forest-900)]/8 bg-white shadow-sm shadow-[var(--brand-forest-900)]/5 lg:sticky lg:top-20">
-        <header class="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--brand-forest-900)]/8 px-4 py-3 sm:px-5">
+        <header data-viewer-head class="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--brand-forest-900)]/8 px-4 py-3 sm:px-5">
           <div class="flex min-w-0 items-center gap-3">
             <span class="grid size-10 shrink-0 place-items-center rounded-xl bg-[var(--brand-primary)]/10 text-[var(--brand-primary)]">
               <ng-icon [name]="current.icon" size="18" aria-hidden="true" />
@@ -101,7 +101,7 @@
         </header>
 
         @if (canEmbed() && viewerUrl(); as url) {
-        <div class="bg-[#e9e5db]">
+        <div data-frame class="bg-[#e9e5db]">
           <iframe [src]="url" [title]="'Visor de ' + current.title"
             class="block h-[min(78vh,44rem)] w-full border-0 bg-white" loading="lazy"></iframe>
         </div>

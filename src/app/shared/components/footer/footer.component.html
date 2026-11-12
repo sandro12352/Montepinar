@@ -26,12 +26,12 @@
           <img class="block h-auto w-40" width="500" height="155" ngSrc="/images/logo.webp" alt="Montepinar Inmobiliaria & Constructora"
             />
         </a>
-        <a href="tel:+51932284185"
+        <a [href]="'tel:' + phoneTel"
           class="flex items-center gap-4 pb-4 text-base font-medium tracking-[-0.02em] text-[var(--brand-forest-900)] no-underline transition-colors duration-200 hover:text-[var(--brand-primary)] sm:text-lg">
           <ng-icon name="lucidePhone" size="22" class="shrink-0" aria-hidden="true" />
-          +51 932 284 185
+          {{ phoneDisplay }}
         </a>
-        <a href="https://wa.me/51932284185" target="_blank" rel="noopener noreferrer"
+        <a [href]="whatsappHref" target="_blank" rel="noopener noreferrer"
           class="flex items-center gap-4 text-base font-medium tracking-[-0.02em] text-[var(--brand-forest-900)] no-underline transition-colors duration-200 hover:text-[var(--brand-primary)] sm:text-lg">
           <ng-icon name="lucideMessageCircle" size="22" class="shrink-0" aria-hidden="true" />
           Escríbenos por WhatsApp

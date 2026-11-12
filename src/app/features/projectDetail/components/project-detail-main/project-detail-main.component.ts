@@ -24,6 +24,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { VisitSheetService } from '../../../../core/services/visit-sheet.service';
 import { ProjectDetail } from '../../data/project-detail.data';
 import { formatSoles, prefersReducedMotion } from '../../utils/reveal';
+import { whatsappLink } from '../../../contact/data/contact.data';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -104,7 +105,7 @@ export class ProjectDetailMainComponent {
   });
 
   protected whatsappLink(message: string): string {
-    return `https://wa.me/51932284185?text=${encodeURIComponent(message)}`;
+    return whatsappLink(message);
   }
 
   protected openVisit(): void {

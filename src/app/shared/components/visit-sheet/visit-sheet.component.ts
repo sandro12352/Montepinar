@@ -13,6 +13,7 @@ import { HlmSheetImports } from '@spartan-ng/helm/sheet';
 import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
 import { gsap } from 'gsap';
 
+import { WHATSAPP_DISPLAY, WHATSAPP_TEL } from '../../../features/contact/data/contact.data';
 import { VisitSheetService } from '../../../core/services/visit-sheet.service';
 import { PICKUP_POINTS } from '../../../features/guidedTour/data/guided-tour.data';
 
@@ -78,6 +79,8 @@ const formatLongDate = (date: Date): string =>
   templateUrl: './visit-sheet.component.html',
 })
 export class VisitSheetComponent {
+  protected readonly phoneDisplay = WHATSAPP_DISPLAY;
+  protected readonly phoneTel = WHATSAPP_TEL;
   protected readonly submitted = signal(false);
   protected readonly submitting = signal(false);
   protected readonly pickupPoints = PICKUP_POINTS;

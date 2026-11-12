@@ -53,13 +53,13 @@ export class Vision360Component {
     },
     {
       id: 'chancay',
-      label: 'Chancay',
+      label: 'Huacho',
       description: 'Costa emergente con vistas abiertas al mar.',
       image: '/images/PalmerasdeMontepinar.webp',
     },
     {
       id: 'huaral',
-      label: 'Huaral',
+      label: 'Huacho',
       description: 'Áreas recreativas y deportivas en el valle fértil.',
       image: '/images/AsociacionMontepinar.webp',
     },

@@ -120,16 +120,26 @@ export class LegalInformationDocumentsComponent {
       });
     });
 
-    // Al cambiar de documento, el visor se desvanece suavemente.
+    // Al cambiar de documento: el encabezado entra deslizando y el visor aparece cuando el PDF ya cargó.
+    // Antes se ocultaba todo el visor ya con el contenido nuevo y se veía un parpadeo.
     effect(() => {
       this.doc();
       if (!this.ready || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       queueMicrotask(() => {
-        gsap.fromTo(
-          this.root().nativeElement.querySelectorAll('[data-viewer]'),
-          { autoAlpha: 0, y: 14 },
-          { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out', overwrite: true },
-        );
+        const root = this.root().nativeElement;
+        const head = root.querySelector<HTMLElement>('[data-viewer-head]');
+        const frame = root.querySelector<HTMLElement>('[data-frame]');
+
+        if (head) gsap.fromTo(head, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out', overwrite: true });
+
+        if (frame) {
+          const reveal = () => gsap.to(frame, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out', overwrite: true });
+          gsap.set(frame, { autoAlpha: 0, y: 16 });
+          const iframe = frame.querySelector('iframe');
+          // Si el navegador no avisa de la carga, aparece igual a los 900 ms.
+          const fallback = gsap.delayedCall(0.9, reveal);
+          iframe?.addEventListener('load', () => { fallback.kill(); reveal(); }, { once: true });
+        }
       });
     });
   }

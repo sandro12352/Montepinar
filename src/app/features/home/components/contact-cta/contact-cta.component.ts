@@ -1,30 +1,35 @@
 import { NgOptimizedImage } from '@angular/common';
 import { afterNextRender, Component, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowRight, lucideCalendarDays, lucideCheck, lucideMessageCircle, lucidePhone } from '@ng-icons/lucide';
+import { lucideArrowRight, lucideArrowUpRight, lucideCalendarDays, lucideCheck, lucideMessageCircle, lucidePhone } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { VisitSheetService } from '../../../../core/services/visit-sheet.service';
+import { WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from '../../../contact/data/contact.data';
 import { PROJECTS } from '../../../projects/data/projects.data';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const WHATSAPP_NUMBER = '51932284185';
 
 @Component({
   selector: 'app-contact-cta',
   templateUrl: './contact-cta.component.html',
   imports: [NgOptimizedImage, NgIcon],
-  providers: [provideIcons({ lucideArrowRight, lucideCalendarDays, lucideCheck, lucideMessageCircle, lucidePhone })],
+  providers: [provideIcons({ lucideArrowRight, lucideArrowUpRight, lucideCalendarDays, lucideCheck, lucideMessageCircle, lucidePhone })],
 })
 export class ContactCtaComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly visitSheet = inject(VisitSheetService);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 
-  protected readonly projects = PROJECTS.map((project) => ({ value: project.name, label: project.name }));
+  protected readonly projects = PROJECTS.map((project) => ({
+    value: project.name,
+    label: project.name,
+    image: project.image,
+    imageAlt: project.imageAlt,
+  }));
   protected readonly selectedProject = signal(this.projects[0].value);
   protected readonly phone = WHATSAPP_NUMBER;
+  protected readonly phoneDisplay = WHATSAPP_DISPLAY;
 
   protected openVisit(): void {
     this.visitSheet.open();

@@ -4,6 +4,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMessageCircle, lucidePhone } from '@ng-icons/lucide';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { WHATSAPP_DISPLAY, WHATSAPP_TEL, whatsappLink } from '../../../features/contact/data/contact.data';
 import { SocialLinksComponent } from '../social-links/social-links.component';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -26,6 +27,9 @@ interface FooterColumn {
   templateUrl: './footer.component.html',
 })
 export class FooterComponent {
+  protected readonly phoneDisplay = WHATSAPP_DISPLAY;
+  protected readonly phoneTel = WHATSAPP_TEL;
+  protected readonly whatsappHref = whatsappLink();
   private readonly destroyRef = inject(DestroyRef);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
 
@@ -51,7 +55,7 @@ export class FooterComponent {
     {
       title: 'Contacto',
       links: [
-        { label: 'WhatsApp', href: 'https://wa.me/51932284185' },
+        { label: 'WhatsApp', href: whatsappLink() },
         { label: 'Agendar visita', href: '#contacto' },
       ],
     },
