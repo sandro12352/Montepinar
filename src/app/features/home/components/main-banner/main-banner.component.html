@@ -38,10 +38,19 @@
               {{ slide.eyebrow }}
             </p>
 
+            <!-- Un solo h1 en toda la página (el de la primera diapositiva); las demás usan <p> con el mismo estilo. -->
+            @if (index === 0) {
             <h1 #titulo
               class="slide-copy-item m-0 max-w-[15ch] text-balance text-[clamp(4.9rem,5.5vw,5.25rem)] font-extrabold leading-[1.02] tracking-[-0.045em] max-sm:max-w-[11ch] max-sm:text-[clamp(2.75rem,11vw,4rem)]">
               {{ slide.title }}
+              <span class="sr-only">: lotes y terrenos en Huacho e Iquitos con Montepinar Inmobiliaria y Constructora</span>
             </h1>
+            } @else {
+            <p #titulo
+              class="slide-copy-item m-0 max-w-[15ch] text-balance text-[clamp(4.9rem,5.5vw,5.25rem)] font-extrabold leading-[1.02] tracking-[-0.045em] max-sm:max-w-[11ch] max-sm:text-[clamp(2.75rem,11vw,4rem)]">
+              {{ slide.title }}
+            </p>
+            }
 
             <p #descripcion
               class="slide-copy-item my-6 max-w-xl text-pretty text-[clamp(1rem,1.5vw,1.2rem)] leading-[1.65] text-white/90">

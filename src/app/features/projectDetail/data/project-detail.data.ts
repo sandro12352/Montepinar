@@ -93,16 +93,9 @@ const LEGAL_DOCS: readonly Omit<LegalItem, 'file'>[] = [
 
 const LEGAL_FILES = ['titulo-propiedad', 'partida-registral', 'habilitacion-zonificacion', 'contrato-compraventa'];
 
-/** Carpeta de documentos de cada proyecto (el slug de la URL no coincide con el nombre de la carpeta). */
-const DOCUMENT_FOLDERS: Record<string, string> = {
-  chancay: 'palmeras-de-montepinar',
-  huaral: 'asociacion-de-vivienda-montepinar',
-  iquitos: 'amazon-lodge-montepinar',
-};
-
-/** Los PDF viven en public/documents/<carpeta>/<archivo>.pdf. */
+/** Los PDF viven en public/documents/<slug>/<archivo>.pdf (la carpeta lleva el mismo nombre que el slug). */
 const legalFor = (slug: string): readonly LegalItem[] =>
-  LEGAL_DOCS.map((doc, index) => ({ ...doc, file: `/documents/${DOCUMENT_FOLDERS[slug] ?? slug}/${LEGAL_FILES[index]}.pdf` }));
+  LEGAL_DOCS.map((doc, index) => ({ ...doc, file: `/documents/${slug}/${LEGAL_FILES[index]}.pdf` }));
 
 const fmt = (value: number): string => value.toLocaleString('en-US');
 const areaRange = (min: number, max: number): string => (min === max ? `${fmt(min)} m²` : `de ${fmt(min)} a ${fmt(max)} m²`);
@@ -166,7 +159,7 @@ function plansFromRows(sectors: readonly PriceSector[], describe: (row: PriceRow
 }
 
 const EXTRA: Record<string, ProjectExtra> = {
-  chancay: {
+  'palmeras-de-montepinar': {
     tagline: 'Un lugar propio, a minutos del nuevo puerto.',
     overview:
       'Palmeras de Montepinar es un desarrollo campestre con lotes desde 120 m² hasta 1,000 m², 70 áreas verdes, country club y seguridad permanente. Un terreno pensado para construir tu casa de campo hoy y ver crecer su valor mientras la zona se desarrolla.',
@@ -205,7 +198,7 @@ const EXTRA: Record<string, ProjectExtra> = {
     financing: { minInitialPercent: 17, maxMonths: 42, annualRate: 0 },
     legal: [],
   },
-  huaral: {
+  'asociacion-de-vivienda-montepinar': {
     tagline: 'Tu lote cerca de todo, junto a Mall Montepinar.',
     overview:
       'Asociación de Vivienda Montepinar reúne lotes de 120 a 200 m² junto a Mall Montepinar, con 70 áreas verdes y un clima soleado casi todo el año. Un proyecto pensado para disfrutar el campo sin renunciar a la comodidad.',
@@ -243,7 +236,7 @@ const EXTRA: Record<string, ProjectExtra> = {
     financing: { minInitialPercent: 23, maxMonths: 42, annualRate: 0 },
     legal: [],
   },
-  iquitos: {
+  'amazon-lodge-montepinar': {
     tagline: 'Naturaleza viva a las puertas de la selva.',
     overview:
       'Amazon Lodge Montepinar es un proyecto eco-residencial con lotes generosos, laguna privada y bosque protegido. Un lugar para vivir cerca de la naturaleza con energía limpia y una comunidad que crece contigo.',

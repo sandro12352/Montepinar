@@ -35,7 +35,7 @@ const PALMERAS_DOCUMENTS: readonly LegalDocument[] = [
 
 // Iquitos aún no tiene documentos cargados: se completa igual que los demás.
 export const LEGAL_PROJECTS: readonly LegalProject[] = [
-  { slug: 'chancay', name: 'Palmeras de Montepinar', location: 'Huacho', documents: PALMERAS_DOCUMENTS },
-  { slug: 'huaral', name: 'Asociación de Vivienda Montepinar', location: 'Huacho', documents: MONTEPINAR_DOCUMENTS },
-  { slug: 'iquitos', name: 'Amazon Lodge Montepinar', location: 'Iquitos', documents: [] },
+  { slug: 'palmeras-de-montepinar', name: 'Palmeras de Montepinar', location: 'Huacho', documents: PALMERAS_DOCUMENTS },
+  { slug: 'asociacion-de-vivienda-montepinar', name: 'Asociación de Vivienda Montepinar', location: 'Huacho', documents: MONTEPINAR_DOCUMENTS },
+  { slug: 'amazon-lodge-montepinar', name: 'Amazon Lodge Montepinar', location: 'Iquitos', documents: [] },
 ];

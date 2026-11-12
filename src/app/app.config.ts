@@ -7,7 +7,7 @@ import { provideBrnCalendarI18n } from '@spartan-ng/brain/calendar';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes, withInMemoryScrolling({ anchorScrolling: 'enabled' })), provideClientHydration(withIncrementalHydration()),
+    provideRouter(routes, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })), provideClientHydration(withIncrementalHydration()),
     provideBrnCalendarI18n({
       formatWeekdayName: (index) => ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'][index],
       months: () => ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],

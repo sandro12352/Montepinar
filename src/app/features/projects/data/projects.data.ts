@@ -20,7 +20,7 @@ export interface ProjectItem {
 
 export const PROJECTS: readonly ProjectItem[] = [
   {
-    slug: 'chancay',
+    slug: 'palmeras-de-montepinar',
     name: 'Palmeras de Montepinar',
     location: 'Huacho',
     mapQuery: '-11.291139,-77.495750',
@@ -38,7 +38,7 @@ export const PROJECTS: readonly ProjectItem[] = [
     ],
   },
   {
-    slug: 'huaral',
+    slug: 'asociacion-de-vivienda-montepinar',
     name: 'Asociación de Vivienda Montepinar',
     location: 'Huacho',
     mapQuery: 'Asociacion Vivienda Montepinar Lt, Carretera Panamericana Norte, Huacho',
@@ -56,7 +56,7 @@ export const PROJECTS: readonly ProjectItem[] = [
     ],
   },
   {
-    slug: 'iquitos',
+    slug: 'amazon-lodge-montepinar',
     name: 'Amazon Lodge Montepinar',
     location: 'Iquitos',
     mapQuery: 'Iquitos, Loreto, Perú',
