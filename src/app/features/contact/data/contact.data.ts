@@ -10,17 +10,17 @@ export const CONTACT_PHONES: readonly ContactPhone[] = [
   { label: 'Ventas', display: '+51 914 675 637', tel: '+51914675637' },
 ];
 
-// El número de Ventas es el canal principal: WhatsApp, llamadas y mensajes de toda la web usan este.
-const SALES_PHONE = CONTACT_PHONES.find((phone) => phone.label === 'Ventas') ?? CONTACT_PHONES[0];
-export const WHATSAPP_NUMBER = SALES_PHONE.tel.replace('+', '');
-export const WHATSAPP_DISPLAY = SALES_PHONE.display;
-export const WHATSAPP_TEL = SALES_PHONE.tel;
+// El número oficial (Oficina) es el canal principal: WhatsApp, llamadas y mensajes de toda la web usan este.
+const MAIN_PHONE = CONTACT_PHONES.find((phone) => phone.label === 'Oficina') ?? CONTACT_PHONES[0];
+export const WHATSAPP_NUMBER = MAIN_PHONE.tel.replace('+', '');
+export const WHATSAPP_DISPLAY = MAIN_PHONE.display;
+export const WHATSAPP_TEL = MAIN_PHONE.tel;
 
 export const whatsappLink = (message?: string): string =>
   `https://wa.me/${WHATSAPP_NUMBER}${message ? `?text=${encodeURIComponent(message)}` : ''}`;
 
 export const OFFICE_ADDRESS = 'Jr. César Vallejo 958 Urb. Covida, Los Olivos, Lima, Perú';
-export const CONTACT_EMAIL = 'informes@inmobiliariamontepinar.com.pe';
+export const CONTACT_EMAIL = 'montepinar.inversiones.2020@gmail.com';
 
 export const OFFICE_HOURS: readonly { readonly days: string; readonly time: string }[] = [
   { days: 'Lunes - Viernes', time: '09:00 - 18:00' },
@@ -38,6 +38,6 @@ export interface SocialLink {
 // Perfiles oficiales de Montepinar en redes sociales.
 export const SOCIAL_LINKS: readonly SocialLink[] = [
   { name: 'Facebook', href: 'https://www.facebook.com/MontepinarInmobiliaria', icon: 'lucideFacebook' },
-  { name: 'Instagram', href: 'https://www.instagram.com/montepinar.of/', icon: 'lucideInstagram' },
+  { name: 'Instagram', href: 'https://www.instagram.com/montepinar_inmobiliaria', icon: 'lucideInstagram' },
   { name: 'TikTok', href: 'https://www.tiktok.com/@montepinarinmobiliaria', icon: 'tiktok' },
 ];

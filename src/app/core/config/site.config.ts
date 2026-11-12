@@ -36,11 +36,11 @@ export const SITE_OFFICE = {
   full: OFFICE_ADDRESS,
 } as const;
 
-/** Teléfono principal (WhatsApp) en formato internacional, el que pide Google. */
+/** Teléfono principal (oficial, también WhatsApp) en formato internacional, el que pide Google. */
 export const PRIMARY_PHONE = `+${WHATSAPP_NUMBER}`;
 
-/** Teléfono de oficina como contacto secundario. */
-export const SECONDARY_PHONE = CONTACT_PHONES.find((phone) => phone.label === 'Oficina')?.tel ?? PRIMARY_PHONE;
+/** Teléfono de Ventas como contacto secundario (el principal es el oficial, el de Oficina). */
+export const SECONDARY_PHONE = CONTACT_PHONES.find((phone) => phone.label === 'Ventas')?.tel ?? PRIMARY_PHONE;
 
 export const SITE_EMAIL = CONTACT_EMAIL;
 export const SITE_HOURS = OFFICE_HOURS;
