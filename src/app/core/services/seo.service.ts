@@ -14,6 +14,8 @@ export interface SeoData {
   readonly imageAlt?: string;
   /** Si es true, la página no se indexa (útil para páginas sin valor en buscadores). */
   readonly noindex?: boolean;
+  /** Tipo de contenido para Open Graph: 'article' en los artículos del blog; por defecto 'website'. */
+  readonly type?: 'website' | 'article';
 }
 
 /**
@@ -42,7 +44,7 @@ export class SeoService {
     });
     this.setCanonical(url);
 
-    this.meta.updateTag({ property: 'og:type', content: 'website' });
+    this.meta.updateTag({ property: 'og:type', content: data.type ?? 'website' });
     this.meta.updateTag({ property: 'og:site_name', content: SITE_NAME });
     this.meta.updateTag({ property: 'og:url', content: url });
     this.meta.updateTag({ property: 'og:title', content: data.title });

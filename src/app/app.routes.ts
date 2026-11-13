@@ -77,6 +77,19 @@ export const routes: Routes = [
                 } satisfies RouteSeo }
             },
             {
+                path:'blog',
+                loadComponent:()=>import('./features/blog/components/blog/blog.component').then(m=>m.BlogComponent),
+                data: { seo: {
+                    title: 'Blog: guías para comprar un lote | Montepinar',
+                    description: 'Guías para comprar un lote o terreno con seguridad: documentos, financiamiento y cómo elegir. Consejos del equipo de Montepinar.',
+                } satisfies RouteSeo }
+            },
+            {
+                // El SEO de cada artículo (título, descripción, imagen) lo fija el propio componente.
+                path:'blog/:slug',
+                loadComponent:()=>import('./features/blog/components/blog-post/blog-post.component').then(m=>m.BlogPostComponent)
+            },
+            {
                 path:'contacto',
                 loadComponent:()=>import('./features/contact/components/contact/contact.component').then(m=>m.ContactComponent),
                 data: { seo: {

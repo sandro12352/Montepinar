@@ -58,5 +58,6 @@ export const NAVIGATION_ITEMS: readonly NavigationItem[] = [
       footer: { label: 'Preguntas frecuentes', path: '/', fragment: 'preguntas-frecuentes' },
     },
   },
+  { label: 'Blog', path: '/blog' },
   { label: 'Contacto', path: '/contacto' },
 ];

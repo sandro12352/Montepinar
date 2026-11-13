@@ -49,6 +49,7 @@ export class FooterComponent {
       links: [
         { label: 'Nosotros', href: '/nosotros' },
         { label: 'Galería', href: '/galeria' },
+        { label: 'Blog', href: '/blog' },
         { label: 'Preguntas frecuentes', href: '#preguntas-frecuentes' },
       ],
     },

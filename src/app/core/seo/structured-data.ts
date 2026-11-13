@@ -96,6 +96,31 @@ export const breadcrumbJsonLd = (items: readonly BreadcrumbItem[]): object => ({
   })),
 });
 
+export interface BlogPostingJsonLdInput {
+  readonly title: string;
+  readonly description: string;
+  readonly path: string;
+  readonly image: string;
+  /** Fechas en formato AAAA-MM-DD. */
+  readonly datePublished: string;
+  readonly dateModified: string;
+}
+
+/** Ficha de un artículo del blog (BlogPosting). El autor y el editor son la empresa. */
+export const blogPostingJsonLd = (input: BlogPostingJsonLdInput): object => ({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: input.title,
+  description: input.description,
+  image: absoluteUrl(input.image),
+  datePublished: input.datePublished,
+  dateModified: input.dateModified,
+  inLanguage: SITE_LANG,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': absoluteUrl(input.path) },
+  author: { '@id': ORGANIZATION_ID },
+  publisher: { '@id': ORGANIZATION_ID },
+});
+
 export interface ProjectJsonLdInput {
   readonly name: string;
   readonly description: string;

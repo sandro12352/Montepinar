@@ -33,6 +33,7 @@ export class App {
       this.seo.set({ ...seo, path: event.urlAfterRedirects.split(/[?#]/)[0] || '/' });
       // Las fichas de proyecto solo existen en el detalle de cada proyecto.
       this.seo.removeJsonLd('project');
+      this.seo.removeJsonLd('post');
       this.seo.removeJsonLd('breadcrumb');
     });
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Al agregar un proyecto o cambiar un slug, actualizar esta lista (y poner redirecciones 301 si el sitio ya está publicado). -->
+<!-- Al agregar un proyecto o un artículo del blog, o cambiar un slug, actualizar esta lista (y poner redirecciones 301 si el sitio ya está publicado). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.montepinarinmobiliaria.pe/</loc>
@@ -44,6 +44,41 @@
   <url>
     <loc>https://www.montepinarinmobiliaria.pe/galeria</loc>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.montepinarinmobiliaria.pe/blog</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.montepinarinmobiliaria.pe/blog/como-comprar-un-lote-en-huacho</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.montepinarinmobiliaria.pe/blog/documentos-para-comprar-un-terreno</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.montepinarinmobiliaria.pe/blog/terrenos-cerca-del-megapuerto-de-chancay</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.montepinarinmobiliaria.pe/blog/lote-o-terreno-diferencia</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.montepinarinmobiliaria.pe/blog/comprar-un-lote-en-cuotas</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.montepinarinmobiliaria.pe/blog/como-es-una-visita-guiada</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.montepinarinmobiliaria.pe/terminos-y-condiciones</loc>

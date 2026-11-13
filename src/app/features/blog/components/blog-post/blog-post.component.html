@@ -1,0 +1,136 @@
+@if (post(); as item) {
+<section aria-labelledby="post-title"
+  class="relative isolate overflow-hidden bg-[var(--brand-forest-900)] pb-[clamp(3rem,6vw,5rem)] pt-[clamp(7.5rem,12vw,9.5rem)] text-white">
+  <span aria-hidden="true"
+    class="pointer-events-none absolute -left-32 top-1/3 -z-10 size-[26rem] rounded-full bg-[var(--brand-primary)]/12 blur-3xl"></span>
+
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <nav hlmBreadcrumb aria-label="Migas de pan" class="mb-8">
+      <ol hlmBreadcrumbList class="gap-1.5 text-xs font-extrabold uppercase tracking-[0.14em] text-white/70 sm:gap-2">
+        <li hlmBreadcrumbItem>
+          <a hlmBreadcrumbLink link="/" class="text-white/70 no-underline hover:text-white">Inicio</a>
+        </li>
+        <li hlmBreadcrumbSeparator class="text-white/50"></li>
+        <li hlmBreadcrumbItem>
+          <a hlmBreadcrumbLink link="/blog" class="text-white/70 no-underline hover:text-white">Blog</a>
+        </li>
+        <li hlmBreadcrumbSeparator class="text-white/50"></li>
+        <li hlmBreadcrumbItem>
+          <span hlmBreadcrumbPage class="text-white">{{ item.category }}</span>
+        </li>
+      </ol>
+    </nav>
+
+    <p
+      class="m-0 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.16em] text-white/90">
+      <span class="size-1.5 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
+      {{ item.category }}
+    </p>
+    <h1 id="post-title"
+      class="m-0 mt-6 max-w-[22ch] text-balance text-[clamp(2.2rem,4.6vw,4.2rem)] font-extrabold leading-[1.05] tracking-[-0.04em]">
+      {{ item.title }}
+    </h1>
+    <p class="mb-0 mt-6 text-sm font-semibold text-white/70">
+      Por Montepinar ·
+      <time [attr.datetime]="item.datePublished">{{ formatDate(item.datePublished) }}</time>
+      · {{ item.readingMinutes }} min de lectura
+    </p>
+  </div>
+</section>
+
+<section class="bg-[#f4f1ea] py-[clamp(3rem,6vw,5rem)] text-[var(--brand-forest-900)]">
+  <div class="mx-auto w-[min(88%,52rem)]">
+    <img width="1200" height="630" priority [ngSrc]="item.image" [alt]="item.imageAlt"
+      class="mb-10 aspect-[1200/630] w-full rounded-3xl object-cover shadow-lg shadow-[var(--brand-forest-900)]/10" />
+
+    <nav aria-labelledby="post-toc-title"
+      class="mb-10 rounded-3xl border border-[var(--brand-forest-900)]/8 bg-white p-6 shadow-sm shadow-[var(--brand-forest-900)]/5 sm:p-8">
+      <h2 id="post-toc-title" class="m-0 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-primary)]">
+        En este artículo
+      </h2>
+      <ol class="mb-0 mt-4 grid list-none gap-2 p-0">
+        @for (section of item.sections; track section.heading; let i = $index) {
+        <li>
+          <a [routerLink]="[]" [fragment]="'seccion-' + (i + 1)"
+            class="text-base font-semibold text-[var(--brand-forest-900)]/80 no-underline hover:text-[var(--brand-primary)]">{{ section.heading }}</a>
+        </li>
+        }
+      </ol>
+    </nav>
+
+    <article>
+      @for (paragraph of item.intro; track paragraph) {
+      <p class="mb-5 mt-0 text-pretty text-lg leading-[1.8] text-[#1f1a14]/80">{{ paragraph }}</p>
+      }
+
+      @for (section of item.sections; track section.heading; let i = $index) {
+      <h2 [id]="'seccion-' + (i + 1)" class="mb-3 mt-10 scroll-mt-28 text-2xl font-extrabold leading-snug tracking-tight sm:text-3xl">{{ section.heading }}</h2>
+      @for (paragraph of section.paragraphs; track paragraph) {
+      <p class="mb-4 mt-0 text-pretty text-base leading-[1.8] text-[#1f1a14]/75">{{ paragraph }}</p>
+      }
+      @if (section.bullets) {
+      <ul class="mb-4 mt-0 grid list-disc gap-2 pl-5 text-base leading-[1.7] text-[#1f1a14]/75">
+        @for (bullet of section.bullets; track bullet) {
+        <li class="marker:text-[var(--brand-primary)]">{{ bullet }}</li>
+        }
+      </ul>
+      }
+      }
+    </article>
+
+    <aside aria-labelledby="post-links-title"
+      class="mt-12 rounded-3xl border border-[var(--brand-forest-900)]/8 bg-white p-7 shadow-sm shadow-[var(--brand-forest-900)]/5 sm:p-9">
+      <h2 id="post-links-title" class="m-0 text-xl font-extrabold tracking-tight">Te puede interesar</h2>
+      <ul class="mb-0 mt-4 grid list-none gap-3 p-0">
+        @for (link of item.links; track link.path) {
+        <li>
+          <a [routerLink]="link.path"
+            class="font-bold text-[var(--brand-primary)] underline-offset-4 hover:underline">{{ link.label }}</a>
+        </li>
+        }
+      </ul>
+    </aside>
+  </div>
+</section>
+
+@if (others().length) {
+<section aria-labelledby="post-others-title" class="bg-[#f4f1ea] pb-[clamp(3.5rem,6vw,5.5rem)] text-[var(--brand-forest-900)]">
+  <div class="mx-auto w-[min(88%,1400px)]">
+    <div class="flex items-end justify-between gap-4">
+      <h2 id="post-others-title" class="m-0 text-2xl font-extrabold tracking-tight sm:text-3xl">Sigue leyendo</h2>
+      <div class="flex shrink-0 gap-2">
+        <button type="button" (click)="scrollOthers(-1)" aria-label="Artículos anteriores"
+          class="grid size-11 cursor-pointer place-items-center rounded-full border border-[var(--brand-forest-900)]/15 bg-white text-[var(--brand-forest-900)] transition-colors hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]">
+          <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+        </button>
+        <button type="button" (click)="scrollOthers(1)" aria-label="Artículos siguientes"
+          class="grid size-11 cursor-pointer place-items-center rounded-full border border-[var(--brand-forest-900)]/15 bg-white text-[var(--brand-forest-900)] transition-colors hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]">
+          <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+        </button>
+      </div>
+    </div>
+    <div #track
+      class="mt-6 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      @for (other of others(); track other.slug) {
+      <article
+        class="group flex shrink-0 basis-[85%] snap-start flex-col overflow-hidden rounded-3xl border border-[var(--brand-forest-900)]/8 bg-white shadow-sm shadow-[var(--brand-forest-900)]/5 transition-shadow duration-300 hover:shadow-lg sm:basis-[calc(50%-0.75rem)] lg:basis-[calc(33.333%-1rem)]">
+        <a [routerLink]="['/blog', other.slug]" class="block overflow-hidden no-underline" tabindex="-1" aria-hidden="true">
+          <img width="1200" height="630" [ngSrc]="other.image" [alt]="other.imageAlt"
+            class="aspect-[1200/630] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        </a>
+        <div class="flex flex-1 flex-col p-6">
+          <p class="m-0 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-primary)]">{{ other.category }}</p>
+          <h3 class="m-0 mt-3 text-lg font-extrabold leading-snug tracking-tight">
+            <a [routerLink]="['/blog', other.slug]"
+              class="text-[var(--brand-forest-900)] no-underline hover:text-[var(--brand-primary)]">{{ other.title }}</a>
+          </h3>
+        </div>
+      </article>
+      }
+    </div>
+  </div>
+</section>
+}
+
+<app-contact-cta></app-contact-cta>
+}
