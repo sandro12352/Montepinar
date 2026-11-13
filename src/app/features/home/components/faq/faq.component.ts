@@ -20,6 +20,8 @@ export class FaqComponent {
 
   /** Video de YouTube que se muestra arriba. Por defecto, el de preguntas frecuentes. */
   readonly videoId = input('pfXXNkYPFSY');
+  /** Muestra las 12 preguntas bajo el video. En Nosotros se oculta porque el video es otro. */
+  readonly showQuestions = input(true);
   private readonly sanitizer = inject(DomSanitizer);
   protected readonly videoUrl = computed<SafeResourceUrl>(() =>
     this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.videoId()}?vq=hd1080&rel=0`),

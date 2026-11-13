@@ -1,3 +1,4 @@
+<div #root>
 <section aria-labelledby="blog-title"
   class="relative isolate overflow-hidden bg-[var(--brand-forest-900)] pb-[clamp(3rem,6vw,5rem)] pt-[clamp(7.5rem,12vw,9.5rem)] text-white">
   <span aria-hidden="true"
@@ -18,16 +19,16 @@
       </ol>
     </nav>
 
-    <p
+    <p data-hero
       class="m-0 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.16em] text-white/90">
       <span class="size-1.5 rounded-full bg-[var(--brand-primary)]" aria-hidden="true"></span>
       Blog
     </p>
-    <h1 id="blog-title"
+    <h1 id="blog-title" data-hero
       class="m-0 mt-6 max-w-[18ch] text-balance text-[clamp(2.6rem,5.6vw,5rem)] font-extrabold leading-[1.02] tracking-[-0.045em]">
       Guías para comprar tu <span class="text-[var(--brand-primary)]">lote</span> con seguridad.
     </h1>
-    <p class="mb-0 mt-6 max-w-2xl text-pretty text-base leading-[1.75] text-white/75 sm:text-lg">
+    <p data-hero class="mb-0 mt-6 max-w-2xl text-pretty text-base leading-[1.75] text-white/75 sm:text-lg">
       Documentos, financiamiento y cómo elegir: consejos del equipo de Montepinar para comprar un lote o terreno con
       tranquilidad.
     </p>
@@ -38,7 +39,7 @@
   <div class="mx-auto grid w-[min(88%,1400px)] gap-8">
     <!-- Artículo destacado -->
     @if (featured; as post) {
-    <article
+    <article data-card
       class="group grid overflow-hidden rounded-3xl border border-[var(--brand-forest-900)]/8 bg-white shadow-sm shadow-[var(--brand-forest-900)]/5 transition-shadow duration-300 hover:shadow-lg lg:grid-cols-[1.15fr_1fr]">
       <a [routerLink]="['/blog', post.slug]" class="block overflow-hidden no-underline" tabindex="-1" aria-hidden="true">
         <img width="1200" height="630" priority [ngSrc]="post.image" [alt]="post.imageAlt"
@@ -66,8 +67,8 @@
     <!-- Resto de artículos -->
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       @for (post of others; track post.slug) {
-      <article
-        class="group flex flex-col overflow-hidden rounded-3xl border border-[var(--brand-forest-900)]/8 bg-white shadow-sm shadow-[var(--brand-forest-900)]/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <article data-card
+        class="group flex flex-col overflow-hidden rounded-3xl border border-[var(--brand-forest-900)]/8 bg-white shadow-sm shadow-[var(--brand-forest-900)]/5 transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lg">
         <a [routerLink]="['/blog', post.slug]" class="block overflow-hidden no-underline" tabindex="-1" aria-hidden="true">
           <img width="1200" height="630" [ngSrc]="post.image" [alt]="post.imageAlt"
             class="aspect-[1200/630] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -93,12 +94,12 @@
 <!-- Proyectos: salida del blog hacia lo que se vende (datos de projects.data.ts) -->
 <section aria-labelledby="blog-projects-title" class="bg-[#f4f1ea] pb-[clamp(3.5rem,6vw,5.5rem)] text-[var(--brand-forest-900)]">
   <div class="mx-auto w-[min(88%,1400px)]">
-    <p class="m-0 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-primary)]">Nuestros proyectos</p>
-    <h2 id="blog-projects-title" class="m-0 mt-3 text-2xl font-extrabold tracking-tight sm:text-4xl">Conoce nuestros proyectos</h2>
+    <p data-fade class="m-0 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--brand-primary)]">Nuestros proyectos</p>
+    <h2 id="blog-projects-title" data-fade class="m-0 mt-3 text-2xl font-extrabold tracking-tight sm:text-4xl">Conoce nuestros proyectos</h2>
     <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       @for (project of projects; track project.slug) {
-      <article
-        class="group flex flex-col overflow-hidden rounded-3xl border border-[var(--brand-forest-900)]/8 bg-white shadow-sm shadow-[var(--brand-forest-900)]/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <article data-card
+        class="group flex flex-col overflow-hidden rounded-3xl border border-[var(--brand-forest-900)]/8 bg-white shadow-sm shadow-[var(--brand-forest-900)]/5 transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lg">
         <a [routerLink]="['/proyectos', project.slug]" class="block overflow-hidden no-underline" tabindex="-1" aria-hidden="true">
           <img width="1600" height="1200" [ngSrc]="project.image" [alt]="project.imageAlt"
             class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -119,3 +120,4 @@
   </div>
 </section>
 <app-contact-cta></app-contact-cta>
+</div>
