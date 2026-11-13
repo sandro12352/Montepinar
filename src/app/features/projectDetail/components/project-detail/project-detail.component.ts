@@ -42,7 +42,7 @@ export class ProjectDetailComponent {
   constructor() {
     // Un slug que no existe vuelve al listado de proyectos.
     effect(() => {
-      if (!this.project()) void this.router.navigate(['/projects']);
+      if (!this.project()) void this.router.navigate(['/proyectos']);
     });
 
     // SEO propio de cada proyecto: título, descripción, canonical, imagen y fichas para Google.
@@ -50,7 +50,7 @@ export class ProjectDetailComponent {
       const project = this.project();
       if (!project) return;
       const seo = PROJECT_SEO[project.slug];
-      const path = `/projects/${project.slug}`;
+      const path = `/proyectos/${project.slug}`;
       const description = seo?.description(project.priceFrom) ?? project.description;
       this.seo.set({
         title: seo?.title ?? `${project.name} en ${project.location} | Montepinar`,
@@ -68,7 +68,7 @@ export class ProjectDetailComponent {
       }));
       this.seo.setJsonLd('breadcrumb', breadcrumbJsonLd([
         { name: 'Inicio', path: '/' },
-        { name: 'Proyectos', path: '/projects' },
+        { name: 'Proyectos', path: '/proyectos' },
         { name: project.name, path },
       ]));
     });

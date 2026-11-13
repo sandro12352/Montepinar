@@ -19,7 +19,7 @@ export class FaqComponent {
   protected readonly whatsappHref = whatsappLink('Hola, tengo una consulta sobre Montepinar.');
 
   /** Video de YouTube que se muestra arriba. Por defecto, el de preguntas frecuentes. */
-  readonly videoId = input('1DKvhA9rYQg');
+  readonly videoId = input('pfXXNkYPFSY');
   private readonly sanitizer = inject(DomSanitizer);
   protected readonly videoUrl = computed<SafeResourceUrl>(() =>
     this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.videoId()}?vq=hd1080&rel=0`),

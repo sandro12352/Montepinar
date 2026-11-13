@@ -1,4 +1,4 @@
-import { afterNextRender, Component, ElementRef, viewChild } from '@angular/core';
+import { afterNextRender, Component, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideArrowRight,
@@ -20,6 +20,9 @@ import { TestimonialsComponent } from '../testimonials/testimonials.component';
 import { GalleryComponent } from '../gallery/gallery.component';
 import { ContactCtaComponent } from '../contact-cta/contact-cta.component';
 import { FaqComponent } from '../faq/faq.component';
+import { SeoService } from '../../../../core/services/seo.service';
+import { faqJsonLd } from '../../../../core/seo/structured-data';
+import { FAQ_ITEMS } from '../../data/faq.data';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,6 +52,11 @@ export class HomeComponent {
   ];
 
   constructor() {
+    // Ficha de preguntas para Google: solo en el inicio, aunque la sección se vea en otras páginas.
+    const seo = inject(SeoService);
+    seo.setJsonLd('faq', faqJsonLd(FAQ_ITEMS));
+    inject(DestroyRef).onDestroy(() => seo.removeJsonLd('faq'));
+
     afterNextRender(() => {
       const panel = this.financingPanel()?.nativeElement;
       if (!panel) return;

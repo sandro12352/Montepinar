@@ -19,7 +19,7 @@
           Tres paisajes, un mismo estilo de vida. Recorre cada proyecto y descubre el espacio que puede convertirse en tu
           próximo hogar.
         </p>
-        <a data-head routerLink="/projects"
+        <a data-head routerLink="/proyectos"
           class="group/link mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[var(--brand-forest-900)] no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
           <span class="border-b-2 border-[var(--brand-primary)] pb-0.5">Ver todos los proyectos</span>
           <ng-icon name="lucideArrowUpRight" size="18" aria-hidden="true"
@@ -71,7 +71,7 @@
               <span class="block text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#1f1a14]/55">Lotes desde</span>
               <span class="block text-3xl font-extrabold tracking-tight text-[var(--brand-forest-900)]">{{ project.priceFrom }}</span>
             </div>
-            <a [routerLink]="['/projects', project.slug]" [tabIndex]="active() === i ? 0 : -1"
+            <a [routerLink]="['/proyectos', project.slug]" [tabIndex]="active() === i ? 0 : -1"
               class="group/btn relative isolate inline-flex min-h-12 items-center gap-3 overflow-hidden rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-sm font-extrabold text-white no-underline transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2 motion-reduce:transition-none">
               <span aria-hidden="true"
                 class="absolute inset-0 origin-left scale-x-0 bg-[var(--brand-forest-900)] transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-focus-visible/btn:scale-x-100 motion-reduce:transition-none"></span>
@@ -173,7 +173,7 @@
               <span class="block text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#1f1a14]/55">Lotes desde</span>
               <span class="block text-2xl font-extrabold tracking-tight text-[var(--brand-forest-900)]">{{ project.priceFrom }}</span>
             </div>
-            <a [routerLink]="['/projects', project.slug]"
+            <a [routerLink]="['/proyectos', project.slug]"
               class="inline-flex min-h-12 items-center gap-3 rounded-xl bg-[var(--brand-primary)] px-6 py-3 text-sm font-extrabold text-white no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2">
               Ver detalle
               <ng-icon name="lucideArrowRight" size="18" aria-hidden="true" />

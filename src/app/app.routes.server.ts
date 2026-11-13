@@ -3,7 +3,7 @@ import { PROJECTS } from './features/projects/data/projects.data';
 
 export const serverRoutes: ServerRoute[] = [
   {
-    path: 'projects/:slug',
+    path: 'proyectos/:slug',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: async () => PROJECTS.map((project) => ({ slug: project.slug })),
   },

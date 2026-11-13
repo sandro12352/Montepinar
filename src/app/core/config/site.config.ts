@@ -48,6 +48,6 @@ export const SITE_HOURS = OFFICE_HOURS;
 /** Solo perfiles oficiales (se usan en sameAs del JSON-LD). */
 export const SITE_SOCIAL_URLS: readonly string[] = SOCIAL_LINKS.map((link) => link.href);
 
-/** Convierte una ruta relativa ('/images/x.webp', '/about') en URL absoluta del sitio. */
+/** Convierte una ruta relativa ('/images/x.webp', '/nosotros') en URL absoluta del sitio. */
 export const absoluteUrl = (path = '/'): string =>
   /^https?:\/\//.test(path) ? path : `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`;

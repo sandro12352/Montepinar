@@ -28,7 +28,7 @@ export const PROJECT_SEO: Readonly<Record<string, ProjectSeo>> = {
     image: '/images/og/og-asociacion.jpg',
     imageAlt: 'Vista aérea del ingreso de la Asociación de Vivienda Montepinar en Huacho, con el mar al fondo, y el texto Lotes en venta en Huacho',
     description: (price) =>
-      `Lotes de 120 a 200 m² en Huacho desde ${price}, junto a Mall Montepinar y cerca del megapuerto de Chancay. Más de 5,000 áreas verdes.`,
+      `Lotes de 120 a 200 m² en Huacho desde ${price}, junto a Mall Montepinar y cerca del megapuerto de Chancay. 70 áreas verdes.`,
   },
   'amazon-lodge-montepinar': {
     title: 'Lotes en venta en Iquitos | Amazon Lodge Montepinar',

@@ -16,7 +16,7 @@ export const routes: Routes = [
                 } satisfies RouteSeo }
             },
             {
-                path:'about',
+                path:'nosotros',
                 loadComponent:()=>import('./features/about/components/about/about.component').then(m=>m.AboutComponent),
                 data: { seo: {
                     title: 'Nosotros | Montepinar Inmobiliaria & Constructora',
@@ -24,7 +24,7 @@ export const routes: Routes = [
                 } satisfies RouteSeo }
             },
             {
-                path:'projects',
+                path:'proyectos',
                 loadComponent:()=>import('./features/projects/components/projects/projects.component').then(m=>m.ProjectsComponent),
                 data: { seo: {
                     title: 'Proyectos de lotes en Huacho e Iquitos | Montepinar',
@@ -33,7 +33,7 @@ export const routes: Routes = [
             },
             {
                 // El SEO de cada proyecto (título, descripción, imagen) lo fija el propio componente.
-                path:'projects/:slug',
+                path:'proyectos/:slug',
                 loadComponent:()=>import('./features/projectDetail/components/project-detail/project-detail.component').then(m=>m.ProjectDetailComponent)
             },
             {

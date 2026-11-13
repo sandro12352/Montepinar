@@ -7,7 +7,7 @@ export interface SeoData {
   readonly title: string;
   /** Descripción para Google y al compartir (ideal: 120–160 caracteres). */
   readonly description?: string;
-  /** Ruta de la página ('/about', '/projects/palmeras-de-montepinar'). Se usa para el canonical y og:url. */
+  /** Ruta de la página ('/nosotros', '/proyectos/palmeras-de-montepinar'). Se usa para el canonical y og:url. */
   readonly path: string;
   /** Imagen para compartir; ruta relativa o URL absoluta. */
   readonly image?: string;

@@ -39,15 +39,15 @@ export class FooterComponent {
     {
       title: 'Proyectos',
       links: [
-        { label: 'Palmeras de Montepinar', href: '/projects/palmeras-de-montepinar' },
-        { label: 'Asociación de Vivienda Montepinar', href: '/projects/asociacion-de-vivienda-montepinar' },
-        { label: 'Amazon Lodge Montepinar', href: '/projects/amazon-lodge-montepinar' },
+        { label: 'Palmeras de Montepinar', href: '/proyectos/palmeras-de-montepinar' },
+        { label: 'Asociación de Vivienda Montepinar', href: '/proyectos/asociacion-de-vivienda-montepinar' },
+        { label: 'Amazon Lodge Montepinar', href: '/proyectos/amazon-lodge-montepinar' },
       ],
     },
     {
       title: 'Enlaces',
       links: [
-        { label: 'Nosotros', href: '/about' },
+        { label: 'Nosotros', href: '/nosotros' },
         { label: 'Galería', href: '/galeria' },
         { label: 'Preguntas frecuentes', href: '#preguntas-frecuentes' },
       ],

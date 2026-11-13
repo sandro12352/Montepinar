@@ -30,20 +30,20 @@ export interface NavigationItem {
 }
 
 export const NAVIGATION_ITEMS: readonly NavigationItem[] = [
-  { label: 'Nosotros', path: '/about' },
+  { label: 'Nosotros', path: '/nosotros' },
   { label: 'Equipo', path: '/equipo' },
   {
     label: 'Proyectos',
-    path: '/projects',
+    path: '/proyectos',
     menu: {
       eyebrow: 'Nuestros proyectos',
       links: PROJECTS.map((project) => ({
         label: project.name,
         description: project.category,
         image: project.image,
-        path: `/projects/${project.slug}`,
+        path: `/proyectos/${project.slug}`,
       })),
-      footer: { label: 'Ver todos los proyectos', path: '/projects' },
+      footer: { label: 'Ver todos los proyectos', path: '/proyectos' },
     },
   },
   { label: 'Información legal', path: '/informacion-legal' },
